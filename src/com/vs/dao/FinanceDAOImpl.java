@@ -1,9 +1,11 @@
 package com.vs.dao;
 
-import org.springframework.jdbc.core.support.JdbcDaoSupport;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public class FinanceDAOImpl extends JdbcDaoSupport implements FinanceDAO {
-
+public class FinanceDAOImpl implements FinanceDAO {
+	@Autowired
+	private JdbcTemplate jdbcTemplate;
 }

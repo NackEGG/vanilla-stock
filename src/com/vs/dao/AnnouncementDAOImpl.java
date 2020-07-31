@@ -1,9 +1,12 @@
 package com.vs.dao;
 
-import org.springframework.jdbc.core.support.JdbcDaoSupport;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public class AnnouncementDAOImpl extends JdbcDaoSupport implements AnnouncementDAO {
-
+public class AnnouncementDAOImpl implements AnnouncementDAO {
+	@Autowired
+	private JdbcTemplate jdbcTemplate;
+	
 }
