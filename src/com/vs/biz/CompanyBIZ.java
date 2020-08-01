@@ -1,5 +1,9 @@
 package com.vs.biz;
 
-public interface CompanyBIZ {
+import java.util.List;
 
+import com.vs.vo.CompanyVO;
+
+public interface CompanyBIZ {
+	public boolean insertIntoAPI(List<CompanyVO> companyList);
 }

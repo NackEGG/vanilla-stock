@@ -1,5 +1,6 @@
 package com.vs.dao;
 
-public interface CommentsDAO {
+import com.vs.vo.CompanyVO;
 
+public interface CommentsDAO {
 }

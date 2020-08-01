@@ -1,5 +1,7 @@
 package com.vs.dao;
 
-public interface CompanyDAO {
+import com.vs.vo.CompanyVO;
 
+public interface CompanyDAO {
+	public int insertIntoAPI(CompanyVO data);
 }

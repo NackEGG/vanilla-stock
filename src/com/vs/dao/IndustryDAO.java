@@ -1,5 +1,10 @@
 package com.vs.dao;
 
-public interface IndustryDAO {
+import java.util.List;
 
+import com.vs.vo.IndustryVO;
+
+public interface IndustryDAO {
+	public int insert(IndustryVO data);
+	public List<IndustryVO> selectList();
 }
