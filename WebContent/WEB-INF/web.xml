@@ -43,7 +43,7 @@
 
 	<servlet-mapping>
 		<servlet-name>vs</servlet-name>
-		<url-pattern>*.do</url-pattern>
+		<url-pattern>/</url-pattern>
 	</servlet-mapping>
   
 </web-app>
