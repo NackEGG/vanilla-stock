@@ -6,6 +6,12 @@ public class CompanyVO {
 	private String stockCode;
 	private String company;
 	private int industryNo;
+	private int stockListed;
+	private int capital;
+	private int facevalue;
+	private String currency;
+	private String tel;
+	private String address;
 	private Timestamp regdate;
 	
 	public CompanyVO() {
@@ -34,6 +40,54 @@ public class CompanyVO {
 
 	public void setIndustryNo(int industryNo) {
 		this.industryNo = industryNo;
+	}
+
+	public int getStockListed() {
+		return stockListed;
+	}
+
+	public void setStockListed(int stockListed) {
+		this.stockListed = stockListed;
+	}
+
+	public int getCapital() {
+		return capital;
+	}
+
+	public void setCapital(int capital) {
+		this.capital = capital;
+	}
+
+	public int getFacevalue() {
+		return facevalue;
+	}
+
+	public void setFacevalue(int facevalue) {
+		this.facevalue = facevalue;
+	}
+
+	public String getCurrency() {
+		return currency;
+	}
+
+	public void setCurrency(String currency) {
+		this.currency = currency;
+	}
+
+	public String getTel() {
+		return tel;
+	}
+
+	public void setTel(String tel) {
+		this.tel = tel;
+	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
 	}
 
 	public Timestamp getRegdate() {
