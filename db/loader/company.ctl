@@ -1,5 +1,6 @@
 options(skip = 1) 
 load data
+characterset utf8
 infile 'company.tsv'
 insert into table company
 fields terminated by x'09'
