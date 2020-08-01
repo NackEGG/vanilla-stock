@@ -6,4 +6,5 @@ import com.vs.vo.StockRecordsVO;
 
 public interface StockRecordsDAO {
 	public List<StockRecordsVO> selectList();
+	public StockRecordsVO select();
 }

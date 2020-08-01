@@ -18,5 +18,11 @@ public class StockRecordsDAOImpl implements StockRecordsDAO{
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	@Override
+	public StockRecordsVO select() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }
 
