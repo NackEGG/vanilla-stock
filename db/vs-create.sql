@@ -275,7 +275,7 @@ ALTER TABLE COMPANY
 /* 재무정보 */
 CREATE TABLE FINANCE (
    NO NUMBER NOT NULL, /* 기본키 */
-   YEAR DATE, /* 연도 */
+   YEAR NUMBER, /* 연도 */
    QUARTER NUMBER, /* 분기 */
    STOCK_CODE VARCHAR2(6), /* 회사코드 */
    ACCOUNT_CODE VARCHAR2(30), /* 항목코드 */
