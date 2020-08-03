@@ -4,14 +4,15 @@ import java.sql.Date;
 
 public class StockRecordsVO {
 	private int no;
+	private String stockCode;
+	private Date tDate;
 	private int open;
 	private int high;
 	private int low;
 	private int close;
 	private int volume;
 	private double adjClose;
-	private String stockCode;
-	private Date tDate;
+	
 	public StockRecordsVO() {
 		// TODO Auto-generated constructor stub
 	}
