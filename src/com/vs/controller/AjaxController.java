@@ -11,9 +11,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.vs.biz.CompanyBIZ;
+import com.vs.biz.FinanceCateBIZ;
 import com.vs.biz.IndustryBIZ;
 import com.vs.util.FinanceApiUtil;
 import com.vs.vo.CompanyVO;
+import com.vs.vo.FinanceCateVO;
 import com.vs.vo.IndustryVO;
 
 
@@ -24,6 +26,19 @@ public class AjaxController {
 	private IndustryBIZ industryBIZ;
 	@Autowired
 	private CompanyBIZ companyBIZ;
+	
+	@Autowired
+	private FinanceCateBIZ financeCateBIZ;
+	
+	
+	@RequestMapping("/financeCateData")
+	public void getFinanceCateData() {
+		FinanceApiUtil fau = new FinanceApiUtil();
+		List<FinanceCateVO> cateList  = fau.getFinanceCateAPI();
+		if(financeCateBIZ.insertViaJSON(cateList))	System.out.println("[insert 모두 완료]");
+		else System.out.println("[insert 실패]");
+		
+	}
 	
 	@RequestMapping("/companyData")
 	public void getCompanyData(HttpServletRequest request, HttpServletResponse response) {

@@ -1,5 +1,7 @@
 package com.vs.dao;
 
-public interface FinanceCateDAO {
+import com.vs.vo.FinanceCateVO;
 
+public interface FinanceCateDAO {
+	public int insertViaJSON(FinanceCateVO financeCate);
 }

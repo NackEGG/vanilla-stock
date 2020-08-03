@@ -2,12 +2,25 @@ package com.vs.vo;
 
 import java.sql.Date;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+@JsonIgnoreProperties(ignoreUnknown = true)
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class FinanceCateVO {
+	@JsonProperty("sj_div")
 	private String sjDiv;
+	@JsonProperty("account_id")
 	private String accountId;
+	@JsonProperty("account_nm")
 	private String accountNm;
-	private Date bsnsDe;
+	@JsonProperty("bsns_de")
+	private String bsnsDe;
+	@JsonProperty("label_kor")
 	private String labelKor;
+	@JsonProperty("label_eng")
 	private String labelEng;
 	
 	public FinanceCateVO() {
@@ -27,6 +40,7 @@ public class FinanceCateVO {
 	}
 
 	public void setAccountId(String accountId) {
+		
 		this.accountId = accountId;
 	}
 
@@ -38,11 +52,10 @@ public class FinanceCateVO {
 		this.accountNm = accountNm;
 	}
 
-	public Date getBsnsDe() {
+	public String getBsnsDe() {
 		return bsnsDe;
 	}
-
-	public void setBsnsDe(Date bsnsDe) {
+	public void setBsnsDe(String bsnsDe) {
 		this.bsnsDe = bsnsDe;
 	}
 
@@ -61,6 +74,5 @@ public class FinanceCateVO {
 	public void setLabelEng(String labelEng) {
 		this.labelEng = labelEng;
 	}
-	
 	
 }

@@ -17,11 +17,16 @@ public class CompanyBIZImpl implements CompanyBIZ {
 		boolean check = false;
 		
 		for(CompanyVO company: companyList) {
-			if(companyDAO.insertIntoAPI(company)>0) { System.out.println("[넣는 중]");	check = true;}
-			else {
-				check = false; 
-				break;
-			}//else end 
+		//	System.out.println(company.getStockCode());
+			try {
+				if(companyDAO.insertIntoAPI(company)>0) {
+					System.out.println("[넣는 중]");	
+					check = true;
+				}
+			}catch (Exception e) {
+				continue;
+			}
+			
 		}//for end 
 		
 		return check;

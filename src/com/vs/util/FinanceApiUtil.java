@@ -1,6 +1,7 @@
 package com.vs.util;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
@@ -23,13 +24,44 @@ import org.jsoup.nodes.Entities;
 import org.jsoup.select.Elements;
 import org.springframework.stereotype.Component;
 
+import com.fasterxml.jackson.core.JsonParser.Feature;
 import com.fasterxml.jackson.databind.MapperFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.vs.vo.CompanyVO;
+import com.vs.vo.FinanceCateVO;
 import com.vs.vo.IndustryVO;
+import com.fasterxml.jackson.core.type.TypeReference;
 
 @Component
 public class FinanceApiUtil {
+	
+	
+   public List<FinanceCateVO> getFinanceCateAPI(){
+	   ObjectMapper om = new ObjectMapper();
+		om.configure(Feature.ALLOW_UNQUOTED_CONTROL_CHARS, true);
+		List<FinanceCateVO> allList = new ArrayList<>();
+		String[] fileNameArr = {"BS1","CF3","CIS1","IS1"};
+		for(String fileName : fileNameArr){
+			
+			try {
+				// 본인의 finance_cate_api 폴더가 있는 경로를 작성 
+				List<FinanceCateVO> cateList 
+				= om.readValue(new File("/Users/kimdabin/playdata/workspace/Spring-work/vanilla-stock/db/finance_cate_api/"+fileName+".txt"),
+						new TypeReference<List<FinanceCateVO>>(){});
+				allList.addAll(cateList);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+		}
+	   
+//		for(FinanceCateVO f : allList) { //test 2020.08.02 by kim-dabin
+//			System.out.println(f.getAccountNm());
+//		}
+	   
+	   return allList;
+   }
 
 	public List<CompanyVO> getCompanyCrawling(List<IndustryVO> industryList) {
 		List<CompanyVO> companyList = null;

@@ -5,7 +5,7 @@ import java.sql.Timestamp;
 
 public class FinanceVO {
 	private int no;
-	private Date year;
+	private int year;
 	private int quarter;
 	private String stockCode;
 	private String accountCode;
@@ -24,11 +24,11 @@ public class FinanceVO {
 		this.no = no;
 	}
 
-	public Date getYear() {
+	public int getYear() {
 		return year;
 	}
 
-	public void setYear(Date year) {
+	public void setYear(int year) {
 		this.year = year;
 	}
 

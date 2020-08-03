@@ -275,7 +275,7 @@ ALTER TABLE COMPANY
 /* 재무정보 */
 CREATE TABLE FINANCE (
    NO NUMBER NOT NULL, /* 기본키 */
-   YEAR DATE, /* 연도 */
+   YEAR NUMBER, /* 연도 */
    QUARTER NUMBER, /* 분기 */
    STOCK_CODE VARCHAR2(6), /* 회사코드 */
    ACCOUNT_CODE VARCHAR2(30), /* 항목코드 */
@@ -313,12 +313,12 @@ ALTER TABLE FINANCE
 
 /* 재무항목정보 */
 CREATE TABLE FINANCE_CATE (
-sj_div  VARCHAR2(10) NOT NULL, /* 재무제표구분 */
-account_id VARCHAR2(30) NOT NULL, /* 계정 고유명칭 */
-account_nm VARCHAR2(30) NOT NULL, /* 계정명 */
-bsns_de DATE, /* 적용 기준일 */
-label_kor VARCHAR2(100), /* 한글 출력명 */
-label_eng VARCHAR2(100)  /* 영문 출력명 */
+sj_div  VARCHAR2(30) NOT NULL, /* 재무제표구분 */
+account_id VARCHAR2(400) NOT NULL, /* 계정 고유명칭 */
+account_nm VARCHAR2(400) NOT NULL, /* 계정명 */
+bsns_de VARCHAR2(20), /* 적용 기준일 */
+label_kor VARCHAR2(400), /* 한글 출력명 */
+label_eng VARCHAR2(400)  /* 영문 출력명 */
 );
 
 COMMENT ON COLUMN FINANCE_CATE.sj_div IS '재무제표구분';
@@ -728,4 +728,4 @@ ALTER TABLE STOCK_RECORDS
          STOCK_CODE
       );
 
-
+INSERT INTO INDUSTRY VALUES(9999, '없음' ,SYSDATE);
