@@ -15,20 +15,21 @@ public class CompanyBIZImpl implements CompanyBIZ {
 	@Override
 	public boolean insertIntoAPI(List<CompanyVO> companyList) {
 		boolean check = false;
-		
+		int i = 0;
 		for(CompanyVO company: companyList) {
 		//	System.out.println(company.getStockCode());
 			try {
 				if(companyDAO.insertIntoAPI(company)>0) {
 					System.out.println("[넣는 중]");	
 					check = true;
+					i++;
 				}
 			}catch (Exception e) {
 				continue;
 			}
 			
 		}//for end 
-		
+		System.out.println("[ 총 넣은 개수 : "+i +" 개 ]");
 		return check;
 	}
 }
