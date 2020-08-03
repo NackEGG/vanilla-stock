@@ -9,14 +9,21 @@ public class CardPageVO {
 	private int incCnt;
 	private int decCnt;
 	
-	private double prevData;
-	private double prevAverge;	
-	
-	private double nextData;
-	private double nextAverge;
-
+	private double CRateSum;
 	private double ChangeRate;
 
+	public double getCRateSum() {
+		return CRateSum;
+	}
+
+	public void setCRateSum(double cRateSum) {
+		CRateSum = cRateSum;
+	}
+	
+	public void addCRateSum(double cRateSum) {
+		CRateSum += cRateSum;
+	}
+	
 	public int getIndustryNo() {
 		return industryNo;
 	}
@@ -40,6 +47,10 @@ public class CardPageVO {
 	public void setTotalCnt(int totalCnt) {
 		this.totalCnt = totalCnt;
 	}
+	
+	public void increaseTotalCnt() {
+		this.totalCnt++;
+	}
 
 	public int getIncCnt() {
 		return incCnt;
@@ -49,6 +60,10 @@ public class CardPageVO {
 		this.incCnt = incCnt;
 	}
 
+	public void increaseIncCnt() {
+		this.incCnt++;
+	}
+	
 	public int getDecCnt() {
 		return decCnt;
 	}
@@ -56,39 +71,11 @@ public class CardPageVO {
 	public void setDecCnt(int decCnt) {
 		this.decCnt = decCnt;
 	}
-
-	public double getPrevData() {
-		return prevData;
+	
+	public void increaseDecCnt() {
+		this.decCnt++;
 	}
-
-	public void setPrevData(double prevData) {
-		this.prevData = prevData;
-	}
-
-	public double getPrevAverge() {
-		return prevAverge;
-	}
-
-	public void setPrevAverge(double prevAverge) {
-		this.prevAverge = prevAverge;
-	}
-
-	public double getNextData() {
-		return nextData;
-	}
-
-	public void setNextData(double nextData) {
-		this.nextData = nextData;
-	}
-
-	public double getNextAverge() {
-		return nextAverge;
-	}
-
-	public void setNextAverge(double nextAverge) {
-		this.nextAverge = nextAverge;
-	}
-
+	
 	public double getChangeRate() {
 		return ChangeRate;
 	}
