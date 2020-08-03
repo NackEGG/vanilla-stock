@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.vs.dao.CompanyDAO;
 import com.vs.vo.CompanyVO;
@@ -12,6 +13,8 @@ import com.vs.vo.CompanyVO;
 public class CompanyBIZImpl implements CompanyBIZ {
 	@Autowired
 	private CompanyDAO companyDAO;
+	
+	@Transactional
 	@Override
 	public boolean insertIntoAPI(List<CompanyVO> companyList) {
 		boolean check = false;
