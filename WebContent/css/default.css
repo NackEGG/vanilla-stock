@@ -1,0 +1,819 @@
+@charset "UTF-8";
+
+html {
+	overflow-y: scroll;
+}
+body {
+	font: 16px "Kakao","Noto Sans KR","나눔고딕",NanumGothic,"맑은고딕","Malgun Gothic","돋움",Dotum,"Helvetica Neue",Helvetica,AppleSDGothicNeo,sans-serif,"Apple Color Emoji","Segoe UI Emoji",NotoColorEmoji,"Segoe UI Symbol","Android Emoji",EmojiSymbols;
+	color:#828282;
+	background-color: #F5F5F5;
+}
+
+.aux {
+	position: relative;
+	width:1100px;
+	margin:auto;
+}
+.popup_bg {
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0,.9);
+	position: fixed;
+	left: 0;
+	top: 0;
+	z-index: 9999;
+	display: none;
+}
+
+.popup_bg.open {
+	display: block;
+}
+.hidden{
+	display:none;
+}
+
+a {
+	color:#828282;
+	text-decoration: none;
+}
+a:hover {
+	color:#CA7415;
+	text-decoration: underline;
+}
+
+#header {
+	width: 100%;
+	height: 140px;
+	line-height: 80px;
+	position: fixed;
+	top: 0;
+	z-index: 999;
+	box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0
+	rgba(0, 0, 0, 0.12);
+	background: rgb(45, 35, 13);
+	transition:1s ease;
+}
+#header #logoBox {
+	width: 100%;
+	height: 80px;
+}
+
+
+#header.lost_city {
+	background:rgb(45,35,13);	
+}
+#header a {
+	text-decoration: none;
+}
+
+#header h1 {
+	width: 227px;
+	position: absolute;
+	top: 23px;
+
+}
+#header h1>a {
+	height: 36px;
+	background-image: url(../img/lostcityLogo.png);
+	background-size: contain;
+	background-repeat: no-repeat;
+	text-indent: -9999px;
+	overflow: hidden;
+	transform: scale(1);
+	transition: .2s ease;
+	display: block;
+}
+#header h1>a:hover {
+	text-decoration: none;
+	transform: scale(1.1);
+}
+#header img {
+	vertical-align: middle;
+	transform:rotate(0deg);
+	transition: .3s ease;
+}
+#header a:hover img {
+	transform:rotate(540deg);
+}
+
+#gnb{
+	height: 60px;
+	/*background:rgb(45,35,13);*/
+	position: absolute;
+	top: 80px;
+}
+
+#gnb ul{
+	
+	height: 60px;
+}
+
+#gnb .nav{
+	
+	float: left;
+	text-align: center;
+	line-height: 55px;
+	font-size: 20px;
+	
+}
+
+#gnb .nav a{
+	display: block;
+	position: 0 5px;
+	margin: 0 15px; 
+	height: 55px;
+	border-bottom: 5px solid rgb(45,35,13); 
+	color: rgba(124, 96, 32, 0.8);
+}
+
+#gnb .nav a:hover{
+	color: rgb(216, 171, 83);
+}
+#gnb .nav.on a{
+	color: rgb(216, 171, 83);
+	border-bottom-color: rgb(216, 171, 83);
+}
+
+
+
+#boardLogo {
+	width: 50px;
+	position: absolute;
+	top: 15px;
+	right: 85px;
+	z-index: 1;
+}
+
+#boardLogo>a {
+	height: 50px;
+	width: 50px;
+	display: block;
+	background-image: url(../img/logo_dust.png);
+	background-size: contain;
+	background-repeat: no-repeat;
+	text-indent: -9999px;
+	overflow: hidden;
+	transition: .3s ease;
+	opacity: .3;
+	transform: scale(.5);
+	transform-origin: 100% 50%;
+}
+
+#boardLogo>a:hover {
+	cursor: pointer;
+	opacity: 1;
+	background-image: url(../img/logo.png);
+	box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0
+	rgba(0, 0, 0, 0.19);
+	transform: scale(1);
+}
+
+#widget{
+	width: 140px;
+	height:80px;
+	position: absolute;
+	right: 10px;
+}
+#noticeBox{
+	width: 50px;
+	height: 80px;
+	/*background-color: yellow;*/
+	text-align: center;
+	line-height: 80px;
+	position: relative;
+}
+#noticeBox .ico_notice{
+	position: relative;
+	font-size: 30px;
+	color: rgb(216, 171, 83);
+	cursor: pointer;
+	text-shadow: 1px 1px 1px #222;
+	transition: .1s ease;
+}
+#noticeBox .ico_notice:hover{
+	color: rgba(216, 171, 83,.7);
+}
+#noticeBox .ico_notice::after{
+	content: "N";
+	display: block;
+	width: 24px;
+	height: 24px;
+	border-radius: 12px;
+	background-color: #B71C1C;
+	position: absolute;
+	bottom: -10px;
+	left: -10px;
+	font-size: 14px;
+	text-align: center;
+	line-height: 24px;
+	color: #fff;
+	font-weight: bold;
+}
+#newsPopup{
+	display: none;
+	width: 482px;
+	box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+	background-color: #4D525A;
+	position: absolute;
+	top:85px;
+	right: 0px;	
+}
+
+
+
+#newsPopup::before{
+	content: " ";
+	width: 0px;
+	height: 0px;
+	background: none;
+	display: block;
+	border-left: 10px solid transparent;
+	border-right: 10px solid  transparent;
+	border-bottom: 10px solid #4D525A;
+	position: absolute;
+	top: -10px;
+	right: 15px;
+}
+
+
+#newsPopup h3{
+	height: 45px;
+	font-size: 20px;
+	line-height: 45px;
+	color: #fff;
+}
+#newsPopup h3 span{
+	color: #B71C1C;
+	text-shadow: 1px 1px 0px #222;
+}
+#newsList{
+	overflow: hidden;
+	overflow-y: auto;
+	max-height: 590px;
+	font-size: 18px;
+}
+
+#newsList li.item_news{ 
+	border-top: 1px solid #EEEEEE;
+	background-color: rgba(216, 171, 83,1);
+	text-align: left;
+	line-height: 1.2;
+
+}
+#newsList li.item_news.off{ 
+	background-color: transparent;
+
+}
+
+#newsList li.item_news:hover{ 
+	
+	background-color: rgba(216, 171, 83,.5);
+	
+
+}
+
+li.item_news a{
+	display: block;
+	padding: 10px 11px;
+	position: relative;
+
+	
+}
+
+li.item_news a::before{
+	content: "";
+	display: inline-block;
+	height: 50px;
+	width: 50px;
+	border-radius: 25px;
+	text-align: center;
+	line-height: 50px;
+	color: #fff;
+	font-size: 21px;
+
+}
+
+li.item_news.chat a::before{
+	content: "귓";
+	background-color: #FFC107;
+}
+
+li.item_news.community a::before{
+	content: "커";
+	background-color: #2196F3;
+}
+
+#newsList div.list_item_news{
+	display: inline-block;
+	vertical-align: middle;
+	/*background-color: red;*/
+	width: 382px;
+	margin: 0 10px;
+	color:  #2D230D;
+	font-size: 17px;
+}
+div.list_item_news .content_news{
+	line-height: 1.5;
+}
+div.list_item_news .time_news{
+	padding-top:5px;
+	font-size: 14px;
+	color: #757575;
+}
+
+
+#profilePopup {
+	background-color: #2D220E;
+}
+
+
+
+#logPopup {
+	width:100%;
+	height:100%;
+	background:rgba(0,0,0,.8);
+	color:#14BAB6;
+	font-size:56px;
+	text-align: center;
+	line-height:600px;
+	position: fixed;
+	z-index: 2;
+	left:0;
+	top:0;
+	text-shadow:0 0 10px #14BAB6;
+}
+
+#loginBox, #logoutBox {
+	height:80px;
+	position: absolute;
+	right:0;
+}
+#loginBox {
+	width:140px;
+	right:10px;
+}
+
+#loginBox img {
+	width:60px;
+	height:60px;
+	border-radius: 32px;
+	box-shadow: 0 12px 15px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
+	margin-right:5px;
+	border:1px solid #666;
+	position: absolute;
+	cursor: pointer;	
+	right:10px;
+	top:10px;
+}
+
+#profilePopup{
+	width: 136px;
+	background-color: #4D525A;
+	border:2px solid #4D525A;
+	display: none;
+	position: absolute;
+	top:85px;
+	right: 0px;
+	font-weight:900;
+	box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+}	
+
+#profilePopup::before{
+	content: " ";
+	width: 0px;
+	height: 0px;
+	background: none;
+	display: block;
+	border-left: 10px solid transparent;
+	border-right: 10px solid  transparent;
+	border-bottom: 10px solid #4D525A;
+	position: absolute;
+	top: -10px;
+	right: 20px;
+}
+
+#loginBox #profileList{
+	text-align: right;
+	
+}
+
+
+#profileList li.profile{
+	width: 126px;
+	height: 68px;
+	padding-right: 10px;
+	font-size: 18px;
+	line-height: 68px;
+	transition: .4s ease;
+	position: relative;
+
+}
+
+#profileList li.profile a{
+	height: 68px;
+	font-size: 18px;
+	display: inline-block;
+	color: rgb(216, 171, 83);
+	text-decoration: none;
+
+}
+
+#profileList li.profile form button{
+	height: 68px;
+	display: inline-block;
+	padding: 0;
+	border: none;
+	color: rgb(216, 171, 83);
+	font: 18px "Kakao";
+	font-weight: bold;
+	background: transparent;
+}
+
+#profileList li.profile span.open_door{
+	height: 58.5px;
+	width: 26.75px;
+	visibility: hidden;
+	opacity: 0;
+	transition: .4s ease-in-out;
+	transform: translateX(-9.25px);
+	background-image: url(../img/door-open.png);
+	background-size: contain;
+	background-repeat: no-repeat;
+	text-indent: 99999px;
+	overflow: hidden;
+	position: absolute;
+	right: 102.81px;
+	bottom: 4.75px;
+
+}
+
+#profileList li.profile span.close_door{
+	height: 49px;
+	width: 27px;
+	visibility: hidden;
+	opacity: 0;
+	transition: .4s ease-in-out;
+	transform: translateX(-27px);
+	background-image: url(../img/door-close.png);
+	background-size: contain;
+	background-repeat: no-repeat;
+	text-indent: 99999px;
+	overflow: hidden;
+	position: absolute;
+	right: 86.25px;
+	bottom: 9.5px;
+
+}
+
+#profileList li.profile .fa-door-open{
+	color: #2D230D;
+}
+
+#profileList li.profile:hover{
+	background-color: rgb(216, 171, 83);
+
+}
+
+#profileList li.profile:hover a , #profileList li.profile:hover form button{
+	color: #2D230D;
+	font-weight: bold;
+	cursor: pointer;
+}
+
+#profileList li.profile:hover span{
+	visibility: visible;
+	opacity: 1;
+	transform: translateX(0);
+
+}
+
+#lostCityLink a{
+	position:absolute;
+	width:340px;
+	height:54px;
+	background-image: url(../img/lostcityLogo.png);
+	background-size:100% 100%;
+	text-indent:-9999px;
+	overflow:hidden;
+	right:80px;
+	top:14px;
+	opacity: .2;
+	transform:scale(.5);
+	transition:.2s ease;
+	transform-origin:100% 50%;
+}
+#lostCityLink a:hover {
+	opacity: 1;
+	transform:scale(.8);
+}
+
+
+#logoutBox {
+	width:490px;
+}
+
+#header .btn {
+	padding: 9px 8px;
+	background:#14BAB6;
+	vertical-align: middle;
+}
+
+#header .btn:hover,#header .btn:focus {
+	background:#fff;
+	color:#14BAB6;
+}
+
+
+
+
+
+
+#logoutBox input {
+	font: 18px "Kakao","Noto Sans CJK KR Thin","나눔고딕",NanumGothic,"맑은고딕","Malgun Gothic","돋움",Dotum,"Helvetica Neue",Helvetica,AppleSDGothicNeo,sans-serif,"Apple Color Emoji","Segoe UI Emoji",NotoColorEmoji,"Segoe UI Symbol","Android Emoji",EmojiSymbols;
+	width:140px;
+	padding:8px;
+	border:1px solid #666;
+	vertical-align: middle;
+}
+
+#logoutBox input:focus {
+	border-color:#333;
+	outline: 3px solid #14BAB6;
+	background:#eee;
+}
+
+#logoutBox .join {
+	text-decoration: none;
+	color:#fff;
+	font-size:17px;
+	margin-left:4px;
+}
+
+#logoutBox .join:hover,#logoutBox .join:focus {
+	color:#14BAB6;
+	text-decoration: underline;
+}
+
+#content {
+	width:100%;
+	min-height: 400px;
+	padding:100px 0 10px 0;
+	position: relative;
+	margin-top: 80px;
+	/*padding-top: 100px;*/
+}
+
+#policy {
+	width:800px;
+	height:150px;
+	display: inline-block;
+}
+#footer {
+	width:100%;
+	background: rgb(45, 35, 13);
+	height:150px;
+	line-height: 150px;
+	text-align: center;
+}
+
+#footer.fixed {
+	position: fixed;
+	bottom:0;
+}
+#footer address {
+	width:190px;
+	height:150px;
+	display: inline-block;
+	color: #795548;
+}
+
+#footer a {
+	color:#fff;
+	text-decoration:none;
+}
+#footer a:hover {
+	color: #795548;
+	text-decoration: underline;
+}
+a.btn {
+	text-decoration: none;
+}
+#footer address a {
+	font-weight: 400;
+}
+
+#policy ul {
+	text-align: center;
+}
+
+#policy li {
+	display: inline;
+	border-left:1px solid #ddd;
+	margin-right:9px;
+	padding-left: 8px;
+}
+
+#policy li:first-child {
+	border:none;
+}
+
+#policy strong {
+	font-weight:400;
+}
+
+
+#content h2.title {
+	font-size:36px;
+	font-weight:bold;
+	color:#676767;
+	text-align: center;
+	margin:20px;
+}
+
+
+.btn {
+	border:0;
+	margin:0;
+	padding:8px 14px;
+	background-color:#2D220E;
+	color:#fff;
+	text-decoration: none;
+	font-weight: 500;
+	box-sizing: content-box;
+	display: inline-block;
+	font-size:18px;
+	line-height: normal;
+}
+
+button.btn {
+	cursor: pointer;
+	font: 18px "Kakao","Noto Sans CJK KR Thin","나눔고딕",NanumGothic,"맑은고딕","Malgun Gothic","돋움",Dotum,"Helvetica Neue",Helvetica,AppleSDGothicNeo,sans-serif,"Apple Color Emoji","Segoe UI Emoji",NotoColorEmoji,"Segoe UI Symbol","Android Emoji",EmojiSymbols;
+}
+
+.btn:hover {
+	background-color:#5f4a1c;
+	color:#fff;
+	box-shadow: 0 12px 15px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
+}
+
+/* firefox가 가진 버튼의 크기를 없애줌 */
+button::-moz-focus-inner {
+    padding: 0;
+    border: 0
+}
+
+.box_btn {
+	padding: 10px 0;
+	text-align: right;
+}
+
+/*
+페이징 CSS
+*/
+.paginate {
+	font-size:22px;
+	text-align:center;
+	height:50px;
+	line-height:50px;
+	font-weight:500;
+	margin: 10px;
+}
+
+.paginate a, 
+.paginate span,
+.paginate strong{
+	color:#858585;
+	text-decoration:none;
+	padding:9px 14px;
+	border:1px solid transparent;
+	transition:.1s ease;
+}
+
+.paginate span {
+	border-color:#E1E1E1;
+	cursor: not-allowed;
+}
+
+.paginate a:hover {
+	background:#2D220E;
+	border-color:#fff;
+	font-weight:bold;
+	color:#fff;
+}
+
+.paginate strong {
+	background:#5f4a1c;
+	border-color:#5f4a1c;
+	color:#fff;
+	cursor: not-allowed;
+	font-weight:bold;
+	box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+/*
+비활성화
+*/
+.paginate span.next,
+.paginate span.prev {
+	border-color:#E1E1E1;
+	color:#E1E1E1;
+	cursor:default;
+	cursor:not-allowed;
+}
+
+.card_user {
+	position: absolute;
+	height:120px;
+	text-align: center;
+	top:10px;
+	left:10px;
+}
+.card_user img {
+	border-radius: 50px;
+	box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+}
+.card_user strong {
+	display:block;
+	width:100px;
+	font-weight:bold;
+	color:#9E9E9E;
+	font-size:16px;
+	margin-top:3px;
+}
+.category.tip{
+			background-color: #9575CD;
+		}
+	.category.free{
+			background-color: #FFD54F;
+		}
+	.category.suggestion{
+			background-color: #64B5F6;
+		}
+		.category.notice{
+			background-color: #424242;
+		}
+.thumb_user::before {
+	content: "";
+	width: 34px;
+	height: 34px;
+	border-radius: 18px;
+	background-image: url(../img/tier.png);
+	background-size: 319px 38px;
+	background-repeat: no-repeat;
+	position: absolute;
+	background-color: #222;
+	right: 0px;
+	top: 22px;
+	border: 1px solid #424242;
+	transition: .1s ease;
+}
+
+
+.thumb_user:hover::before{
+	content: attr(data-tier);
+	text-align: center;
+	font-size: 14px;
+	font-weight: 700;
+	color:#fff;
+	text-shadow: 1px 1px 1px #000;
+	opacity: .7;
+	
+	
+}
+.thumb_user.tier_1::before {
+	background-position: 1px 0px;
+	
+}
+
+.thumb_user.tier_2::before {
+	background-position: -35px 0px;
+	
+}
+
+.thumb_user.tier_3::before {
+	background-position: -69px 0px;
+}
+
+.thumb_user.tier_4::before {
+	background-position: -103px 0px;
+}
+
+.thumb_user.tier_5::before {
+	background-position: -136px 1px;
+}
+
+.thumb_user.tier_6::before {
+	background-position: -170.5px 0px;
+}
+
+.thumb_user.tier_7::before {
+	background-position: -204px 1px;
+}
+
+.thumb_user.tier_8::before {
+	background-position: -242.1px -1px;
+}
+
+.thumb_user.tier_9::before {
+	background-position: -282.8px -2px;
+}
