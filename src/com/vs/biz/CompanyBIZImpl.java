@@ -18,10 +18,15 @@ public class CompanyBIZImpl implements CompanyBIZ {
 		
 		for(CompanyVO company: companyList) {
 		//	System.out.println(company.getStockCode());
-			if(companyDAO.insertIntoAPI(company)>0) {
-				System.out.println("[넣는 중]");	
-				check = true;
+			try {
+				if(companyDAO.insertIntoAPI(company)>0) {
+					System.out.println("[넣는 중]");	
+					check = true;
+				}
+			}catch (Exception e) {
+				continue;
 			}
+			
 		}//for end 
 		
 		return check;
