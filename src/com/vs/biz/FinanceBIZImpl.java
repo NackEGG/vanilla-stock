@@ -1,5 +1,6 @@
 package com.vs.biz;
 
+import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -16,7 +17,7 @@ public class FinanceBIZImpl implements FinanceBIZ {
 	@Autowired
 	private FinanceDAO financeDAO;
 
-	// dao의 결과 List<Map<String,Object>>를 -> Map<String,Long>으로
+	// dao의 결과 List<Map<String,Object>>를 -> Map<String account_code,Long value>로
 	@Override
 	public Map<String, Long> findAccountValueMap(FinanceVO financeVO) {
 		Map<String, Long> result = new HashMap<>();
@@ -24,10 +25,13 @@ public class FinanceBIZImpl implements FinanceBIZ {
 				financeDAO.findAccountValueList(financeVO);
 
 		for (Map<String, Object> map : daoResult) {
-			for (Entry<String, Object> entry : map.entrySet()) {
-				String key = entry.getKey();
-				Long value = (Long) entry.getValue();
+			String key = (String) map.get("account_code");
+			if("".equals(map.get("account_value"))
+					|| map.get("account_value") != null) {
+				Long value = ((BigDecimal)map.get("account_value")).longValue();
 				result.put(key, value);
+			} else {
+				continue; // account_value에 아무값도 없을 경우 map에 안 포함시킴
 			}
 		}
 		return result;
