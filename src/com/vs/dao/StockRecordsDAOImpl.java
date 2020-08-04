@@ -22,43 +22,39 @@ import com.vs.vo.StockRecordsVO;
 public class StockRecordsDAOImpl implements StockRecordsDAO {
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
-	private SimpleJdbcCall simpleJdbcCall;
 
 	@Override
-	public List<StockRecordsVO> selectList(String stockCode, Date tDate) {
-		simpleJdbcCall = new SimpleJdbcCall(jdbcTemplate)
-				.withProcedureName("usp_get_list_stock_records")
-				.returningResultSet("list_stock_records", 
-						BeanPropertyRowMapper.newInstance(StockRecordsVO.class));
-		
-				/*.returningResultSet("list_stock_records", new RowMapper<StockRecordsVO>() {
+	public List<StockRecordsVO> selectList(StockRecordsVO stockRecordsVO) {
+		System.out.println("출력dao");	
+		RowMapper<StockRecordsVO> rowMapper = new RowMapper<StockRecordsVO>() {
 
-					@Override
-					public StockRecordsVO mapRow(ResultSet rs, int rowNum) throws SQLException {
-						StockRecordsVO stockRecordsVO = new StockRecordsVO();
-						
-						stockRecordsVO.setNo(rs.getInt("no"));
-						stockRecordsVO.setStockCode(rs.getString("stock_code"));
-						stockRecordsVO.settDate(rs.getDate("t_date"));
-						stockRecordsVO.setOpen(rs.getInt("open"));
-						stockRecordsVO.setHigh(rs.getInt("high"));
-						stockRecordsVO.setLow(rs.getInt("low"));
-						stockRecordsVO.setClose(rs.getInt("close"));
-						stockRecordsVO.setVolume(rs.getInt("volume"));
-						stockRecordsVO.setAdjClose(rs.getInt("adj_close"));
-						
-						return stockRecordsVO;
-					}
-				});*/
-		
-		Map<String,Object> result = simpleJdbcCall.execute(stockCode, tDate);
-		List<StockRecordsVO> listStockRecords = (List<StockRecordsVO>) result.get("list_stock_records");
-                   
-		return listStockRecords;
+			@Override
+			public StockRecordsVO mapRow(ResultSet rs, int rowNum) throws SQLException {
+				StockRecordsVO vo = new StockRecordsVO();
+				vo.setNo(rs.getInt("NO"));
+				vo.setStockCode(rs.getString("STOCK_CODE"));
+				vo.settDate(rs.getString("T_DATE"));
+				vo.setOpen(rs.getInt("OPEN"));
+				vo.setHigh(rs.getInt("HIGH"));
+				vo.setLow(rs.getInt("LOW"));
+				vo.setClose(rs.getInt("CLOSE"));
+				vo.setVolume(rs.getInt("VOLUME"));
+				vo.setAdjClose(rs.getDouble("ADJ_CLOSE"));
+				return vo;
+			}
+		};
+		String sql = "SELECT NO, STOCK_CODE, T_DATE, OPEN, HIGH, LOW, CLOSE, VOLUME, ADJ_CLOSE "
+				+ "FROM STOCK_RECORDS "
+				+ "WHERE STOCK_CODE = ? AND T_DATE > ? "
+				+ "ORDER BY T_DATE";
+		System.out.println(sql);
+		return jdbcTemplate.query(sql 
+				, new Object[] {stockRecordsVO.getStockCode(),stockRecordsVO.gettDate()}
+				, rowMapper);
 	}
 
 	@Override
-	public StockRecordsVO select(String stockCode, Date tDate) {
+	public StockRecordsVO select(StockRecordsVO stockRecordsVO) {
 		// TODO Auto-generated method stub
 		return null;
 	}
