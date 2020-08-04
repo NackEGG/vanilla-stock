@@ -27,7 +27,7 @@ import javafx.util.Pair;
 import com.vs.vo.CardPageVO;
 
 @Controller
-@RequestMapping("/industryCard")
+@RequestMapping("/cardpage")
 public class CardPageController {
 	@Autowired
 	private StockRecordsBIZ stockRecordsBIZ;
@@ -38,7 +38,7 @@ public class CardPageController {
 	
 	private Map<String, CardPageVO> cardDataMap;
 
-	@RequestMapping("getData")
+	@RequestMapping("industryCard")
 	public void initCardPage(HttpServletRequest request, HttpServletResponse response) {
 		String[] Date = getStartEndDate();		// 0:Start, 1:End
 		

@@ -22,7 +22,7 @@ import com.vs.vo.StockRecordsVO;
 import javafx.util.Pair;
 
 @Repository
-public class StockRecordsDAOImpl extends JdbcDaoSupport implements StockRecordsDAO {
+public class StockRecordsDAOImpl implements StockRecordsDAO {
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
 	private SimpleJdbcCall simpleJdbcCall;
@@ -93,7 +93,7 @@ public class StockRecordsDAOImpl extends JdbcDaoSupport implements StockRecordsD
 				return resultPair;
 			}//rs.next사용불가! 자동으로 호출되기때문
 		};
-		return (List<Pair<StockRecordsVO, String>>) super.getJdbcTemplate().queryForObject(
+		return (List<Pair<StockRecordsVO, String>>) jdbcTemplate.queryForObject(
 				sql, mapper,new Object[] {startDate, endDate});
 	}
 }
