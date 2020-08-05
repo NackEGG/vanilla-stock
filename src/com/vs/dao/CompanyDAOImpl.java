@@ -29,8 +29,7 @@ public class CompanyDAOImpl implements CompanyDAO {
 	public CompanyVO select(String keyword) {
 		// TODO Auto-generated method stub
 		simpleJdbcCall
-		.withProcedureName("USP_GET_COMPANY")
-		.returningResultSet("companyVO", new CompanyRowMapper());
+		.withProcedureName("USP_GET_COMPANY");
 		
 		SqlParameterSource in = new MapSqlParameterSource()
 				.addValue("PI_KEYWORD", keyword);
