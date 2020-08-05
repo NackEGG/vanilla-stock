@@ -38,8 +38,10 @@ public class CardPageController {
 	
 	private Map<String, CardPageVO> cardDataMap;
 
-	@RequestMapping("industryCard")
+	@RequestMapping("init")
 	public void initCardPage(HttpServletRequest request, HttpServletResponse response) {
+		System.out.println("응 들어옴~");
+		
 		String[] Date = getStartEndDate();		// 0:Start, 1:End
 		
 		// 기존 데이터 삭제
@@ -115,7 +117,7 @@ public class CardPageController {
 		//   2-2) 평균구하기
 		
 		//   2-3) 상승/하락/보합 갯수 세기
-
+		
 	}
 	
 	private String[] getStartEndDate(){
