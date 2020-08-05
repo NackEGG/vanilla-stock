@@ -29,6 +29,9 @@ p:password="admin1234"
  p:dataSource-ref="dataSource"
   class="org.springframework.jdbc.datasource.DataSourceTransactionManager"/>
 
+<bean id="simpleJdbcCall" class="org.springframework.jdbc.core.simple.SimpleJdbcCall">
+	<constructor-arg ref="jdbcTemplate"/>
+</bean>
 <!-- myBatis -->
 <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
   <property name="dataSource" ref="dataSource" />
