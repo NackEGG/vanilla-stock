@@ -302,8 +302,8 @@
 				<div id ="summaryBox">
 					<div id="descBox">
 						<div id ="upperDescBox">
-							<div id="companyName">»ï¼ºÀüÀÚ</div>
-							<div id="companyCode">005930</div>
+							<div id="companyName">${companyVO.company}</div>
+							<div id="companyCode">${companyVO.stockCode}</div>
 						</div><!--//#upperDescBox-->
 						<hr style="margin: -7px 10px 10px 10px">
 						<div id="lowerDescBox">
