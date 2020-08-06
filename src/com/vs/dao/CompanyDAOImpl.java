@@ -78,23 +78,7 @@ public class CompanyDAOImpl implements CompanyDAO {
 			vo.setAddress(rs.getString("ADDRESS"));
 			vo.setRegdate(rs.getTimestamp("REGDATE"));
 			return vo;
-    }
-	@Override
-	public List<CompanyVO> listcompany() {
-		RowMapper<CompanyVO> rowMapper = new CompanyRowMapper();
-		return null;
-	}
-	
-	
-	public class CompanyRowMapper implements RowMapper<CompanyVO>{
-		@Override
-		public CompanyVO mapRow(ResultSet rs, int rowNum) throws SQLException {
-			CompanyVO vo = new CompanyVO();
-			vo.setCompany(rs.getString("company"));
-			vo.setIndustryNo(rs.getInt("industryno"));
-			vo.setStockCode(rs.getString("stockcode"));
-			return null;
 		}
-		
 	}
+		
 }
