@@ -1,6 +1,6 @@
 package com.vs.vo;
 
-import java.sql.Date;
+import java.util.Date;
 
 public class StockRecordsVO {
 	private int no;
