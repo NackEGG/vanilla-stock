@@ -1,5 +1,11 @@
 package com.vs.biz;
 
-public interface StockRecordsBIZ {
+import java.util.List;
 
+import com.vs.vo.StockRecordsVO;
+
+import javafx.util.Pair;
+
+public interface StockRecordsBIZ {
+	public List<Pair<StockRecordsVO, String>> selectStockWithCompany(String startDate, String endDate);
 }
