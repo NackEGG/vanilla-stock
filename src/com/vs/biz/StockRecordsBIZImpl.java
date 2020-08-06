@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.vs.dao.StockRecordsDAO;
 import com.vs.vo.StockRecordsVO;
+import javafx.util.Pair;
 
 @Service
 public class StockRecordsBIZImpl implements StockRecordsBIZ{
@@ -23,5 +24,9 @@ public class StockRecordsBIZImpl implements StockRecordsBIZ{
 	public StockRecordsVO select(StockRecordsVO stockRecordsVO) {
 		// TODO Auto-generated method stub
 		return null;
+  }
+	public List<Pair<StockRecordsVO, String>> selectStockWithCompany(String startDate, String endDate) {
+		return stockRecordsDAO.selectStockWithCompany(startDate, endDate);
+
 	}
 }
