@@ -1,5 +1,6 @@
 package com.vs.dao;
 
+import java.math.BigDecimal;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
@@ -22,11 +23,15 @@ public class IndustryDAOImpl implements IndustryDAO {
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
 	
-	@Autowired
-	private SimpleJdbcCall simpleJdbcCall;
+	public SimpleJdbcCall getSimpleJdbcCall(JdbcTemplate jdbcTemplate) {
+		return new SimpleJdbcCall(jdbcTemplate);
+	}
 	
 	@Override
 	public IndustryVO get(String stockCode) {
+		
+		SimpleJdbcCall simpleJdbcCall = getSimpleJdbcCall(jdbcTemplate);
+		
 		simpleJdbcCall
 		.withProcedureName("USP_GET_INDUSTRY");
 		
@@ -35,9 +40,9 @@ public class IndustryDAOImpl implements IndustryDAO {
 		
 		Map out = simpleJdbcCall.execute(in);
 		IndustryVO industryVO = new IndustryVO();
-		industryVO.setNo((int) out.get("NO"));
-		industryVO.setName((String) out.get("NAME"));
-		industryVO.setRegdate((Timestamp) out.get("REGDATE"));
+		industryVO.setNo(((BigDecimal) out.get("PO_NO")).intValue());
+		industryVO.setName((String) out.get("PO_NAME"));
+		industryVO.setRegdate((Timestamp) out.get("PO_REGDATE"));
 		
 		return industryVO;
 	}

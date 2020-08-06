@@ -1,5 +1,7 @@
 package com.vs.biz;
 
-public interface ArticleBIZ {
+import com.vs.vo.ArticleVO;
 
+public interface ArticleBIZ {
+	public boolean insert(ArticleVO articleVO);
 }
