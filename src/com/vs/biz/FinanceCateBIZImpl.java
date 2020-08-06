@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.vs.dao.FinanceCateDAO;
 import com.vs.vo.FinanceCateVO;
@@ -13,6 +14,7 @@ public class FinanceCateBIZImpl implements FinanceCateBIZ {
 	@Autowired
 	private FinanceCateDAO financeCateDAO;
 	
+	@Transactional
 	@Override
 	public boolean insertViaJSON(List<FinanceCateVO> list) {
 		boolean check = false;

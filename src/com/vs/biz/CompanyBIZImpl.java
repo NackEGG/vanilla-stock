@@ -4,14 +4,24 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.vs.dao.CompanyDAO;
 import com.vs.vo.CompanyVO;
 
 @Service
 public class CompanyBIZImpl implements CompanyBIZ {
+	
 	@Autowired
 	private CompanyDAO companyDAO;
+	
+	@Override
+	public CompanyVO select(String keyword) {
+		return companyDAO.select(keyword);
+	}
+	
+	@Transactional
+
 	@Override
 	public boolean insertIntoAPI(List<CompanyVO> companyList) {
 		boolean check = false;
@@ -32,4 +42,5 @@ public class CompanyBIZImpl implements CompanyBIZ {
 		System.out.println("[ 총 넣은 개수 : "+i +" 개 ]");
 		return check;
 	}
+	
 }

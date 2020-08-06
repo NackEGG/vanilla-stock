@@ -278,7 +278,7 @@ CREATE TABLE FINANCE (
    YEAR NUMBER, /* 연도 */
    QUARTER NUMBER, /* 분기 */
    STOCK_CODE VARCHAR2(6), /* 회사코드 */
-   ACCOUNT_CODE VARCHAR2(30), /* 항목코드 */
+   ACCOUNT_CODE VARCHAR2(400), /* 항목코드 */
    ACCOUNT_VALUE NUMBER, /* 항목값 */
    REGDATE DATE /* 작성일 */
 );
