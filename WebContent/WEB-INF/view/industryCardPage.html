@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title></title>
+	<link rel="stylesheet" href="../css/reset.css" />
+	<link rel="stylesheet" href="../css/kakao.font.css" />
+	<link rel="stylesheet" href="../css/default.css" />
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+	<script src="../js/jquery.js"></script>
+	<style type="text/css" media="screen">
+
+		.aux{
+			/*background-color: pink;*/
+		}
+		/*여기서부터 ul,li태그에 적용*/
+		.title {
+			height: 50px;
+			line-height: 50px;
+			font-weight: bold;
+			border-bottom:solid 1px gray;
+		}
+		.t_line {border-right:solid 1px gray;}
+		.lt_line {border-bottom:solid 1px gray;}
+		.list {
+			height: 40px;
+			line-height: 30px;
+			background: #f3f3f3;
+		}
+		.w60 {width:60px; }
+		.w160 {width:160px; }
+
+		#industrycard_content {
+			display: block;
+			width: 760px; /*725*/
+			min-height: 600px;
+			/*padding: 20px;*/
+			margin-bottom: 20px;
+			/*border: 1px solid #bcbcbc;*/
+			/*background-color: #ff0000;*/
+
+		}
+		#industrycard_content ul{
+
+			/*background-color: yellow;*/
+			min-height: 260px;
+			width: 725px;
+			overflow: hidden;
+		}
+
+		#industrycard_sidebar{
+			width: 500px;
+			min-height: 100px;
+			position: absolute;
+			right: 0;
+			top: 0;
+			/*background-color: blue;*/
+		}
+
+		#industrycard_sidebar ul {
+			overflow: hidden;
+		}
+		#industrycard_sidebar ul li {
+			float: left;
+			/*outline: 1px solid #666666;*/
+			/*margin-left: 3px;*/
+		}
+		#industrycard_sidebar {
+			width: 300px;
+			padding: 20px;
+			margin-bottom: 20px;
+			float: right;
+			border: 1px solid #bcbcbc;
+		}
+		*{
+			box-sizing:border-box;
+		}
+		#industrycard_content li.card{
+			height:135px;
+			width:135px;
+			margin-left:10px;
+			margin-bottom: 10px;
+			float: left;
+
+		}
+		div.cardContainer{
+			display: block;
+			height:135px;
+			width:135px;
+
+		}
+
+		li.card div.cardContainer div{
+			height:inherit;
+			width:inherit;
+			color:#FFF;
+			font-size:24px;/*수정필요*/
+			backface-visibility:hidden;
+			-webkit-backface-visibility:hidden;
+			transition:all 1.5s;
+			-webkit-transition:all 1.5s;
+			-moz-transition:all 1.5s;
+			-o-transition:all 1.5s;
+			padding-top:80px;
+			text-align:center;
+		}
+		.front {
+			background-color: gray;
+		}
+		.back {
+			background-color: pink;
+		}
+		div.cardContainer div:last-child{
+			position:relative;
+			top:-135px;
+			transform:rotateY(180deg);
+			-webkit-transform:rotateY(180deg);
+			-ms-transform:rotateY(180deg);
+			-moz-transform:rotateY(180deg);
+			-o-transform:rotateY(180deg);
+		}
+		div.cardContainer:hover div:first-child{
+			transform:rotateY(-180deg);
+			-webkit-transform:rotateY(-180deg);
+			-ms-transform:rotateY(-180deg);
+			-moz-transform:rotateY(-180deg);
+			-o-transform:rotateY(-180deg);
+		}
+		div.cardContainer:hover div:last-child{
+			transform:rotateY(0deg);
+			-webkit-transform:rotateY(0deg);
+			-ms-transform:rotateY(0deg);
+			-moz-transform:rotateY(0deg);
+			-o-transform:rotateY(0deg);
+		}
+
+		/*#footer{
+           position: relative;
+        }*/
+	</style>
+</head>
+<body>
+	<div id="header">
+		<div id="logoBox">
+			<h1>
+				<a href="" title="vanilla stock">
+				<img src="../img/vs-logo2.PNG" alt="vanilla stock"/>
+				</a>
+			</h1>
+			
+		</div><!--//#logoBox -->
+		<div class="aux">
+			<div id="gnb">
+				<h2 class="screen_out">주요 서비스</h2>
+				<ul>
+					<li class="nav on"><a href=""> 종목</a> </li>
+					<li class="nav"><a href=""> 투기장 </a></li>
+					<li class="nav"><a href="">랭킹</a> </li>
+				</ul>
+			
+			</div><!--//#gnb -->
+
+			<div id="searchBox">
+				<label class="screen_out">찾을 회사 입력</label>
+						<input class="inp_txt" type="text" placeholder="회사명을 입력해주세요" />
+						 <span class="btn_search"> <i class="fa fa-search"></i></span>
+			</div><!--//#searchBox -->
+
+		</div><!--//.aux -->
+	<div id="loginBox">
+		<div id="loginBtn" class="btn hidden">
+			로그인
+		</div><!--//loginBtn -->
+		<div id="profileBox" class="">
+			<h2 class="screen_out">유저정보</h2>
+			<img src="../profile/profile.png"
+			class="profile_on"  width="60" height="60"
+			alt="테스터"
+			title="테스터"/>
+			<div id="profilePopup" class="profile_on">
+				<ul id="profileList">
+					<li class="profile"><a href="/user.jsp?no=3"><span class="open_door" >문</span> 
+					<!--관리자는 관리자 페이지로 바꾸기 -->	
+					마이페이지</a></li><!--//.profile -->
+					<li class="profile"><a href="/logout.do"><span class="close_door" >문</span> 로그아웃</a></li><!--//.profile -->
+				</ul><!--//profileList -->
+			</div><!--//#profilePopup -->
+		</div><!--#profileBox -->
+		<script>
+			const $profile = $("#profileBox img");
+			const $profileTarget = $("#profilePopup");
+
+			$profile.click(function () {
+				$profileTarget.toggle();
+        });// profileBox click end
+
+			$("html").click(function(e){
+				if(!$(e.target).hasClass("profile_on")){
+					$profileTarget.hide();
+				}
+        });//
+    </script>
+
+		</div>
+			
+	</div><!--//#header -->
+	<div id="content">
+		<div class="aux">
+			<div id="industrycard_content"><!--수정필요******-->
+				<ul>
+					<li class="card">
+						<div class="cardContainer">
+							<div class="front">RED</div>
+							<div class="back">PINK</div>
+						</div>
+					</li>
+					<li class="card">
+						<div class="cardContainer">
+							<div class="front">YELLOW</div>
+							<div class="back">GREEN</div>
+						</div>
+					</li>
+					<li class="card">
+						<div class="cardContainer">
+							<div class="front">SKYBLUE</div>
+							<div class="back">DARKBLUE</div>
+						</div>
+
+					</li>
+					<li class="card">
+						<div class="cardContainer">
+							<div class="front">RED</div>
+							<div class="back">PINK</div>
+						</div>
+
+					</li>
+					<li class="card">
+						<div class="cardContainer">
+							<div class="front">YELLOW</div>
+							<div class="back">GREEN</div>
+						</div>
+
+					</li>
+					<li class="card">
+						<div class="cardContainer">
+							<div class="front">SKYBLUE</div>
+							<div class="back">DARKBLUE</div>
+						</div>
+
+					</li>
+					<li class="card">
+						<div class="cardContainer">
+							<div class="front">RED</div>
+							<div class="back">PINK</div>
+						</div>
+
+					</li>
+					<li class="card">
+						<div class="cardContainer">
+							<div class="front">YELLOW</div>
+							<div class="back">GREEN</div>
+						</div>
+
+					</li>
+					<li class="card">
+						<div class="cardContainer">
+							<div class="front">SKYBLUE</div>
+							<div class="back">DARKBLUE</div>
+						</div>
+
+					</li>
+					<li class="card">
+						<div class="cardContainer">
+							<div class="front">RED</div>
+							<div class="back">PINK</div>
+						</div>
+
+					</li>
+					<li class="card">
+						<div class="cardContainer">
+							<div class="front">YELLOW</div>
+							<div class="back">GREEN</div>
+						</div>
+
+					</li>
+					<li class="card">
+						<div class="cardContainer">
+							<div class="front">SKYBLUE</div>
+							<div class="back">DARKBLUE</div>
+						</div>
+
+					</li>
+
+					<li class="card">
+						<div class="cardContainer">
+							<div class="front">RED</div>
+							<div class="back">PINK</div>
+						</div>
+
+					</li>
+					<li class="card">
+						<div class="cardContainer">
+							<div class="front">YELLOW</div>
+							<div class="back">GREEN</div>
+						</div>
+
+					</li>
+					<li class="card">
+						<div class="cardContainer">
+							<div class="front">SKYBLUE</div>
+							<div class="back">DARKBLUE</div>
+						</div>
+
+					</li>
+					<li class="card">
+						<div class="cardContainer">
+							<div class="front">RED</div>
+							<div class="back">PINK</div>
+						</div>
+
+					</li>
+					<li class="card">
+						<div class="cardContainer">
+							<div class="front">YELLOW</div>
+							<div class="back">GREEN</div>
+						</div>
+
+					</li>
+					<li class="card">
+						<div class="cardContainer">
+							<div class="front">SKYBLUE</div>
+							<div class="back">DARKBLUE</div>
+						</div>
+					</li>
+
+					<li class="card">
+						<div class="cardContainer">
+							<div class="front">RED</div>
+							<div class="back">PINK</div>
+						</div>
+
+					</li>
+					<li class="card">
+						<div class="cardContainer">
+							<div class="front">YELLOW</div>
+							<div class="back">GREEN</div>
+						</div>
+
+					</li>
+					<li class="card">
+						<div class="cardContainer">
+							<div class="front">SKYBLUE</div>
+							<div class="back">DARKBLUE</div>
+						</div>
+
+					</li>
+					<li class="card">
+						<div class="cardContainer">
+							<div class="front">RED</div>
+							<div class="back">PINK</div>
+						</div>
+
+					</li>
+					<li class="card">
+						<div class="cardContainer">
+							<div class="front">YELLOW</div>
+							<div class="back">GREEN</div>
+						</div>
+
+					</li>
+					<li class="card">
+						<div class="cardContainer">
+							<div class="front">SKYBLUE</div>
+							<div class="back">DARKBLUE</div>
+						</div>
+					</li>
+
+				</ul>
+			</div><!--//#industrycard_content -->
+
+			<div id="industrycard_sidebar">
+				<ul>
+					<li class="title t_line w160">업종명</li><li class="w60 title ">전일대비</li>
+					<li class="list l_line w160">인터넷과카탈로그소매</li><li class="w60 list ">+3.5%</li>
+					<li class="list l_line w160">건설</li> <li class="w60 list ">+3.5%</li>
+					<li class="list l_line w160">양방향미디어와서비스</li> <li class="w60 list ">+3.5%</li>
+				</ul>
+			</div><!--industrycard_sidebar-->
+		</div><!--//.aux-->
+	</div><!--//#content -->
+
+	
+	<div id="footer">
+			<div id="policy">
+		<h4 class="screen_out">정책 및 약관</h4>
+		<ul>
+		<li><a href="">회사소개</a></li><!--
+	 --><li><a href="">광고</a></li><!--
+	 --><li><a href="">검색등록</a></li><!--
+	 --><li><a href="">제휴제안</a></li><!--
+	 --><li><a href="">이용약관</a></li><!--
+	 --><li><a href=""><strong>개인정보이용약관</strong></a></li><!--
+	 --><li><a href="">청소년보호정책</a></li><!--
+	--><li><a href="">고객센터</a></li>
+</ul>
+</div><!--//policy -->
+<address>&copy; 2020 <a href="">NackEGG.com</a></address>
+
+	</div><!--//#footer -->
+	<script  src="../js/fix-footer.js"></script>
+
+</body>
+</html>
