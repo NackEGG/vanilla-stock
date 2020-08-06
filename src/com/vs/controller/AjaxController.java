@@ -93,7 +93,7 @@ public class AjaxController {
 	
 	@RequestMapping("/init")
 	public void initCardPage(HttpServletRequest request, HttpServletResponse response) {
-		System.out.println("응 들어옴~");
+		System.out.println("페이지 진입 성공");
 		
 		String[] Date = getStartEndDate();		// 0:Start, 1:End
 		
@@ -172,9 +172,17 @@ public class AjaxController {
 		}
 
 		// 산업군의 변동률 계산
-		for(String indNo : indNoList) {			
-			double cRateSum = cardDataMap.get(indNo).getCRateSum();
-			int totalCnt = cardDataMap.get(indNo).getTotalCnt();
+		for(String indNo : indNoList) {		
+			double cRateSum = 0;
+			int totalCnt =0;
+			try {
+				cRateSum = cardDataMap.get(indNo).getCRateSum();
+				 totalCnt = cardDataMap.get(indNo).getTotalCnt();
+				
+			} catch (Exception e) {
+				System.out.println("[ ERROR indNo  "+indNo+" ]");
+			}
+			 
 			cardDataMap.get(indNo).setChangeRate(cRateSum / totalCnt);
 		}
 		
