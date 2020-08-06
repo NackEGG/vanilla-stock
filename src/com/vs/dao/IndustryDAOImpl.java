@@ -2,19 +2,45 @@ package com.vs.dao;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
+import org.springframework.jdbc.core.namedparam.SqlParameterSource;
+import org.springframework.jdbc.core.simple.SimpleJdbcCall;
 import org.springframework.stereotype.Repository;
 
 import com.vs.vo.IndustryVO;
 
 @Repository
 public class IndustryDAOImpl implements IndustryDAO {
+	
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
+	
+	@Autowired
+	private SimpleJdbcCall simpleJdbcCall;
+	
+	@Override
+	public IndustryVO get(String stockCode) {
+		simpleJdbcCall
+		.withProcedureName("USP_GET_INDUSTRY");
+		
+		SqlParameterSource in = new MapSqlParameterSource()
+				.addValue("PI_STOCK_CODE", stockCode);
+		
+		Map out = simpleJdbcCall.execute(in);
+		IndustryVO industryVO = new IndustryVO();
+		industryVO.setNo((int) out.get("NO"));
+		industryVO.setName((String) out.get("NAME"));
+		industryVO.setRegdate((Timestamp) out.get("REGDATE"));
+		
+		return industryVO;
+	}
 	
 	@Override
 	public int insert(IndustryVO data) {
@@ -39,4 +65,5 @@ public class IndustryDAOImpl implements IndustryDAO {
 		};
 		return jdbcTemplate.query("select * from industry", rowMapper);
 	}
+
 }

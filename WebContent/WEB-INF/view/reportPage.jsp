@@ -312,7 +312,7 @@
 									<img src="../img/logo-name.JPG">
 								</div><!--//#industryLogo -->
 								<div id="industyName">
-									정보산업
+									${industryVO.name}
 								</div><!--//#industryName -->
 							</div><!--//#industryBox -->
 						</div><!--//#lowerDescBox -->
