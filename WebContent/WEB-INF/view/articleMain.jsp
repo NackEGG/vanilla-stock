@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="../css/reset.css" />
     <link rel="stylesheet" href="../css/kakao.font.css" />
     <link rel="stylesheet" href="../css/default.css" />
-     <link rel="stylesheet" href="../css/article.css" />
+    <link rel="stylesheet" href="../css/article.css" />
     <link
       rel="stylesheet"
       href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
@@ -118,6 +118,13 @@
             <li class="article_recent">최신순</li>
             <li class="article_popular">인기순</li>
           </ul>
+          <div class="article_open">
+            <a
+              href="/Users/IRENE/Downloads/폴더/vanilla-stock-front/jeongyeon/articleOpen.html"
+              onclick="window.open(this.href, '_blank', 'width=800px,height=400px,toolbars=no,scrollbars=no, resizable=no, fullscreen=no'); return false;"
+              >+OPEN
+            </a>
+          </div>
         </div>
         <!--//#main header -->
         <div id="divMiddle">
@@ -459,3 +466,4 @@
     <script src="../js/fix-footer.js"></script>
   </body>
 </html>
+

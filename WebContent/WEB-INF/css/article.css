@@ -1,11 +1,3 @@
-.subject {
-  display: flex;
-  flex-direction: column;
-  background-color: #bdbdbd;
-  width: 100%;
-  height: 60px;
-}
-
 .articleTitle {
   width: 80px;
   height: 20px;
@@ -13,91 +5,20 @@
   font-weight: bold;
   margin-left: 10px;
 }
-.articleHeader {
-  width: 120px;
-  height: 20px;
-  display: flex;
-  flex-direction: column;
-  padding-top: 10px;
-  padding-bottom: 5px;
-  padding-left: 10px;
+
+.article_open {
+  width: 30px;
+  height: 30px;
+  font-size: 25px;
   color: black;
   font-weight: bold;
-  font-size: 17px;
-}
-.articleDate {
-  width: 150px;
-  height: 20px;
-  display: flex;
-  flex-direction: column;
-  padding-left: 10px;
-  font-size: 12px;
-}
-
-.articleInfo {
-  width: 100px;
-  height: 20px;
-  display: flex;
-  justify-content: right;
-}
-
-.viewComment {
-  width: 200px;
-  height: 30px;
-  display: flex;
-  padding-left: 900px;
-  margin-top: -50px;
-}
-
-.articleChart {
-  background-color: thistle;
-  width: 100%;
-  height: 100px;
-  margin-top: 30px;
-  display: flex;
-  flex-direction: column;
+  display: block;
+  margin-left: 970px;
+  margin-top: -35px;
 }
 
 .articleBuy {
   display: block;
-}
-
-.articleComment {
-  background-color: wheat;
-  width: 100%;
-  height: 150px;
-  margin-top: 10px;
-  padding-top: 10px;
-  display: flex;
-  flex-direction: column;
-}
-
-.articleCommentList {
-  background-color: lightblue;
-  width: 100%;
-  height: 70px;
-  margin-top: 5px;
-}
-
-.commentWrite {
-  width: 800px;
-  height: 70px;
-  display: block;
-  margin-top: 20px;
-  padding-left: 10px;
-  margin-left: 100px;
-  border-radius: 20px;
-  border-style: none;
-}
-.commentEnter {
-  width: 80px;
-  height: 50px;
-  background-color: white;
-  border-radius: 15px;
-  margin-left: 940px;
-  display: inline-block;
-  margin-top: -65px;
-  border-style: none;
 }
 
 .articleRatio {
@@ -120,357 +41,302 @@
   float: left;
 }
 
-.articleBuy {
-  display: flex;
-  justify-content: space-around;
-  margin-top: 20px;
-}
-
-.commentList {
-  display: block;
-}
-
-.commentWriter {
-  width: 300px;
-  height: 20px;
-  font-size: 17px;
-}
-
-.commentDate {
-  width: 100px;
-  height: 20px;
-  font-size: 12px;
-}
-
-.commentContents {
-  margin-top: 7px;
-}
-
-.articleLikes {
-  font-size: 14px;
-  width: 150px;
-  height: 20px;
-  display: flex;
-  margin-left: 900px;
-  margin-top: -35px;
-  justify-content: space-between;
-}
-
-
 #divTop {
-	background-color: #bdbdbd ;
-width: 100%;
-height: 60px;
-
-
+  background-color: #bdbdbd;
+  width: 100%;
+  height: 60px;
 }
-.article{
-font-size: 30px;
-font-weight: bold;
-padding-top: 22px;
-padding-left: 10px;
-display: flex;
-
+.article {
+  font-size: 30px;
+  font-weight: bold;
+  padding-top: 22px;
+  padding-left: 10px;
+  display: flex;
+  color: grey;
 }
 
-.article_recent{
-	color: black;
-	margin-left: 120px;
-	margin-top: -20px;
+.article_recent {
+  color: black;
+  margin-left: 120px;
+  margin-top: -20px;
 }
 
-.article_popular{
-	color: black;
-	margin-left: 180px;
-	margin-top : -18px;
+.article_popular {
+  color: black;
+  margin-left: 180px;
+  margin-top: -18px;
 }
 
 #divMiddle {
-	
-width: 100%;
-height: 450px;
-font-size: 15px;
-font-weight: bold;
-color: black;
-
+  width: 100%;
+  height: 450px;
+  font-size: 15px;
+  font-weight: bold;
+  color: black;
 }
 
-.article_list{
-	background-color: ;
-	margin-top: 7px;
-	height: 450px;
-	display: flex;
-	justify-content: center;
-	flex-direction: column;
-	
+.article_list {
+  background-color: ;
+  margin-top: 7px;
+  height: 450px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
 }
 
-.articleCompany{
-	
-	width : 700px;
-	height: 30px;
-	margin-top: 25px;
+.articleCompany {
+  width: 700px;
+  height: 30px;
+  margin-top: 25px;
 }
 
-.companyList{
-	background-color: #bdbdbd ;
-	width : 100%;
-	height : 70px;
-	margin-bottom: 10px;
+.companyList {
+  background-color: #bdbdbd;
+  width: 100%;
+  height: 70px;
+  margin-bottom: 5px;
+  margin-top: 10px;
 }
 
-.companyName{
-	width: 200px;
-	height: 20px;
-	margin-left: 10px;
-	display: block;
-	
+.companyName {
+  width: 200px;
+  height: 20px;
+  margin-left: 10px;
+  display: block;
+  font-size: 20px;
 }
 
-
-.articleTitle{
-	width : 600px;
-	height : 20px;
-	display: block;
-	text-align: center;
-	margin-top: -20px;
-	
+.articleTitle {
+  width: 600px;
+  height: 20px;
+  display: block;
+  text-align: center;
+  margin-top: -20px;
 }
 
- .articleRatio {
-	display: inline-block;
-	width: 250px;
-	height: 20px;
-	background-color: #eaeaea;
-	/*position: relative;*/
-	border-radius: 10px;
-	vertical-align: middle;
-	margin-left: 500px;
-	margin-top : -55px;
-  }
-  .articleRatio_fill {
-	height: 100%;
-	background-color: #66c87b;
-	border-top-right-radius: 0;
-	border-bottom-right-radius: 0;
-	border-radius: 10px;
-	float: left;
-  }
-
-.articleOpinion{
-	width: 100px;
-	height: 40px;
-	display: flex;
-	flex-direction: column;
-	margin-left: 800px;
-	margin-top : -60px;
-	text-align: center;
-	
+.articleRatio {
+  display: inline-block;
+  width: 250px;
+  height: 20px;
+  background-color: #eaeaea;
+  /*position: relative;*/
+  border-radius: 10px;
+  vertical-align: middle;
+  margin-left: 500px;
+  margin-top: -55px;
+}
+.articleRatio_fill {
+  height: 100%;
+  background-color: #66c87b;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+  border-radius: 10px;
+  float: left;
 }
 
-
-
-.opHeader{
-	width: 100px;
-	height: 30px;
-	display: flex;
-	justify-content: space-around;
+.articleOpinion {
+  width: 100px;
+  height: 40px;
+  display: flex;
+  flex-direction: column;
+  margin-left: 800px;
+  margin-top: -60px;
+  text-align: center;
 }
 
-.articleOpNum{
-	width: 100px;
-	height: 30px;
-	display: flex;
-	justify-content: space-around;
+.opHeader {
+  width: 100px;
+  height: 30px;
+  display: flex;
+  justify-content: space-around;
 }
 
-.viewTimestamp{
-	width: 200px;
-	height: 40px;
-	display: flex;
-	flex-direction: column;
-	margin-left: 950px;
-	margin-top: -35px;
+.articleOpNum {
+  width: 100px;
+  height: 30px;
+  display: flex;
+  justify-content: space-around;
 }
 
-.articleTimestamp{
-	display: block;
-	margin-top: 5px;
-	padding-left: 15px;
+.viewTimestamp {
+  width: 200px;
+  height: 40px;
+  display: flex;
+  flex-direction: column;
+  margin-left: 950px;
+  margin-top: -35px;
+}
 
+.articleTimestamp {
+  display: block;
+  margin-top: 5px;
+  padding-left: 15px;
 }
 
 /*searchBox는 검색창*/
 
-#searchBox{
-	width: 510px;
-	/*height:50px; */
-	margin: auto;
-	/*background-color: red;*/
-	margin-bottom: 5px;
+#searchBox {
+  width: 510px;
+  /*height:50px; */
+  margin: auto;
+  /*background-color: red;*/
+  margin-bottom: 10px;
 }
-#searchForm{
-	width: 500px;
-	min-height:50px; 
-	position: relative;
+#searchForm {
+  width: 500px;
+  min-height: 50px;
+  position: relative;
 }
-#searchBox .box_inp_search{
-	width: 120px;
-	height: 48px;
-	background-color: #fff;
-	position: absolute;
-	top: 0;
-	left: 0;
-	padding: 0;
-	/*line-height: 48px;*/
-	
-	
+#searchBox .box_inp_search {
+  width: 120px;
+  height: 48px;
+  background-color: #fff;
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding: 0;
+  /*line-height: 48px;*/
 }
-#searchBox .select_title{
-	width: 103px; /*118*/
-	height: 19px; /*48*/ 
-	border:1px solid #E0E0E0; 
-	/*line-height: 48px;*/
-	font-size: 16px;
-	padding: 14px 5px 15px 10px;  
-	/*background-color: red;*/
-	position: relative;
-	cursor: pointer;
+#searchBox .select_title {
+  width: 103px; /*118*/
+  height: 19px; /*48*/
+  border: 1px solid #e0e0e0;
+  /*line-height: 48px;*/
+  font-size: 16px;
+  padding: 14px 5px 15px 10px;
+  /*background-color: red;*/
+  position: relative;
+  cursor: pointer;
 }
 
-#searchBox .select_option{
-	width: 118px;
-	height: 148px;
-	display: none;
-	background-color: #fff;
-	border:1px solid #E0E0E0;
-	position: absolute;
-	top: 50px;
-	left: 0;
-	text-align: left;
-
+#searchBox .select_option {
+  width: 118px;
+  height: 148px;
+  display: none;
+  background-color: #fff;
+  border: 1px solid #e0e0e0;
+  position: absolute;
+  top: 50px;
+  left: 0;
+  text-align: left;
 }
 
-#searchBox .ico_angle_up{
-	display: none;
-	width: 10px;
-	height: 16px;
-	
-	/*background-color: blue;*/
-	position: absolute;
-	top: 15px;
-	right: 10px;
+#searchBox .ico_angle_up {
+  display: none;
+  width: 10px;
+  height: 16px;
+
+  /*background-color: blue;*/
+  position: absolute;
+  top: 15px;
+  right: 10px;
 }
 
-#searchBox.click .select_option{
-	display: block;
+#searchBox.click .select_option {
+  display: block;
 }
 
-#searchBox.click .ico_angle_up{
-	display: block;
+#searchBox.click .ico_angle_up {
+  display: block;
 }
-#searchBox.click .ico_angle_down{
-	display: none;
+#searchBox.click .ico_angle_down {
+  display: none;
 }
-.select_option ul{
-	width: 118px;
-	height: 148px;
-}
-
-.select_option .opt_select{
-	display: block;
-	width: 104px;
-	height: 49px;
-	/*background-color: red;*/
-	line-height: 49px;
-	padding-left: 14px;
-	transition: .1s ease;
+.select_option ul {
+  width: 118px;
+  height: 148px;
 }
 
-
+.select_option .opt_select {
+  display: block;
+  width: 104px;
+  height: 49px;
+  /*background-color: red;*/
+  line-height: 49px;
+  padding-left: 14px;
+  transition: 0.1s ease;
+}
 
 .opt_select:hover {
-	background-color: #EEEEEE;
-	color: #222;
-
+  background-color: #eeeeee;
+  color: #222;
 }
 
-#searchBox .box_inp_txt{
-	width: 378px;
-	height: 48px;
-	border:1px solid #E0E0E0;
-	position: absolute;
-	left: 130px;
+#searchBox .box_inp_txt {
+  width: 378px;
+  height: 48px;
+  border: 1px solid #e0e0e0;
+  position: absolute;
+  left: 130px;
 }
-#searchBox .inp_txt{
-	width: 328px;
-	height: 48px;
-	border:none;
-	outline: none;
-	background-color: #fff;
-	/*position: absolute;*/
-	
-	padding:0 40px 0 10px;
-	font-size: 16px;
+#searchBox .inp_txt {
+  width: 328px;
+  height: 48px;
+  border: none;
+  outline: none;
+  background-color: #fff;
+  /*position: absolute;*/
+
+  padding: 0 40px 0 10px;
+  font-size: 16px;
 }
 
-.select_title .ico_angle_down{ 
-	width: 10px;
-	height: 16px;
-	display: block;
-	/*background-color: blue;*/
-	position: absolute;
-	top: 16px;
-	right: 10px;
-	
+.select_title .ico_angle_down {
+  width: 10px;
+  height: 16px;
+  display: block;
+  /*background-color: blue;*/
+  position: absolute;
+  top: 16px;
+  right: 10px;
 }
 
 /*paginate는 페이지리스트와 관련되어 있는 CSS*/
 .paginate {
-	font-size:22px;
-	text-align:center;
-	height:50px;
-	line-height:50px;
-	font-weight:500;
-	margin: 10px;
+  font-size: 22px;
+  text-align: center;
+  height: 50px;
+  line-height: 50px;
+  font-weight: 500;
+  margin: 10px;
+  margin-top: -30px;
 }
 
-.paginate a, 
+.paginate a,
 .paginate span,
-.paginate strong{
-	color:#858585;
-	text-decoration:none;
-	padding:9px 14px;
-	border:1px solid transparent;
-	transition:.1s ease;
+.paginate strong {
+  color: #858585;
+  text-decoration: none;
+  padding: 9px 14px;
+  border: 1px solid transparent;
+  transition: 0.1s ease;
 }
 
 .paginate span {
-	border-color:#E1E1E1;
-	cursor: not-allowed;
+  border-color: #e1e1e1;
+  cursor: not-allowed;
 }
 
 .paginate a:hover {
-	background:  black;
-	border-color:#fff;
-	font-weight:bold;
-	color:#fff;
+  background: black;
+  border-color: #fff;
+  font-weight: bold;
+  color: #fff;
 }
 
 .paginate strong {
-	background: black;
-	border-color: black;
-	color:#fff;
-	cursor: not-allowed;
-	font-weight:bold;
-	box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  background: black;
+  border-color: black;
+  color: #fff;
+  cursor: not-allowed;
+  font-weight: bold;
+  box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
-
 
 .paginate span.next,
 .paginate span.prev {
-	border-color:black;
-	color:black;
-	cursor:default;
-	cursor:not-allowed;
+  border-color: black;
+  color: black;
+  cursor: default;
+  cursor: not-allowed;
 }
