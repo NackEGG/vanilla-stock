@@ -25,15 +25,17 @@ public class CompanyDAOImpl implements CompanyDAO {
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
 	
-	@Autowired
-	private SimpleJdbcCall simpleJdbcCall;
+	public SimpleJdbcCall getSimpleJdbcCall(JdbcTemplate jdbcTemplate) {
+		return new SimpleJdbcCall(jdbcTemplate);
+	}
 	
 	@Override
 	public CompanyVO select(String keyword) {
-		// TODO Auto-generated method stub
+		
+		SimpleJdbcCall simpleJdbcCall = getSimpleJdbcCall(jdbcTemplate);
+		
 		simpleJdbcCall
-		.withProcedureName("USP_GET_COMPANY")
-		.returningResultSet("companyVO", new CompanyRowMapper());
+		.withProcedureName("USP_GET_COMPANY");
 		
 		SqlParameterSource in = new MapSqlParameterSource()
 				.addValue("PI_KEYWORD", keyword);
