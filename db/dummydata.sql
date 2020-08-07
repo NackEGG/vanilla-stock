@@ -100,4 +100,12 @@ insert into comments values(comments_seq.nextval, 11, 5, '이거 안사면 어�
 insert into comments values(comments_seq.nextval, 12, 5, '어떡해여어어어어' , sysdate);
 insert into comments values(comments_seq.nextval, 13, 6, '나도 비오기전에 집가고싶다아아아 그래서 이거 사나요?' , sysdate);
 
-
+/* HIT */
+Insert into hit values (hit_seq.nextval,'1',1,'A', 2 ,sysdate);
+Insert into hit values (hit_seq.nextval,'1',2,'N', 1 ,sysdate);
+Insert into hit values (hit_seq.nextval,'1',1,'A', 2 ,sysdate);
+Insert into hit values (hit_seq.nextval,'1',2,'N', 1 ,sysdate);
+Insert into hit values (hit_seq.nextval,'1',2,'A', 1 ,sysdate);
+Insert into hit values (hit_seq.nextval,'1',1,'N', 2 ,sysdate);
+Insert into hit values (hit_seq.nextval,'1',2,'A', 1 ,sysdate);
+Insert into hit values (hit_seq.nextval,'1',1,'N', 2 ,sysdate);
