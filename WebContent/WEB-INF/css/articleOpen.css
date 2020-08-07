@@ -1,0 +1,56 @@
+/*ARTICLE OPEN FORM */
+.body {
+  width: 850px;
+  height: 400px;
+}
+.articleOpenform {
+  width: 800px;
+  height: 400px;
+  background-color: lightgoldenrodyellow;
+}
+
+.articleCompanyOption {
+  width: 300px;
+  height: 30px;
+}
+
+.openTitle {
+  width: 300px;
+  height: 30px;
+  margin-left: 10px;
+}
+
+.articleOpenTitle {
+  width: 700px;
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  padding: 10px;
+  padding-top: 60px;
+}
+
+.openConfirmed {
+  width: 100px;
+  height: 40px;
+  background-color: lightsalmon;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 300px;
+  margin-top: 30px;
+}
+
+.articleName {
+  width: 90px;
+  height: 20px;
+  font-size: 20px;
+  font-weight: bold;
+  margin-left: 10px;
+}
+
+.articleCName {
+  font-size: 20px;
+  font-weight: bold;
+  margin-right: 60px;
+  padding-left: 10px;
+}
