@@ -43,7 +43,7 @@ public class CompanyDAOImpl implements CompanyDAO {
 	
 	@Override
 	public List<CompanyVO> selectCompany(int indNo)  {
-		String sql="select company,industry_no,stock_code from company where company.stock_code in (select stock_records.stock_code from stock_records) and industry_no=?";
+		String sql="select company,industry_no,stock_code from company where company.stock_code in (select stock_records.stock_code from stock_records) and industry_no=? ORDER BY company.company";
 		RowMapper<CompanyVO> rowMapper = new RowMapper<CompanyVO>() {
 			
 			@Override

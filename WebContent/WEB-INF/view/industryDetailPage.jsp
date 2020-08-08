@@ -12,19 +12,17 @@
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
 	<script src="${pageContext.request.contextPath}/js/jquery.js"></script>
 	<!--그래프를 위한 스크립트-->
-	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 	<script src="https://code.highcharts.com/highcharts.js"></script>
-	<script src="https://code.highcharts.com/modules/data.js"></script>
-	<script src="https://code.highcharts.com/modules/series-label.js"></script>
 	<script src="https://code.highcharts.com/modules/exporting.js"></script>
 	<script src="https://code.highcharts.com/modules/export-data.js"></script>
 	<script src="https://code.highcharts.com/modules/accessibility.js"></script>
-	<!-- Additional files for the Highslide popup effect -->
-	<script src="https://www.highcharts.com/media/com_demo/js/highslide-full.min.js"></script>
-	<script src="https://www.highcharts.com/media/com_demo/js/highslide.config.js" charset="utf-8"></script>
-	<link rel="stylesheet" type="text/css" href="https://www.highcharts.com/media/com_demo/css/highslide.css">
 
-
+	<script>
+		
+	
+	
+	
+	</script>
 	<style type="text/css">
 		/*1row*/
 
@@ -152,39 +150,43 @@
          height: 19px;
       } */
       /*그래프를 위한 가져온 css*/
-      .highcharts-figure, .highcharts-data-table table {
-         min-width: 360px;
-         max-width: 800px;
-         /*margin: 1em auto;*/
-      }
-
-      .highcharts-data-table table {
-         font-family: Verdana, sans-serif;
-         border-collapse: collapse;
-         border: 1px solid #EBEBEB;
-         text-align: center;
-         width: 100%;
-         max-width: 500px;
-      }
-      .highcharts-data-table caption {
-         padding: 1em 0;
-         font-size: 1.2em;
-         color: #555;
-      }
-      .highcharts-data-table th {
-         font-weight: 600;
-         padding: 0.5em;
-      }
-      .highcharts-data-table td, .highcharts-data-table th, .highcharts-data-table caption {
-         padding: 0.5em;
-      }
-      .highcharts-data-table thead tr, .highcharts-data-table tr:nth-child(even) {
-         background: #f8f8f8;
-      }
-      .highcharts-data-table tr:hover {
-         background: #f1f7ff;
-      }
-
+		/* #container {
+		height: 400px; 
+		}
+		 */
+		.highcharts-figure, .highcharts-data-table table {
+		  min-width: 310px; 
+		  max-width: 800px;
+		 /*  margin: 1em auto; */
+		}
+		
+		.highcharts-data-table table {
+		  font-family: Verdana, sans-serif;
+		  border-collapse: collapse;
+		  border: 1px solid #EBEBEB;
+		 /*  margin: 10px auto; */
+		  text-align: center;
+		  width: 100%;
+		  max-width: 500px;
+		}
+		.highcharts-data-table caption {
+		  padding: 1em 0;
+		  font-size: 1.2em;
+		  color: #555;
+		}
+		.highcharts-data-table th {
+			font-weight: 600;
+		  padding: 0.5em;
+		}
+		.highcharts-data-table td, .highcharts-data-table th, .highcharts-data-table caption {
+		  padding: 0.5em;
+		}
+		.highcharts-data-table thead tr, .highcharts-data-table tr:nth-child(even) {
+		  background: #f8f8f8;
+		}
+		.highcharts-data-table tr:hover {
+		  background: #f1f7ff;
+		}
 	</style>
 	<script type="text/javascript">
 		function company_checkbox(){
@@ -202,6 +204,8 @@
 			}else{
 				flag=true;
 			}
+			
+			
 			return flag;
 			
 		}
@@ -257,7 +261,7 @@
 				</div><!--//#profilePopup -->
 			</div><!--#profileBox -->
 			<script>
-				const $profile = $("#profileBox img");
+				const $profile = $("#profileBox_img");
 				const $profileTarget = $("#profilePopup");
 
 				$profile.click(function () {
@@ -278,35 +282,31 @@
 		<div class="aux">
 			<div id="industry_info"><!--1row-->
 				<div id="card_detail">
-				<c:forEach var="comlist" items="${comlist}">
-					<c:forEach var="cardData" items="${cardDataMap }">
-					<c:if test="${comlist.industryNo==cardData.key}">
 					 <div class="card_left">
 						<ul>
 							<li>
 								<a href="" title="testicon">
 								<img style="width: 50%; max-width: 600px; height: 50%; vertical-align: middle" 
-										src="${pageContext.request.contextPath}/icon/<c:out value="${comlist.industryNo}"/>.png">
+										src="${pageContext.request.contextPath}/icon/<c:out value="${detailIndNo}"/>.png">
 								</a>
 							</li>
 						</ul>
 						
 						<ul>
 							<li style="text-align: center; font-size: large; margin-top: 15px" >
-								<c:out value="${cardData.value.getIndustryName()}"/>
+								<c:out value="${detailIndName}"/>
 							</li>
 						</ul>
 					</div>
 					<div class="card_right">
-					<!-- c태그(if,foreach)이용 -->
 						<table class="card_table">
 							<tr style="height: 30px">
 								<td colspan="4" style="color : <c:choose>
-									<c:when test="${cardData.value.getChangeRate() < 0}">blue</c:when>
-									<c:when test="${cardData.value.getChangeRate() > 0}">red</c:when>
+									<c:when test="${cardDetail.getChangeRate() < 0}">blue</c:when>
+									<c:when test="${cardDetail.getChangeRate() > 0}">red</c:when>
 									<c:otherwise>#669</c:otherwise>
 									</c:choose>">
-									전일 대비 :<c:out value="${String.format('%.02f', cardData.value.getChangeRate()) }"/>%
+									전일 대비 :<c:out value="${String.format('%.02f', cardDetail.getChangeRate()) }"/>%
 								</td>
 							</tr>
 							<tr>
@@ -316,128 +316,40 @@
 								<td>하락</td>
 							</tr>
 							<tr>
-								<td><c:out value="${cardData.value.totalCnt}"/></td>
-								<td><c:out value="${cardData.value.incCnt}"/></td>
-								<td><c:out value="${cardData.value.totalCnt-cardData.value.incCnt-cardData.value.decCnt}"/></td>
-								<td><c:out value="${cardData.value.decCnt}"/></td>
+								<td><c:out value="${cardDetail.totalCnt}"/></td>
+								<td><c:out value="${cardDetail.incCnt}"/></td>
+								<td><c:out value="${cardDetail.totalCnt - cardDetail.incCnt - cardDetail.decCnt}"/></td>
+								<td><c:out value="${cardDetail.decCnt}"/></td>
 							</tr>
 						</table>
 					</div>
-					</c:if>
-					</c:forEach>
-					</c:forEach>
 				</div><!--card_detail-->
 				<!--그래프내용-->
 				<div id="graph_company">
 					<figure class="highcharts-figure">
 						<div id="container" style="height: 300px"></div>
 						<script>
-							Highcharts.chart('container', {
-
-								chart: {
-									scrollablePlotArea: {
-										minWidth: 700
-									}
-								},
-
-								data: {
-									csvURL: 'https://cdn.jsdelivr.net/gh/highcharts/highcharts@v7.0.0/samples/data/analytics.csv',
-									beforeParse: function (csv) {
-										return csv.replace(/\n\n/g, '\n');
-									}
-								},
-
-								title: {
-									text: null
-								},
-
-								/*subtitle: {
-									text: 'Source: Google Analytics'
-								},*/
-
-								xAxis: {
-									tickInterval: 7 * 24 * 3600 * 1000, // one week
-									tickWidth: 0,
-									gridLineWidth: 1,
-									labels: {
-										align: 'left',
-										x: 3,
-										y: -3
-									}
-								},
-
-								yAxis: [{ // left y axis
-									title: {
-										text: null
-									},
-									labels: {
-										align: 'left',
-										x: 3,
-										y: 16,
-										format: '{value:.,0f}'
-									},
-									showFirstLabel: false
-								}, { // right y axis
-									linkedTo: 0,
-									gridLineWidth: 0,
-									opposite: true,
-									title: {
-										text: null
-									},
-									labels: {
-										align: 'right',
-										x: -3,
-										y: 16,
-										format: '{value:.,0f}'
-									},
-									showFirstLabel: false
-								}],
-
-								legend: {
-									align: 'left',
-									verticalAlign: 'top',
-									borderWidth: 0
-								},
-
-								tooltip: {
-									shared: true,
-									crosshairs: true
-								},
-
-								plotOptions: {
-									series: {
-										cursor: 'pointer',
-										point: {
-											events: {
-												click: function (e) {
-													hs.htmlExpand(null, {
-														pageOrigin: {
-															x: e.pageX || e.clientX,
-															y: e.pageY || e.clientY
-														},
-														headingText: this.series.name,
-														maincontentText: Highcharts.dateFormat('%A, %b %e, %Y', this.x) + ':<br/> ' +
-																this.y + ' sessions',
-														width: 200
-													});
-												}
-											}
-										},
-										marker: {
-											lineWidth: 1
-										}
-									}
-								},
-
-								series: [{
-									name: 'All sessions',
-									lineWidth: 4,
-									marker: {
-										radius: 4
-									}
-								}, {
-									name: 'New users'
-								}]
+						var dateList = ${plotDateList};
+						Highcharts.chart('container', {
+							  chart: {
+							    type: 'column'
+							  },
+							  title: {
+							    text: null
+							  },
+							  xAxis: {
+							    categories: dateList
+							  },
+							  credits: {
+							    enabled: false
+							  },
+							  series: [{
+							    name: '',
+							    data: [0, 0, 0, 0, 0, 0, 0]
+							  }, {
+							    name: '',
+							    data: [0, 0, 0, 0, 0, 0, 0]
+							  }]
 							});
 						</script>
 					</figure>
@@ -450,16 +362,16 @@
 					<div id="detail_header">
 						<div class="company_left">
 							<img>
-							<div><span style="font-size: xx-large">아시아경제</span></div>
-							<div><span>등락%</span></div>
+							<div id="comName1" style="font-size: xx-large">선택 안함</div>
+							<div id="comCRate1" style="text-align: left">등락%</div>
 						</div>
 						<div class="company_center">
 							<img src="${pageContext.request.contextPath}/img/vsline.PNG" alt="vanilla stock" width="200px" height="20"/>
 						</div>
 						<div class="company_right">
 							<img>
-							<div><span style="font-size: xx-large">디앤씨미디어</span></div>
-							<div><span>등락%</span></div>
+							<div id="comName2" style="font-size: xx-large">선택 안함</div>
+							<div id="comCRate2" style="text-align: right">등락%</div>
 							
 						</div>
 					</div><!--detail_header-->
@@ -504,7 +416,7 @@
 						<p>종목 선택하기</p><hr>
 						 <c:forEach var="comlist" items="${comlist}"> 
 						<ul id="select_company_list"><!--name과 value수정하기-->
-							<li><label><input type="checkbox" name="companysel" value="blue"><c:out  value="${comlist.getCompany()}"/></label></li>
+							<li><label><input type="checkbox" name="companysel" value="<c:out  value="${comlist.getCompany()}"/>" class="cb"><c:out  value="${comlist.getCompany()}"/></label></li>
 							<!-- <li><label><input type="checkbox" name="companysel" value="red"> 회사이름2</label></li> -->
 						</ul>
 						</c:forEach> 	
@@ -515,14 +427,69 @@
 					</form>
 				</div><!-- select_company -->
 				<!-- checkbox를 위한 제이쿼리 -->
-				<script>
-				$(document).ready(function(){
-					$('#go').click(function(){
-						var cnt=$('.cb:checked').length;
-						$('#result').html(cnt+"개 선택됨").css("color","blue");
-					});
+				<script type="text/javascript">
+				$('#go').on('click', function(){
+					var dateList = ${plotDateList};
+					var comName = [];
+					var CRList1 = [];
+					var CRList2 = [];
+					
+					$('input[type="checkbox"]:checked').each(function(index,item){
+						comName[index] = $(this).val();
+						
+					   });
+				    var form = {
+				            str1 :comName[0],
+				           	str2: comName[1]
+				    }
+				    $.ajax({
+				        url: "http://localhost:8787/vanilla-stock/cardpage/restController",
+				        type: "POST",
+				        data: JSON.stringify(form),
+				        contentType: "application/json; charset=utf-8;",
+				        dataType: "json",
+				        success: function(data){
+				           	for(var i=0; i<7; i++){
+				           		CRList1[i] = parseFloat(data[0][i]);
+				           	}
+				           	for(var i=0; i<7; i++){
+				           		CRList2[i] = parseFloat(data[1][i]);
+				           	}
+				           	
+				           	$('#comName1').html(comName[0]);
+				        	$('#comName2').html(comName[1]);
+				        	$('#comCRate1').html(CRList1[6] + "%");
+				        	$('#comCRate2').html(CRList2[6] + "%");
+				        	Highcharts.chart('container', {
+				        		  chart: {
+				        		    type: 'column'
+				        		  },
+				        		  title: {
+				        		    text: null
+				        		  },
+				        		  xAxis: {
+				        		    categories: dateList
+				        		  },
+				        		  credits: {
+				        		    enabled: false
+				        		  },
+				        		  series: [{
+				        		    name: comName[0],
+				        		    data: CRList1
+				        		  }, {
+				        		    name: comName[1],
+				        		    data: CRList2
+				        		  }]
+				        	});
+				        },
+				        error: function(){
+				            alert("restController err");
+				        }
+				    });
 				});
 				</script>
+				
+				
 			</div><!--company_info-->
 		</div><!--//.aux -->
 	</div><!--//#content -->

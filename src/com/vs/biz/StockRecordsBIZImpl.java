@@ -18,4 +18,11 @@ public class StockRecordsBIZImpl implements StockRecordsBIZ{
 	public List<Pair<StockRecordsVO, String>> selectStockWithCompany(String startDate, String endDate) {
 		return stockRecordsDAO.selectStockWithCompany(startDate, endDate);
 	}
+
+	@Override
+	public List<Pair<StockRecordsVO, String>> selectStockWithCompanyByIndustry(int indNo, String startDate,
+			String endDate) {
+		// TODO Auto-generated method stub
+		return stockRecordsDAO.selectStockWithCompanyByIndustry(indNo, startDate, endDate);
+	}
 }
