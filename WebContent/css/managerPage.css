@@ -397,12 +397,12 @@
 			line-height: 60px;
 		}
 
-		#articleSection p.sort a{
+		#articleSection p.sort label{
 			display: inline-block;
 			font-size: 15px;
 			margin-right: 10px;
 		}
-		#articleSection p.sort a.on{
+		#articleSection p.sort input:checked+label{
 			color: #ff907c;
 			font-weight: bold;
 		}
