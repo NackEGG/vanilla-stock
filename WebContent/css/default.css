@@ -1,3 +1,4 @@
+
 @charset "UTF-8";
 html{
 	overflow-y: scroll;
@@ -412,4 +413,5 @@ a.btn {
 	color:#E1E1E1;
 	cursor:default;
 	cursor:not-allowed;
+
 }

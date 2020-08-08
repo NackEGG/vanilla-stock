@@ -75,6 +75,7 @@ public class PaginateUtil {
 
 		return paginate;
 	}
+
 	
 
 
@@ -98,6 +99,7 @@ public class PaginateUtil {
 
 		if (total != 0) {
 
+
 //이전버튼
 			if (pageNo <= 1) {
 //비활성화
@@ -110,6 +112,7 @@ public class PaginateUtil {
 			} // if end
 
 			for (int i = 1; i <= numBlock; i++) {
+
 
 //실제 출력 페이지
 				int realPage = ((nowBlock - 1) * numBlock) + i;
@@ -132,6 +135,7 @@ public class PaginateUtil {
 
 			} // for end(블록 만들기)
 
+
 //다음버튼
 			if (pageNo >= totalPage) {
 //비활성화
@@ -148,5 +152,4 @@ public class PaginateUtil {
 
 		return paginate;
 	}
-
 }

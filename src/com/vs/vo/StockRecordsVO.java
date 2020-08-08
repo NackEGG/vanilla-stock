@@ -1,11 +1,11 @@
 package com.vs.vo;
 
-import java.sql.Date;
+import java.util.Date;
 
 public class StockRecordsVO {
 	private int no;
 	private String stockCode;
-	private Date tDate;
+	private String tDate;
 	private int open;
 	private int high;
 	private int low;
@@ -64,10 +64,10 @@ public class StockRecordsVO {
 	public void setStockCode(String stockCode) {
 		this.stockCode = stockCode;
 	}
-	public Date gettDate() {
+	public String gettDate() {
 		return tDate;
 	}
-	public void settDate(Date tDate) {
+	public void settDate(String tDate) {
 		this.tDate = tDate;
 	}
 	
