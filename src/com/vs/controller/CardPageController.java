@@ -8,6 +8,8 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.json.JSONObject;
+import org.json.XML;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -30,6 +32,7 @@ import javafx.util.Pair;
 import com.vs.vo.CardPageVO;
 import com.vs.vo.CompanyVO;
 import com.vs.util.CardPageUtil;
+import com.vs.util.HtmlReaderUtil;
 import com.vs.vo.StringPairVO;
 
 @Controller
@@ -43,6 +46,7 @@ public class CardPageController {
 	private CompanyBIZ companyBIZ ;
 	
 	public Map<String, List<Double>> comCRateMapForCN;
+	public List<CompanyVO> comlist;
 
 	@RequestMapping("/init")
 	public String initCardPage(HttpServletRequest request, HttpServletResponse response, Model model) {	
@@ -90,7 +94,7 @@ public class CardPageController {
 		model.addAttribute("detailIndNo", indNo + "");
 		
 		// 산업에 속한 회사 리스트 가져오기 --> comlist
-		List<CompanyVO> comlist = companyBIZ.selectCompany(indNo);
+		comlist = companyBIZ.selectCompany(indNo);
 		model.addAttribute("comlist",comlist);
 
 		// 산업 표 데이터 생성
@@ -125,16 +129,88 @@ public class CardPageController {
 	
 	@RequestMapping(value="/restController", method=RequestMethod.POST)
 	@ResponseBody
-    public Object restController(@RequestBody StringPairVO jamong) {
-        System.out.println(jamong.getStr1()+"");
-        System.out.println(jamong.getStr2()+"");
+    public Object restController(@RequestBody StringPairVO jamong, Model model) {
+		String[] comName = new String[2];
+		String[] comCode = new String[2];
+		
+		comName[0] = jamong.getStr1()+"";		
+		comName[1] = jamong.getStr2()+"";
+        System.out.println(comName[0] + "\n"+comName[1]);
         
-        ArrayList<List<Double>> arrList = new ArrayList<List<Double>>();
-        List<Double> tmpList1 = comCRateMapForCN.get(jamong.getStr1()+"");
-        List<Double> tmpList2 = comCRateMapForCN.get(jamong.getStr2()+"");
-        arrList.add(tmpList1);
-        arrList.add(tmpList2);
+        for(CompanyVO curVo : comlist) {
+        	if(comName[0].equals(curVo.getCompany())) {
+        		comCode[0] = curVo.getStockCode();
+        	}else if(comName[1].equals(curVo.getCompany())) {
+        		comCode[1] = curVo.getStockCode();
+        	}
+        }
         
-        return arrList;
+        //CRate
+        ArrayList<List<String>> arrList = new ArrayList<List<String>>();
+        for(int i=0; i<2; i++) {
+            List<String> tmpList = new ArrayList<String>();
+            
+            for(Double dData : comCRateMapForCN.get(comName[i])) {
+            	tmpList.add(dData + "");
+            }
+            arrList.add(tmpList);            
+        }
+        
+        //표 데이터
+        for(String curCode : comCode) {
+        	List<String> tmpList = new ArrayList<String>();
+             
+        	// 주가 정보 가져오기
+	        String html = HtmlReaderUtil.getHtml("http://asp1.krx.co.kr/servlet/krx.asp.XMLSise?code=" + curCode);
+		    System.out.println(curCode);
+	        
+	        JSONObject json = XML.toJSONObject(html);
+		    Map<String, Object> resultMap = HtmlReaderUtil.parseJsonToMap(json.toString());
+		    
+		    System.out.println(resultMap);
+		    
+		    // 주가 정보 파싱
+		    Map<String, Object> TBL_StockInfo = (Map<String, Object>) ((Map<String, Object>)(resultMap.get("stockprice"))).get("TBL_StockInfo");
+		    String curJuka 	= TBL_StockInfo.get("CurJuka") + "";
+		    String Debi 	= TBL_StockInfo.get("Debi") + "";
+		    String Volume 	= TBL_StockInfo.get("Volume") + "";
+		    String PER 		= TBL_StockInfo.get("Per") + "";
+		    String HighJuka = TBL_StockInfo.get("HighJuka") + "";
+		    String LowJuka 	= TBL_StockInfo.get("LowJuka") + "";
+	
+		    // List에 담기
+		    tmpList.add(curJuka);
+		    tmpList.add(Debi);
+		    tmpList.add(Volume);
+		    tmpList.add(PER);
+		    tmpList.add(HighJuka);
+		    tmpList.add(LowJuka);
+		    System.out.println(curJuka + "/"+Debi + "/"+Volume + "/"+PER + "/"+HighJuka + "/"+LowJuka);
+		    
+		    arrList.add(tmpList);
+        }
+        
+	    return arrList;
     }
+	
+	@RequestMapping(value = "/krx")
+	public String krx(Model model) {
+	     String html = HtmlReaderUtil.getHtml("http://asp1.krx.co.kr/servlet/krx.asp.XMLSise?code=003620");
+	     JSONObject json = XML.toJSONObject(html);
+	     Map<String, Object> resultMap = HtmlReaderUtil.parseJsonToMap(json.toString());
+	     model.addAttribute("map", resultMap);
+	     
+	     Map<String, Object> TBL_StockInfo = (Map<String, Object>) ((Map<String, Object>)(resultMap.get("stockprice"))).get("TBL_StockInfo");
+	     String curJuka 	= TBL_StockInfo.get("CurJuka") + "";
+	     String Debi 		= TBL_StockInfo.get("Debi") + "";
+	     String Volume 		= TBL_StockInfo.get("Volume") + "";
+	     String PER 		= TBL_StockInfo.get("Per") + "";
+	     String HighJuka 	= TBL_StockInfo.get("HighJuka") + "";
+	     String LowJuka 	= TBL_StockInfo.get("LowJuka") + "";
+
+	     System.out.println(curJuka + "/"+Debi + "/"+Volume + "/"+PER + "/"+HighJuka + "/"+LowJuka);
+	     
+	     return "krx";
+	 }
+	
 }

@@ -363,7 +363,7 @@
 						<div class="company_left">
 							<img>
 							<div id="comName1" style="font-size: xx-large">선택 안함</div>
-							<div id="comCRate1" style="text-align: left">등락%</div>
+							<div id="CRate1" style="text-align: left">등락%</div>
 						</div>
 						<div class="company_center">
 							<img src="${pageContext.request.contextPath}/img/vsline.PNG" alt="vanilla stock" width="200px" height="20"/>
@@ -371,7 +371,7 @@
 						<div class="company_right">
 							<img>
 							<div id="comName2" style="font-size: xx-large">선택 안함</div>
-							<div id="comCRate2" style="text-align: right">등락%</div>
+							<div id="CRate2" style="text-align: right">등락%</div>
 							
 						</div>
 					</div><!--detail_header-->
@@ -379,34 +379,34 @@
 					<div>
 						<table class="detail_table">
 							<tr>
-								<td>값</td>
-								<td style="background: white">전일비</td>
-								<td>값</td>
+								<td id="cmpCurJuka1">-</td>
+								<td style="background: white">현재주가</td>
+								<td id="cmpCurJuka2">-</td>
 							</tr>
 							<tr>
-								<td>값</td>
-								<td style="background: white">매수호가</td>
-								<td>값</td>
+								<td id="cmpDebi1">-</td>
+								<td style="background: white">전일대비</td>
+								<td id="cmpDebi2">-</td>
 							</tr>
 							<tr>
-								<td>값</td>
-								<td style="background: white">매도호가</td>
-								<td>값</td>
-							</tr>
-							<tr>
-								<td>값</td>
+								<td id="cmpVolume1">-</td>
 								<td style="background: white">거래량</td>
-								<td>값</td>
+								<td id="cmpVolume2">-</td>
 							</tr>
 							<tr>
-								<td>값</td>
-								<td style="background: white">거래대금</td>
-								<td>값</td>
+								<td id="cmpPER1">-</td>
+								<td style="background: white">PER</td>
+								<td id="cmpPER2">-</td>
 							</tr>
 							<tr>
-								<td>값</td>
-								<td style="background: white">전일거래량</td>
-								<td>값</td>
+								<td id="cmpHighJuka1">-</td>
+								<td style="background: white">고가</td>
+								<td id="cmpHighJuka2">-</td>
+							</tr>
+							<tr>
+								<td id="cmpLowJuka1">-</td>
+								<td style="background: white">저가</td>
+								<td id="cmpLowJuka2">-</td>
 							</tr>
 						</table>
 					</div>
@@ -458,8 +458,28 @@
 				           	
 				           	$('#comName1').html(comName[0]);
 				        	$('#comName2').html(comName[1]);
-				        	$('#comCRate1').html(CRList1[6] + "%");
-				        	$('#comCRate2').html(CRList2[6] + "%");
+				        	
+				        	$('#CRate1').html(CRList1[6] + "%");
+				        	$('#CRate2').html(CRList2[6] + "%");
+				        	
+				        	$('#cmpCurJuka1').html(data[2][0]);
+				        	$('#cmpCurJuka2').html(data[3][0]);
+				        	
+				        	$('#cmpDebi1').html(data[2][1]);
+				        	$('#cmpDebi2').html(data[3][1]);
+				        	
+				        	$('#cmpVolume1').html(data[2][2]);
+				        	$('#cmpVolume2').html(data[3][2]);
+				        	
+				        	$('#cmpPER1').html(data[2][3]);
+				        	$('#cmpPER2').html(data[3][3]);
+
+				        	$('#cmpHighJuka1').html(data[2][4]);
+				        	$('#cmpHighJuka2').html(data[3][4]);
+
+				        	$('#cmpLowJuka1').html(data[2][5]);
+				        	$('#cmpLowJuka2').html(data[3][5]);
+				        	
 				        	Highcharts.chart('container', {
 				        		  chart: {
 				        		    type: 'column'
