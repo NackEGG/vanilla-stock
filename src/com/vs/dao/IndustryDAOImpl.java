@@ -70,5 +70,17 @@ public class IndustryDAOImpl implements IndustryDAO {
 		};
 		return jdbcTemplate.query("select * from industry", rowMapper);
 	}
+	
+	public List<String> getIndName(int indNo) {
+		RowMapper<String> rowMapper = new RowMapper<String>() {
+			
+			@Override
+			public String mapRow(ResultSet rs, int rowNum) throws SQLException {
+				String res = rs.getString("name");
+				return res;
+			}
+		};
+		return jdbcTemplate.query("select name from industry where no=?", rowMapper, new Object[] {indNo});
+	}
 
 }

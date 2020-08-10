@@ -12,5 +12,6 @@ public interface StockRecordsDAO {
 	public List<StockRecordsVO> selectList(StockRecordsVO stockRecordsVO);
 	public StockRecordsVO select(StockRecordsVO stockRecordsVO);
 	public List<Pair<StockRecordsVO, String>> selectStockWithCompany(String startDate, String endDate);
+	public List<Pair<StockRecordsVO, String>> selectStockWithCompanyByIndustry(int indNo, String startDate, String endDate);
 	public int selectPrevMonthClose(StockRecordsVO stockRecordsVO);
 }

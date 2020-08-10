@@ -34,4 +34,11 @@ public class StockRecordsBIZImpl implements StockRecordsBIZ{
 	public int selectPrevMonthClose(StockRecordsVO stockRecordsVO) {
 		return stockRecordsDAO.selectPrevMonthClose(stockRecordsVO);
 	}
+
+	@Override
+	public List<Pair<StockRecordsVO, String>> selectStockWithCompanyByIndustry(int indNo, String startDate,
+			String endDate) {
+		// TODO Auto-generated method stub
+		return stockRecordsDAO.selectStockWithCompanyByIndustry(indNo, startDate, endDate);
+	}
 }

@@ -1,5 +1,6 @@
 package com.vs.biz;
 
+import java.util.Collection;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,5 +43,16 @@ public class CompanyBIZImpl implements CompanyBIZ {
 		System.out.println("[ 총 넣은 개수 : "+i +" 개 ]");
 		return check;
 	}
+
+	@Override
+	public List<CompanyVO> selectCompany(int indNo) {
+		return companyDAO.selectCompany(indNo);
+	}
+
+	@Override
+	public List<CompanyVO> getList() {
+		return companyDAO.selectList();
+	}
+
 	
 }

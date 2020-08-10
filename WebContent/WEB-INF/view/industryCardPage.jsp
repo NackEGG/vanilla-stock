@@ -135,6 +135,7 @@
 			border: 1px solid gray;
 			vertical-align: middle;
 			font-size: medium;
+			text-align: center;
 		}
 		div.cardContainer div:last-child{
 			position:relative;
@@ -250,7 +251,7 @@
 	</div><!--//#header -->
 	<div id="content">
 		<div class="aux">
-			<div id="industrycard_content"><!--수정필요******-->
+			<div id="industrycard_content">
 				<ul>
 				<c:forEach var="cardData" items="${cardDataMap }">
 					<li class="card">
@@ -275,7 +276,7 @@
 										<td><c:out value="${cardData.value.decCnt}"/></td>
 									</tr>
 								</table>
-								<br><span style="margin-left: 50%"><a href=""> 자세히보기 </a></span>
+								<br><span style="margin-left: 50%"><a href="${pageContext.request.contextPath}/cardpage/init/<c:out value="${cardData.value.getIndustryNo()}"/>"> 자세히보기 </a></span>
 							</div>
 						</div>
 					</li>
@@ -297,7 +298,11 @@
 							<td>
 								<a href=""><c:out value="${cardData.value.getIndustryName() }"/></a>
 							</td>
-							<td>
+							<td style="color : <c:choose>
+								<c:when test="${cardData.value.getChangeRate() < 0}">blue</c:when>
+								<c:when test="${cardData.value.getChangeRate() > 0}">red</c:when>
+								<c:otherwise>#669</c:otherwise>
+								</c:choose>">
 								<c:out value="${String.format('%.02f', cardData.value.getChangeRate()) }"/>%
 							</td>
 						</tr>
