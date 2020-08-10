@@ -1,4 +1,3 @@
-
 var $footer = $("#footer");
 
 function fixFooter() {

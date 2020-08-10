@@ -13,7 +13,7 @@
 <!-- 트랜잭션을 annotation으로 -->
 <tx:annotation-driven/>
 
-<context:component-scan base-package="com.vs"/>
+<context:component-scan base-package="com.vs" />
 <mybatis-spring:scan base-package="com.vs.mapper"/>
 <!-- DB Connection, dbcp 등등...  -->	
 <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource"
@@ -29,9 +29,18 @@ p:password="admin1234"
  p:dataSource-ref="dataSource"
   class="org.springframework.jdbc.datasource.DataSourceTransactionManager"/>
 
+<bean id="simpleJdbcCall" class="org.springframework.jdbc.core.simple.SimpleJdbcCall">
+	<constructor-arg ref="jdbcTemplate"/>
+</bean>
 <!-- myBatis -->
 <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
   <property name="dataSource" ref="dataSource" />
 </bean>
+
+<!-- sqlSession -->
+<bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
+<constructor-arg index="0" ref="sqlSessionFactory" /></bean>
+
+
 
 </beans>

@@ -15,6 +15,11 @@ public class IndustryBIZImpl implements IndustryBIZ{
 	private IndustryDAO industryDAO;
 	
 	@Override
+	public IndustryVO get(String stockCode) {
+		return industryDAO.get(stockCode);
+	}
+	
+	@Override
 	public List<IndustryVO> getList() {
 		// TODO Auto-generated method stub
 		return industryDAO.selectList();
@@ -41,4 +46,5 @@ public class IndustryBIZImpl implements IndustryBIZ{
 	public List<String> getIndName(int indNo) {
 		return industryDAO.getIndName(indNo);
 	}
+
 }

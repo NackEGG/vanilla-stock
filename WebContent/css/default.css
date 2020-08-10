@@ -1,3 +1,4 @@
+
 @charset "UTF-8";
 html{
 	overflow-y: scroll;
@@ -267,7 +268,7 @@ html{
 
 		}
 	
-		#searchBox .inp_txt{
+		#header #searchBox .inp_txt{
 			width: 300px;
 			height: 30px;
 			border:none;
@@ -279,10 +280,10 @@ html{
 			font-size: 16px;
 			border-radius: 2px;
 		}
-		#searchBox span.btn_search{
+		#header #searchBox span.btn_search{
 			display: block;
 			color: #424242;
-			line-height: 49px;
+			line-height: 46px;
 			position: absolute;
 			top: 0;
 			left: 10px;
@@ -357,5 +358,60 @@ a.btn {
 	padding: 50px 0 50px 0;
 	position: relative;
 	/*margin-top: 88px;*/
+
+}
+
+/*
+페이징 CSS
+*/
+.paginate {
+	font-size:22px;
+	text-align:center;
+	height:50px;
+	line-height:50px;
+	font-weight:500;
+	margin: 10px;
+}
+
+.paginate a, 
+.paginate span,
+.paginate strong{
+	color:#858585;
+	text-decoration:none;
+	padding:9px 14px;
+	border:1px solid transparent;
+	transition:.1s ease;
+}
+
+.paginate span {
+	border-color:#E1E1E1;
+	cursor: not-allowed;
+}
+
+.paginate a:hover {
+	background:#FFE0B2;
+	border-color:#212121;
+	font-weight:bold;
+	color:#fff;
+}
+
+.paginate strong {
+	background:#212121;
+	border-color:#212121;
+	color:#FFE0B2;
+	cursor: not-allowed;
+	font-weight:bold;
+	box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+/*
+비활성화
+*/
+.paginate span.next,
+.paginate span.prev {
+	border-color:#E1E1E1;
+	color:#E1E1E1;
+	cursor:default;
+	cursor:not-allowed;
 
 }

@@ -12,10 +12,17 @@ import com.vs.vo.CompanyVO;
 
 @Service
 public class CompanyBIZImpl implements CompanyBIZ {
+	
 	@Autowired
 	private CompanyDAO companyDAO;
 	
+	@Override
+	public CompanyVO select(String keyword) {
+		return companyDAO.select(keyword);
+	}
+	
 	@Transactional
+
 	@Override
 	public boolean insertIntoAPI(List<CompanyVO> companyList) {
 		boolean check = false;

@@ -1,5 +1,14 @@
 package com.vs.biz;
 
-public interface MemberBIZ {
+import java.util.List;
+import java.util.Map;
+import javax.servlet.http.HttpSession;
+import org.springframework.beans.factory.annotation.Qualifier;
+import com.vs.vo.MemberVO;
 
+public interface MemberBIZ {
+	public Map<String, Object> selectList(String searchWord, String sortType, int page);
+  public boolean loginCheck(MemberVO vo, HttpSession session);
+	
+	public MemberVO viewMember(MemberVO vo);
 }
