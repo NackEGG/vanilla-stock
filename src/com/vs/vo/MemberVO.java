@@ -12,10 +12,33 @@ public class MemberVO {
 	private String gender;
 	private String nickname;
 	private String profile;
+	private int countVisits;
+	private int countComments;
+	private int countArticles;
 	private Timestamp regdate;
 	
 	public MemberVO() {
 		// TODO Auto-generated constructor stub
+	}
+	
+	public int getCountArticles() {
+		return countArticles;
+	}
+	public int getCountComments() {
+		return countComments;
+	}
+	public int getCountVisits() {
+		return countVisits;
+	}
+	public void setCountArticles(int countArticles) {
+		this.countArticles = countArticles;
+	}
+	
+	public void setCountComments(int countComments) {
+		this.countComments = countComments;
+	}
+	public void setCountVisits(int countVisits) {
+		this.countVisits = countVisits;
 	}
 
 	public int getNo() {

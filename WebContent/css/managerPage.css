@@ -1,0 +1,422 @@
+@charset "UTF-8";
+
+		#header{
+			height: 45px;
+		}
+		#header>.aux{
+			display: none;
+		}
+		.article{
+			display: none;
+			min-height: 500px;
+
+			
+		}
+		.article.show{
+			display: block;
+
+		}
+
+		#content{
+			color: #757575;
+			
+		}
+		#snbSection{
+			width: 180px;
+			/*background-color: #212121;*/
+			color: #FFE0B2;
+			position: absolute;
+			left: 0;
+			top: 0;
+			z-index: 99;
+			background-color: #EEEEEE;
+			box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+		}
+		#snbSection .aside_profile{
+			background-color: #fff;
+			width: 100px;
+			height: 100px;
+			border-radius: 70px;
+			margin: auto;
+		}
+		#snbSection .aside_profile img{
+			width:96px;
+            height: 96px;
+            border: 2px solid #EEEEEE;
+            border-radius: 50px;
+		}
+		#snbSection .aside_btn_write{
+			height: 30px;
+			width: 140px;
+			margin: auto;
+			line-height: 30px;
+			font-size: 15px;
+			margin-top: 5px;
+			border-radius: 0px;
+			background-color: #212121;
+			color: #FFE0B2;
+			border-bottom: 1px solid #EEEEEE;
+
+		}
+
+		#snbSection .aside_box_menu{
+			margin: 15px auto;
+			width: 140px;
+			height: 250px;
+			background-color: #212121;
+			text-align: center;
+			font-size: 18px;
+
+		}
+		.aside_box_menu .menu{
+			width: 140px;
+			height: 50px;
+			line-height: 45px;
+			position: relative;
+		}
+		
+		.aside_box_menu .menu:hover{
+			color: #FF907C;
+			cursor: pointer;
+			border-bottom-color: #FF907C;
+
+		}
+		.aside_box_menu .menu.on{
+			color: #FF907C;
+		}
+		.aside_box_menu .menu.on::after{
+			content: " ";
+			display: block;
+			width: 50px;
+			height: 3px;
+			background-color: #FF907C;
+			position: absolute;
+			top: 40px;
+			left: 45px;
+		}
+
+		#articleSection{
+			width: 900px;
+			min-height: 500px;
+			background-color: #EEE;
+			margin-left: 190px;
+			padding-top: 25px;
+			/*padding-bottom: 50px;*/
+			position: relative;
+			/*box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);*/
+		}
+
+/**/
+		#articleSection div.article{
+			width: 800px;
+			margin: 0px auto;
+			/*background-color: yellow;*/
+		}	
+		#articleSection div.wrap_bar{
+			width: 800px;
+			height: 50px;
+			background-color: #FAFAFA;
+			color: #757575;
+			position: relative;
+			transition: .4s ease-in-out;
+			box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+		}
+		#articleSection div.inner_bar{
+			height: 50px;
+			
+		}
+		
+		
+
+		#articleSection div.box_ico_search_bar{
+			width: 50px;
+			height: 25px;
+			position: absolute;
+			right: 5px;
+			top: 12.5px;
+			font-size: 16px;
+			/*background-color: pink;*/
+			line-height: 25px;
+			cursor: pointer;
+			border-left: 1px solid #9E9E9E;
+			padding: 0 5px 0 7px;
+		}
+
+
+
+		#articleSection .box_inp_settings{
+			width: 95px;
+			height: 48px;
+			line-height: 48px;
+			background-color: #FAFAFA;
+			position: absolute;
+			top: 0;
+			left: 0;
+			padding: 0;
+			/*background-color: blue;*/ㄴ
+		}
+
+		#articleSection .ico_chx{
+			width: 15px;
+			height: 15px;
+			position: absolute;
+			right: 76px;
+		}
+		#articleSection .select_title{
+			width: 55px; /*118*/
+			height: 48px; /*48*/ 
+			line-height: 48px;
+			font-size: 16px;
+			padding: 0px 5px 0px 10px;  
+			/*background-color: red;*/
+			position: absolute;
+			right: 0;
+			top: 0;
+			cursor: pointer;
+		}
+
+
+		#articleSection .ico_angle_down{ 
+			width: 10px;
+			height: 16px;
+			display: block;
+			/*background-color: blue;*/
+			position: absolute;
+			top: 0px;
+			right: 10px;
+			
+		}
+
+		#articleSection .select_option{
+			width: 118px;
+			height: 98px;
+			display: none;
+			background-color: #fff;
+			border:1px solid #E0E0E0;
+			position: absolute;
+			top: 50px;
+			left: 0;
+			text-align: left;
+			z-index: 999;
+
+		}
+
+		#articleSection .ico_angle_up{
+			display: none;
+			width: 10px;
+			height: 16px;
+			
+			/*background-color: blue;*/
+			position: absolute;
+			top: 0px;
+			right: 10px;
+		}
+
+		#articleSection.click .select_option{
+			display: block;
+		}
+
+		#articleSection.click .ico_angle_up{
+			display: block;
+		}
+		#articleSection.click .ico_angle_down{
+			display: none;
+		}
+		.select_option ul{
+			width: 118px;
+			height: 148px;
+		}
+		.select_option .opt_select{
+			display: block;
+			width: 104px;
+			height: 49px;
+			/*background-color: red;*/
+			line-height: 49px;
+			padding-left: 14px;
+			transition: .1s ease;
+		}
+		.opt_select:hover {
+			background-color: #EEEEEE;
+			color: #222;
+
+		}
+
+		#articleSection .inner_search{
+			width: 800px;
+			height: 50px;
+			/*background-color: blue;*/
+			position: absolute;
+			left: 0;
+			top: 0;
+
+		}
+	
+		#articleSection .inp_txt{
+			width: 750px;
+			height: 50px;
+			border:none;
+			outline: none;
+			background-color: #fff;
+			/*position: absolute;*/
+			
+			padding:0 10px 0 40px;
+			font-size: 16px;
+			border-radius: 2px;
+		}
+		#articleSection span.btn_search{
+			display: block;
+			line-height: 50px;
+			position: absolute;
+			top: 0;
+			left: 10px;
+			font-size: 16px;
+		}
+
+		#articleSection span.btn_close{
+			display: block;
+			line-height: 50px;
+			position: absolute;
+			top: 0;
+			right: 10px;
+			font-size: 16px;
+			cursor: pointer;
+		}
+
+		/**/
+		#articleSection .wrap_list{
+			width: 800px;
+			min-height: 260px;
+			margin-top: 20px;
+			background-color: #EEEEEE;
+		}
+
+		#articleSection .list_member{
+			width: 800px;
+
+		}
+
+
+		li.member{
+        width: 800px;
+        height: 66px;
+        border-bottom: 1px solid #E0E0E0;
+        /*background-color: yellow;*/
+        position: relative;
+        line-height: 66px;
+        color: #757575;
+
+
+      }
+      li.member:hover{
+        background-color: #E0E0E0;
+      }
+      
+
+      li.member .nickname{
+            width: 160px;            
+            /*background-color: yellow;*/
+            position: absolute;
+            left: 20px;
+            top: 0;
+            text-align: center;
+       }
+
+      li.member .email{
+            width: 200px;          
+            /*background-color: red;*/
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            position: absolute;
+            left: 190px;
+            top: 0; 
+              text-align: center;
+        }
+
+       li.member .box_activities{
+       	 	width: 300px;
+       	 	height: 66px;
+       	 	/*background-color: green;*/
+       	 	position: absolute;
+            left: 400px;
+            top: 0; 
+           
+       }
+       li.member .box_activities ul{
+       		width: 300px;
+       	 	height: 66px;
+       }
+
+       li.member .activity{
+       	display: block;
+       	width: 98px;
+       	height: 66px;
+       	 float: left;
+       	 position: relative;
+       	 text-align: center;
+       }
+       li.member .activity:nth-child(-n+3)::after{
+       		content: " ";
+       		display: block;
+       		width: 2px;
+       		height: 14px;
+       		background-color: #757575;
+       		position: absolute;
+       		top:26px;
+       		right: 0;
+
+       }
+
+
+        li.member .join{
+            width: 100px;
+            height: 66px;
+            position: absolute;
+            right: 0;
+            top: 0;
+            font-size: 14px;
+            text-align: center;
+            /*background-color: yellow;*/
+            color: #757575;
+        }
+        #articleSection .head_list{
+        	width: 800px;
+        	height: 60px;
+        	/*background-color: yellow;*/
+        	line-height: 60px;
+        	position: relative;
+        }
+        #articleSection p.sort{
+			width: 165px;
+			height: 60px;
+			/*background-color: green;*/
+			position: absolute;
+			top: 0;
+			right: 0;
+			text-align: center;
+			line-height: 60px;
+		}
+
+		#articleSection p.sort label{
+			display: inline-block;
+			font-size: 15px;
+			margin-right: 10px;
+		}
+		#articleSection p.sort input:checked+label{
+			color: #ff907c;
+			font-weight: bold;
+		}
+
+		#articleSection span.total{
+			font-size: 18px;
+			color: #757575;
+		}
+
+		#articleSection span.total strong{
+			font-weight: bold;
+			color: #ff907c;
+		}
+		.paginate{
+			margin-left: 190px;
+		}
+

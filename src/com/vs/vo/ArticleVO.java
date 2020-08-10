@@ -8,6 +8,10 @@ public class ArticleVO {
 	private String stockCode;
 	private int memberNo;
 	private Timestamp regdate;
+	private String companyName;
+	private int countHit;
+	private int countGood;
+	private int countBad;
 	
 	public ArticleVO() {
 		// TODO Auto-generated constructor stub
@@ -51,6 +55,38 @@ public class ArticleVO {
 
 	public void setRegdate(Timestamp regdate) {
 		this.regdate = regdate;
+	}
+
+	public String getCompanyName() {
+		return companyName;
+	}
+
+	public void setCompanyName(String companyName) {
+		this.companyName = companyName;
+	}
+
+	public int getCountHit() {
+		return countHit;
+	}
+
+	public void setCountHit(int countHit) {
+		this.countHit = countHit;
+	}
+
+	public int getCountGood() {
+		return countGood;
+	}
+
+	public void setCountGood(int countGood) {
+		this.countGood = countGood;
+	}
+
+	public int getCountBad() {
+		return countBad;
+	}
+
+	public void setCountBad(int countBad) {
+		this.countBad = countBad;
 	}
 	
 }
