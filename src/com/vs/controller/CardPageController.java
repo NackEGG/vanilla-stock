@@ -161,7 +161,7 @@ public class CardPageController {
         	List<String> tmpList = new ArrayList<String>();
              
         	// 주가 정보 가져오기
-	        String html = HtmlReaderUtil.getHtml("http://asp1.krx.co.kr/servlet/krx.asp.XMLSise?code=" + curCode);
+	        String html = HtmlReaderUtil.getHtml("http://asp1.krx.co.kr/servlet/krx.asp.XMLSiseEng?code=" + curCode);
 		    System.out.println(curCode);
 	        
 	        JSONObject json = XML.toJSONObject(html);
@@ -192,10 +192,10 @@ public class CardPageController {
         
 	    return arrList;
     }
-	
+	//참고 페이지
 	@RequestMapping(value = "/krx")
 	public String krx(Model model) {
-	     String html = HtmlReaderUtil.getHtml("http://asp1.krx.co.kr/servlet/krx.asp.XMLSise?code=003620");
+	     String html = HtmlReaderUtil.getHtml("http://asp1.krx.co.kr/servlet/krx.asp.XMLSiseEng?code=003620");
 	     JSONObject json = XML.toJSONObject(html);
 	     Map<String, Object> resultMap = HtmlReaderUtil.parseJsonToMap(json.toString());
 	     model.addAttribute("map", resultMap);
