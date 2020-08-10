@@ -1,5 +1,6 @@
 package com.vs.dao;
 
+import java.math.BigDecimal;
 import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -12,6 +13,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
+import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.jdbc.core.simple.SimpleJdbcCall;
 import org.springframework.jdbc.core.support.JdbcDaoSupport;
 import org.springframework.stereotype.Repository;
@@ -23,8 +26,13 @@ import javafx.util.Pair;
 
 @Repository
 public class StockRecordsDAOImpl implements StockRecordsDAO {
+	
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
+	
+	public SimpleJdbcCall getSimpleJdbcCall(JdbcTemplate jdbcTemplate) {
+		return new SimpleJdbcCall(jdbcTemplate);
+	}
 
 	@Override
 	public List<StockRecordsVO> selectList(StockRecordsVO stockRecordsVO) {
@@ -91,5 +99,24 @@ public class StockRecordsDAOImpl implements StockRecordsDAO {
 		};
 		return (List<Pair<StockRecordsVO, String>>) jdbcTemplate.query(
 				sql, mapper,new Object[] {startDate, endDate});
+	}
+
+	@Override
+	public int selectPrevMonthClose(StockRecordsVO stockRecordsVO) {
+		
+		SimpleJdbcCall simpleJdbcCall = getSimpleJdbcCall(jdbcTemplate);
+		
+		simpleJdbcCall
+		.withProcedureName("USP_PREV_MONTH_STOCK_PRICE");
+		
+		SqlParameterSource in = new MapSqlParameterSource()
+				.addValue("PI_STOCK_CODE", stockRecordsVO.getStockCode())
+				.addValue("PI_T_DATE", stockRecordsVO.gettDate());
+
+		Map out = simpleJdbcCall.execute(in);
+		
+		int ret = ((BigDecimal) out.get("PO_CLOSE")).intValue();
+		
+		return ret;
 	}
 }

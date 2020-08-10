@@ -1,148 +1,31 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
+<%@ page import ="java.util.Date" %>
+<%@ page import ="com.vs.util.StockApiUtil" %>
+<%
+	String[] arrStockInfo = (String[])request.getAttribute("arrStockInfo");
+	String[][] arrDailyStock = (String[][])request.getAttribute("arrDailyStock");
+	String[][] arrTimeConclude = (String[][])request.getAttribute("arrTimeConclude");
+	int prevMonthClose = (int)request.getAttribute("prevMonthClose");
+	
+	String today = arrStockInfo[18].substring(0,11);
+%>
+<%@ taglib prefix="c"   uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
 	<meta charset="utf-8">
 	<title></title>
-	<link rel="stylesheet" href="../css/reset.css" />
-	<link rel="stylesheet" href="../css/kakao.font.css" />
-	<link rel="stylesheet" href="../css/default.css" />
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/css/reset.css" />
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/css/kakao.font.css" />
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/css/default.css" />
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/css/reportPage.css" />
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
-	<script src="../js/jquery.js"></script>
+	<script src="${pageContext.request.contextPath}/js/jquery.js"></script>
 	<script src="https://code.highcharts.com/highcharts.js"></script>
 	<script src="https://code.highcharts.com/modules/exporting.js"></script>
 	<script src="https://code.highcharts.com/modules/export-data.js"></script>
 	<script src="https://code.highcharts.com/modules/accessibility.js"></script>
-	<style type="text/css" media="screen">
-		#content{
-			padding: 20px 0 50px 0;
-		}
-		#content .aux{
-			background-color: #EEEEEE;
-			color: #FFE0B2;
-		}
-		#upperContent{
-			background-color: yellowgreen;
-		}
-		#lowerContent{
-			background-color: #6200EE;
-		}
-		#summaryBox{
-			display: flex;
-			background-color: yellow;
-			margin: 10px 10px;
-			height: 300px;
-		}
-		#supportingBox{
-			display: flex;
-			background-color: indianred;
-			margin: 10px 10px;
-			height: 300px;
-		}
-		#descBox{
-			height: inherit;
-			width: 540px;
-			background-color: black;
-		}
-		#upperDescBox{
-			display: flex;
-
-		}
-		#companyName{
-			font-size: 40px;
-			padding: 10px;
-		}
-		#companyCode {
-			font-size: 18px;
-			padding-top: 37px;
-		}
-		#chartBox {
-			width: 50%;
-			height: inherit;
-		}
-		#industyBox{
-			padding-left: 10px;
-			padding-top: 5px;
-			width: 98px;
-			height: 74px;
-		}
-		#industyBox img{
-			width: 100%;
-			height: 50px;
-		}
-		#industyName{
-			text-align: center;
-		}
-		#sameIndustryBox{
-			width: 33.3%;
-			background-color: #7986cb;
-		}
-		#financeInfoBox{
-			width: 33.3%;
-			background-color: #FF80AB;
-		}
-		#articleBox{
-			width: 33.3%;
-			background-color: springgreen;
-		}
-		.upperTitle{
-			height: 14%;
-			padding: 5px 5px 0 5px;
-			background-color: #2D230D;
-		}
-		.upperTitle .title{
-			padding: 6px;
-			font-size: 21px;
-			width: 35%;
-		}
-
-	</style>
-	<style type="text/css">
-		.highcharts-figure, .highcharts-data-table table {
-			min-width: 320px;
-			max-width: 800px;
-			margin: 1em auto;
-		}
-
-		#container {
-			height: inherit;
-		}
-		.highcharts-figure{
-			min-width: 280px;
-			max-width: 800px;
-			margin: 1em auto;
-			height: 94%;
-		}
-
-		.highcharts-data-table table {
-			font-family: Verdana, sans-serif;
-			border-collapse: collapse;
-			border: 1px solid #EBEBEB;
-			margin: 10px auto;
-			text-align: center;
-			width: 100%;
-			max-width: 500px;
-		}
-		.highcharts-data-table caption {
-			padding: 1em 0;
-			font-size: 1.2em;
-			color: #555;
-		}
-		.highcharts-data-table th {
-			font-weight: 600;
-			padding: 0.5em;
-		}
-		.highcharts-data-table td, .highcharts-data-table th, .highcharts-data-table caption {
-			padding: 0.5em;
-		}
-		.highcharts-data-table thead tr, .highcharts-data-table tr:nth-child(even) {
-			background: #f8f8f8;
-		}
-		.highcharts-data-table tr:hover {
-			background: #f1f7ff;
-		}
-	</style>
 	<script>
 		$(function (){
 			$('#container').highcharts({
@@ -152,14 +35,30 @@
 					marginRight: 10,
 					events: {
 						load: function () {
-
+							
 							// set up the updating of the chart each second
 							var series = this.series[0];
+							var sc = $("#companyCode").text();
 							setInterval(function () {
-								var x = (new Date()).getTime(), // current time
-										y = Math.random();
-								series.addPoint([x, y], true, true);
-							}, 1000);
+								const sc = $("#companyCode").text();
+								var ret = 0;
+								console.log(sc);
+								$.ajax({
+									url:"/vanilla-stock/ajax/reportPage/rtprice/", 
+									data : {no : sc},
+									dataType : "json",
+									type : "POST",
+									error : function() {
+										alert(sc)
+									},
+									success : function (json) {
+										console.log(json.result);
+										var x = (new Date()).getTime();
+										var y = json.result;
+										series.addPoint([x, y], true, true);
+									}
+								});
+							}, 10000);
 						}
 					}
 				},
@@ -168,7 +67,7 @@
 				},
 
 				title: {
-					text: 'Live random data'
+					text: '실시간 주가 상황판'
 				},
 				accessibility: {
 					announceNewData: {
@@ -189,7 +88,7 @@
 
 				yAxis: {
 					title: {
-						text: 'Value'
+						text: '주가'
 					},
 					plotLines: [{
 						value: 0,
@@ -213,22 +112,49 @@
 				series: [{
 					name: 'Random data',
 					data: (function () {
-						// generate an array of random data
-						var data = [],
-								time = (new Date()).getTime(),
-								i;
-
-						for (i = -19; i <= 0; i += 1) {
-							data.push({
-								x: time + i * 1000,
-								y: Math.random()
-							});
-						}
+						var time = (new Date()).getTime();
+						var data = [{x: time - 90000,y: <%=Integer.parseInt(arrTimeConclude[9][1].replaceAll(",", ""))%>},
+							{x:   time - 80000 ,y: <%=Integer.parseInt(arrTimeConclude[8][1].replaceAll(",", ""))%>},
+							{x:   time - 70000 ,y: <%=Integer.parseInt(arrTimeConclude[7][1].replaceAll(",", ""))%>},
+							{x:   time - 60000 ,y: <%=Integer.parseInt(arrTimeConclude[6][1].replaceAll(",", ""))%>},
+							{x:   time - 50000 ,y: <%=Integer.parseInt(arrTimeConclude[5][1].replaceAll(",", ""))%>},
+							{x:   time - 40000 ,y: <%=Integer.parseInt(arrTimeConclude[4][1].replaceAll(",", ""))%>},
+							{x:   time - 30000 ,y: <%=Integer.parseInt(arrTimeConclude[3][1].replaceAll(",", ""))%>},
+							{x:   time - 20000 ,y: <%=Integer.parseInt(arrTimeConclude[2][1].replaceAll(",", ""))%>},
+							{x:   time - 10000 ,y: <%=Integer.parseInt(arrTimeConclude[1][1].replaceAll(",", ""))%>},
+							{x:   time ,y: <%=Integer.parseInt(arrTimeConclude[0][1].replaceAll(",", ""))%>}];
+						
 						return data;
 					}())
 				}]
 			});
 		});
+		
+		function getStockData() {
+			const sc = $("#companyCode").text();
+			var ret = 0;
+			console.log(sc);
+			$.ajax({
+				url:"/vanilla-stock/ajax/reportPage/rtprice/", 
+				data : {no : sc},
+				dataType : "json",
+				type : "POST",
+				error : function() {
+					alert(sc)
+				},
+				success : function (json) {
+					console.log(json.result);
+					//var x = (new Date()).getTime(), // current time
+				 	$("#dataContainer").val(json.result);
+					$("#dataContainer").val();
+				}
+			});
+			//ajax end
+		}
+		
+		
+		
+		
 	</script> <!--// chart스크립트-->
 </head>
 <body>
@@ -236,7 +162,7 @@
 		<div id="logoBox">
 			<h1>
 				<a href="" title="vanilla stock">
-				<img src="../img/vs-logo2.PNG" alt="vanilla stock"/>
+				<img src="${pageContext.request.contextPath}/img/vs-logo2.PNG" alt="vanilla stock"/>
 				</a>
 			</h1>
 			
@@ -265,7 +191,7 @@
 		</div><!--//loginBtn -->
 		<div id="profileBox" class="">
 			<h2 class="screen_out">유저정보</h2>
-			<img src="../profile/profile.png"
+			<img src="${pageContext.request.contextPath}/profile/profile.png"
 			class="profile_on"  width="60" height="60"
 			alt="테스터"
 			title="테스터"/>
@@ -309,17 +235,47 @@
 						<div id="lowerDescBox">
 							<div id="industyBox">
 								<div id ="industryLogo">
-									<img src="../img/logo-name.JPG">
+									<img src="${pageContext.request.contextPath}/icon/<c:out value="${industryVO.no}"/>.png">
 								</div><!--//#industryLogo -->
 								<div id="industyName">
-									${industryVO.name}
+									${industryVO.name} 
 								</div><!--//#industryName -->
 							</div><!--//#industryBox -->
+							<div id="deviBox">
+								<div id="prevDayDevi">
+									전일대비 : <%=arrStockInfo[3] %> &nbsp;
+									<% if(arrStockInfo[2].equals("1") || arrStockInfo[2].equals("2")){%>
+										▲ <%}else if(arrStockInfo[2].equals("4") || arrStockInfo[2].equals("5")){ %>
+										▼ <%}else{ %>
+										─ <%} %>
+								</div><!--//#prevDayDevi -->
+								<div id="prevDayDeviPercent">
+									<%= arrStockInfo[17]%>%
+								</div><!--//#prevDayDeviPercent -->
+								<div id="prevMonthDeviChai">
+									<% int monthDevi = Integer.parseInt(arrStockInfo[1].replaceAll(",", "")) - prevMonthClose; %>
+									전월대비 : <%= Math.abs(monthDevi) %> 
+									<% if(monthDevi > 0){%>
+										▲ <%}else if(monthDevi < 0){ %>
+										▼ <%}else{ %>
+										─ <%} %>
+								</div><!--//#prevMonthDeviChai -->
+								<div id="prevMonthDeviPercent">
+									<% Float monthDeviPercent = monthDevi / Float.parseFloat(arrStockInfo[1].replaceAll(",", "")) * 100; %>
+									<%= String.format("%.2f", monthDeviPercent)%>%
+								</div><!--//#prevMonthDeviPercent -->
+							</div><!--//#deviBox -->
+							<div id ="presentPriceBox">
+								<div id="presentPriceWord">현재가</div>
+								<div id="presentPrice"><%=arrStockInfo[1] %></div>
+								
+							</div><!--//#presentPriceBox -->
 						</div><!--//#lowerDescBox -->
 					</div><!--//#descBox -->
 					<div id="chartBox">
 						<figure class="highcharts-figure">
 						<div id="container"></div>
+						<div id="dataContainer" value=""></div>
 					</figure>
 					</div><!--//#chartBox -->
 				</div><!--//#summaryBox -->
@@ -368,7 +324,7 @@
 <address>&copy; 2020 <a href="">NackEGG.com</a></address>
 
 	</div><!--//#footer -->
-	<script  src="../js/fix-footer.js"></script>
+	<script  src="${pageContext.request.contextPath}/js/fix-footer.js"></script>
 
 </body>
 </html>

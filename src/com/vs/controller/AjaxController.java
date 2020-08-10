@@ -12,10 +12,12 @@ import java.util.concurrent.ConcurrentHashMap;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.vs.biz.CompanyBIZ;
@@ -25,6 +27,7 @@ import com.vs.biz.MemberBIZ;
 import com.vs.biz.MemberLogBIZ;
 import com.vs.biz.StockRecordsBIZ;
 import com.vs.util.FinanceApiUtil;
+import com.vs.util.StockApiUtil;
 import com.vs.vo.CardPageVO;
 import com.vs.vo.CompanyVO;
 import com.vs.vo.FinanceCateVO;
@@ -51,6 +54,20 @@ public class AjaxController {
 
 	private Map<String, CardPageVO> cardDataMap;
 	private List<String> indNoList;
+	
+	
+	@RequestMapping(value = "/reportPage/rtprice", method = RequestMethod.POST)
+	public String getRealTimePrice(@RequestParam("no") String no) {
+		//String stockCode = request.getParameter("stockCode");
+		//System.out.println("출력");
+		StockApiUtil api = new StockApiUtil(no);
+		String[][] TimeConclude = api.getTimeConcludeAPI();
+		
+		String result = TimeConclude[0][1].replaceAll(",", ""); 
+		//System.out.println(result);
+		//System.out.println("{\"result\":"+result+"}");
+		return "{\"result\":"+result+"}";
+	}
 	
 	@RequestMapping(value = "/manager/member", method = RequestMethod.POST)
 	public Map<String, Object> getManagerPgUserList(HttpServletRequest request) {
