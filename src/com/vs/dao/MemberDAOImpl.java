@@ -76,6 +76,7 @@ public class MemberDAOImpl implements MemberDAO {
 		List<MemberVO> memberVOList = (List<MemberVO>)out.get("OUT_CURSOR");
 		
 		return memberVOList;
+	}
     
     @Override
 	public boolean loginCheck(MemberVO vo){
