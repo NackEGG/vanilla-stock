@@ -21,7 +21,7 @@ public class MemberBIZImpl implements MemberBIZ {
 	@Override
 	public Map<String, Object> selectList(String searchWord, String sortType, int page) {
 		// TODO Auto-generated method stub
-		int numPage = 50; //각 인덱스당 출력되는 유저 수 
+		int numPage = 10; //각 인덱스당 출력되는 유저 수 
 		int numBlock = 5; //출력될 페이지 인덱스 개수 
 		if(searchWord.isEmpty()||searchWord.length()<1)	searchWord = null;
 		Map<String, Object> viewMap = new ConcurrentHashMap<String, Object>();
@@ -35,9 +35,10 @@ public class MemberBIZImpl implements MemberBIZ {
 		viewMap.put("memberList", memberList);
 		
 		//총 멤버수 
-		int total = memberDAO.selectTotal(searchWord);
-		viewMap.put("paginate",paginateUtil.getPaginate(page, total, numPage, numBlock, "/manager/member"));
-		
+		int total = memberDAO.selectTotal(searchWord); ///vanilla-stock/ajax/manager/member '&page='+page
+		viewMap.put("paginate",paginateUtil.getPaginate(page, total, numPage, numBlock, 
+				"/vanilla-stock/ajax/manager/member"));
+		viewMap.put("total",total);
 		 return viewMap;
 	}
 }

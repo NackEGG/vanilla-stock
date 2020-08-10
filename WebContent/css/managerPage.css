@@ -75,16 +75,16 @@
 			position: relative;
 		}
 		
-		.aside_box_menu .menu:hover{
+		.aside_box_menu .menu>a:hover{
 			color: #FF907C;
 			cursor: pointer;
 			border-bottom-color: #FF907C;
 
 		}
-		.aside_box_menu .menu.on{
+		.aside_box_menu .menu.on>a{
 			color: #FF907C;
 		}
-		.aside_box_menu .menu.on::after{
+		.aside_box_menu .menu.on>a::after{
 			content: " ";
 			display: block;
 			width: 50px;
@@ -397,12 +397,12 @@
 			line-height: 60px;
 		}
 
-		#articleSection p.sort label{
+		#articleSection p.sort a{
 			display: inline-block;
 			font-size: 15px;
 			margin-right: 10px;
 		}
-		#articleSection p.sort input:checked+label{
+		#articleSection p.sort a.on{
 			color: #ff907c;
 			font-weight: bold;
 		}
@@ -419,4 +419,48 @@
 		.paginate{
 			margin-left: 190px;
 		}
+.article{
+			width: 800px;
+			margin: 0px auto;
 
+			/*background-color: yellow;*/
+		}	
+		
+		#listTab{
+                width: 900px;
+                height: 59px;
+                /*background-color: red;*/
+                /*padding-top: 30px;*/
+                border-bottom: 1px solid #BDBDBD;
+                margin-left: 190px;
+            }
+            #listTab ul{
+                width: 900px;
+                height: 58px;
+                /*background-color: yellow;*/
+
+            }
+
+            #listTab li label{
+                height: 58px;
+                width: 140px;
+                float: left;
+                background-color: #E0E0E0;
+                font-size: 20px;
+                border-width: 1px 1px 0 0px;
+                border-style: solid;
+                border-color: #BDBDBD;
+                cursor: pointer;
+                line-height: 60px;
+                text-align: center;
+            }
+            #listTab input:checked+label {
+                background-color: #EEEEEE;
+                border-bottom: 2px solid #EEEEEE;
+              
+            }
+
+            #listTab a{
+                color: #424242;
+                text-decoration: none;
+            }

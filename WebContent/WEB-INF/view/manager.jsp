@@ -42,10 +42,10 @@
 					<h3 class="screen_out">관리 메뉴</h3>
 					<ul class="aside_list_menu">
 						<li class="menu dashboard"> <a href="managerPage-dashboard.html">대시보드</a></li>
-						<li class="menu members on"><a href="managerPage-members.html">사용자 관리</a></li>
-						<li class="menu contents"><a href="managerPage-contents.html"> 컨텐츠 관리</a></li>
-						<li class="menu comments"><a href="managerPage-comments.html">댓글 관리</a></li>
-						<li class="menu stats"><a href="managerPage-stats.html"> 통계</a></li>
+						<li class="menu members ${category=='members'?'on':''}"><a href="/vanilla-stock/manager/members">사용자 관리</a></li>
+						<li class="menu contents ${category=='contents'?'on':''}"><a href="/vanilla-stock/manager/contents"> 컨텐츠 관리</a></li>
+						<li class="menu comments ${category=='comments'?'on':''}"><a href="/vanilla-stock/manager/comments">댓글 관리</a></li>
+						<li class="menu stats ${category=='stats'?'on':''}"><a href="/vanilla-stock/manager/stats"> 통계</a></li>
 					</ul>
 				</div><!--//.aside_box_menu -->
 			
@@ -72,117 +72,22 @@
 				</div><!--//.dashboard -->
 				<!-- dashboard 끝  -->
 				<!-- user article 시작  -->
-				<div class="article user show">
-					<div class="wrap_bar">
-						<div class="inner_bar">
-							
-						<!-- -->
-						<div class="box_inp_settings">
-							<div class="ico_chx">
-								<input type="checkbox" name="all" value="" />
-							</div>
-							
-						<div class="select_title" data-title="제목">
-							
-							<span class="opt_seleted">
-								설정
-							</span>
-							
-							<span class="ico_angle_down">
-							<i class="fas fa-angle-down"></i>
-							</span>
-							<span class="ico_angle_up">
-							<i class="fas fa-angle-up"></i>
-							</span>
-						</div><!--//select_title -->
-						
-						<div class="select_option">
-							<ul>
-								
-								<li>
-									<a class="opt_select" href=""  data-setting-key="block_user">사용자 차단</a>
-								</li>
-								<li>
-									<a class="opt_select" href=""  data-setting-key="delete_user">사용자 강퇴</a>
-								</li>
-							</ul>
-
-						</div><!--//select_option -->
-						
-					</div><!--//box_inp_search -->
-
-					 <script type="text/javascript">
-    	
-					 	const $selectTitle = $(".select_title");
-					 	const $articleSection = $("#articleSection");
-					 	$selectTitle.on("click", function(){
-					 		$articleSection.toggleClass("click");
-					 	});//on end
-    	
-   					 </script>
-						<!-- -->
-							<div class="box_ico_search_bar">
-							<div class="ico_search_bar"> <i class="fa fa-search"></i> 검색</div>
-						</div><!--//.box_btn_search_bar -->
-
-						</div><!--//.inner_bar-->
-						<div class="inner_search hidden">
-						<label class="screen_out">찾을 유저 입력</label>
-						<input name="searchWord" class="inp_txt" type="text" placeholder="사용자 계정 입력"  form="searchForm" />
-						 <span class="btn_search"> <i class="fa fa-search"></i></span>
-						 <span class="btn_close"><i class="fas fa-times"></i></span>
-						
-
-						 </div><!--//.inner_search -->
-						  <script type="text/javascript">
-						 	$btnClose = $(".btn_close");
-						 	$innerSearch =$(".inner_search");
-						 	$innerBar = $('.inner_bar');
-						 	$icoSearchBar = $('.ico_search_bar');
-						 	
-						 	$btnClose.on("click", function(){
-						 		$innerSearch.addClass('hidden');
-						 		$innerBar.removeClass('hidden');
-						 	});
-
-						 	$icoSearchBar.on('click',function(){
-						 		$innerSearch.removeClass('hidden');
-						 		$innerBar.addClass('hidden');
-						 	});
-
-
-						 </script>
-
-					</div><!--//.wrap_bar -->
-					
-					<div class="wrap_list">
-						<div class="head_list">
-     						<span class="total"> 총 사용자 <strong class="total_count">100</strong> 명 </span>
-							<p class="sort">
-								<input id="latestMember" type="radio" form="searchForm" name="sortType" value="latestMember" checked/>
-								<label for="latestMember">최신순</label>
-								<input id="hardMember" type="radio" form="searchForm" name="sortType" value="hardMember" />
-								<label for="hardMember">열혈순</label>
-								
-								
-							</p><!--//sort -->
-						</div><!--//.head_list -->
-						<div class="list_member">
-					</div><!--//.wrap_list -->
-
-				</div><!--//.user -->
-
+			
+				<c:import url="manager-view/${category }.jsp"/> 
 
 			</div><!--//#articleSection -->
-			
+			<div class="div_paginate"></div>
 	
-		
 		</div><!--//.aux -->
+<form id="searchForm" action="" method="post" />
 
-	<form id="searchForm" action="" method="post" />
+</div><!--//#content -->	
+		
 
-	</div><!--//#content -->
 	
+
+	
+		<c:import url="/WEB-INF/template/footer.jsp"/>
 	<script type="text/template" id="membsersTmp">
 						
 						
@@ -217,26 +122,44 @@
            							
             						
         							</ul>
-						
-    							</div><!--//.list_member -->
-							<@=paginate @>
+		
 					</script>
-	<c:import url="/WEB-INF/template/footer.jsp"/>
+					
+					<!-- <script >
+					<@=paginate @>
+					</script> -->
+
 	<script type="text/javascript">
-	//_.templateSettings = {interpolate: /\<\@\=(.+?)\@\>/gim,evaluate: /\<\@([\s\S]+?)\@\>/gim,escape: /\<\@\-(.+?)\@\>/gim};
+	
 		const membersTmp = _.template($("#membsersTmp").html());
 		const $wrapList  = $(".list_member"); 
 		const $txtInp = $(".inp_txt");
 		const $searchForm = $("#searchForm");
-		let page = 1; // page는 1페이지 부터 시작  
+		const $totalCount = $(".total_count"); 
+		const $aux = $(".aux");
+		const $sortBtn = $(".sort input[type=radio]");
+		const $divPaginate = $('.div_paginate'); 
+		let page = 1;// page는 1페이지 부터 시작  
+		
 		getMembers();
+		
+		$sortBtn.change(getMembers);
+		//검색하기 
+		$searchForm.submit(function(e) {
+			e.preventDefault();
+			//console.log(sortingType);
+			page=1;
+			getMembers();
+			
+		});//submit end 
+
 		function getMembers() {
 			
 			let formData =  $searchForm.serialize();
 			console.log("form data");
 			console.log(formData);
 			$.ajax({ 
-				url:"/vanilla-stock/ajax/manager/member",
+				url:"/vanilla-stock/ajax/manager/members",
 				type:"post",
 				data:formData+'&page='+page,
 				error:function(){
@@ -247,8 +170,11 @@
 					if(page==1 || json.memberList.length>0){
 						
 						let tmp = membersTmp({"memberList": json.memberList,"paginate": json.paginate });
-						console.log(tmp);
+						console.log(json.total);
+						$totalCount.text(json.total);
+						
 						$wrapList.empty().append(tmp);
+						$divPaginate.empty().append(json.paginate);
 						$txtInp.val(""); 
 						
 					}
@@ -257,6 +183,16 @@
 			});//ajax end 
 		}// search() end
 		
+		//pageblock 클릭
+		$aux.on("click",".paginate a",function(e){
+			e.preventDefault();
+			// 각 페이지의 시작되는 게시물 번호  
+			page = this.dataset.no;
+			//ajax로 데이터 리스트 받아오는 함수 
+			console.log(page)
+			getMembers();
+
+		});//click() end
 	
 	</script>
 </body>

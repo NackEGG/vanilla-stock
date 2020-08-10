@@ -40,7 +40,7 @@ public class AjaxController {
 	
 	
 	
-	@RequestMapping(value = "/manager/member", method = RequestMethod.POST)
+	@RequestMapping(value = "/manager/members", method = RequestMethod.POST)
 	public Map<String, Object> getManagerPgUserList(HttpServletRequest request) {
 		String searchWord = request.getParameter("searchWord");
 		String sortType = request.getParameter("sortType");
@@ -49,9 +49,9 @@ public class AjaxController {
 		Map<String, Object> map = new ConcurrentHashMap<String, Object>();
 		map = memberBIZ.selectList(searchWord, sortType, page);
 		
-		for( String key : map.keySet()) {
-			System.out.println("[ "+map.get(key)+" ]");
-		}
+//		for( String key : map.keySet()) {
+//			System.out.println("[ "+map.get(key)+" ]");
+//		}
 		return map;
 	}
 	
