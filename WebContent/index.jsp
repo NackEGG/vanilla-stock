@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@taglib uri="http://www.springframework.org/tags" prefix="spring" %>
 <!DOCTYPE html>
 <html>
   <head>
@@ -30,7 +32,7 @@
       <div id="logoBox">
         <h1>
           <a href="" title="vanilla stock">
-            <img src="../img/vs-logo2.PNG" alt="vanilla stock" />
+            <img src="img/vs-logo2.PNG" alt="vanilla stock" />
           </a>
         </h1>
       </div>
@@ -39,8 +41,8 @@
         <div id="gnb">
           <h2 class="screen_out">주요 서비스</h2>
           <ul>
-            <li class="nav"><a href=""> 종목</a></li>
-            <li class="nav on"><a href=""> 투기장 </a></li>
+            <li class="nav"><a href="${pageContext.request.contextPath}/cardpage/init"> 종목</a></li>
+            <li class="nav"><a href=""> 투기장 </a></li>
             <li class="nav"><a href="">랭킹</a></li>
           </ul>
         </div>
@@ -65,24 +67,24 @@
         
         
         <!-- Hidden된 로그인창-->
-        <div id="loginForm" style="visibility: hidden;" action ="/login" method="get">
+        <div id="loginForm" style="visibility: hidden;">
           <div class="form">
             <div class="formContents"></div>
             <c:if test ="${member==null}">
-            <form class="login-form">
+            <form class="login-form"  action ="vanilla-stock/login" method="get">
               <input type="text" class="email" placeholder="email" />
               <input type="password" class="password" placeholder="password" />
               <button class="login">login</button>
               <p class="message">
-                회원이 아니시라면?
+                	회원이 아니시라면?
                 <a
                   href="/Users/IRENE/Downloads/폴더/vanilla-stock-front/jeongyeon/signup.html"
                   >회원가입</a
                 >
               </p>
-              </c:if>
               <p class="close" onclick="popupclose('loginForm')">닫기</p>
             </form>
+            </c:if>
           </div>
         </div>
 
@@ -125,7 +127,7 @@
         <div id="profileBox" class="hidden">
           <h2 class="screen_out">유저정보</h2>
           <img
-            src="../profile/profile.png"
+            src="profile/profile.png"
             class="profile_on"
             width="60"
             height="60"
@@ -294,6 +296,6 @@
       <address>&copy; 2020 <a href="">NackEGG.com</a></address>
     </div>
     <!--//#footer -->
-    <script src="../js/fix-footer.js"></script>
+    <script src="js/fix-footer.js"></script>
   </body>
 </html>
