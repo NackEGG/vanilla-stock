@@ -14,7 +14,6 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.jdbc.core.simple.SimpleJdbcCall;
-import org.springframework.jdbc.core.support.JdbcDaoSupport;
 import org.springframework.stereotype.Repository;
 
 import com.vs.vo.CompanyVO;
@@ -63,24 +62,17 @@ public class CompanyDAOImpl implements CompanyDAO {
 		return jdbcTemplate.update("update company set industry_no = ? where stock_code = ? ",
 				new Object[] {data.getIndustryNo(),data.getStockCode()});
 	}
+	
+	@Override
+	public List<String> selectAllCompanyName() {
+		return jdbcTemplate.query("SELECT COMPANY FROM COMPANY ORDER BY COMPANY", new RowMapper<String>() {
 
-	public class CompanyRowMapper implements RowMapper<CompanyVO>{
-
-		@Override
-		public CompanyVO mapRow(ResultSet rs, int rowNum) throws SQLException {
-			CompanyVO vo = new CompanyVO();
-			vo.setStockCode(rs.getString("STOCK_CODE"));
-			vo.setCompany(rs.getString("COMPANY"));
-			vo.setIndustryNo(rs.getInt("INDUSTRY_NO"));
-			vo.setStockListed(rs.getInt("STOCK_LISTED"));
-			vo.setCapital(rs.getInt("CAPITAL"));
-			vo.setFacevalue(rs.getInt("FACEVALUE"));
-			vo.setCurrency(rs.getString("CURRENCY"));
-			vo.setTel(rs.getString("TEL"));
-			vo.setAddress(rs.getString("ADDRESS"));
-			vo.setRegdate(rs.getTimestamp("REGDATE"));
-			return vo;
-		}
-	}
-		
+			@Override
+			public String mapRow(ResultSet rs, int rowNum) throws SQLException {
+				String companyName = rs.getString("COMPANY");
+				return companyName;
+			}
+			
+		});
+	}	
 }

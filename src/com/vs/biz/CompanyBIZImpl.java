@@ -1,5 +1,6 @@
 package com.vs.biz;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,5 +43,13 @@ public class CompanyBIZImpl implements CompanyBIZ {
 		System.out.println("[ 총 넣은 개수 : "+i +" 개 ]");
 		return check;
 	}
-	
+
+	@Override
+	public List<String> selectAllCompanyName() {
+		
+		List<String> ret = new ArrayList<String>();
+		ret = companyDAO.selectAll();
+		
+		return ret;
+	}
 }
