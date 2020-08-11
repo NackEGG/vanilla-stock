@@ -32,10 +32,11 @@
 
 		
 		<div id="loginBox">
-			<div id="loginBtn" class="hidden">
+		
+			<div id="loginBtn" class="${loginMember eq null ? ' ' : 'hidden' }">
 			로그인
 			</div><!--//loginBtn -->
-			<div id="profileBox" >
+			<div id="profileBox" class="${loginMember eq null ? 'hidden' : ' ' }">
 				<h2 class="screen_out">유저정보</h2>
 				<img src="../profile/profile.png"
 				class="profile_on"  width="60" height="60"

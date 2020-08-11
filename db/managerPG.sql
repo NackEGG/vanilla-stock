@@ -1,3 +1,32 @@
+select no, email, password, birthday, score, utl_raw.cast_to_varchar2(dbms_lob.substr(profile, dbms_lob.getlength(profile))) profile ,gender, nickname, regdate
+from MEMBER;
+
+
+select tb2.*
+from(
+select rownum r, tb1.*
+from(
+select f.no financeNO, f.year financeYEAR, f.quarter financeQuarter, f.stock_code financeStockCode, f.account_code financeAccountCode, fc.account_nm financeAccountName, fc.label_kor financeCateLabelKor, fc.sj_div financeCateSjDiv, f.account_value financeAccountValue, f.regdate financeRegdate, comp.*
+from finance f, (select c.stock_code companyStockCode, c.company company, c.industry_no companyIndustryNo, i.name industryName, c.stock_listed companyStockListed, c.capital companyCapital, c.facevalue companyFacevalue, c.currency companyCurrency, c.tel companyTel, 
+c.address companyAddress, c.regdate companyRegdate
+from company c, industry i 
+where c.industry_no = i.no) comp, finance_cate fc
+where comp.companyStockCode = f.stock_code and f.account_code = fc.account_id
+  and company LIKE '%삼성%'
+order by f.year desc, f.quarter desc) tb1) tb2
+where tb2.r BETWEEN 1 AND 10;
+
+select rownum as r, x.*
+from(
+select f.no, f.year, f.quarter, f.stock_code stockCode, f.account_code accountCode, fc.account_nm accountName, fc.label_kor, fc.sj_div, f.account_value accountValue, f.regdate, comp.*
+from finance f, (select c.stock_code, c.company, c.industry_no industryNo, i.name industryName, c.stock_listed stockListed, c.capital, c.facevalue, c.currency, c.tel, 
+c.address, c.regdate
+from company c, industry i 
+where c.industry_no = i.no) comp, finance_cate fc
+where comp.stock_code = f.stock_code and f.account_code = fc.account_id
+order by f.year desc, f.quarter desc ) x;
+
+
 SELECT *
   FROM 
 CREATE OR REPLACE PROCEDURE select_member02 ( search_word in varchar2, sort_type in varchar2, out_cursor out SYS_REFCURSOR)
