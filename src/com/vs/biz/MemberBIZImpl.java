@@ -44,19 +44,26 @@ public class MemberBIZImpl implements MemberBIZ {
 		 return viewMap;
 	}
   @Override
-	public boolean loginCheck(MemberVO vo, HttpSession session) {
-		boolean result = memberDAO.loginCheck(vo);
-		if(result) { // true일 경우 세
-		System.out.println("true");
-		session.setAttribute("email", vo.getEmail()); //세션 변수 등록 
-		}
-			
-		return result;
-	}
-
-	@Override
-	public MemberVO viewMember(MemberVO vo) {
+	public MemberVO loginCheck(MemberVO vo)  {
 		
-		return memberDAO.viewMember(vo);
-	}
+              return memberDAO.loginCheck(vo);
+      
+
+     
+  }
+//		if(result) { // true일 경우 세
+//			MemberVO vo1 = viewMember(vo);
+//		System.out.println("true");
+//		session.setAttribute("email", vo1.getEmail()); //세션 변수 등록 
+//		session.setAttribute("password", vo1.getPassword());
+//		}
+//			
+//		return result;
+	
+
+//	@Override
+//	public MemberVO viewMember(MemberVO vo) {
+//		
+//		return memberDAO.viewMember(vo);
+//	}
 }

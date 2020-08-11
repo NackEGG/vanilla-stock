@@ -1,0 +1,103 @@
+#signupContents {
+  width: 600px;
+  height: 70px;
+  display: block;
+  margin-left: 200px;
+}
+
+.clearfix {
+  width: 200px;
+  height: 30px;
+  display: flex;
+  flex-direction: row;
+  margin-left: 650px;
+  margin-top: 10px;
+}
+
+#signup {
+}
+
+.signupForm {
+  width: auto;
+  height: 600px;
+}
+
+.profileDefault {
+  width: 120px;
+  height: 110px;
+  display: flex;
+  justify-content: center;
+  margin-left: 450px;
+}
+
+.profiledefault {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  margin-top: 10px;
+}
+
+.join_subject {
+  color: black;
+  font-size: 20px;
+  padding-top: 25px;
+}
+
+.join_inputbox {
+  width: 220px;
+  height: 30px;
+  margin-top: 5px;
+  margin-left: 20px;
+  border-style: none;
+}
+
+.joinForm_middle {
+  width: 750px;
+  height: 450px;
+
+  display: block;
+  margin-top: 10px;
+  margin-left: 150px;
+}
+
+.joinformContents {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.confirmbutton {
+  width: 70px;
+  height: 35px;
+  border-radius: 10%;
+  border-style: none;
+
+  font-size: 12px;
+  color: black;
+  margin-left: 20px;
+}
+
+#join_gender {
+  margin-left: 20px;
+}
+
+#dateofbirth {
+  margin-left: 20px;
+  width: 70px;
+  height: 30px;
+  margin-top: 10px;
+}
+
+.signupConfirmed {
+  width: 120px;
+  height: 50px;
+  font-size: 25px;
+  color: black;
+  font-weight: bold;
+  margin-top: 400px;
+}
+
+.birthofdate {
+  width: 150px;
+  display: inline;
+}

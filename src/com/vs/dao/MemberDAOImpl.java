@@ -79,14 +79,23 @@ public class MemberDAOImpl implements MemberDAO {
 	}
     
     @Override
-	public boolean loginCheck(MemberVO vo){
-		System.out.println("===>Mybatis로 로그인 check");
-		String email = sqlSession.selectOne(MAPPER + ".loginCheck", vo);
-		return (email == null) ? false : true ;
+	public MemberVO loginCheck(MemberVO vo){
+    	
+    	MemberVO mem = null;
+    	
+    	try(SqlSession session = sqlSessionFactory.openSession()){
+    		mem = session.selectOne(MAPPER+"loginCheck", vo);
+    	}catch (Exception e) {
+    		e.printStackTrace();
+    	}
+    	
+		System.out.println("===>Mybatis로 로그인 check "+ vo.getEmail());
+		return mem;
+		
 	}
  
-    @Override
-	public MemberVO viewMember(MemberVO vo) {
-		return sqlSession.selectOne("member.viewMember", vo);
-	}
+//    @Override
+//	public MemberVO viewMember(MemberVO vo) {
+//		return sqlSession.selectOne("member.viewMember", vo);
+//	}
 }
