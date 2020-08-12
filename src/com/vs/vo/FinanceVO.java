@@ -1,6 +1,5 @@
 package com.vs.vo;
 
-import java.sql.Date;
 import java.sql.Timestamp;
 
 public class FinanceVO {
@@ -9,8 +8,9 @@ public class FinanceVO {
 	private int quarter;
 	private String stockCode;
 	private String accountCode;
-	private int accountValue;
+	private long accountValue;
 	private Timestamp regdate;
+	private String labelKor;
 	
 	public FinanceVO() {
 		// TODO Auto-generated constructor stub
@@ -56,11 +56,11 @@ public class FinanceVO {
 		this.accountCode = accountCode;
 	}
 
-	public int getAccountValue() {
+	public long getAccountValue() {
 		return accountValue;
 	}
 
-	public void setAccountValue(int accountValue) {
+	public void setAccountValue(long accountValue) {
 		this.accountValue = accountValue;
 	}
 
@@ -71,6 +71,13 @@ public class FinanceVO {
 	public void setRegdate(Timestamp regdate) {
 		this.regdate = regdate;
 	}
-	
+
+	public String getLabelKor() {
+		return labelKor;
+	}
+
+	public void setLabelKor(String labelKor) {
+		this.labelKor = labelKor;
+	}
 	
 }

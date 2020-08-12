@@ -46,7 +46,7 @@
         <span class="articleCName">회사 </span>
         <div class="ui-widget">
   			<label for="articleCompanyOption"> </label>
- 			 <input class="articleCompanyOption" placeholder="회사명을 입력하세요">
+ 			 <input class="articleCompanyOption" placeholder="회사명을 입력하세요" form="openForm">
 		</div>
       </div>
       <div class="articleOpenTitle">
@@ -56,12 +56,12 @@
           placeholder="투기장명을 입력하세요."
           name="title"
           class="openTitle"
+          form="openForm"
         />
       </div>
-
-      <div class="openConfirmed">
-        OPEN
-      </div>
+      	<div class="openConfirmed">
+      		OPEN
+      	</div>
     </div>
   </body>
 </html>

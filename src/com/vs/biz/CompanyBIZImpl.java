@@ -48,7 +48,7 @@ public class CompanyBIZImpl implements CompanyBIZ {
 	public List<String> selectAllCompanyName() {
 		
 		List<String> ret = new ArrayList<String>();
-		ret = companyDAO.selectAll();
+		ret = companyDAO.selectAllCompanyName();
 		
 		return ret;
 	}
