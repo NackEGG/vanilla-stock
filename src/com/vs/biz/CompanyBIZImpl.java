@@ -1,5 +1,6 @@
 package com.vs.biz;
 
+import java.util.Collection;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,7 +23,6 @@ public class CompanyBIZImpl implements CompanyBIZ {
 	}
 	
 	@Transactional
-
 	@Override
 	public boolean insertIntoAPI(List<CompanyVO> companyList) {
 		boolean check = false;
@@ -43,13 +43,24 @@ public class CompanyBIZImpl implements CompanyBIZ {
 		System.out.println("[ 총 넣은 개수 : "+i +" 개 ]");
 		return check;
 	}
+  
+  @Override
+	public List<CompanyVO> selectCompany(int indNo) {
+		return companyDAO.selectCompany(indNo);
+	}
 
 	@Override
-	public List<String> selectAllCompanyName() {
+	public List<CompanyVO> getList() {
+		return companyDAO.selectList();
+	}
+  
+  @Override
+  public List<String> selectAllCompanyName() {
 		
 		List<String> ret = new ArrayList<String>();
 		ret = companyDAO.selectAllCompanyName();
 		
 		return ret;
 	}
+
 }

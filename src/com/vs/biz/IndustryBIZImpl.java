@@ -42,4 +42,9 @@ public class IndustryBIZImpl implements IndustryBIZ{
 		return check;
 	}
 
+	@Override
+	public List<String> getIndName(int indNo) {
+		return industryDAO.getIndName(indNo);
+	}
+
 }

@@ -100,6 +100,36 @@ public class StockRecordsDAOImpl implements StockRecordsDAO {
 		return (List<Pair<StockRecordsVO, String>>) jdbcTemplate.query(
 				sql, mapper,new Object[] {startDate, endDate});
 	}
+	
+	public List<Pair<StockRecordsVO, String>> selectStockWithCompanyByIndustry(int indNo, String startDate, String endDate){
+		String sql ="select open,close,STOCK_RECORDS.stock_code,t_date,industry_no "
+				+ "from STOCK_RECORDS ,COMPANY  "
+				+ "WHERE STOCK_RECORDS.STOCK_CODE = COMPANY.STOCK_CODE "
+				+ "AND T_DATE >= ? AND T_DATE <= ? "
+				+ "AND industry_no = ? "
+				+ "ORDER BY stock_records.stock_code , t_date DESC";
+		RowMapper<Pair<StockRecordsVO, String>> mapper = new RowMapper<Pair<StockRecordsVO, String>>() {
+
+			@Override
+			public Pair<StockRecordsVO, String> mapRow(ResultSet rs, int rowNum) throws SQLException {
+				StockRecordsVO tempVO = new StockRecordsVO();
+				String tempStr = "";
+				
+				tempVO.setOpen(rs.getInt("open"));
+				tempVO.setClose(rs.getInt("close"));
+				tempVO.setStockCode(rs.getString("stock_code"));
+				tempVO.settDate(rs.getString("t_date"));
+				tempStr = rs.getString("industry_no");
+				Pair<StockRecordsVO, String> resultPair = new Pair(tempVO, tempStr);
+				
+				//System.out.println(tempVO.getStockCode() + " / " + tempVO.gettDate() + " / " + tempStr);
+				
+				return resultPair;
+			}//rs.next사용불가! 자동으로 호출되기때문
+		};
+		return (List<Pair<StockRecordsVO, String>>) jdbcTemplate.query(
+				sql, mapper,new Object[] {startDate, endDate, indNo});
+	}
 
 	@Override
 	public int selectPrevMonthClose(StockRecordsVO stockRecordsVO) {

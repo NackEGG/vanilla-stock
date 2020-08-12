@@ -1,5 +1,4 @@
 @import url(https://fonts.googleapis.com/css?family=Roboto:300);
-
 .loginForm {
   box-shadow: 0px 12px 20px rgba(0, 0, 0, 0.19), 0, 6px, 6px rgba(0, 0, 0, 0.24);
   position: fixed;
@@ -11,15 +10,15 @@
   align-items: center;
   margin-right: 900px;
 }
-
 .form {
   z-index: 1;
-  background: #ffffff;
+  background: #FFFFFF;
   width: 500px;
-  margin: 10px auto 100px -550px;
+  margin: 300px auto 100px -950px;
   padding: 45px;
   text-align: center;
   box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+  position: absolute;
 }
 .formContents {
   position: relative;
@@ -27,7 +26,7 @@
 .form input {
   font-family: "Roboto", sans-serif;
   outline: 0;
-  background: #f2f2f2;
+  background: #F2F2F2;
   width: 100%;
   border: 0;
   margin: 0 0 15px;
@@ -39,11 +38,11 @@
   font-family: "Roboto", sans-serif;
   text-transform: uppercase;
   outline: 0;
-  background: #4caf50;
+  background: black;
   width: 100%;
   border: 0;
   padding: 15px;
-  color: #ffffff;
+  color: #FFFFFF;
   font-size: 14px;
   -webkit-transition: all 0.3 ease;
   transition: all 0.3 ease;
@@ -52,15 +51,15 @@
 .form button:hover,
 .form button:active,
 .form button:focus {
-  background: #43a047;
+  background: grey;
 }
 .form .message {
   margin: 15px 0 0;
-  color: #b3b3b3;
+  color: #B3B3B3;
   font-size: 12px;
 }
 .form .message a {
-  color: #4caf50;
+  color: black;
   text-decoration: none;
 }
 .form .register-form {
@@ -87,10 +86,10 @@
   padding: 0;
   font-size: 36px;
   font-weight: 300;
-  color: #1a1a1a;
+  color: #1A1A1A;
 }
 .container .info span {
-  color: #4d4d4d;
+  color: #4D4D4D;
   font-size: 12px;
 }
 .container .info span a {
@@ -98,11 +97,10 @@
   text-decoration: none;
 }
 .container .info span .fa {
-  color: #ef3b3a;
+  color: #EF3B3A;
 }
-
 .close {
-  color: #b3b3b3;
+  color: #B3B3B3;
   font-size: 15px;
   margin-top: 10px;
 }
