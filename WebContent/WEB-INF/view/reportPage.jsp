@@ -2,13 +2,22 @@
     pageEncoding="EUC-KR"%>
 <%@ page import ="java.util.Date" %>
 <%@ page import ="com.vs.util.StockApiUtil" %>
+<%@ page import ="java.text.DecimalFormat" %>
+<%@ page import ="java.util.Map" %>
 <%
 	String[] arrStockInfo = (String[])request.getAttribute("arrStockInfo");
 	String[][] arrDailyStock = (String[][])request.getAttribute("arrDailyStock");
 	String[][] arrTimeConclude = (String[][])request.getAttribute("arrTimeConclude");
 	int prevMonthClose = (int)request.getAttribute("prevMonthClose");
+	Map<String,Long> financeMap = (Map<String,Long>)request.getAttribute("financeMap");
+	Map<String,Long> industryFinanceMap = (Map<String,Long>)request.getAttribute("industryFinanceMap");
 	
 	String today = arrStockInfo[18].substring(0,11);
+	
+	DecimalFormat formatter = new DecimalFormat("###,###"); 
+	int monthDevi = Integer.parseInt(arrStockInfo[1].replaceAll(",", "")) - prevMonthClose;
+	Float monthDeviPercent = monthDevi / Float.parseFloat(arrStockInfo[1].replaceAll(",", "")) * 100;
+	
 %>
 <%@ taglib prefix="c"   uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
@@ -16,16 +25,198 @@
 <head>
 	<meta charset="utf-8">
 	<title></title>
-	<link rel="stylesheet" href="${pageContext.request.contextPath}/css/reset.css" />
-	<link rel="stylesheet" href="${pageContext.request.contextPath}/css/kakao.font.css" />
-	<link rel="stylesheet" href="${pageContext.request.contextPath}/css/default.css" />
-	<link rel="stylesheet" href="${pageContext.request.contextPath}/css/reportPage.css" />
+	<link rel="stylesheet" href="/vanilla-stock/css/reset.css" />
+	<link rel="stylesheet" href="/vanilla-stock/css/kakao.font.css" />
+	<link rel="stylesheet" href="/vanilla-stock/css/default.css" />
+	<link rel="stylesheet" href="/vanilla-stock/css/reportPage.css" />
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
-	<script src="${pageContext.request.contextPath}/js/jquery.js"></script>
+	<script src="js/jquery.js"></script>
 	<script src="https://code.highcharts.com/highcharts.js"></script>
 	<script src="https://code.highcharts.com/modules/exporting.js"></script>
 	<script src="https://code.highcharts.com/modules/export-data.js"></script>
 	<script src="https://code.highcharts.com/modules/accessibility.js"></script>
+	<script src="https://code.highcharts.com/highcharts-more.js"></script>
+	<style type="text/css">
+		#content{
+			padding: 20px 0 50px 0;
+		}
+		#content .aux{
+			background-color: #EEEEEE;
+			color: black;
+		}
+		#upperContent{
+			background-color: yellowgreen;
+		}
+		#lowerContent{
+			background-color: #6200EE;
+		}
+		#summaryBox{
+			display: flex;
+			background-color: yellow;
+			margin: 10px 10px;
+			height: 300px;
+		}
+		#supportingBox{
+			display: flex;
+			background-color: indianred;
+			margin: 10px 10px;
+			height: 300px;
+		}
+		#descBox{
+			height: inherit;
+			width: 540px;
+			background-color: #F4FF81;
+		}
+		#upperDescBox{
+			display: flex;
+
+		}
+		#lowerDescBox{
+			display: flex;
+			height: 50%;
+		}
+		#companyName{
+			font-size: 40px;
+			padding: 10px;
+		}
+		#companyCode {
+			font-size: 18px;
+			padding-top: 37px;
+		}
+		#chartBox {
+			width: 50%;
+			height: inherit;
+		}
+		#industyBox{
+			padding-left: 10px;
+			padding-top: 5px;
+			width: 33%;
+			height: 74px;
+		}
+		#industryLogo{
+			text-align: center;
+		}
+		#industyBox img{
+			width: 95%;
+    		height: 134px;
+		}
+		#industyName{
+			text-align: center;
+    		font-size: 15px;
+    		margin-top: 8px;	
+		}
+		#industryAverageBox{
+			text-align: center;
+    		margin-top: 12px;
+    		font-size: 26px;
+		}
+		#deviBox{
+			padding-left: 10px;
+			padding-top: 5px;
+			width: 61%;
+			height: 74px;
+		}
+		.stockPriceBox{
+			display: flex;
+		}
+		.stockPriceName{
+			padding: 29px 12px 0px 21px;
+    		width: 53px;
+		}
+		.stockPrice{
+			height: 61px;
+    		width: 275px;
+    		text-align: right;
+    		font-size: 31px;
+			margin: 10px 10px -13px 10px;
+		}
+		#presentPriceBox{
+			padding-left: 10px;
+			padding-top: 5px;
+			width: 33%;
+			height: 74px;
+		}
+		
+		#sameIndustryBox{
+			width: 25%;
+			background-color: #7986cb;
+		}
+		#financeInfoBox{
+			width: 50%;
+			background-color: #FF80AB;
+		}
+		#articleBox{
+			width: 50%;
+			background-color: springgreen;
+		}
+		.deviPercent{
+			width: 109px;
+			text-align: right;
+		}
+		.daydeviName{
+			width: 130px;
+		}
+		.percentBox{
+			display: flex;
+			padding: 5px 0px 8px 0px;
+		}
+		.upperTitle{
+			height: 14%;
+			padding: 5px 5px 0 5px;
+			background-color: #2D230D;
+		}
+		.upperTitle .title{
+			padding: 6px;
+			font-size: 21px;
+			width: 35%;
+		}
+		.highcharts-figure, .highcharts-data-table table {
+			min-width: 320px;
+			max-width: 800px;
+			margin: 1em auto;
+		}
+
+		#container {
+			height: inherit;
+		}
+		#container2 {
+			height: inherit;
+		}
+		.highcharts-figure{
+			min-width: 280px;
+			max-width: 800px;
+			margin: 1em auto;
+			height: 94%;
+		}
+
+		.highcharts-data-table table {
+			font-family: Verdana, sans-serif;
+			border-collapse: collapse;
+			border: 1px solid #EBEBEB;
+			margin: 10px auto;
+			text-align: center;
+			width: 100%;
+			max-width: 500px;
+		}
+		.highcharts-data-table caption {
+			padding: 1em 0;
+			font-size: 1.2em;
+			color: #555;
+		}
+		.highcharts-data-table th {
+			font-weight: 600;
+			padding: 0.5em;
+		}
+		.highcharts-data-table td, .highcharts-data-table th, .highcharts-data-table caption {
+			padding: 0.5em;
+		}
+		.highcharts-data-table thead tr, .highcharts-data-table tr:nth-child(even) {
+			background: #f8f8f8;
+		}
+		.highcharts-data-table tr:hover {
+			background: #f1f7ff;
+		}
+	</style>
 	<script>
 		$(function (){
 			$('#container').highcharts({
@@ -35,24 +226,21 @@
 					marginRight: 10,
 					events: {
 						load: function () {
-							
 							// set up the updating of the chart each second
 							var series = this.series[0];
 							var sc = $("#companyCode").text();
 							setInterval(function () {
 								const sc = $("#companyCode").text();
 								var ret = 0;
-								console.log(sc);
 								$.ajax({
 									url:"/vanilla-stock/ajax/reportPage/rtprice/", 
 									data : {no : sc},
 									dataType : "json",
 									type : "POST",
 									error : function() {
-										alert(sc)
+										console.log(sc)
 									},
 									success : function (json) {
-										console.log(json.result);
 										var x = (new Date()).getTime();
 										var y = json.result;
 										series.addPoint([x, y], true, true);
@@ -130,31 +318,6 @@
 			});
 		});
 		
-		function getStockData() {
-			const sc = $("#companyCode").text();
-			var ret = 0;
-			console.log(sc);
-			$.ajax({
-				url:"/vanilla-stock/ajax/reportPage/rtprice/", 
-				data : {no : sc},
-				dataType : "json",
-				type : "POST",
-				error : function() {
-					alert(sc)
-				},
-				success : function (json) {
-					console.log(json.result);
-					//var x = (new Date()).getTime(), // current time
-				 	$("#dataContainer").val(json.result);
-					$("#dataContainer").val();
-				}
-			});
-			//ajax end
-		}
-		
-		
-		
-		
 	</script> <!--// chart스크립트-->
 </head>
 <body>
@@ -191,7 +354,7 @@
 		</div><!--//loginBtn -->
 		<div id="profileBox" class="">
 			<h2 class="screen_out">유저정보</h2>
-			<img src="${pageContext.request.contextPath}/profile/profile.png"
+			<img src="/vanilla-stock/profile/profile.png"
 			class="profile_on"  width="60" height="60"
 			alt="테스터"
 			title="테스터"/>
@@ -235,47 +398,61 @@
 						<div id="lowerDescBox">
 							<div id="industyBox">
 								<div id ="industryLogo">
-									<img src="${pageContext.request.contextPath}/icon/<c:out value="${industryVO.no}"/>.png">
+									<img src="/vanilla-stock/icon/${industryVO.no}.png">
 								</div><!--//#industryLogo -->
 								<div id="industyName">
 									${industryVO.name} 
 								</div><!--//#industryName -->
+								<div id ="industryAverageBox">
+									<div id="industryAverage">0.45%+</div>			
+								</div><!--//#presentPriceBox -->
 							</div><!--//#industryBox -->
 							<div id="deviBox">
-								<div id="prevDayDevi">
-									전일대비 : <%=arrStockInfo[3] %> &nbsp;
+								<div class = "stockPriceBox">
+									<div class = "stockPriceName">현재가</div>
+									<div class = "stockPrice">&#8361;<%=arrStockInfo[1].trim()%></div>
+								</div>
+								<hr style="margin: -6px 0px 9px 0px;">
+								<div class = "percentBox">
+									<div class = "daydeviName">전일대비</div>
+									<div class = "deviPercent"><%=arrStockInfo[17]%>%
 									<% if(arrStockInfo[2].equals("1") || arrStockInfo[2].equals("2")){%>
 										▲ <%}else if(arrStockInfo[2].equals("4") || arrStockInfo[2].equals("5")){ %>
 										▼ <%}else{ %>
 										─ <%} %>
-								</div><!--//#prevDayDevi -->
-								<div id="prevDayDeviPercent">
-									<%= arrStockInfo[17]%>%
-								</div><!--//#prevDayDeviPercent -->
-								<div id="prevMonthDeviChai">
-									<% int monthDevi = Integer.parseInt(arrStockInfo[1].replaceAll(",", "")) - prevMonthClose; %>
-									전월대비 : <%= Math.abs(monthDevi) %> 
+									</div>
+									<div class = "daydeviName">전월대비</div>
+									<div class = "deviPercent"><%= String.format("%.2f", monthDeviPercent)%>%
 									<% if(monthDevi > 0){%>
 										▲ <%}else if(monthDevi < 0){ %>
 										▼ <%}else{ %>
 										─ <%} %>
-								</div><!--//#prevMonthDeviChai -->
-								<div id="prevMonthDeviPercent">
-									<% Float monthDeviPercent = monthDevi / Float.parseFloat(arrStockInfo[1].replaceAll(",", "")) * 100; %>
-									<%= String.format("%.2f", monthDeviPercent)%>%
-								</div><!--//#prevMonthDeviPercent -->
+									</div>																			
+								</div>
+								<div class = "percentBox">
+									<div class = "daydeviName">거래량</div>
+									<div class = "deviPercent"><%=arrStockInfo[5]%></div>
+									<div class = "daydeviName">거래금액</div>
+									<div class = "deviPercent"><%=arrStockInfo[6]%></div>																			
+								</div>
+								<div class = "percentBox">
+									<div class = "daydeviName">고가</div>
+									<div class = "deviPercent"><%=arrStockInfo[8]%></div>
+									<div class = "daydeviName">저가</div>
+									<div class = "deviPercent"><%=arrStockInfo[9]%></div>																			
+								</div>
+								<div class = "percentBox">
+									<div class = "daydeviName">52주최고가</div>
+									<div class = "deviPercent"><%=arrStockInfo[10]%></div>
+									<div class = "daydeviName">52주최저가</div>
+									<div class = "deviPercent"><%=arrStockInfo[11]%></div>																			
+								</div>
 							</div><!--//#deviBox -->
-							<div id ="presentPriceBox">
-								<div id="presentPriceWord">현재가</div>
-								<div id="presentPrice"><%=arrStockInfo[1] %></div>
-								
-							</div><!--//#presentPriceBox -->
 						</div><!--//#lowerDescBox -->
 					</div><!--//#descBox -->
 					<div id="chartBox">
 						<figure class="highcharts-figure">
 						<div id="container"></div>
-						<div id="dataContainer" value=""></div>
 					</figure>
 					</div><!--//#chartBox -->
 				</div><!--//#summaryBox -->
@@ -283,23 +460,50 @@
 			<div id="lowerContent">
 				<div id="supportingBox">
 					<div id="financeInfoBox">
-						<div class="upperTitle">
-							<div class="title">
-								기업재무정보
-							</div><!--//.title -->
-						</div><!--//.upperTitle -->
-					</div><!--//#financeInfoBox -->
-					<div id="sameIndustryBox">
-						<div class="upperTitle">
-							<div class="title">
-								동일업종정보
-							</div><!--//.title -->
-						</div><!--//.upperTitle -->
-					</div><!--//#sameIndustryBox -->
+						<figure class="highcharts-figure">
+								<div id="container2"></div>
+							</figure>
+						<script type="text/javascript">
+					$(function (){
+						$('#container2').highcharts({
+						chart: {
+					    	type: 'column'
+					  	},
+					  	title: {
+					    	text: '한눈에 보는 재무정보'
+					  	},
+					  	xAxis: {
+					    	categories: ['자산규모', '당기순이익', '유동자산', '매출액', '영업이익','현금자산']
+					  	},
+					  	credits: {
+					    	enabled: false
+					  	},
+					  	series: [{
+					    	name: '${companyVO.company}',
+					   		data: [<%=financeMap.get("자본과부채총계")%>,
+				    		<%=financeMap.get("당기순이익(손실)")%>,
+				    		<%=financeMap.get("유동자산")%>,
+				    		<%=financeMap.get("수익(매출액)")%>,
+				    		<%=financeMap.get("영업이익(손실)")%>,
+				    		<%=financeMap.get("현금및현금성자산")%>]
+					  		}, {
+					    	name: '동종업계 평균',
+					    	data: [<%=industryFinanceMap.get("자본과부채총계")%>,
+				    		<%=industryFinanceMap.get("당기순이익(손실)")%>,
+				    		<%=industryFinanceMap.get("유동자산")%>,
+				    		<%=industryFinanceMap.get("수익(매출액)")%>,
+				    		<%=industryFinanceMap.get("영업이익(손실)")%>,
+				    		<%=industryFinanceMap.get("현금및현금성자산")%>]
+					  		}]
+					  		})
+						});
+				
+					</script>
+					</div><!--//#financeInfoBox -->		
 					<div id="articleBox">
 						<div class="upperTitle">
 							<div class="title">
-								투기장
+								오늘의 투기장
 							</div><!--//.title -->
 						</div><!--//.upperTitle -->
 					</div><!--//#ArticleBox -->

@@ -236,7 +236,7 @@
 			console.log("form data");
 			console.log(formData);
 			$.ajax({ 
-				url:"/vanilla-stock/ajax/manager/member",
+				url:"/vanilla-stock/ajax/articlePage/list",
 				type:"post",
 				data:formData+'&page='+page,
 				error:function(){
@@ -246,7 +246,7 @@
 				
 					if(page==1 || json.memberList.length>0){
 						
-						let tmp = membersTmp({"memberList": json.memberList,"paginate": json.paginate });
+						let tmp = membersTmp({"articleList": json.memberList,"paginate": json.paginate });
 						console.log(tmp);
 						$wrapList.empty().append(tmp);
 						$txtInp.val(""); 
@@ -257,7 +257,10 @@
 			});//ajax end 
 		}// search() end
 		
-	
+		$btnSearch.on("click", function(){
+	 		let page = 
+	 	});
+			
 	</script>
 </body>
 </html>

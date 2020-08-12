@@ -15,7 +15,11 @@ public interface MemberDAO {
 	public MemberVO loginCheck(MemberVO vo);
 
 
+
 	public void logout(HttpSession session);
+
+	public MemberVO selectByEmail(String email);
+
 
 	public MemberVO selectByEmail(String email);
 

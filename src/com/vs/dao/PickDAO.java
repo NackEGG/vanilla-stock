@@ -1,5 +1,7 @@
 package com.vs.dao;
 
-public interface PickDAO {
+import com.vs.vo.PickVO;
 
+public interface PickDAO {
+	public boolean insert(PickVO vo);
 }

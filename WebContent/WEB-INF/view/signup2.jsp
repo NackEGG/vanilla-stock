@@ -1,14 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!DOCTYPE html>
 <html>
   <head>
+  	<!-- 혹시모를 비상사태를 대비한 백업파일 -->
     <meta charset="utf-8" />
     <title></title>
-    <link rel="stylesheet" href="css/reset.css" />
-    <link rel="stylesheet" href="css/kakao.font.css" />
-    <link rel="stylesheet" href="css/default.css" />
-    <link rel="stylesheet" href="css/signup.css" />
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/reset.css" />
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/kakao.font.css" />
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/default.css" />
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/signup.css" />
     
     <link
       rel="stylesheet"
@@ -16,7 +18,7 @@
       integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf"
       crossorigin="anonymous"
     />
-    <script src="../js/jquery.js"></script>
+    <script src="${pageContext.request.contextPath}/js/jquery.js"></script>
     <style type="text/css" media="screen">
       #divTEST {
         height: 1000px;
@@ -65,7 +67,7 @@
         <div id="profileBox" class="hidden">
           <h2 class="screen_out">유저정보</h2>
           <img
-            src="../profile/profile.png"
+            src="${pageContext.request.contextPath}/profile/profile.png"
             class="profile_on"
             width="60"
             height="60"
@@ -122,30 +124,39 @@
               <li class="checkBox check02">
               
                 <textarea name="signupContents" id="signupContents">
-여러분을 환영합니다.
-    저희 사이트는 정보제공만 할 뿐 여러분의 의사결정에 아무런 책임을 지지않습니다. 동의하신다면 이용약관 동의에 체크해주세요.
-           </textarea
-                >
+이 사이트에 게재된 정보는 오직 정보 제공 목적입니다. 
+vanilla-stock은 정확하고 시기 적절한 정보를 제공하고자 노력하지만, 의도하지 않은 기술적 또는 사실 관계의 부정확 및 오탈자가 있을 수 있습니다.
+vanilla-stock은 이 웹사이트 상의 자료가 정확하거나 최신이거나 완벽하다고 보증하지 않으므로, 이 자료에 의존해서는 안 됩니다. 
+vanilla-stock은 통보 없이 언제라도 변경, 삭제 및 수정할 수 있는 권리가 있습니다.
+관련 법률에서 허용하는 최대한의 범위 내에서 vanilla-stock은 특정 목적을 위한 매매 가능성 및 적합성의 암시적 보증 등 모든 보증을 책임지지 않습니다. 
+vanilla-stock은 이 사이트에 포함된 정보, 텍스트, 그래픽, 링크 또는 기타 항목의 정확성 또는 완결성을 명시적 또는 암시적으로 보증하지 않으며, 
+본 자료의 오류 또는 누락, 또는 사이트에 포함된 정보의 제3자에 의한 이용 또는 해석에 대한 모든 책임을 명시적으로 부인합니다. 
+vanilla-stock은 이 사이트를 통하여 이용자에게 제공된 정보를 제3자가 무단 사용함으로써 발생할 수 있는 손실 또는 손해를 책임지지 않습니다.
+또한 이 사이트의 장애 또는 중단, 또는 사이트 또는 이 자료에 대한 이용자의 접근, 접근 불능 또는 이용과 관련한 사유로 인해 발생하는 어떠한 종류의 손실 또는 손해에도 책임을 지지 않습니다. 
+이때, 그러한 사유를 제공한 환경이 vanilla-stock 또는 이 사이트를 위한 소프트웨어 또는 지원 서비스를 제공하는 벤더의 통제범위 내에 있었는지 여부는 무관합니다
+
+동의하신다면 이용약관 동의에 체크해주세요.
+           		</textarea>
 
                 <ul class="clearfix">
                     <li class="checkBtn">
-                        <input type="checkbox" name="chk" />
-                      </li>
+                        <input type="checkbox" name="agree" value="true" />
+                    </li>
                     <li>이용약관 동의(필수)</li>
-                   
-                  </ul>
+                </ul>
               </li>
-              
-
+             
+			</ul>
           </form>
         </div> <!-- // #signup -->
 
         <div class= "signupForm">
             <div class="profileDefault">
-                    <img src="avatar.jpg" class="profiledefault" />
+                    <img src="${pageContext.request.contextPath}/img/jicon.png" class="profiledefault" />
                   </div>
 
                   <div class= "joinformContents">
+  
                       <form  enctype="text/plain" action="/signup" method="post">
                         <table boder ="1px" bordercolor="grey" class="joinForm_middle">
                             <tbody>
@@ -174,91 +185,65 @@
                                     </tr>
                                     <tr>
                                     
-                                    <td class = "birthofdate"><select name="day" id="dateofbirth">
-                                        <option value="01" selected(초기 선택된 항목)>01</option>
-                                        <option value="02">02</option>
-                                        <option value="03">03</option>
-                                        <option value="04">04</option>
-                                       <option value="05">05</option>
-                                       <option value="06">06</option>
-                                       <option value="07">07</option>
-                                       <option value="08">08</option>
-                                       <option value="09">09</option>
-                                       <option value="10">10</option>
-                                       <option value="11">11</option>
-                                        <option value="12">12</option>
-                                        <option value="13">13</option>
-                                        <option value="14">14</option>
-                                       <option value="15">15</option>
-                                       <option value="16">16</option>
-                                       <option value="17">17</option>
-                                       <option value="18">18</option>
-                                       <option value="19">19</option>
-                                       <option value="20">20</option>
-                                       <option value="21">21</option>
-                                       <option value="22">22</option>
-                                        <option value="23">23</option>
-                                        <option value="24">24</option>
-                                       <option value="25">25</option>
-                                       <option value="26">26</option>
-                                       <option value="27">27</option>
-                                       <option value="28">28</option>
-                                       <option value="29">29</option>
-                                       <option value="30">30</option>
-                                       <option value="31">31</option>
-                                     </select> 일
+                                    <td class ="birthofdate">
+                                    <select name="year" id="dateofbirth">
+                                    <%for(int i=2020; i>=1950; i--){%>
+	                                    <option value="<%out.print(String.format("%4d", i)); %>"
+										<%if(i == 2020){%> 
+										 selected>
+										<%}else{ %>
+										 >
+										 <%}
+	                                    out.print(String.format("%4d", i)); %>
+										</option>                                    	
+                                    <%} %>
+                                    </select> 년
                                     </td>
                                     
                                      <td class="birthofdate">
                                      <select name="month" id="dateofbirth">
-                                        <option value="01" selected(초기 선택된 항목)>01</option>
-                                        <option value="02">02</option>
-                                        <option value="03">03</option>
-                                        <option value="04">04</option>
-                                       <option value="05">05</option>
-                                       <option value="06">06</option>
-                                       <option value="07">07</option>
-                                       <option value="08">08</option>
-                                       <option value="09">09</option>
-                                       <option value="10">10</option>
-                                       <option value="11">11</option>
-                                       <option value="12">12</option>
-                                    </select>월
+                                     <%for(int i=1; i<=12; i++){%>
+	                                    <option value="<%out.print(String.format("%02d", i)); %>"
+										<%if(i == 1){%> 
+										 selected>
+										<%}else{ %>
+										 >
+										 <%}
+	                                    out.print(String.format("%02d", i)); %>
+										</option>                                    	
+                                   	 <%} %>
+                                    </select> 월
                                 </td>
-                                    <td class ="birthofdate">
-                                    <select name="year" id="dateofbirth">
-                                        <option value="2000" selected(초기 선택된 항목)>2000</option>
-                                        <option value="1999">1999</option>
-                                        <option value="1998">1998</option>
-                                        <option value="1997">1997</option>
-                                       <option value="1996">1996</option>
-                                       <option value="1995">1995</option>
-                                       <option value="1994">1994</option>
-                                       <option value="1993">1993</option>
-                                       <option value="1992">1992</option>
-                                       <option value="1991">1991</option>
-                                       <option value="1990">1990</option>
-                                       <option value="1989">1989</option>
-                                    </select>년
+                                
+                                <td class = "birthofdate"><select name="day" id="dateofbirth">
+                                    <%for(int i=1; i<=31; i++){%>
+	                                    <option value="<%out.print(String.format("%02d", i)); %>"
+										<%if(i == 1){%> 
+										 selected>
+										<%}else{ %>
+										 >
+										 <%}
+	                                    out.print(String.format("%02d", i)); %>
+										</option>                                    	
+                                    <%} %>
+                                     </select> 일
                                     </td>
                                     
-                          
-        
-    
+                                    
                                 </tr>
 
                                 <tr>
                                     <td class="join_subject" name="gender">성별</td>
-                                    </tr>
-                                    <tr>
-                                    <td> <input type="radio" id="join_gender"
+                                </tr>
+                                <tr>
+                                    <td>
+                                    	<input type="radio" id="join_gender"
                                         name="gender" value="W"> 여성
-                                        <td>
+                                    </td>
+                                    <td>
                                         <input type="radio" id="join_gender"
                                         name="gender" value="M"> 남성
-                                        </td>
-                                 </td>
-                            
+                                    </td>                            
                                 </tr>
 
                                 <tr>
@@ -276,17 +261,18 @@
                     
                     </form>
 
+
+
                     <div>
                         <input type="button" name ="signupconfirm" class="signupConfirmed" value="SIGN NP">
                     </div>
-        
                   </div>
             </div>
 
         </div>
 
       </div>
-    </div>
+    
     <!--//#content -->
 
     <div id="footer">
@@ -323,6 +309,6 @@
       <address>&copy; 2020 <a href="">NackEGG.com</a></address>
     </div>
     <!--//#footer -->
-    <script src="../js/fix-footer.js"></script>
+    <script src="${pageContext.request.contextPath}/js/fix-footer.js"></script>
   </body>
 </html>

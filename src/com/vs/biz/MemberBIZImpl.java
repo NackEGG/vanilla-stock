@@ -11,7 +11,9 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import com.vs.dao.MemberDAO;
+import com.vs.util.AlreadyException;
 import com.vs.util.PaginateUtil;
+import com.vs.util.RegisterRequest;
 import com.vs.vo.MemberVO;
 import com.vs.vo.PageVO;
 
@@ -45,6 +47,7 @@ public class MemberBIZImpl implements MemberBIZ {
 		return viewMap;
 	}
 
+
 	@Override
 	public MemberVO loginCheck(MemberVO vo) {
 
@@ -70,5 +73,6 @@ public class MemberBIZImpl implements MemberBIZ {
 			return false;
 		}
 	}
+
 
 }

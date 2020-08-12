@@ -1,10 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>    
 <!DOCTYPE html>
 <html>
   <head>
     <meta charset="utf-8" />
     <title></title>
+    <c:import url="/WEB-INF/template/link.jsp"/>
     <link rel="stylesheet" href="css/reset.css" />
     <link rel="stylesheet" href="css/kakao.font.css" />
     <link rel="stylesheet" href="css/default.css" />
@@ -15,7 +17,7 @@
       integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf"
       crossorigin="anonymous"
     />
-    <script src="../js/jquery.js"></script>
+    <script src="js/jquery.js"></script>
     <style type="text/css" media="screen">
       #divTEST {
         height: 1000px;
@@ -28,7 +30,7 @@
       <div id="logoBox">
         <h1>
           <a href="" title="vanilla stock">
-            <img src="../img/vs-logo2.PNG" alt="vanilla stock" />
+            <img src="img/vs-logo2.PNG" alt="vanilla stock" />
           </a>
         </h1>
       </div>
@@ -50,6 +52,8 @@
             class="inp_txt"
             type="text"
             placeholder="회사명을 입력해주세요"
+            form="searchForm"
+            name="searchWord"
           />
           <span class="btn_search"> <i class="fa fa-search"></i></span>
         </div>
@@ -64,7 +68,7 @@
         <div id="profileBox" class="hidden">
           <h2 class="screen_out">유저정보</h2>
           <img
-            src="../profile/profile.png"
+            src="profile/profile.png"
             class="profile_on"
             width="60"
             height="60"
@@ -115,260 +119,40 @@
         <div id="divTop">
           <ul>
             <li class="article">투기장</li>
-            <li class="article_recent">최신순</li>
-            <li class="article_popular">인기순</li>
+            <li class="article_recent">
+            	<input type="radio" name="sortType" checked="checked" value ="latest" form="searchForm">
+            		최신순
+            	</li>
+            <li class="article_popular">
+            	<input type="radio" name="sortType" value ="popularity" form="searchForm">
+            		인기순
+            	</li>
           </ul>
           <div class="article_open">
-            <a
-              href="/Users/IRENE/Downloads/폴더/vanilla-stock-front/jeongyeon/articleOpen.html"
-              onclick="window.open(this.href, '_blank', 'width=800px,height=400px,toolbars=no,scrollbars=no, resizable=no, fullscreen=no'); return false;"
-              >+OPEN
+            <a href="/vanilla-stock/articleOpen"
+              onclick="window.open(this.href, '_blank', 'width=800px,height=400px,toolbars=no,scrollbars=no, resizable=no, fullscreen=no'); return false;">
+              +OPEN
             </a>
           </div>
         </div>
-        <!--//#main header -->
+        <!--//#divTop -->
         <div id="divMiddle">
           <div class="article_list">
-            <div class="companyList">
-              <div class="articleCompany">
-                <span class="companyName"
-                  ><i class="fas fa-fire-alt"></i>삼성전자</span
-                >
-                <span class="articleTitle">삼성전자투기방이야~~~~</span>
-              </div>
-              <!--//#articleCompany -->
-
-              <div class="articleRatio">
-                <div
-                  class="articleRatio_fill"
-                  title="70승"
-                  style="width: 10%;"
-                ></div>
-              </div>
-
-              <!--//#articleChart -->
-              <div class="articleOpinion">
-                <div class="opHeader">
-                  <span>풀매수</span>
-                  <span>:</span>
-                  <span>풀매도</span>
-                </div>
-                <div class="articleOpNum">
-                  <span>500</span>
-                  <span>400</span>
-                </div>
-              </div>
-              <div class="viewTimestamp">
-                <div class="articleView">
-                  <span>조회수</span>
-                  <span>12334</span>
-                </div>
-                <div class="articleTimestamp">
-                  <span>3시간 전</span>
-                </div>
-              </div>
-            </div>
-            <!-- //#companylist-->
-
-            <div class="companyList">
-              <div class="articleCompany">
-                <span class="companyName"
-                  ><i class="fas fa-fire-alt"></i>카카오</span
-                >
-                <span class="articleTitle">팔아? 말아?</span>
-              </div>
-              <!--//#articleCompany -->
-
-              <div class="articleRatio">
-                <div
-                  class="articleRatio_fill"
-                  title="70승"
-                  style="width: 60%;"
-                ></div>
-              </div>
-
-              <!--//#articleChart -->
-              <div class="articleOpinion">
-                <div class="opHeader">
-                  <span>풀매수</span>
-                  <span>:</span>
-                  <span>풀매도</span>
-                </div>
-                <div class="articleOpNum">
-                  <span>500</span>
-                  <span>400</span>
-                </div>
-              </div>
-              <div class="viewTimestamp">
-                <div class="articleView">
-                  <span>조회수</span>
-                  <span>12334</span>
-                </div>
-                <div class="articleTimestamp">
-                  <span>3시간 전</span>
-                </div>
-              </div>
-            </div>
-
-            <div class="companyList">
-              <div class="articleCompany">
-                <span class="companyName"
-                  ><i class="fas fa-fire-alt"></i>삼성전자</span
-                >
-                <span class="articleTitle">삼성전자투기방이야~~~~</span>
-              </div>
-              <!--//#articleCompany -->
-
-              <div class="articleRatio">
-                <div
-                  class="articleRatio_fill"
-                  title="70승"
-                  style="width: 30%;"
-                ></div>
-              </div>
-
-              <!--//#articleChart -->
-              <div class="articleOpinion">
-                <div class="opHeader">
-                  <span>풀매수</span>
-                  <span>:</span>
-                  <span>풀매도</span>
-                </div>
-                <div class="articleOpNum">
-                  <span>500</span>
-                  <span>400</span>
-                </div>
-              </div>
-              <div class="viewTimestamp">
-                <div class="articleView">
-                  <span>조회수</span>
-                  <span>12334</span>
-                </div>
-                <div class="articleTimestamp">
-                  <span>3시간 전</span>
-                </div>
-              </div>
-            </div>
-
-            <div class="companyList">
-              <div class="articleCompany">
-                <span class="companyName"
-                  ><i class="fas fa-fire-alt"></i>하이닉스</span
-                >
-                <span class="articleTitle">하이닉스 투기방</span>
-              </div>
-              <!--//#articleCompany -->
-
-              <div class="articleRatio">
-                <div
-                  class="articleRatio_fill"
-                  title="70승"
-                  style="width: 90%;"
-                ></div>
-              </div>
-
-              <!--//#articleChart -->
-              <div class="articleOpinion">
-                <div class="opHeader">
-                  <span>풀매수</span>
-                  <span>:</span>
-                  <span>풀매도</span>
-                </div>
-                <div class="articleOpNum">
-                  <span>500</span>
-                  <span>400</span>
-                </div>
-              </div>
-              <div class="viewTimestamp">
-                <div class="articleView">
-                  <span>조회수</span>
-                  <span>12334</span>
-                </div>
-                <div class="articleTimestamp">
-                  <span>3시간 전</span>
-                </div>
-              </div>
-            </div>
-
-            <div class="companyList">
-              <div class="articleCompany">
-                <span class="companyName"
-                  ><i class="fas fa-fire-alt"></i>네이버파이낸셜</span
-                >
-                <span class="articleTitle">네이버 네이버</span>
-              </div>
-              <!--//#articleCompany -->
-
-              <div class="articleRatio">
-                <div
-                  class="articleRatio_fill"
-                  title="70승"
-                  style="width: 45%;"
-                ></div>
-              </div>
-
-              <!--//#articleChart -->
-              <div class="articleOpinion">
-                <div class="opHeader">
-                  <span>풀매수</span>
-                  <span>:</span>
-                  <span>풀매도</span>
-                </div>
-                <div class="articleOpNum">
-                  <span>300</span>
-                  <span>400</span>
-                </div>
-              </div>
-              <div class="viewTimestamp">
-                <div class="articleView">
-                  <span>조회수</span>
-                  <span>12334</span>
-                </div>
-                <div class="articleTimestamp">
-                  <span>3시간 전</span>
-                </div>
-              </div>
-            </div>
-
-            <!--//#article_list -->
+          	
+              
+            </div> <!-- //wrap-list -->
+            <!-- //.companyList -->           
           </div>
+          <!-- //.article_list -->
         </div>
         <!--//#divMiddle -->
-      </div>
-    </div>
-    <!--//#content -->
-    <div class="paginate">
-      <!--페이지 리스트 부분-->
-      <!-- 이전 페이지 이동 :  비활성 -->
-      <span title="이전 페이지 없음"><i class="fa fa-chevron-left"></i></span>
-      <!-- 이전 페이지 이동 :  활성 -->
-      <a href="" title="이전 페이지로"
-        ><i class="fa fa-chevron-left"></i
-        ><span class="screen_out">이전 페이지</span></a
-      >
-      <!-- 페이지들 -->
-      <a href="" title="1">1</a>
-      <a href="" title="2">2</a>
-      <strong title="현재 3페이지">3</strong>
-      <a href="" title="4">4</a>
-      <a href="" title="5">5</a>
-      <!-- 다음 페이지 이동 :  활성 -->
-      <a href="" title="다음 페이지로"
-        ><i class="fa fa-chevron-right"></i
-        ><span class="screen_out">다음 페이지</span></a
-      >
-      <!-- 다음 페이지 이동 :  비활성 -->
-      <span title="다음 페이지 없음"><i class="fa fa-chevron-right"></i></span>
-    </div>
-    <!--//paginate-->
-
-    <div id="searchBox">
+        <div id="searchBox">
       <h2 class="screen_out">검색</h2>
       <form id="searchForm" action="">
         <fieldset class="fld_search">
           <legend class="screen_out">검색어 입력폼</legend>
           <div class="box_inp_search">
-            <div class="select_title" data-title="제목">
+            <div class="select_title" data-title="제목" >
               <span class="opt_seleted">
                 제목+내용
               </span>
@@ -382,7 +166,7 @@
             </div>
             <!--//select_title -->
 
-            <div class="select_option">
+            <div class="select_option" >
               <ul>
                 <li>
                   <a class="opt_select" href="" data-search-key="subject"
@@ -421,13 +205,19 @@
               class="inp_txt"
               type="text"
               placeholder="검색어를 입력해주세요"
+              form = "searchForm"
             />
-          </div>
+          </div>  
           <!--//box_inp_txt -->
         </fieldset>
       </form>
       <!--//searchForm -->
+      </div>
+      <!--//.aux -->
     </div>
+    <!--//#content -->
+
+    
 
     <div id="footer">
       <div id="policy">
@@ -463,7 +253,116 @@
       <address>&copy; 2020 <a href="">NackEGG.com</a></address>
     </div>
     <!--//#footer -->
-    <script src="../js/fix-footer.js"></script>
+    <script src="js/fix-footer.js"></script>
+    <script type="text/template" id="articleTmp">
+	
+	<@ if(articleList!=null && articleList.length>0){ @>
+		<@ _.each(articleList, function(artc){ @>
+	<div class="companyList">
+		<div class="articleCompany">
+                <span class="companyName">
+					<i class="fas fa-fire-alt"></i><@=artc.companyName@>
+				</span>
+                <span class="articleTitle">
+				<a href="articlePage/comments/<@=artc.no@>">
+					<@=artc.title@>
+				</a>
+				</span>
+              </div>
+              <!--//#articleCompany -->
+				<@ 
+					if((artc.countGood + artc.countBad) != 0){
+						var good = artc.countGood/((artc.countGood) + (artc.countBad)) * 100;
+						var bad = artc.countBad/((artc.countGood) + (artc.countBad)) * 100;
+					}
+				@>
+              <div class="articleRatio">
+                <div
+                  class="articleRatio_fill"
+                  title="<@if((artc.countGood + artc.countBad) != 0){@>
+						<@=artc.countGood/((artc.countGood) + (artc.countBad)) * 100@> :
+						<@=artc.countBad/((artc.countGood) + (artc.countBad)) * 100@>
+						<@}else{@>
+						0:0<@}@>"
+                  style="width: <@if((artc.countGood + artc.countBad) != 0){@>
+						<@=artc.countGood/((artc.countGood) + (artc.countBad)) * 100@>
+						<@}else{@>
+						0<@}@>%;"
+                ></div>
+              </div>
+
+              <!--//.articleRatio -->
+              <div class="articleOpinion">
+                <div class="opHeader">
+                  <span>풀매수</span>
+                  <span>:</span>
+                  <span>풀매도</span>
+                </div>
+                <div class="articleOpNum">
+                  <span><@=artc.countGood@></span>
+                  <span><@=artc.countBad@></span>
+                </div>
+              </div>
+              <!-- //.articleOpinion -->
+              <div class="viewTimestamp">
+                <div class="articleView">
+                  <span>조회수</span>
+                  <span><@=artc.countHit@></span>
+                </div>
+                <div class="articleTimestamp">
+                  <span><@=moment(artc.regdate).fromNow()@></span>
+                </div>
+              </div>
+              <!-- //.viewTimestamp -->
+				</div><!--//.companyList-->
+				<@ }) } @>
+ 			<@=paginate @>
+	</script>
+    <script type="text/javascript">
+	//_.templateSettings = {interpolate: /\<\@\=(.+?)\@\>/gim,evaluate: /\<\@([\s\S]+?)\@\>/gim,escape: /\<\@\-(.+?)\@\>/gim};
+		const articleTmp = _.template($("#articleTmp").html());
+		const $wrapList  = $(".article_list"); 
+		const $txtInp = $(".inp_txt");
+		const $searchForm = $("#searchForm");
+		let page = 1; // page는 1페이지 부터 시작  
+		getArticle();
+		function getArticle() {
+			
+			let formData =  $searchForm.serialize();
+			console.log("form data");
+			console.log(formData);
+			$.ajax({ 
+				url:"/vanilla-stock/ajax/articlePage/list/",
+				type:"POST",
+				data:formData+'&page='+page,
+				error:function(){
+					alert("error");
+				},
+				success: function(json) {
+				
+					if(page==1 || json.articleList.length>0){
+						
+						let tmp = articleTmp({"articleList": json.articleList,"paginate": json.paginate });
+						console.log(tmp);
+						$wrapList.empty().append(tmp);
+						$txtInp.val(""); 	
+					}
+				}
+			});//ajax end 
+		}// search() end
+	</script>
+	<script type ="text/javascript">
+	//pageblock 클릭
+	$('.aux').on("click",".paginate a",function(e){
+		e.preventDefault();
+		// 각 페이지의 시작되는 게시물 번호  
+		page = this.dataset.no;
+		//ajax로 데이터 리스트 받아오는 함수 
+		getArticle();
+
+	});//click() end
+	
+	</script>
   </body>
 </html>
 

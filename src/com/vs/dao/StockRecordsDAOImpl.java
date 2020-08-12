@@ -130,6 +130,7 @@ public class StockRecordsDAOImpl implements StockRecordsDAO {
 		return (List<Pair<StockRecordsVO, String>>) jdbcTemplate.query(
 				sql, mapper,new Object[] {startDate, endDate, indNo});		
 	}
+
 	@Override
 	public int selectPrevMonthClose(StockRecordsVO stockRecordsVO) {
 		

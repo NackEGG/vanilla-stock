@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@taglib uri="http://www.springframework.org/tags" prefix="spring" %>
 <!DOCTYPE html>
 <html>
   <head>
@@ -39,7 +41,11 @@
         <div id="gnb">
           <h2 class="screen_out">주요 서비스</h2>
           <ul>
+<<<<<<< HEAD:WebContent/WEB-INF/view/index.jsp
             <li class="nav"><a href=""> 종목</a></li>
+=======
+            <li class="nav"><a href="${pageContext.request.contextPath}/cardpage/init"> 종목</a></li>
+>>>>>>> 069f0a27a078bf9e1c5912af467abf63b7c237b1:WebContent/index.jsp
             <li class="nav"><a href=""> 투기장 </a></li>
             <li class="nav"><a href="">랭킹</a></li>
           </ul>
@@ -54,6 +60,7 @@
       
          <!--//.aux -->
         <!-- Hidden된 로그인창-->
+<<<<<<< HEAD:WebContent/WEB-INF/view/index.jsp
         <div id="loginForm" style="visibility: hidden;" >
           <div class="form">
             <div class="formContents"></div>
@@ -61,17 +68,30 @@
             <form class="login-form" action ="/vanilla-stock/login" method="post">
               <input type="text" name="email" class="email" placeholder="email" />
               <input type="password" name="password" class="password" placeholder="password" />
+=======
+        <div id="loginForm" style="visibility: hidden;">
+          <div class="form">
+            <div class="formContents"></div>
+            <c:if test ="${member==null}">
+            <form class="login-form"  action ="vanilla-stock/login" method="get">
+              <input type="text" class="email" placeholder="email" />
+              <input type="password" class="password" placeholder="password" />
+>>>>>>> 069f0a27a078bf9e1c5912af467abf63b7c237b1:WebContent/index.jsp
               <button class="login">login</button>
               <p class="message">
-                회원이 아니시라면?
+                	회원이 아니시라면?
                 <a
                   href="/vanila-stock/signup"
                   >회원가입</a
                 >
               </p>
+<<<<<<< HEAD:WebContent/WEB-INF/view/index.jsp
               
+=======
+>>>>>>> 069f0a27a078bf9e1c5912af467abf63b7c237b1:WebContent/index.jsp
               <p class="close" onclick="popupclose('loginForm')">닫기</p>
             </form>
+            </c:if>
           </div>
         </div>
 
@@ -283,6 +303,6 @@
       <address>&copy; 2020 <a href="">NackEGG.com</a></address>
     </div>
     <!--//#footer -->
-    <script src="../js/fix-footer.js"></script>
+    <script src="js/fix-footer.js"></script>
   </body>
 </html>

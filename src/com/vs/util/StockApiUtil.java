@@ -8,8 +8,6 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLConnection;
 import java.text.DecimalFormat;
-import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -62,7 +60,6 @@ public class StockApiUtil {
 		try {
 			URL url = new URL(geturl);
 			URLConnection conn = url.openConnection();
-			HttpURLConnection httpConnection = (HttpURLConnection) conn;
 
 			is = new URL(geturl).openStream();
 			isr = new InputStreamReader(is, "UTF-8");
@@ -256,9 +253,8 @@ public class StockApiUtil {
 		Hoga[21] = formatter.format(Integer.parseInt(Hoga[11].replace(",", ""))
 				+ Integer.parseInt(Hoga[13].replace(",", "")) + Integer.parseInt(Hoga[15].replace(",", ""))
 				+ Integer.parseInt(Hoga[17].replace(",", "")) + Integer.parseInt(Hoga[19].replace(",", "")));
+		
 		return Hoga;
 		
-		
-
 	}
 }

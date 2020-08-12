@@ -6,5 +6,6 @@ import java.util.Map;
 import com.vs.vo.FinanceVO;
 
 public interface FinanceBIZ {
-	public Map<String,Long> findAccountValueMap(FinanceVO financeVO);	
+	public Map<String, Long> findRecentAccountValueMap(String stockCode);	
+	public Map<String, Long> findIndustryAverageValueMap(int industryNo);
 }

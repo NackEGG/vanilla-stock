@@ -12,6 +12,7 @@ public class ArticleVO {
 	private int countHit;
 	private int countGood;
 	private int countBad;
+	private int countComments;
 	
 	public ArticleVO() {
 		// TODO Auto-generated constructor stub
@@ -87,6 +88,14 @@ public class ArticleVO {
 
 	public void setCountBad(int countBad) {
 		this.countBad = countBad;
+	}
+
+	public int getCountComments() {
+		return countComments;
+	}
+
+	public void setCountComments(int countComments) {
+		this.countComments = countComments;
 	}
 	
 }
