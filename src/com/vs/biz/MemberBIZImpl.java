@@ -11,14 +11,15 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import com.vs.dao.MemberDAO;
+import com.vs.util.AlreadyException;
 import com.vs.util.PaginateUtil;
+import com.vs.util.RegisterRequest;
 import com.vs.vo.MemberVO;
 import com.vs.vo.PageVO;
 
 @Service
 public class MemberBIZImpl implements MemberBIZ {
 	@Autowired
-	
 	private MemberDAO memberDAO;
 	
 	@Override
@@ -43,20 +44,22 @@ public class MemberBIZImpl implements MemberBIZ {
 		
 		 return viewMap;
 	}
-  @Override
-	public boolean loginCheck(MemberVO vo, HttpSession session) {
-		boolean result = memberDAO.loginCheck(vo);
-		if(result) { // true일 경우 세
-		System.out.println("true");
-		session.setAttribute("email", vo.getEmail()); //세션 변수 등록 
-		}
-			
-		return result;
-	}
-
 	@Override
-	public MemberVO viewMember(MemberVO vo) {
-		
-		return memberDAO.viewMember(vo);
+	public MemberVO loginCheck(MemberVO vo)  {
+		return memberDAO.loginCheck(vo);
+	}
+	
+	@Override
+	public boolean insertUser(MemberVO regReq) {
+		MemberVO dupMember = memberDAO.selectByEmail(regReq.getEmail());
+        if(dupMember!=null) {
+            throw new AlreadyException(regReq.getEmail()+" is duplicate email.");
+        }
+        
+        if(memberDAO.insertUser(regReq)>0) {
+        	return true;
+        }else {
+        	return false;
+        }
 	}
 }
