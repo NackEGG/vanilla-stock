@@ -227,7 +227,6 @@ color: black;
 	
 }
 
-
 .articleTitle{
 	width : 600px;
 	height : 20px;
@@ -300,7 +299,7 @@ color: black;
 
 }
 
-/*searchBox는 검색창*/
+/*searchBox�뒗 寃��깋李�*/
 
 #searchBox{
 	width: 510px;
@@ -425,7 +424,7 @@ color: black;
 	
 }
 
-/*paginate는 페이지리스트와 관련되어 있는 CSS*/
+/*paginate�뒗 �럹�씠吏�由ъ뒪�듃�� 愿��젴�릺�뼱 �엳�뒗 CSS*/
 .paginate {
 	font-size:22px;
 	text-align:center;

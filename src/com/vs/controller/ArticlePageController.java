@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.vs.biz.ArticleBIZ;
+import com.vs.biz.CompanyBIZ;
 import com.vs.vo.ArticleVO;
 
 @Controller
@@ -22,32 +23,34 @@ public class ArticlePageController {
 	@Autowired
 	ArticleBIZ articleBIZ;
 	
-	@RequestMapping(path = "/articlePage", method = RequestMethod.POST)
+	@Autowired
+	CompanyBIZ companyBIZ;
+	
+	@RequestMapping(path = "/articleOpen", method = RequestMethod.GET)
+	public String hello03(Model model) {
+		
+		List<String> companyList = companyBIZ.selectAllCompanyName();
+		model.addAttribute("companyList", companyList);
+		return "articleOpen";
+	}
+	
+	@RequestMapping(path = "/articlePage", method = RequestMethod.GET)
 	public String hello01(HttpServletRequest request, Model model) {
 		ArticleVO articleVO = new ArticleVO();
 		//articleVO.setTitle((String) request.getAttribute("title"));
 		//articleVO.setMemberNo((int) request.getAttribute("id"));
-		articleVO.setTitle("테스트 아티클");
-		articleVO.setMemberNo(1);
-		boolean check = articleBIZ.insert(articleVO);
+		//articleVO.setTitle("테스트 아티클");
+		//articleVO.setMemberNo(1);
+		//boolean check = articleBIZ.insert(articleVO);
 		
 		return "articleMain";
 	}
 	
-	@RequestMapping(path = "/articlePage/list", method = RequestMethod.GET)
-	public Map<String, Object> hello2(HttpServletRequest request, Model model) {
-		String searchWord = request.getParameter("searchWord");
-		String searchType = request.getParameter("searchType");
-		String sortType = request.getParameter("sortType");
-		int page = Integer.parseInt(request.getParameter("page"));
-		Map<String, Object> map = new ConcurrentHashMap<String, Object>();
-		map = articleBIZ.getPageList(searchWord, searchType, sortType, page);
-		
-		for( String key : map.keySet()) {
-			System.out.println("[ "+map.get(key)+" ]");
-		}
-		
-		return map;
+	@RequestMapping(path = "/articlePage/comments/{no}", method = RequestMethod.GET)
+	public String hello02(@PathVariable int no, Model model) {
+		ArticleVO articleVO = new ArticleVO();
+		articleVO = articleBIZ.select(no);
+		model.addAttribute("articleVO", articleVO);
+		return "articleComments";
 	}
-	
 }

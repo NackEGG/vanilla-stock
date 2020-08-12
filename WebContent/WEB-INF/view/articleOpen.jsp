@@ -1,21 +1,38 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import ="java.util.List" %>
+<% List<String> companyList = (List<String>)request.getAttribute("companyList"); %>    
+  
 <!DOCTYPE html>
 <html>
   <head>
     <meta charset="UTF-8" />
     <title></title>
-    <link rel="stylesheet" href="../css/reset.css" />
-    <link rel="stylesheet" href="../css/kakao.font.css" />
-    <link rel="stylesheet" href="../css/default.css" />
-    <link rel="stylesheet" href="../css/articleOpen.css" />
+    <link rel="stylesheet" href="css/reset.css" />
+    <link rel="stylesheet" href="css/kakao.font.css" />
+    <link rel="stylesheet" href="css/default.css" />
+    <link rel="stylesheet" href="css/articleOpen.css" />
     <link
       rel="stylesheet"
       href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
       integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf"
       crossorigin="anonymous"
     />
-    <script src="../js/jquery.js"></script>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  	<link rel="stylesheet" href="/resources/demos/style.css">
+    <script src="js/jquery.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script>
+  	$( function() {
+  		var availableTags = [];
+  		<%for(int i=0; i < companyList.size();i++){%>
+  		availableTags[<%=i%>]='<%=companyList.get(i)%>';
+  		<%}%>
+    	$( ".articleCompanyOption" ).autocomplete({
+      	source: availableTags
+    	});
+  	} );
+  </script>
     <style type="text/css" media="screen">
       #divTEST {
         height: 1000px;
@@ -27,12 +44,10 @@
     <div class="articleOpenform">
       <div class="articleOpenTitle">
         <span class="articleCName">회사 </span>
-        <select name="회사" class="articleCompanyOption">
-          <option value="" selected="selected">회사선택</option>
-          <option value="학생">학생</option>
-          <option value="회사원">회사원</option>
-          <option value="기타">기타</option>
-        </select>
+        <div class="ui-widget">
+  			<label for="articleCompanyOption"> </label>
+ 			 <input class="articleCompanyOption" placeholder="회사명을 입력하세요" form="openForm">
+		</div>
       </div>
       <div class="articleOpenTitle">
         <span class="articleName">투기장명</span>
@@ -41,12 +56,12 @@
           placeholder="투기장명을 입력하세요."
           name="title"
           class="openTitle"
+          form="openForm"
         />
       </div>
-
-      <div class="openConfirmed">
-        OPEN
-      </div>
+      	<div class="openConfirmed">
+      		OPEN
+      	</div>
     </div>
   </body>
 </html>

@@ -2,6 +2,7 @@ package com.vs.dao;
 import java.math.BigDecimal;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -26,6 +27,34 @@ public class ArticleDAOImpl implements ArticleDAO {
 
 	public SimpleJdbcCall getSimpleJdbcCall(JdbcTemplate jdbcTemplate) {
 		return new SimpleJdbcCall(jdbcTemplate);
+	}
+	
+	// 페이지 게시물 선택 조회
+	@Override
+	public ArticleVO select(int no) {
+		
+		SimpleJdbcCall simpleJdbcCall = getSimpleJdbcCall(jdbcTemplate);
+		
+		simpleJdbcCall
+		.withProcedureName("USP_GET_ARTICLE");
+		
+		SqlParameterSource in = new MapSqlParameterSource()
+				.addValue("PI_NO", no);
+
+		Map out = simpleJdbcCall.execute(in);
+		
+		ArticleVO vo = new ArticleVO();
+		vo.setNo(no);
+		vo.setTitle((String) out.get("PO_TITLE"));
+		vo.setStockCode((String) out.get("PO_STOCK_CODE"));
+		vo.setMemberNo(((BigDecimal) out.get("PO_MEMBER_NO")).intValue());
+		vo.setRegdate((Timestamp) out.get("PO_REGDATE"));
+		vo.setCompanyName((String) out.get("PO_COMPANY_NAME"));
+		vo.setCountHit(((BigDecimal) out.get("PO_COUNT_HIT")).intValue());
+		vo.setCountGood(((BigDecimal) out.get("PO_COUNT_GOOD")).intValue());
+		vo.setCountBad(((BigDecimal) out.get("PO_COUNT_BAD")).intValue());
+		vo.setCountComments(((BigDecimal) out.get("PO_COUNT_COMMENTS")).intValue());
+		return vo;
 	}
 	
 	// 해당 페이지 정보에 속하는 ArticleVO를 List로
@@ -56,17 +85,22 @@ public class ArticleDAOImpl implements ArticleDAO {
 		
 		SimpleJdbcCall simpleJdbcCall = getSimpleJdbcCall(jdbcTemplate);
 		
-		simpleJdbcCall
-		.withProcedureName("USP_ADD_ARTICLE");
-		
-		SqlParameterSource in = new MapSqlParameterSource()
-				.addValue("PI_TITLE", articleVO.getTitle())
-				.addValue("PI_STOCK_CODE", articleVO.getStockCode())
-				.addValue("PI_MEMBER_NO", articleVO.getMemberNo());
-		
-		simpleJdbcCall.execute(in);
-		
-		return false;
+		try {
+			simpleJdbcCall
+			.withProcedureName("USP_ADD_ARTICLE");
+			
+			SqlParameterSource in = new MapSqlParameterSource()
+					.addValue("PI_TITLE", articleVO.getTitle())
+					.addValue("PI_STOCK_CODE", articleVO.getStockCode())
+					.addValue("PI_MEMBER_NO", articleVO.getMemberNo());
+			
+			Map<String, Object> out = simpleJdbcCall.execute(in);
+			
+			return true;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
 	}
 	
 	@Override
@@ -106,4 +140,5 @@ public class ArticleDAOImpl implements ArticleDAO {
 			return vo;
 		}
 	}
+
 }
