@@ -2,6 +2,8 @@ package com.vs.dao;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import com.vs.vo.MemberVO;
 
 public interface MemberDAO {
@@ -11,5 +13,7 @@ public interface MemberDAO {
 	public MemberVO loginCheck(MemberVO vo);
 //	//로그인정보 
 //	public MemberVO viewMember(MemberVO vo);
+	
+	public void logout (HttpSession session);
 
 }

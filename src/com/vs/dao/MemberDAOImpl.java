@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
 import javax.annotation.Resource;
+import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -91,6 +92,13 @@ public class MemberDAOImpl implements MemberDAO {
     	
 		System.out.println("===>Mybatis로 로그인 check "+ vo.getEmail());
 		return mem;
+		
+	}
+
+	@Override
+	public void logout(HttpSession session) {
+		System.out.println("로그아웃!!!!!!");
+		session.invalidate();
 		
 	}
  

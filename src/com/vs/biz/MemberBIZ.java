@@ -11,4 +11,6 @@ public interface MemberBIZ {
   public MemberVO loginCheck(MemberVO vo);
 	
 	//public MemberVO viewMember(MemberVO vo);
+  
+  public void logout(HttpSession session);
 }

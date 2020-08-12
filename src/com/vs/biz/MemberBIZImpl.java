@@ -59,6 +59,11 @@ public class MemberBIZImpl implements MemberBIZ {
 //		}
 //			
 //		return result;
+@Override
+public void logout(HttpSession session) {
+	memberDAO.logout(session);
+	
+}
 	
 
 //	@Override

@@ -109,3 +109,8 @@ Insert into hit values (hit_seq.nextval,'1',2,'A', 1 ,sysdate);
 Insert into hit values (hit_seq.nextval,'1',1,'N', 2 ,sysdate);
 Insert into hit values (hit_seq.nextval,'1',2,'A', 1 ,sysdate);
 Insert into hit values (hit_seq.nextval,'1',1,'N', 2 ,sysdate);
+
+/*ANNOUNCEMENT*/
+
+insert into announcement values (announcement_seq.nextval,'근로자의날 휴장안내',UTL_RAW.CAST_TO_RAW('근로자의 날에 휴장할계획입니다.'),sysdate);
+insert into announcement values (announcement_seq.nextval,'어린이의날 휴장안내',UTL_RAW.CAST_TO_RAW('어린이 날에 휴장할계획입니다.'),to_date('05-05-2018','MM-DD-YYYY'));

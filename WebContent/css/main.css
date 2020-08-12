@@ -194,6 +194,21 @@
   margin-top: -300px;
 }
 
+
+.announcement {
+  width: 400px;
+  height: 30px;
+  background-color: white;
+  margin-top: 20px;
+  margin-left: 490px;
+  padding-left: 5px;
+  padding-right: 5px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: black;
+}
+
 .low_btn {
   display: inline-block;
 }

@@ -30,7 +30,7 @@
       <div id="logoBox">
         <h1>
           <a href="" title="vanilla stock">
-            <img src="../img/vs-logo2.PNG" alt="vanilla stock" />
+            <img src="img/vs-logo2.PNG" alt="vanilla stock" />
           </a>
         </h1>
       </div>
@@ -40,47 +40,36 @@
           <h2 class="screen_out">주요 서비스</h2>
           <ul>
             <li class="nav"><a href=""> 종목</a></li>
-            <li class="nav on"><a href=""> 투기장 </a></li>
+            <li class="nav"><a href=""> 투기장 </a></li>
             <li class="nav"><a href="">랭킹</a></li>
           </ul>
         </div>
         <!--//#gnb -->
 
-        <div id="searchBox">
-          <label class="screen_out">찾을 회사 입력</label>
-          <input
-            class="inp_txt"
-            type="text"
-            placeholder="회사를 입력해주세요"
-          />
-          <span class="btn_search"> <i class="fa fa-search"></i></span>
-        </div>
-        <!--//#searchBox -->
-      </div>
-      <!--//.aux -->
+       </div>
       <div id="loginBox">
-        <div id="loginBtn" class="btn" class="btn" onclick="modalpopup('loginForm')">
+        <div id="loginBtn" class="btn ${loginMember eq null? '':'hidden'}" onclick="modalpopup('loginForm')">
           로그인
         </div>
-        
-        
+      
+         <!--//.aux -->
         <!-- Hidden된 로그인창-->
-        <div id="loginForm" style="visibility: hidden;" action ="/login" method="get">
+        <div id="loginForm" style="visibility: hidden;" >
           <div class="form">
             <div class="formContents"></div>
-            <c:if test ="${member==null}">
-            <form class="login-form">
-              <input type="text" class="email" placeholder="email" />
-              <input type="password" class="password" placeholder="password" />
+            
+            <form class="login-form" action ="/vanilla-stock/login" method="post">
+              <input type="text" name="email" class="email" placeholder="email" />
+              <input type="password" name="password" class="password" placeholder="password" />
               <button class="login">login</button>
               <p class="message">
                 회원이 아니시라면?
                 <a
-                  href="/Users/IRENE/Downloads/폴더/vanilla-stock-front/jeongyeon/signup.html"
+                  href="/vanila-stock/signup"
                   >회원가입</a
                 >
               </p>
-              </c:if>
+              
               <p class="close" onclick="popupclose('loginForm')">닫기</p>
             </form>
           </div>
@@ -119,19 +108,18 @@
  
         </script>
         
-        
-        
         <!--//loginBtn -->
-        <div id="profileBox" class="hidden">
-          <h2 class="screen_out">유저정보</h2>
+        <div id="profileBox" class="${loginMember eq null ? 'hidden' : ''}">
+
           <img
-            src="../profile/profile.png"
+            src="profile/profile.png"
             class="profile_on"
             width="60"
             height="60"
             alt="테스터"
             title="테스터"
           />
+        
           <div id="profilePopup" class="profile_on">
             <ul id="profileList">
               <li class="profile">
@@ -143,7 +131,7 @@
               </li>
               <!--//.profile -->
               <li class="profile">
-                <a href="/logout.do"
+                <a href="${pageContext.request.contextPath}/logout"
                   ><span class="close_door">문</span> 로그아웃</a
                 >
               </li>
@@ -252,8 +240,9 @@
             <span>최근조회종목</span>
           </div>
 
-          <div class="announcement">
-            NEW 공지사항
+           <div class="announcement">
+            <span>NEW 공지사항</span>
+            <span>${announce}</span>
           </div>
         </div>
       </div>

@@ -12,9 +12,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.vs.biz.ArticleBIZ;
 import com.vs.vo.ArticleVO;
+import com.vs.vo.CommentsVO;
 
 @Controller
 public class ArticlePageController {
@@ -22,14 +24,14 @@ public class ArticlePageController {
 	@Autowired
 	ArticleBIZ articleBIZ;
 	
-	@RequestMapping(path = "/articlePage", method = RequestMethod.POST)
+	@RequestMapping(path = "/articlePage", method = RequestMethod.GET)
 	public String hello01(HttpServletRequest request, Model model) {
 		ArticleVO articleVO = new ArticleVO();
 		//articleVO.setTitle((String) request.getAttribute("title"));
 		//articleVO.setMemberNo((int) request.getAttribute("id"));
 		articleVO.setTitle("테스트 아티클");
 		articleVO.setMemberNo(1);
-		boolean check = articleBIZ.insert(articleVO);
+		//boolean check = articleBIZ.insert(articleVO);
 		
 		return "articleMain";
 	}
@@ -49,5 +51,7 @@ public class ArticlePageController {
 		
 		return map;
 	}
+	
+	
 	
 }
