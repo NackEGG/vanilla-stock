@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.vs.biz.ArticleBIZ;
+import com.vs.biz.CompanyBIZ;
 import com.vs.vo.ArticleVO;
 import com.vs.vo.CommentsVO;
 
@@ -24,13 +25,24 @@ public class ArticlePageController {
 	@Autowired
 	ArticleBIZ articleBIZ;
 	
+	@Autowired
+	CompanyBIZ companyBIZ;
+	
+	@RequestMapping(path = "/articleOpen", method = RequestMethod.GET)
+	public String hello03(Model model) {
+		
+		List<String> companyList = companyBIZ.selectAllCompanyName();
+		model.addAttribute("companyList", companyList);
+		return "articleOpen";
+	}
+	
 	@RequestMapping(path = "/articlePage", method = RequestMethod.GET)
 	public String hello01(HttpServletRequest request, Model model) {
 		ArticleVO articleVO = new ArticleVO();
 		//articleVO.setTitle((String) request.getAttribute("title"));
 		//articleVO.setMemberNo((int) request.getAttribute("id"));
-		articleVO.setTitle("테스트 아티클");
-		articleVO.setMemberNo(1);
+//		articleVO.setTitle("테스트 아티클");
+//		articleVO.setMemberNo(1);
 		//boolean check = articleBIZ.insert(articleVO);
 		
 		return "articleMain";

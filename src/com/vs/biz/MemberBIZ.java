@@ -8,9 +8,12 @@ import com.vs.vo.MemberVO;
 
 public interface MemberBIZ {
 	public Map<String, Object> selectList(String searchWord, String sortType, int page);
+	
   public MemberVO loginCheck(MemberVO vo);
 	
 	//public MemberVO viewMember(MemberVO vo);
   
   public void logout(HttpSession session);
+  
+  public boolean insertUser(MemberVO newMember);
 }
