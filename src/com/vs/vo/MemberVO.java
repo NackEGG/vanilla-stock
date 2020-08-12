@@ -21,6 +21,15 @@ public class MemberVO {
 		// TODO Auto-generated constructor stub
 	}
 	
+	public MemberVO(String email, String password, Date birthday, String gender, String nickname) {
+		super();
+		this.email = email;
+		this.password = password;
+		this.birthday = birthday;
+		this.gender = gender;
+		this.nickname = nickname;
+	}
+	
 	public int getCountArticles() {
 		return countArticles;
 	}

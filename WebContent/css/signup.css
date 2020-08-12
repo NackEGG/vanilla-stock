@@ -44,10 +44,11 @@
 }
 
 .join_inputbox {
-  width: 220px;
-  height: 30px;
-  margin-top: 5px;
+  width: 300px;
+  height: 50px;
+  margin-top: 8px;
   margin-left: 20px;
+  margin-bottom : 20px;
   border-style: none;
 }
 
@@ -61,7 +62,8 @@
 }
 
 .joinformContents {
-  display: flex;
+  /* display: flex; */
+  display: grid;
   justify-content: center;
   align-items: center;
 }
@@ -98,6 +100,10 @@
 }
 
 .birthofdate {
-  width: 150px;
+  width: 120px;
   display: inline;
 }
+
+/* .input_group{
+	height: 300px;
+} */

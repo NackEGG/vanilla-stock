@@ -11,5 +11,7 @@ public interface MemberDAO {
 	public MemberVO loginCheck(MemberVO vo);
 //	//로그인정보 
 //	public MemberVO viewMember(MemberVO vo);
+	public MemberVO selectByEmail(String email);
+	public int insertUser(MemberVO regReq);
 
 }
