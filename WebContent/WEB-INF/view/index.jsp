@@ -41,42 +41,25 @@
         <div id="gnb">
           <h2 class="screen_out">주요 서비스</h2>
           <ul>
-<<<<<<< HEAD:WebContent/WEB-INF/view/index.jsp
-            <li class="nav"><a href=""> 종목</a></li>
-=======
             <li class="nav"><a href="${pageContext.request.contextPath}/cardpage/init"> 종목</a></li>
->>>>>>> 069f0a27a078bf9e1c5912af467abf63b7c237b1:WebContent/index.jsp
-            <li class="nav"><a href=""> 투기장 </a></li>
+            <li class="nav"><a href="${pageContext.request.contextPath}/articlePage"> 투기장 </a></li>
             <li class="nav"><a href="">랭킹</a></li>
           </ul>
         </div>
         <!--//#gnb -->
-
        </div>
       <div id="loginBox">
         <div id="loginBtn" class="btn ${loginMember eq null? '':'hidden'}" onclick="modalpopup('loginForm')">
           로그인
         </div>
-      
          <!--//.aux -->
         <!-- Hidden된 로그인창-->
-<<<<<<< HEAD:WebContent/WEB-INF/view/index.jsp
         <div id="loginForm" style="visibility: hidden;" >
           <div class="form">
             <div class="formContents"></div>
-            
             <form class="login-form" action ="/vanilla-stock/login" method="post">
               <input type="text" name="email" class="email" placeholder="email" />
               <input type="password" name="password" class="password" placeholder="password" />
-=======
-        <div id="loginForm" style="visibility: hidden;">
-          <div class="form">
-            <div class="formContents"></div>
-            <c:if test ="${member==null}">
-            <form class="login-form"  action ="vanilla-stock/login" method="get">
-              <input type="text" class="email" placeholder="email" />
-              <input type="password" class="password" placeholder="password" />
->>>>>>> 069f0a27a078bf9e1c5912af467abf63b7c237b1:WebContent/index.jsp
               <button class="login">login</button>
               <p class="message">
                 	회원이 아니시라면?
@@ -85,30 +68,20 @@
                   >회원가입</a
                 >
               </p>
-<<<<<<< HEAD:WebContent/WEB-INF/view/index.jsp
-              
-=======
->>>>>>> 069f0a27a078bf9e1c5912af467abf63b7c237b1:WebContent/index.jsp
               <p class="close" onclick="popupclose('loginForm')">닫기</p>
             </form>
-            </c:if>
           </div>
         </div>
-
         <!-- Hidden된 로그인창띄우는 JS-->
         <script>
           function modalpopup(i) {
             document.getElementById(i).style.visibility = "visible";
           }
-
           function popupclose(i) {
             document.getElementById(i).style.visibility = "hidden";
           }
-          
-       
       	$(document).ready(function(e){
       		$('#login').click(function(){
-
       			// 입력 값 체크
       			if($.trim($('#email').val()) == ''){
       				alert("아이디를 입력해 주세요.");
@@ -125,12 +98,9 @@
       		});
       		
       	});
- 
         </script>
-        
         <!--//loginBtn -->
         <div id="profileBox" class="${loginMember eq null ? 'hidden' : ''}">
-
           <img
             src="profile/profile.png"
             class="profile_on"
@@ -139,7 +109,6 @@
             alt="테스터"
             title="테스터"
           />
-        
           <div id="profilePopup" class="profile_on">
             <ul id="profileList">
               <li class="profile">
@@ -165,11 +134,9 @@
         <script>
           const $profile = $("#profileBox img");
           const $profileTarget = $("#profilePopup");
-
           $profile.click(function () {
             $profileTarget.toggle();
           }); // profileBox click end
-
           $("html").click(function (e) {
             if (!$(e.target).hasClass("profile_on")) {
               $profileTarget.hide();
@@ -196,7 +163,6 @@
             </div>
             <span class="close" onclick="searchToggle(this, event);"></span>
           </div>
-
           <!--검색창 띄우는 JS-->
           <script>
             function searchToggle(obj, evt) {
@@ -231,9 +197,7 @@
                 </div>
               </div>
             </div>
-
             <!-- hidden된 하한가 DIV-->
-
             <div id="low" style="visibility: hidden;">
               <div class="lowList">
                 <span>삼성전자</span>
@@ -242,14 +206,12 @@
                 <span>-29.76%</span>
               </div>
             </div>
-
             <!-- hidden된 하한가 DIV 보여주는 JS-->
             <script>
               function financeLow() {
                 document.getElementById("low").style.visibility = "visible";
                 document.getElementById("high").style.visibility = "hidden";
               }
-
               function financeHigh() {
                 document.getElementById("low").style.visibility = "hidden";
                 document.getElementById("high").style.visibility = "visible";
@@ -259,7 +221,6 @@
           <div class="recentSearch">
             <span>최근조회종목</span>
           </div>
-
            <div class="announcement">
             <span>NEW 공지사항</span>
             <span>${announce}</span>
@@ -268,7 +229,6 @@
       </div>
     </div>
     <!--//#content -->
-
     <div id="footer">
       <div id="policy">
         <h4 class="screen_out">정책 및 약관</h4>

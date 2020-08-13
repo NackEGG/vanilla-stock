@@ -45,7 +45,7 @@ public class ReportPageController {
 		//CompanyVO companyVO = companyBIZ.select(keyword);
 		
 		// 회사, 산업 정보
-		CompanyVO companyVO = companyBIZ.select("001840");
+		CompanyVO companyVO = companyBIZ.select("005930");
 		IndustryVO industryVO = industryBIZ.get(companyVO.getStockCode());
 			
 		// 주식 실시간 API 

@@ -268,6 +268,18 @@ color: black;
 }
 
 
+.article_open {
+  width: 30px;
+  height: 30px;
+  font-size: 25px;
+  color: black;
+  font-weight: bold;
+  display: block;
+  margin-left: 970px;
+  margin-top: -35px;
+}
+
+
 
 .opHeader{
 	width: 100px;
@@ -301,7 +313,7 @@ color: black;
 
 /*searchBox�뒗 寃��깋李�*/
 
-#searchBox{
+#searchboxArticle{
 	width: 510px;
 	/*height:50px; */
 	margin: auto;
@@ -313,7 +325,7 @@ color: black;
 	min-height:50px; 
 	position: relative;
 }
-#searchBox .box_inp_search{
+#searchboxArticle .box_inp_search{
 	width: 120px;
 	height: 48px;
 	background-color: #fff;
@@ -325,7 +337,7 @@ color: black;
 	
 	
 }
-#searchBox .select_title{
+#searchboxArticle .select_title{
 	width: 103px; /*118*/
 	height: 19px; /*48*/ 
 	border:1px solid #E0E0E0; 
@@ -337,7 +349,7 @@ color: black;
 	cursor: pointer;
 }
 
-#searchBox .select_option{
+#searchboxArticle .select_option{
 	width: 118px;
 	height: 148px;
 	display: none;
@@ -350,7 +362,7 @@ color: black;
 
 }
 
-#searchBox .ico_angle_up{
+#searchboxArticle .ico_angle_up{
 	display: none;
 	width: 10px;
 	height: 16px;
@@ -361,14 +373,15 @@ color: black;
 	right: 10px;
 }
 
-#searchBox.click .select_option{
+#searchboxArticle.click .select_option{
 	display: block;
 }
 
-#searchBox.click .ico_angle_up{
+#searchboxArticle.click .ico_angle_up{
 	display: block;
 }
-#searchBox.click .ico_angle_down{
+
+#searchboxArticle.click .ico_angle_down{
 	display: none;
 }
 .select_option ul{
@@ -394,14 +407,14 @@ color: black;
 
 }
 
-#searchBox .box_inp_txt{
+#searchboxArticle .box_inp_txt{
 	width: 378px;
 	height: 48px;
 	border:1px solid #E0E0E0;
 	position: absolute;
 	left: 130px;
 }
-#searchBox .inp_txt{
+#searchboxArticle .inp_txt{
 	width: 328px;
 	height: 48px;
 	border:none;
@@ -472,4 +485,15 @@ color: black;
 	color:black;
 	cursor:default;
 	cursor:not-allowed;
+}
+
+
+.btn_search{
+	display: block;
+			color: #424242;
+			line-height: 48px;
+			position: absolute;
+			top: 0;
+			right: 10px;
+			font-size: 20px;
 }
