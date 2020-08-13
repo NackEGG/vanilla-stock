@@ -2,6 +2,14 @@ select no, email, password, birthday, score, utl_raw.cast_to_varchar2(dbms_lob.s
 from MEMBER;
 
 
+select company, length(company)
+from company
+order by length(company) desc;
+
+select name, length(name)
+from industry
+order by length(name) desc;
+
 select tb2.*
 from(
 select rownum r, tb1.*
@@ -12,7 +20,7 @@ c.address companyAddress, c.regdate companyRegdate
 from company c, industry i 
 where c.industry_no = i.no) comp, finance_cate fc
 where comp.companyStockCode = f.stock_code and f.account_code = fc.account_id
-  and company LIKE '%삼성%'
+  and company LIKE '삼성전기'
 order by f.year desc, f.quarter desc) tb1) tb2
 where tb2.r BETWEEN 1 AND 10;
 

@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html>
+<div id="articleSection">
 <div class="article user show">
 					<div class="wrap_bar">
 						<div class="inner_bar">
@@ -42,11 +42,7 @@
 
 					 <script type="text/javascript">
     	
-					 	const $selectTitle = $(".select_title");
-					 	const $articleSection = $("#articleSection");
-					 	$selectTitle.on("click", function(){
-					 		$articleSection.toggleClass("click");
-					 	});//on end
+			
     	
    					 </script>
 						<!-- -->
@@ -102,3 +98,44 @@
 					</div><!--//.wrap_list -->
 
 				</div><!--//.member -->
+</div><!--//#articleSection -->		
+<script type="text/template" id="membsersTmp">
+						
+						
+        					<h3 class="screen_out">가입한 유저 목록</h3>
+        						<ul>
+									<@ if(memberList!=null&&memberList.length>0){ @>
+										<@ _.each(memberList, function(mem){  @> 
+           	 						<li class="member">
+                						<input type="checkbox" name="no" value="<@=mem.NO @>" />
+                						<a href="">
+                   							<div title="닉네임" class="nickname"> <@=mem.NICKNAME @> </div>
+                 							
+                   							<div title="<@=mem.email @>" class="email"><@=mem.EMAIL @></div>
+                   							<div class="box_activities">
+                   								<ul>
+                   									<h4 class="screen_out">유저 활동 내역 요약</h4>
+                   									<li title="글 개수" class="activity">
+                   										<div class="posts"><i class="far fa-file-alt"></i> <@=mem.COUNTARTICLES @></div>
+                   									</li>
+                   									<li class="activity">
+                   										<div title="댓글수" class="comments"><i class="far fa-comments"></i> <@=mem.COUNTCOMMENTS @></div>
+                   									</li>
+                   									<li class="activity">
+                   										<div title="방문수" class="visit"><i class="fas fa-shoe-prints"></i> <@=mem.COUNTVISITS @></div>
+                   									</li>
+                   								</ul>
+                   							</div><!--//.box_activies -->
+                    						<div class="join"><time><@=moment(mem.REGDATE).fromNow() @></time></div> 
+                							</a>
+           								</li><!--//.member -->
+										<@ }) }@>
+           							
+            						
+        							</ul>
+		
+					</script>
+<script>
+const membersTmp = _.template($("#membsersTmp").html());
+</script>	
+				

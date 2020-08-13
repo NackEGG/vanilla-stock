@@ -9,6 +9,8 @@
 		.article{
 			display: none;
 			min-height: 500px;
+			width: 800px;
+			margin: 0px auto;
 
 			
 		}
@@ -142,7 +144,13 @@
 			padding: 0 5px 0 7px;
 		}
 
-
+		div.box_ico_search_bar span.ico_btn_detail{
+			display: inline-block;
+			width: 50px;
+			height: 25px;
+			text-align: center;
+			line-height: 25px;
+		}
 
 		#articleSection .box_inp_settings{
 			width: 95px;
@@ -153,7 +161,19 @@
 			top: 0;
 			left: 0;
 			padding: 0;
-			/*background-color: blue;*/ㄴ
+			/*background-color: blue;*/
+		}
+		#articleSection div.box_inp_detail_search{
+			width: 740px;
+			padding-left: 10px;
+			/*background-color: red;*/
+		} 
+
+		#articleSection div.box_inp_detail_search input{
+			border:0;
+			padding: 0 5px 0 7px;
+			font-size: 16px;
+			margin: 0 10px;
 		}
 
 		#articleSection .ico_chx{
@@ -250,6 +270,15 @@
 			top: 0;
 
 		}
+		#articleSection .inner_detail_search{
+			width: 800px;
+			height: 50px;
+			line-height: 50px;
+			/*background-color: blue;*/
+			position: absolute;
+			left: 0;
+			top: 0;	
+		}
 	
 		#articleSection .inp_txt{
 			width: 750px;
@@ -272,6 +301,15 @@
 			font-size: 16px;
 		}
 
+		#articleSection span.btn_perid_search{
+			display: block;
+			line-height: 50px;
+			position: absolute;
+			top: 0;
+			right: 10px;
+			font-size: 16px;
+			cursor: pointer;
+		}
 		#articleSection span.btn_close{
 			display: block;
 			line-height: 50px;
@@ -296,7 +334,7 @@
 		}
 
 
-		li.member{
+		li.member, li.arena{
         width: 800px;
         height: 66px;
         border-bottom: 1px solid #E0E0E0;
@@ -307,7 +345,7 @@
 
 
       }
-      li.member:hover{
+      li.member:hover, li.arena:hover{
         background-color: #E0E0E0;
       }
       
@@ -387,7 +425,7 @@
         	position: relative;
         }
         #articleSection p.sort{
-			width: 165px;
+			max-width: 165px;
 			height: 60px;
 			/*background-color: green;*/
 			position: absolute;
@@ -395,17 +433,26 @@
 			right: 0;
 			text-align: center;
 			line-height: 60px;
+			pointer : cursor;
 		}
 
-		#articleSection p.sort a{
+		#articleSection p.sort label{
 			display: inline-block;
 			font-size: 15px;
 			margin-right: 10px;
+			
 		}
-		#articleSection p.sort a.on{
+		#articleSection p.sort input {
+			display: none;
+		}	
+		#articleSection p.sort input:checked+label {
+		color: #ff907c;
+		font-weight: bold;
+		}
+		/* #articleSection p.sort a.on{
 			color: #ff907c;
 			font-weight: bold;
-		}
+		} */
 
 		#articleSection span.total{
 			font-size: 18px;
@@ -416,17 +463,216 @@
 			font-weight: bold;
 			color: #ff907c;
 		}
+
+
 		.paginate{
 			margin-left: 190px;
 		}
-.article{
-			width: 800px;
-			margin: 0px auto;
 
+
+		div.list_finance{
+			width: 100%;
 			/*background-color: yellow;*/
-		}	
+		}
+		div.list_finance thead{
+			box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+		}
+		div.list_finance thead th{
+			font-size: 13px;
+            color: #424242;
+            padding: 10px 7px;
+            background-color: transparent;
+            text-shadow: 1px 1px 0px #FFE0B2;
+            text-align: center;
+            font-weight: bold;
+            /*color: #FFDECA;*/
+
+           
+		}
 		
-		#listTab{
+
+		div.list_finance td{
+			vertical-align: middle;
+
+
+		}
+
+		div.list_finance tbody tr:nth-child(odd){
+            background-color: rgba(189, 189, 189,.5);
+        }
+        div.list_finance tbody tr{
+            background-color: rgba(189, 189, 189,.1);
+        }
+
+        div.list_finance tbody td{
+			line-height: 30px;
+            font-size: 12px;
+            text-align: center;
+            padding: 10px 8px;
+            cursor: pointer;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            color: #424242;
+		}
+
+		div.list_finance tbody td.row{
+			max-width: 50px;
+		}
+
+		div.list_finance tbody td.account_label{
+			max-width: 120px;
+		}
+		div.list_finance tbody td.industry{
+			max-width: 80px;
+			
+		}
+
+		li.arena div{
+			text-align: center;
+		}
+
+		 li.arena div.company{
+        	width: 180px;
+        	height: 36px;
+        	line-height: 36px;
+        	position: absolute;
+        	left: 25px;
+        	top: 0;
+        	font-size: 15px;
+        	/*background-color: yellow;*/
+        }
+        li.arena div.industry{
+        	width: 180px;
+        	height: 30px;
+        	line-height: 30px;
+        	font-size: 13.5px;
+        	/*background-color: blue;*/
+        	position: absolute;
+        	bottom: 0;
+        	left: 25px;
+        	text-align: center;
+        }
+
+        li.arena div.comments{
+        	width: 60px;
+        	height: 30px;
+        	line-height: 30px;
+        	font-size: 13.5px;
+        	/*background-color: pink;*/
+        	position: absolute;
+        	bottom: 0px;
+        	left: 205px;
+        	text-align: left;
+        }
+        li.arena div.regdate{
+        	width: 90px;
+        	height: 30px;
+        	line-height: 30px;
+        	font-size: 13.5px;
+        	/*background-color: green;*/
+        	position: absolute;
+        	bottom: 0px;
+        	left: 265px;
+        	text-align: center;
+
+        }
+        li.arena button.btn_delete{
+        	padding: 7px 15px;
+			vertical-align: middle;
+			font-size: 14px;
+			position: absolute;
+			right: 25px;
+			top: 19px;
+			transition: .2s ease;
+        }
+
+        li.arena button.btn_delete:hover, li.arena button.btn_delete:focus {
+			background:#fff;
+			color: #ff907c;
+			box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+		}
+
+		li.arena div.box_winratio{
+            width: 150px;
+            height: 36px;
+            /*background: red;*/
+            position: absolute;
+            left: 205px;
+            line-height:36px;
+            top: 0; 
+
+
+        }
+     	div.box_winratio span.winratio_txt{
+            display: block;
+            height: 20px;
+            position: absolute;
+            left: 190px;
+            bottom: 10px;
+            line-height: 20px;
+            font-size: 20px;
+            color: #4F3D17;
+            font-weight: bold;
+
+        }
+
+        div.box_winratio .winratio_graph{
+            display: inline-block;
+            width: 150px;
+            height: 20px;
+            vertical-align: middle;
+            position: absolute;
+            bottom: 8px;
+            left: 0px;
+            text-align: center;
+            
+        }
+        .winratio_graph_fill{
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            border-radius: 4px;
+        }
+        .winratio_graph_fill_left{
+            background-color: #F44336;
+            border-top-right-radius: 0;
+            border-bottom-right-radius:0;
+            z-index: 1;
+
+        }
+        .winratio_graph_txt{
+            position: absolute;
+            top: 3px;
+            height: 100%;
+            line-height: 15px;
+            font-size: 12px;
+            color: #fff;
+            font-weight: bold;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .winratio_graph_txt_left{
+            left: 9px;
+            text-align: left;
+            z-index: 1;
+        }
+
+        .winratio_graph_fill_right{
+            width: 100%;
+            background-color: #2196F3;
+
+        }
+
+        .winratio_graph_txt_right{
+            right: 8px;
+            text-align: right;
+        }
+
+       #listTab{
                 width: 900px;
                 height: 59px;
                 /*background-color: red;*/
@@ -463,4 +709,12 @@
             #listTab a{
                 color: #424242;
                 text-decoration: none;
+            }
+            
+            div.div_contents{
+            	display: none;	
+            }
+            
+            div.div_contents.show{
+            	display: block;
             }
