@@ -107,20 +107,21 @@
             	</li>
           </ul>
           <div class="article_open">
-            <a href=""
-              onclick= "articleOpenPopup()">
+            <a href="">
               +OPEN
             </a>
           </div>
           <script>
-          	function articleOpenPopup(){
+          	$(".article_open a").click(function(e){
           		if("${loginMember eq null ? '0' : '1'}" == 1){
+          			e.preventDefault();
           			window.open("/vanilla-stock/articleOpen", '_blank', 'width=800px,height=400px,toolbars=no,scrollbars=no, resizable=no, fullscreen=no'); 
           			return false;
           		} else{
+          			e.preventDefault();
           			alert("로그인해주세요");
           		}
-          	}
+          	});
           </script>
         </div>
         <!--//#divTop -->
