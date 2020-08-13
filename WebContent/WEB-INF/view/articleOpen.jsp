@@ -46,7 +46,8 @@
         <span class="articleCName">회사 </span>
         <div class="ui-widget">
   			<label for="articleCompanyOption"> </label>
- 			 <input class="articleCompanyOption" placeholder="회사명을 입력하세요" form="openForm">
+ 			 <input type="text" class="articleCompanyOption" placeholder="회사명을 입력하세요" name="company"
+ 			 	form="insertForm">
 		</div>
       </div>
       <div class="articleOpenTitle">
@@ -56,12 +57,41 @@
           placeholder="투기장명을 입력하세요."
           name="title"
           class="openTitle"
-          form="openForm"
+          form="insertForm"
         />
       </div>
       	<div class="openConfirmed">
       		OPEN
       	</div>
     </div>
+   <form id="insertForm" action="" method="post" />
+   <script type="text/javascript">
+	//_.templateSettings = {interpolate: /\<\@\=(.+?)\@\>/gim,evaluate: /\<\@([\s\S]+?)\@\>/gim,escape: /\<\@\-(.+?)\@\>/gim}; 
+		const $articleCompanyOption = $(".articleCompanyOption")
+		const $openTitle = $(".openTitle")
+		const $insertForm = $("#insertForm");
+		function insertArticle() {
+			let formData =  $insertForm.serialize();
+			console.log("form data");
+			console.log(formData);
+			$.ajax({ 
+				url:"/vanilla-stock/ajax/articlePage/insert",
+				type:"post",
+				data:formData,
+				error:function(){
+					alert("open 실패");
+				},
+				success: function() {
+					alert("open 성공")
+					opener.location.reload();
+					window.close();
+					
+				}
+			});//ajax end 
+		}// search() end
+		$( ".openConfirmed" ).click(function() {
+			insertArticle();	 
+		});
+	</script>
   </body>
 </html>

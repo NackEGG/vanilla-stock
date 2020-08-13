@@ -122,30 +122,5 @@ public class MemberDAOImpl implements MemberDAO {
 		}
 		return result;
 	}
-
-
-    public MemberVO selectByEmail(String email) {
-    	MemberVO mem = null;
-    	try(SqlSession session = sqlSessionFactory.openSession()){
-    	mem = session.selectOne(MAPPER+"selectByEmail", email);
-    	}catch (Exception e) {
-    		e.printStackTrace();
-    		mem = null;
-    	}
-    	return mem;
-    }
  
-    public int insertUser(MemberVO regReq) {
-    	int result = 0;
-    	try(SqlSession session = sqlSessionFactory.openSession()){
-    		System.out.println("insertUser : "+regReq.getGender().length()+ " : " + regReq.getGender());
-    		regReq.setGender(regReq.getGender().trim());
-    	result	= session.insert(MAPPER+"join", regReq);
-    	}catch (Exception e) {
-    		e.printStackTrace();
-    	}
-    	return result;
-    }
- 
-
 }

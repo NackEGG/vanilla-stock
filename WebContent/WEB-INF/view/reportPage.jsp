@@ -28,9 +28,8 @@
 	<link rel="stylesheet" href="/vanilla-stock/css/reset.css" />
 	<link rel="stylesheet" href="/vanilla-stock/css/kakao.font.css" />
 	<link rel="stylesheet" href="/vanilla-stock/css/default.css" />
-	<link rel="stylesheet" href="/vanilla-stock/css/reportPage.css" />
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
-	<script src="js/jquery.js"></script>
+	<script src="/vanilla-stock/js/jquery.js"></script>
 	<script src="https://code.highcharts.com/highcharts.js"></script>
 	<script src="https://code.highcharts.com/modules/exporting.js"></script>
 	<script src="https://code.highcharts.com/modules/export-data.js"></script>
@@ -147,7 +146,7 @@
 		}
 		#articleBox{
 			width: 50%;
-			background-color: springgreen;
+			background-color: #F4FF81;
 		}
 		.deviPercent{
 			width: 109px;
@@ -163,12 +162,30 @@
 		.upperTitle{
 			height: 14%;
 			padding: 5px 5px 0 5px;
-			background-color: #2D230D;
 		}
 		.upperTitle .title{
 			padding: 6px;
 			font-size: 21px;
 			width: 35%;
+		}
+		.articleRatio {
+ 			display: inline-block;
+    		width: 495px;
+    		height: 20px;
+    		background-color: #eaeaea;
+   			/* position: relative; */
+   			border-radius: 10px;
+    		vertical-align: middle;
+    		margin-left: 17px;
+    		margin-top: 0px;
+		}
+		.articleRatio_fill {
+  			height: 100%;
+  			background-color: #66c87b;
+  			border-top-right-radius: 0;
+  			border-bottom-right-radius: 0;
+  			border-radius: 10px;
+  			float: left;
 		}
 		.highcharts-figure, .highcharts-data-table table {
 			min-width: 320px;
@@ -506,7 +523,14 @@
 								오늘의 투기장
 							</div><!--//.title -->
 						</div><!--//.upperTitle -->
-					</div><!--//#ArticleBox -->
+						<div class="articleRatio">
+                			<div
+                  			class="articleRatio_fill"
+                  			title=""
+                 			style="width: 60%;"
+                				></div>
+             			 	</div>
+						</div><!--//#ArticleBox -->
 				</div><!--//#supprotingBox -->
 			</div><!--//#lowerContent -->
 		</div><!--//.aux -->

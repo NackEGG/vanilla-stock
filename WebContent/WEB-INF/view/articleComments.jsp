@@ -112,10 +112,12 @@
     <!--//#header -->
     <div id="content">
       <div class="aux">
+
         <div class="subject">
           <span class="articleHeader">${articleVO.title}</span>
           <span class="articleDate">${articleVO.regdate}</span>
-        </div>
+          <input id="articleNo" type="hidden" value="${articleVO.no}" form="pickForm"/>
+        </div> 
         <div class="viewComment">
           <div>
             <span class="articleInfo">조회수</span>
@@ -136,27 +138,64 @@
             ></div>
           </div>
           <div class="articleBuy">
-            <span>${articleVO.countGood}</span>
-            <span>${articleVO.countBad}</span>
+            <span id = "articleBuy_Good"></span>
+            <span id = "articleBuy_Bad"></span>
           </div>
 
-          <div class="articleFullbuy">
-            <span>풀매수</span>
-          </div>
-          <div class="articleFullsell">
-            <span>풀매도</span>
-          </div>
+          <input class="pickRadio" type="radio" name="pick" value="Y" form="pickForm"> 풀매수
+          <input class="pickRadio" type="radio" name="pick" value="N" form="pickForm"> 풀매도
+          
+          <form id="pickForm" action=""/>
+          
           <script type="text/javascript">
          	const $selectTitle = $(".select_title");
           	const $searchBox = $("#searchBox");
           	$selectTitle.on("click", function () {
               $searchBox.toggleClass("click");
             });
-          	$().function(){
-          		$(".opinion_btn")
-          	}		
-          
           </script>
+          <script type="text/javascript">
+			const $goodOpinion = $("#articleBuy_Good");
+			const $badOpinion = $("#articleBuy_Bad");
+			const articleNo = $("#articleNo").val();
+			getOpinion();
+			function getOpinion() {
+				$.ajax({ 
+					url:"/vanilla-stock/ajax/articlePage/pick",
+					type:"GET",
+					data:{ articleNo : "${articleVO.no}" },
+					dataType:'json',
+					error:function(){
+						alert("error");
+					},
+					success: function(json) {
+						console.log(json.good);
+						console.log(json.bad);
+						$goodOpinion.text(json.good); 	
+						$badOpinion.text(json.bad); 	
+					}
+				});//ajax end 
+			}// search() end		
+		</script>
+		<script type="text/javascript">
+			const $pickRadio = $(".pickRadio");
+			const $pickForm = $("#pickForm");
+			$pickRadio.on("click", function(){
+				let formData = $pickForm.serialize();
+				console.log(formData);
+	 			$.ajax({
+	 				url:"/vanilla-stock/ajax/articlePage/pick",
+	 				type:"POST",
+	 				data:formData+'&articleNo='+articleNo,
+	 				error:function(){
+						alert("error");
+					},
+					success: function() {
+						getOpinion();
+					}
+	 			})
+	 		});
+		</script>
         </div>
 
         <div class="articleComment">

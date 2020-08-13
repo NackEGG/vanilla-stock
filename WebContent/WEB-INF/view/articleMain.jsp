@@ -26,7 +26,7 @@
     </style>
   </head>
   <body>
-    <div id="header">
+  <div id="header">
       <div id="logoBox">
         <h1>
           <a href="" title="vanilla stock">
@@ -39,14 +39,13 @@
         <div id="gnb">
           <h2 class="screen_out">주요 서비스</h2>
           <ul>
-            <li class="nav"><a href=""> 종목</a></li>
-            <li class="nav on"><a href=""> 투기장 </a></li>
+            <li class="nav"><a href="${pageContext.request.contextPath}/cardpage/init"> 종목</a></li>
+            <li class="nav"><a href="${pageContext.request.contextPath}/articlePage"> 투기장 </a></li>
             <li class="nav"><a href="">랭킹</a></li>
           </ul>
         </div>
         <!--//#gnb -->
-
-        <div id="searchBox">
+		<div id="searchBox">
           <label class="screen_out">찾을 회사 입력</label>
           <input
             class="inp_txt"
@@ -58,15 +57,70 @@
           <span class="btn_search"> <i class="fa fa-search"></i></span>
         </div>
         <!--//#searchBox -->
-      </div>
-      <!--//.aux -->
+       </div>
       <div id="loginBox">
-        <div id="loginBtn" class="btn">
+        <div id="loginBtn" class="btn ${loginMember eq null? '':'hidden'}" onclick="modalpopup('loginForm')">
           로그인
         </div>
+      
+         <!--//.aux -->
+        <!-- Hidden된 로그인창-->
+        <div id="loginForm" style="visibility: hidden;" >
+          <div class="form">
+            <div class="formContents"></div>
+            
+            <form class="login-form" action ="/vanilla-stock/login" method="post">
+              <input type="text" name="email" class="email" placeholder="email" />
+              <input type="password" name="password" class="password" placeholder="password" />
+              <button class="login">login</button>
+              <p class="message">
+                	회원이 아니시라면?
+                <a
+                  href="/vanila-stock/signup"
+                  >회원가입</a
+                >
+              </p>
+              <p class="close" onclick="popupclose('loginForm')">닫기</p>
+            </form>
+          </div>
+        </div>
+
+        <!-- Hidden된 로그인창띄우는 JS-->
+        <script>
+          function modalpopup(i) {
+            document.getElementById(i).style.visibility = "visible";
+          }
+
+          function popupclose(i) {
+            document.getElementById(i).style.visibility = "hidden";
+          }
+          
+       
+      	$(document).ready(function(e){
+      		$('#login').click(function(){
+
+      			// 입력 값 체크
+      			if($.trim($('#email').val()) == ''){
+      				alert("아이디를 입력해 주세요.");
+      				$('#email').focus();
+      				return;
+      			}else if($.trim($('#passwd').val()) == ''){
+      				alert("패스워드를 입력해 주세요.");
+      				$('#password').focus();
+      				return;
+      			}
+      			
+      			//전송
+      			$('#login-form').submit();
+      		});
+      		
+      	});
+ 
+        </script>
+        
         <!--//loginBtn -->
-        <div id="profileBox" class="hidden">
-          <h2 class="screen_out">유저정보</h2>
+        <div id="profileBox" class="${loginMember eq null ? 'hidden' : ''}">
+
           <img
             src="profile/profile.png"
             class="profile_on"
@@ -75,6 +129,7 @@
             alt="테스터"
             title="테스터"
           />
+        
           <div id="profilePopup" class="profile_on">
             <ul id="profileList">
               <li class="profile">
@@ -86,7 +141,7 @@
               </li>
               <!--//.profile -->
               <li class="profile">
-                <a href="/logout.do"
+                <a href="${pageContext.request.contextPath}/logout"
                   ><span class="close_door">문</span> 로그아웃</a
                 >
               </li>
@@ -120,20 +175,30 @@
           <ul>
             <li class="article">투기장</li>
             <li class="article_recent">
-            	<input type="radio" name="sortType" checked="checked" value ="latest" form="searchForm">
+            	<input type="radio" class="sortRadio" name="sortType" checked="checked" value ="latest" form="searchForm">
             		최신순
             	</li>
             <li class="article_popular">
-            	<input type="radio" name="sortType" value ="popularity" form="searchForm">
+            	<input type="radio" class="sortRadio" name="sortType" value ="popularity" form="searchForm">
             		인기순
             	</li>
           </ul>
           <div class="article_open">
-            <a href="/vanilla-stock/articleOpen"
-              onclick="window.open(this.href, '_blank', 'width=800px,height=400px,toolbars=no,scrollbars=no, resizable=no, fullscreen=no'); return false;">
+            <a href=""
+              onclick= "articleOpenPopup()">
               +OPEN
             </a>
           </div>
+          <script>
+          	function articleOpenPopup(){
+          		if("${loginMember eq null ? '0' : '1'}" == 1){
+          			window.open("/vanilla-stock/articleOpen", '_blank', 'width=800px,height=400px,toolbars=no,scrollbars=no, resizable=no, fullscreen=no'); 
+          			return false;
+          		} else{
+          			alert("로그인해주세요");
+          		}
+          	}
+          </script>
         </div>
         <!--//#divTop -->
         <div id="divMiddle">
@@ -212,6 +277,7 @@
         </fieldset>
       </form>
       <!--//searchForm -->
+
       </div>
       <!--//.aux -->
     </div>
@@ -360,6 +426,10 @@
 		//ajax로 데이터 리스트 받아오는 함수 
 		getArticle();
 
+	});//click() end
+	
+	$('.aux').on("click",".sortRadio",function(e){
+		getArticle()
 	});//click() end
 	
 	</script>

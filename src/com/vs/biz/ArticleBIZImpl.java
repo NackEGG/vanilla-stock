@@ -1,6 +1,5 @@
 package com.vs.biz;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -44,11 +43,11 @@ public class ArticleBIZImpl implements ArticleBIZ {
 		PageVO pageVO = new PageVO(page, numPage);
 		int startPage = pageVO.getStart();
 		int endPage = pageVO.getEnd();
-		System.out.println(searchWord);
-		System.out.println(searchType);
-		System.out.println(sortType);
-		System.out.println(startPage);
-		System.out.println(endPage);
+		//System.out.println(searchWord);
+		//System.out.println(searchType);
+		//System.out.println(sortType);
+		//System.out.println(startPage);
+		//System.out.println(endPage);
 		List<ArticleVO> articleList = articleDAO.getPageList(searchWord, searchType, sortType, startPage, endPage);
 		
 		map.put("articleList", articleList);
