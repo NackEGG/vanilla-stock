@@ -489,13 +489,15 @@ color: black;
 
 .btn_search{
 	display: block;
-			color: #424242;
-			line-height: 48px;
-			position: absolute;
-			top: 0;
-			right: 10px;
-			font-size: 20px;
+	color: #424242;
+	line-height: 48px;
+	position: absolute;
+	top: 0;
+	right: 10px;
+	font-size: 20px;
+	cursor: pointer;
 }
+
  .article_open {
  width: 30px;
  height: 30px;
