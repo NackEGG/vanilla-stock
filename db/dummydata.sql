@@ -85,20 +85,20 @@ Insert into pick(no, opinion, member_no, article_no, regdate) values(pick_seq.ne
 
 
 /*COMMENTS*/
-insert into comments values(comments_seq.nextval, 1, 1, '살거야' , sysdate);
-insert into comments values(comments_seq.nextval, 1, 2, '안살거야' , sysdate);
-insert into comments values(comments_seq.nextval, 3, 2, '어쩌라는거지이이' , sysdate);
-insert into comments values(comments_seq.nextval, 4, 3, '사라는거야 말라는거야' , sysdate);
-insert into comments values(comments_seq.nextval, 5, 3, '이거 팔아야되나요 말아야하나요' , sysdate);
-insert into comments values(comments_seq.nextval, 6, 3, '퇴근하고 싶어요!!!!!!!' , sysdate);
-insert into comments values(comments_seq.nextval, 7, 3, '사든 말든' , sysdate);
-insert into comments values(comments_seq.nextval, 8, 4, '관심 없음' , sysdate);
-insert into comments values(comments_seq.nextval, 9, 4, '이럴거야 저럴거야 뭐할거야' , sysdate);
-insert into comments values(comments_seq.nextval, 10, 4, '하기실허엉어어어ㅓㅇ어' , sysdate);
-insert into comments values(comments_seq.nextval, 11, 5, '이거 안사면 어떡하죠?!!!!!' , sysdate);
+insert into comments values(comments_seq.nextval, 1, 1, '살거야' ,1 , sysdate);
+insert into comments values(comments_seq.nextval, 1, 2, '안살거야' , 2 , sysdate);
+insert into comments values(comments_seq.nextval, 3, 2, '어쩌라는거지이이' ,3, sysdate);
+insert into comments values(comments_seq.nextval, 4, 3, '사라는거야 말라는거야' ,4 , sysdate);
+insert into comments values(comments_seq.nextval, 5, 3, '이거 팔아야되나요 말아야하나요' ,1, sysdate);
+insert into comments values(comments_seq.nextval, 6, 3, '퇴근하고 싶어요!!!!!!!' ,4, sysdate);
+insert into comments values(comments_seq.nextval, 7, 3, '사든 말든' ,4 ,sysdate);
+insert into comments values(comments_seq.nextval, 8, 4, '관심 없음' ,4, sysdate);
+insert into comments values(comments_seq.nextval, 9, 4, '이럴거야 저럴거야 뭐할거야',4 , sysdate);
+insert into comments values(comments_seq.nextval, 10, 4, '하기실허엉어어어ㅓㅇ어' ,4, sysdate);
+insert into comments values(comments_seq.nextval, 11, 5, '이거 안사면 어떡하죠?!!!!!' ,4, sysdate);
 
-insert into comments values(comments_seq.nextval, 12, 5, '어떡해여어어어어' , sysdate);
-insert into comments values(comments_seq.nextval, 13, 6, '나도 비오기전에 집가고싶다아아아 그래서 이거 사나요?' , sysdate);
+insert into comments values(comments_seq.nextval, 12, 5, '어떡해여어어어어' ,4, sysdate);
+insert into comments values(comments_seq.nextval, 13, 6, '나도 비오기전에 집가고싶다아아아 그래서 이거 사나요?' ,4, sysdate);
 
 /* HIT */
 Insert into hit values (hit_seq.nextval,'1',1,'A', 2 ,sysdate);

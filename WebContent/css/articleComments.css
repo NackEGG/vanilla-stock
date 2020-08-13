@@ -137,12 +137,24 @@
   margin-right: 5px;
 }
 
-.commentBox {
-  width: 100%;
+.commentBox{
+	display:flex;
+}
+
+.goodCommentBox {
+  width: 50%;
   height: 140px;
   display: flex;
   flex-direction: row;
 }
+
+.badCommentBox {
+  width: 50%;
+  height: 140px;
+  display: flex;
+  flex-direction: row;
+}
+
 
 .commentWriter {
   width: 300px;

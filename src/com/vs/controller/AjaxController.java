@@ -70,6 +70,44 @@ public class AjaxController {
 	private Map<String, CardPageVO> cardDataMap;
 	private List<String> indNoList;
 	
+	@RequestMapping(path = "/articlePage/pickComments", method = RequestMethod.GET)
+	public Map<String, Object> hell08(HttpServletRequest request, HttpSession session){
+		Map<String, Object> map = new ConcurrentHashMap<String, Object>();
+		int articleNo = Integer.parseInt(request.getParameter("articleNo"));
+		int page = Integer.parseInt(request.getParameter("page"));
+		map = commentsBIZ.getCommentsByOpinion(articleNo, page);
+		
+		return map;
+	}
+	
+	@RequestMapping(path = "/articlePage/pickComments", method = RequestMethod.POST)
+	public String hell07(HttpServletRequest request, HttpSession session) {
+		String result = null;
+		MemberVO memberVO = new MemberVO();
+		CommentsVO commentsVO = new CommentsVO();
+		memberVO = (MemberVO) session.getAttribute("loginMember");
+		commentsVO.setMemberNo(memberVO.getNo()); 
+		commentsVO.setArticleNo(Integer.parseInt(request.getParameter("articleNo")));
+		commentsVO.setContent(request.getParameter("content"));
+		commentsVO.setOpinion(request.getParameter("opinion"));
+		
+		System.out.println(commentsVO.getMemberNo());
+		System.out.println(commentsVO.getArticleNo());
+		System.out.println(commentsVO.getContent());
+		System.out.println(commentsVO.getOpinion());
+		
+		boolean check = 
+				commentsBIZ.insertPickComments(commentsVO);
+		
+		if(check) {
+			result = "";
+		} else {
+			result = "댓글 등록에 실패하셨습니다.";
+		}
+		
+		return "{\"result\":"+result+"}";
+	}
+	
 	@RequestMapping(path = "/articlePage/comments", method = RequestMethod.POST)
 	public void hell06(HttpServletRequest request, HttpSession session) {
 		CommentsVO commentsVO = new CommentsVO();

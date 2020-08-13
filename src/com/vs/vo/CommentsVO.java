@@ -8,6 +8,8 @@ public class CommentsVO {
 	private int articleNo;
 	private String content;
 	private Timestamp regdate;
+	private String opinion;
+	private String nickname;
 	
 	public CommentsVO() {
 		// TODO Auto-generated constructor stub
@@ -51,6 +53,22 @@ public class CommentsVO {
 
 	public void setRegdate(Timestamp regdate) {
 		this.regdate = regdate;
+	}
+
+	public String getOpinion() {
+		return opinion;
+	}
+
+	public void setOpinion(String opinion) {
+		this.opinion = opinion;
+	}
+
+	public String getNickname() {
+		return nickname;
+	}
+
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
 	}
 	
 }
