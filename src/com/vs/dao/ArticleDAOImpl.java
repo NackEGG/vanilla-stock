@@ -91,7 +91,7 @@ public class ArticleDAOImpl implements ArticleDAO {
 			
 			SqlParameterSource in = new MapSqlParameterSource()
 					.addValue("PI_TITLE", articleVO.getTitle())
-					.addValue("PI_STOCK_CODE", articleVO.getStockCode())
+					.addValue("PI_COMPANY_NAME", articleVO.getCompanyName())
 					.addValue("PI_MEMBER_NO", articleVO.getMemberNo());
 			
 			Map<String, Object> out = simpleJdbcCall.execute(in);

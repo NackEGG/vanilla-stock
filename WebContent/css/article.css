@@ -487,7 +487,6 @@ color: black;
 	cursor:not-allowed;
 }
 
-
 .btn_search{
 	display: block;
 			color: #424242;
@@ -496,4 +495,14 @@ color: black;
 			top: 0;
 			right: 10px;
 			font-size: 20px;
+}
+ .article_open {
+ width: 30px;
+ height: 30px;
+ font-size: 25px;
+ color: black;
+ font-weight: bold;
+ display: block;
+ margin-left: 970px;
+ margin-top: -35px;
 }

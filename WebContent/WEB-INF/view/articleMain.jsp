@@ -83,56 +83,69 @@
 					$profileTarget.toggle();
 				}); // profileBox click end
 
-				$("html").click(function(e) {
-					if (!$(e.target).hasClass("profile_on")) {
-						$profileTarget.hide();
-					}
-				}); //
-			</script>
-		</div>
-	</div>
-	<!--//#header -->
-	<div id="content">
-		<div class="aux">
-			<div id="divTop">
-				<ul>
-					<li class="article">투기장</li>
-					<li class="article_recent"><input type="radio" name="sortType"
-						checked="checked" value="latest" form="searchForm"> 최신순</li>
-					<li class="article_popular"><input type="radio"
-						name="sortType" value="popularity" form="searchForm"> 인기순
-					</li>
-				</ul>
-				<div class="article_open">
-					<a href="/vanilla-stock/articleOpen"
-						onclick="window.open(this.href, '_blank', 'width=800px,height=400px,toolbars=no,scrollbars=no, resizable=no, fullscreen=no'); return false;">
-						+OPEN </a>
-				</div>
-			</div>
-			<!--//#divTop -->
-			<div id="divMiddle">
-				<div class="article_list"></div>
-				<!-- //wrap-list -->
-				<!-- //.companyList -->
-			</div>
-			<!-- //.article_list -->
-		</div>
-		<!--//#divMiddle -->
-		<div id="searchboxArticle">
-			<h2 class="screen_out">검색</h2>
-			<form id="searchForm" action="">
-				<fieldset class="fld_search">
-					<legend class="screen_out">검색어 입력폼</legend>
-					<div class="box_inp_search">
-						<div class="select_title" data-title="제목">
-							<span class="opt_seleted"> 제목+내용 </span> <span
-								class="ico_angle_down"> <i class="fas fa-angle-down"></i>
-							</span> <span class="ico_angle_up"> <i class="fas fa-angle-up"></i>
-							</span>
-						</div>
+				 $("html").click(function (e) {
+            if (!$(e.target).hasClass("profile_on")) {
+              $profileTarget.hide();
+            }
+          }); //
+        </script>
+      </div>
+    </div>
+    <!--//#header -->
+    <div id="content">
+      <div class="aux">
+        <div id="divTop">
+          <ul>
+            <li class="article">투기장</li>
+            <li class="article_recent">
+            	<input type="radio" class="sortRadio" name="sortType" checked="checked" value ="latest" form="searchForm">
+            		최신순
+            	</li>
+            <li class="article_popular">
+            	<input type="radio" class="sortRadio" name="sortType" value ="popularity" form="searchForm">
+            		인기순
+            	</li>
+          </ul>
+          <div class="article_open">
+            <a href=""
+              onclick= "articleOpenPopup()">
+              +OPEN
+            </a>
+          </div>
+          <script>
+          	function articleOpenPopup(){
+          		if("${loginMember eq null ? '0' : '1'}" == 1){
+          			window.open("/vanilla-stock/articleOpen", '_blank', 'width=800px,height=400px,toolbars=no,scrollbars=no, resizable=no, fullscreen=no'); 
+          			return false;
+          		} else{
+          			alert("로그인해주세요");
+          		}
+          	}
+          </script>
+        </div>
+        <!--//#divTop -->
+        <div id="divMiddle">
+          <div class="article_list">
+          	
+              
+            </div> <!-- //wrap-list -->
+            <!-- //.companyList -->           
+          </div>
+          <!-- //.article_list -->
+        </div>
+        <!--//#divMiddle -->
+        <div id="searchBox">
+      <h2 class="screen_out">검색</h2>
+      <form id="searchForm" action="">
+        <fieldset class="fld_search">
+          <legend class="screen_out">검색어 입력폼</legend>
+          <div class="box_inp_search">
+            <div class="select_title" data-title="제목" >
+              <span class="opt_seleted">
+                제목+내용
+              </span>
 						<!--//select_title -->
-
-						<div class="select_option">
+       <div class="select_option">
 							<ul>
 								<li><a class="opt_select" href="" data-search-key="subject">제목</a>
 								</li>
@@ -145,9 +158,7 @@
 						<!--//select_option -->
 					</div>
 					<!--//box_inp_search -->
-
-
-					
+            
 					 <script type="text/javascript">
     	
 					 	const $selectTitle = $(".select_title");
@@ -173,9 +184,31 @@
 	<!--//.aux -->
 	</div>
 	<!--//#content -->
+          <script type="text/javascript">
+            const $selectTitle = $(".select_title");
+            const $searchBox = $("#searchBox");
+            $selectTitle.on("click", function () {
+              $searchBox.toggleClass("click");
+            }); //on end
+          </script>
+          <div class="box_inp_txt">
+            <label class="screen_out">검색어 입력</label>
+            <input
+              class="inp_txt"
+              type="text"
+              placeholder="검색어를 입력해주세요"
+              form = "searchForm"
+            />
+          </div>  
+          <!--//box_inp_txt -->
+        </fieldset>
+      </form>
+      <!--//searchForm -->
 
-
-
+      </div>
+      <!--//.aux -->
+    </div>
+    <!--//#content -->
 	<div id="footer">
 		<div id="policy">
 			<h4 class="screen_out">정책 및 약관</h4>
@@ -319,8 +352,11 @@
 			page = this.dataset.no;
 			//ajax로 데이터 리스트 받아오는 함수 
 			getArticle();
-
-		});//click() end
+	  });//click() end
+	
+	  $('.aux').on("click",".sortRadio",function(e){
+		    getArticle();
+	    });//click() end
 	</script>
 </body>
 </html>

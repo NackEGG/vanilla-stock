@@ -10,6 +10,7 @@ import org.apache.ibatis.javassist.expr.NewArray;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -38,18 +39,18 @@ public class ReportPageController {
 	@Autowired
 	FinanceBIZ financeBIZ;
 	
-	@RequestMapping(path = "/reportPage", method = RequestMethod.GET)
-	public String hello01(HttpServletRequest request, Model model) throws Exception {
+	@RequestMapping(path = "/reportPage/{no}", method = RequestMethod.GET)
+	public String hello01(@PathVariable String no, Model model) throws Exception {
 		
 		//String keyword = (String) request.getAttribute("keyword");
 		//CompanyVO companyVO = companyBIZ.select(keyword);
 		
 		// 회사, 산업 정보
-		CompanyVO companyVO = companyBIZ.select("005930");
-		IndustryVO industryVO = industryBIZ.get(companyVO.getStockCode());
+		CompanyVO companyVO = companyBIZ.select(no);
+		IndustryVO industryVO = industryBIZ.get(no);
 			
 		// 주식 실시간 API 
-		StockApiUtil api = new StockApiUtil(companyVO.getStockCode());
+		StockApiUtil api = new StockApiUtil(no);
 		String[] arrStockInfo = api.getStockInfoAPI();
 		String[][] arrDailyStock = api.getDailyStockAPI();
 		String[][] arrTimeConclude = api.getTimeConcludeAPI();
@@ -63,14 +64,13 @@ public class ReportPageController {
 		// 전월 종가 불러오기
 		StockRecordsVO stockRecordsVO = new StockRecordsVO();
 		stockRecordsVO.settDate(arrStockInfo[18].substring(0, 10));
-		System.out.println(stockRecordsVO.gettDate());
-		stockRecordsVO.setStockCode(companyVO.getStockCode());
+		stockRecordsVO.setStockCode(no);
 		int prevMonthClose = stockRecordsBIZ.selectPrevMonthClose(stockRecordsVO);
 		
 		// 가장 최근 분기 재무 정보 
 		FinanceVO financeVO = new FinanceVO();
 		financeVO.setStockCode(companyVO.getStockCode());
-		Map<String,Long> financeMap = financeBIZ.findRecentAccountValueMap(companyVO.getStockCode());
+		Map<String,Long> financeMap = financeBIZ.findRecentAccountValueMap(no);
 		/*
 		 * for(Entry<String,Long> r : financeMap.entrySet()) {
 		 * System.out.println(r.getKey() + " : " + r.getValue()); }

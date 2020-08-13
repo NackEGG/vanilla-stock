@@ -77,9 +77,12 @@
           function modalpopup(i) {
             document.getElementById(i).style.visibility = "visible";
           }
+
           function popupclose(i) {
             document.getElementById(i).style.visibility = "hidden";
           }
+          
+       
       	$(document).ready(function(e){
       		$('#login').click(function(){
       			// 입력 값 체크
@@ -101,6 +104,7 @@
         </script>
         <!--//loginBtn -->
         <div id="profileBox" class="${loginMember eq null ? 'hidden' : ''}">
+
           <img
             src="profile/profile.png"
             class="profile_on"

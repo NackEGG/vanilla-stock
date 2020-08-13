@@ -20,8 +20,6 @@ public interface MemberDAO {
 
 	public MemberVO selectByEmail(String email);
 
-
-
 	public int insertUser(MemberVO regReq);
 
 }
