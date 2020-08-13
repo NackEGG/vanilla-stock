@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.vs.biz.ArticleBIZ;
+import com.vs.biz.CommentsBIZ;
 import com.vs.biz.CompanyBIZ;
 import com.vs.biz.FinanceCateBIZ;
 import com.vs.biz.IndustryBIZ;
@@ -34,6 +35,7 @@ import com.vs.util.FinanceApiUtil;
 import com.vs.util.StockApiUtil;
 import com.vs.vo.ArticleVO;
 import com.vs.vo.CardPageVO;
+import com.vs.vo.CommentsVO;
 import com.vs.vo.CompanyVO;
 import com.vs.vo.FinanceCateVO;
 import com.vs.vo.IndustryVO;
@@ -62,9 +64,31 @@ public class AjaxController {
 	private ArticleBIZ articleBIZ;
 	@Autowired
 	private PickBIZ pickBIZ;
+	@Autowired
+	private CommentsBIZ commentsBIZ;
 
 	private Map<String, CardPageVO> cardDataMap;
 	private List<String> indNoList;
+	
+	@RequestMapping(path = "/articlePage/comments", method = RequestMethod.POST)
+	public void hell06(HttpServletRequest request, HttpSession session) {
+		CommentsVO commentsVO = new CommentsVO();
+		MemberVO memberVO = new MemberVO();
+		memberVO = (MemberVO) session.getAttribute("loginMember");
+		commentsVO.setArticleNo(Integer.parseInt(request.getParameter("articleNo")));
+		commentsVO.setContent(request.getParameter("content"));
+		commentsVO.setMemberNo(memberVO.getNo());
+		System.out.println(commentsVO.getArticleNo());
+		System.out.println(commentsVO.getContent());
+		System.out.println(commentsVO.getMemberNo());
+		
+		try {
+			commentsBIZ.insert(commentsVO);
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("ajaxcontroller에러");
+		}
+	}
 	
 	@RequestMapping(path = "/articlePage/pick", method = RequestMethod.POST) 
 	public String hello4(HttpSession session, HttpServletRequest request) {	
@@ -117,12 +141,16 @@ public class AjaxController {
 	@RequestMapping(path = "/articlePage/list", method = RequestMethod.POST)
 	public Map<String, Object> hello2(HttpServletRequest request) {		
 		String searchWord = request.getParameter("searchWord");
-		//String searchType = request.getParameter("searchType");
+		String searchType = request.getParameter("searchType");
 		String sortType = request.getParameter("sortType");
 		int page = Integer.parseInt(request.getParameter("page"));
+		System.out.println("검색조건"+searchType);
+		System.out.println("검색어"+searchWord);
+		System.out.println("분류조건"+sortType);
+		System.out.println("페이지"+page);		
 		
 		Map<String, Object> map = new ConcurrentHashMap<String, Object>();
-		map = articleBIZ.getPageList(searchWord, "all", sortType, page);
+		map = articleBIZ.getPageList(searchWord, searchType, sortType, page);
 		
 		return map;
 	}

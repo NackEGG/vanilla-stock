@@ -47,8 +47,8 @@
 
 			<div id="searchBox">
 				<label class="screen_out">찾을 회사 입력</label> <input class="inp_txt"
-					type="text" placeholder="회사명을 입력해주세요" form="searchForm"
-					name="searchWord" /> <span class="btn_search"> <i
+					type="text" placeholder="회사명을 입력해주세요" form="searchForm" /> 
+					<span class="btn_search"> <i
 					class="fa fa-search"></i></span>
 			</div>
 			<!--//#searchBox -->
@@ -126,89 +126,75 @@
         <!--//#divTop -->
         <div id="divMiddle">
           <div class="article_list">
-          	
-              
-            </div> <!-- //wrap-list -->
-            <!-- //.companyList -->           
+            </div> <!-- //article_list -->   
           </div>
-          <!-- //.article_list -->
-        </div>
         <!--//#divMiddle -->
-        <div id="searchBox">
+        <div id="searchboxArticle">
       <h2 class="screen_out">검색</h2>
-      <form id="searchForm" action="">
+      <form id="searchForm" action="" method="POST">
         <fieldset class="fld_search">
           <legend class="screen_out">검색어 입력폼</legend>
           <div class="box_inp_search">
             <div class="select_title" data-title="제목" >
-              <span class="opt_seleted">
-                제목+내용
-              </span>
-						<!--//select_title -->
-       <div class="select_option">
-							<ul>
-								<li><a class="opt_select" href="" data-search-key="subject">제목</a>
-								</li>
-								<li><a class="opt_select" href=""
-									data-search-key="subjectNcontent">제목+내용</a></li>
-								<li><a class="opt_select" href=""
-									data-search-key="nickname">닉네임</a></li>
-							</ul>
-						</div>
-						<!--//select_option -->
-					</div>
-					<!--//box_inp_search -->
+              <span class="opt_seleted" >
+               					 회사명+제목
+              </span>      
+         	 </div>
+		<!--//select_title -->
+       		<div class="select_option">
+				<ul>
+					<li>
+						<label for="searchAll" class="opt_select">회사명+제목</label>
+						<input id="searchAll" class="hidden" checked type="radio" name="searchType" value="all"/>
+					</li>
+					<li>
+						<label for="searchCompany" class="opt_select">회사명</label>
+						<input id="searchCompany" class="hidden" type="radio" name="searchType" value="company"/>
+					</li>
+					<li>
+						<label for="searchTitle" class="opt_select">제목</label>
+						<input id="searchTitle" class="hidden" type="radio" name="searchType" value="title"/>
+					</li>
+					</ul>
+			</div><!--//select_option -->
+		</div>
+		<!--//box_inp_search -->
             
 					 <script type="text/javascript">
     	
 					 	const $selectTitle = $(".select_title");
 					 	const $searchBox = $("#searchboxArticle");
+					 	const $selectOpt = $(".opt_select");
 					 	$selectTitle.on("click", function(){
 					 		$searchBox.toggleClass("click");
 					 	});//on end
+					 	$selectOpt.on("click",function(){
+					 		let $this = $(this);
+					 		let value = $this.text();
+					 		$searchBox.removeClass("click");
+					 		$(".select_title").text(value);
+					 		//radio checked 변경 
+					 		$this.siblings().prop("checked",true);
+					 	});
     	
    					 </script>
 					
 					<div class="box_inp_txt">
 						<label class="screen_out">검색어 입력</label> <input class="inp_txt"
-							type="text" placeholder="검색어를 입력해주세요" form="searchForm" /> <span
-							class="btn_search"> <i class="fa fa-search"></i></span>
+							type="text" placeholder="검색어를 입력해주세요" form="searchForm" name="searchWord"/> 
+							<span class="btn_search"> <i class="fa fa-search"></i></span>
 					</div>
-					<!--//box_inp_txt -->
+					
+					<!--//box_inp_txt -->					
 				</fieldset>
 			</form>
 			<!--//searchForm -->
-		
+			</div>
 		<!-- //searchbox -->
 	</div>
 	<!--//.aux -->
 	</div>
 	<!--//#content -->
-          <script type="text/javascript">
-            const $selectTitle = $(".select_title");
-            const $searchBox = $("#searchBox");
-            $selectTitle.on("click", function () {
-              $searchBox.toggleClass("click");
-            }); //on end
-          </script>
-          <div class="box_inp_txt">
-            <label class="screen_out">검색어 입력</label>
-            <input
-              class="inp_txt"
-              type="text"
-              placeholder="검색어를 입력해주세요"
-              form = "searchForm"
-            />
-          </div>  
-          <!--//box_inp_txt -->
-        </fieldset>
-      </form>
-      <!--//searchForm -->
-
-      </div>
-      <!--//.aux -->
-    </div>
-    <!--//#content -->
 	<div id="footer">
 		<div id="policy">
 			<h4 class="screen_out">정책 및 약관</h4>
@@ -324,7 +310,7 @@
 			$.ajax({
 				url : "/vanilla-stock/ajax/articlePage/list/",
 				type : "POST",
-				data : formData + '&page=' + page,
+				data : formData + '&page='+page,
 				error : function() {
 					alert("error");
 				},
@@ -336,9 +322,7 @@
 							"articleList" : json.articleList,
 							"paginate" : json.paginate
 						});
-						console.log(tmp);
 						$wrapList.empty().append(tmp);
-						$txtInp.val("");
 					}
 				}
 			});//ajax end 
@@ -352,9 +336,15 @@
 			page = this.dataset.no;
 			//ajax로 데이터 리스트 받아오는 함수 
 			getArticle();
-	  });//click() end
+	 	});//click() end
 	
-	  $('.aux').on("click",".sortRadio",function(e){
+	  	$('.aux').on("click",".sortRadio",function(e){
+	  		page=1;
+		    getArticle();
+	    });//click() end
+	    
+	    $('.aux').on("click",".btn_search",function(e){
+	  		page=1;
 		    getArticle();
 	    });//click() end
 	</script>

@@ -112,7 +112,6 @@
     <!--//#header -->
     <div id="content">
       <div class="aux">
-
         <div class="subject">
           <span class="articleHeader">${articleVO.title}</span>
           <span class="articleDate">${articleVO.regdate}</span>
@@ -128,7 +127,7 @@
             <span class="articleInfo">${articleVO.countComments}</span>
           </div>
         </div>
-
+	<form id="pickForm" action="">
         <div class="articleChart">
           <div class="articleRatio">
             <div
@@ -145,7 +144,6 @@
           <input class="pickRadio" type="radio" name="pick" value="Y" form="pickForm"> 풀매수
           <input class="pickRadio" type="radio" name="pick" value="N" form="pickForm"> 풀매도
           
-          <form id="pickForm" action=""/>
           
           <script type="text/javascript">
          	const $selectTitle = $(".select_title");
@@ -197,7 +195,7 @@
 	 		});
 		</script>
         </div>
-
+       </form>
         <div class="articleComment">
           <span class="articleTitle">댓글 입력</span>
           <input
@@ -205,9 +203,29 @@
             placeholder="댓글을 입력하세요."
             name="comment"
             class="commentWrite"
+            form="commentsForm"
           />
           <input type="button" value="등록" class="commentEnter" />
         </div>
+        <script type="text/javascript">
+        	const $comments = $(".commentWrite");
+        	$commentEnter.on("click", function(){
+				let content = $comments.val();
+				console.log(content);
+	 			$.ajax({
+	 				url:"/vanilla-stock/ajax/articlePage/comments",
+	 				type:"POST",
+	 				data:'content'=content+'&articleNo='+articleNo,
+	 				error:function(){
+						alert("error");
+					},
+					success: function() {
+						getOpinion();
+					}
+	 			})
+	 		});
+        	
+        </script>
         <div class="commentBox">
           <div class="articleCommentListYes">
             <div class="commentList">

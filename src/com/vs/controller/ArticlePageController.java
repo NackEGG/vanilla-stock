@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.vs.biz.ArticleBIZ;
+import com.vs.biz.CommentsBIZ;
 import com.vs.biz.CompanyBIZ;
 import com.vs.vo.ArticleVO;
 import com.vs.vo.CommentsVO;
@@ -31,6 +32,9 @@ public class ArticlePageController {
 	@Autowired
 	CompanyBIZ companyBIZ;
 	
+	@Autowired
+	CommentsBIZ commentsBIZ;
+	
 	@RequestMapping(path = "/articleOpen", method = RequestMethod.GET)
 	public String hello03(Model model) {
 		List<String> companyList = companyBIZ.selectAllCompanyName();
@@ -44,7 +48,7 @@ public class ArticlePageController {
 	}
 	
 	@RequestMapping(path = "/articlePage", method = RequestMethod.POST)
-	public String hello04(HttpServletRequest request, HttpSession session, Model model) {		
+	public String hello04(HttpServletRequest request, HttpSession session) {		
 		ArticleVO articleVO = new ArticleVO();
 		MemberVO memberVO = new MemberVO();
 		memberVO = (MemberVO) session.getAttribute("loginMember");

@@ -1,7 +1,8 @@
 
 @charset "UTF-8";
 html{
-	overflow-y: scroll;
+	overflow-y: scroll;	
+	overflow-x: hidden;
 }
 
 	body {
