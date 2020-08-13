@@ -473,3 +473,14 @@ color: black;
 	cursor:default;
 	cursor:not-allowed;
 }
+
+.article_open {
+ width: 30px;
+ height: 30px;
+ font-size: 25px;
+ color: black;
+ font-weight: bold;
+ display: block;
+ margin-left: 970px;
+ margin-top: -35px;
+}

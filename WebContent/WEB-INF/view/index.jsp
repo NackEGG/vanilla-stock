@@ -41,12 +41,8 @@
         <div id="gnb">
           <h2 class="screen_out">주요 서비스</h2>
           <ul>
-<<<<<<< HEAD:WebContent/WEB-INF/view/index.jsp
-            <li class="nav"><a href=""> 종목</a></li>
-=======
             <li class="nav"><a href="${pageContext.request.contextPath}/cardpage/init"> 종목</a></li>
->>>>>>> 069f0a27a078bf9e1c5912af467abf63b7c237b1:WebContent/index.jsp
-            <li class="nav"><a href=""> 투기장 </a></li>
+            <li class="nav"><a href="${pageContext.request.contextPath}/articlePage"> 투기장 </a></li>
             <li class="nav"><a href="">랭킹</a></li>
           </ul>
         </div>
@@ -60,7 +56,6 @@
       
          <!--//.aux -->
         <!-- Hidden된 로그인창-->
-<<<<<<< HEAD:WebContent/WEB-INF/view/index.jsp
         <div id="loginForm" style="visibility: hidden;" >
           <div class="form">
             <div class="formContents"></div>
@@ -68,15 +63,6 @@
             <form class="login-form" action ="/vanilla-stock/login" method="post">
               <input type="text" name="email" class="email" placeholder="email" />
               <input type="password" name="password" class="password" placeholder="password" />
-=======
-        <div id="loginForm" style="visibility: hidden;">
-          <div class="form">
-            <div class="formContents"></div>
-            <c:if test ="${member==null}">
-            <form class="login-form"  action ="vanilla-stock/login" method="get">
-              <input type="text" class="email" placeholder="email" />
-              <input type="password" class="password" placeholder="password" />
->>>>>>> 069f0a27a078bf9e1c5912af467abf63b7c237b1:WebContent/index.jsp
               <button class="login">login</button>
               <p class="message">
                 	회원이 아니시라면?
@@ -85,13 +71,8 @@
                   >회원가입</a
                 >
               </p>
-<<<<<<< HEAD:WebContent/WEB-INF/view/index.jsp
-              
-=======
->>>>>>> 069f0a27a078bf9e1c5912af467abf63b7c237b1:WebContent/index.jsp
               <p class="close" onclick="popupclose('loginForm')">닫기</p>
             </form>
-            </c:if>
           </div>
         </div>
 

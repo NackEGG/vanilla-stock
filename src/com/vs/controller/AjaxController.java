@@ -11,6 +11,7 @@ import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,10 +32,12 @@ import com.vs.biz.PickBIZ;
 import com.vs.biz.StockRecordsBIZ;
 import com.vs.util.FinanceApiUtil;
 import com.vs.util.StockApiUtil;
+import com.vs.vo.ArticleVO;
 import com.vs.vo.CardPageVO;
 import com.vs.vo.CompanyVO;
 import com.vs.vo.FinanceCateVO;
 import com.vs.vo.IndustryVO;
+import com.vs.vo.MemberVO;
 import com.vs.vo.PickVO;
 import com.vs.vo.StockRecordsVO;
 
@@ -63,27 +66,52 @@ public class AjaxController {
 	private Map<String, CardPageVO> cardDataMap;
 	private List<String> indNoList;
 	
-	
-	@RequestMapping(path = "/articlePage/comments/pick", method = RequestMethod.POST) 
-	public String hello3(HttpServletRequest request) {
+	@RequestMapping(path = "/articlePage/pick", method = RequestMethod.POST) 
+	public String hello4(HttpSession session, HttpServletRequest request) {	
+		PickVO pickVO = new PickVO();
+		MemberVO memberVO = new MemberVO();
+		memberVO = (MemberVO) session.getAttribute("loginMember");
+		pickVO.setMemberNo(memberVO.getNo());
+		pickVO.setArticleNo(Integer.parseInt(request.getParameter("articleNo")));
+		pickVO.setOpinion(request.getParameter("pick"));
+		System.out.println(pickVO.getArticleNo());
+		System.out.println(pickVO.getOpinion());
+		System.out.println(pickVO.getMemberNo());
 		
-		PickVO vo = new PickVO();
-		String opinion = request.getParameter("opinion");
-		int articleNo = Integer.parseInt(request.getParameter("articleNo"));
-		int memberNo = Integer.parseInt(request.getParameter("memberNo"));
-		vo.setOpinion(opinion);
-		vo.setArticleNo(articleNo);
-		vo.setMemberNo(memberNo);
-		
-		boolean check = pickBIZ.insert(vo);
-		if(check) {
-			
-		} else {
-			System.out.println("인서트 실패");
+		try {
+			pickBIZ.insert(pickVO);
+		} catch (Exception e) {
+			// TODO: handle exception
 		}
-		
+		return "";
+	} 
+	
+	@RequestMapping(path = "/articlePage/pick", method = RequestMethod.GET) 
+	public String hello3(HttpServletRequest request) {	
+		int no = Integer.parseInt(request.getParameter("articleNo"));
+		ArticleVO vo = new ArticleVO();
+		vo = articleBIZ.select(no);
+		int good = vo.getCountGood();
+		int bad = vo.getCountBad();
 		return "{\"good\":"+good+",\"bad\":"+bad+"}";
 	} 
+	
+	@RequestMapping(path = "/articlePage/insert", method = RequestMethod.POST) 
+	public String hello5(HttpSession session, HttpServletRequest request) {
+		ArticleVO articleVO = new ArticleVO();
+		MemberVO memberVO = new MemberVO();
+		memberVO = (MemberVO) session.getAttribute("loginMember");
+		articleVO.setCompanyName((String) request.getParameter("company"));
+		articleVO.setTitle((String) request.getParameter("title"));
+		articleVO.setMemberNo(memberVO.getNo());
+		boolean check = articleBIZ.insert(articleVO);
+		System.out.println(check);
+		if(check) {
+			return "articleMain";
+		} else {
+			return "articleOpen";
+		}
+	}
 	 
 	
 	@RequestMapping(path = "/articlePage/list", method = RequestMethod.POST)
@@ -95,15 +123,6 @@ public class AjaxController {
 		
 		Map<String, Object> map = new ConcurrentHashMap<String, Object>();
 		map = articleBIZ.getPageList(searchWord, "all", sortType, page);
-		
-		System.out.println(map.get("articleList"));
-		System.out.println(map.get("paginate"));
-		
-		//for( String key : map.keySet()) {
-		//	System.out.println("[ "+map.get(key)+" ]");
-		//}
-		
-		// System.out.println(map.get("paginate"));
 		
 		return map;
 	}
