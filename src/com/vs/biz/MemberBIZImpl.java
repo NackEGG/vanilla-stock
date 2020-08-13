@@ -19,14 +19,16 @@ import com.vs.vo.PageVO;
 @Service
 public class MemberBIZImpl implements MemberBIZ {
 	@Autowired
+
 	private MemberDAO memberDAO;
-	
+
 	@Override
 	public Map<String, Object> selectList(String searchWord, String sortType, int page) {
 		// TODO Auto-generated method stub
-		int numPage = 50; //각 인덱스당 출력되는 유저 수 
-		int numBlock = 5; //출력될 페이지 인덱스 개수 
-		if(searchWord.isEmpty()||searchWord.length()<1)	searchWord = null;
+		int numPage = 50; // 각 인덱스당 출력되는 유저 수
+		int numBlock = 5; // 출력될 페이지 인덱스 개수
+		if (searchWord.isEmpty() || searchWord.length() < 1)
+			searchWord = null;
 		Map<String, Object> viewMap = new ConcurrentHashMap<String, Object>();
 		List<MemberVO> memberList = new ArrayList<MemberVO>();
 		PaginateUtil paginateUtil = new PaginateUtil();
@@ -34,23 +36,34 @@ public class MemberBIZImpl implements MemberBIZ {
 		int startPage = pageVO.getStart();
 		int endPage = pageVO.getEnd();
 		memberList = memberDAO.selectList(searchWord, sortType, startPage, endPage);
-		//멤버 리스트 
+		// 멤버 리스트
 		viewMap.put("memberList", memberList);
-		
-		//총 멤버수 
+
+		// 총 멤버수
 		int total = memberDAO.selectTotal(searchWord);
-		viewMap.put("paginate",paginateUtil.getPaginate(page, total, numPage, numBlock, "/manager/member"));
-		
-		 return viewMap;
+		viewMap.put("paginate", paginateUtil.getPaginate(page, total, numPage, numBlock, "/manager/member"));
+
+		return viewMap;
 	}
+
+
 	@Override
-	public MemberVO loginCheck(MemberVO vo)  {
+	public MemberVO loginCheck(MemberVO vo) {
+
 		return memberDAO.loginCheck(vo);
+
 	}
-	
+
+	@Override
+	public void logout(HttpSession session) {
+		memberDAO.logout(session);
+
+	}
+
 	@Override
 	public void insertUser(MemberVO regReq) {
 		MemberVO dupMember = memberDAO.selectByEmail(regReq.getEmail());
+    
         if(dupMember!=null) {
             throw new AlreadyException(regReq.getEmail()+" is duplicate email.");
         }
@@ -63,4 +76,5 @@ public class MemberBIZImpl implements MemberBIZ {
         }
         */
 	}
+
 }

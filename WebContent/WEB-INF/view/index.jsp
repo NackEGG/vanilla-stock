@@ -42,52 +42,36 @@
           <h2 class="screen_out">주요 서비스</h2>
           <ul>
             <li class="nav"><a href="${pageContext.request.contextPath}/cardpage/init"> 종목</a></li>
-            <li class="nav"><a href=""> 투기장 </a></li>
+            <li class="nav"><a href="${pageContext.request.contextPath}/articlePage"> 투기장 </a></li>
             <li class="nav"><a href="">랭킹</a></li>
           </ul>
         </div>
         <!--//#gnb -->
-
-        <div id="searchBox">
-          <label class="screen_out">찾을 회사 입력</label>
-          <input
-            class="inp_txt"
-            type="text"
-            placeholder="회사를 입력해주세요"
-          />
-          <span class="btn_search"> <i class="fa fa-search"></i></span>
-        </div>
-        <!--//#searchBox -->
-      </div>
-      <!--//.aux -->
+       </div>
       <div id="loginBox">
-        <div id="loginBtn" class="btn" class="btn" onclick="modalpopup('loginForm')">
+        <div id="loginBtn" class="btn ${loginMember eq null? '':'hidden'}" onclick="modalpopup('loginForm')">
           로그인
         </div>
-        
-        
+         <!--//.aux -->
         <!-- Hidden된 로그인창-->
-        <div id="loginForm" style="visibility: hidden;">
+        <div id="loginForm" style="visibility: hidden;" >
           <div class="form">
             <div class="formContents"></div>
-            <c:if test ="${member==null}">
-            <form class="login-form"  action ="vanilla-stock/login" method="get">
-              <input type="text" class="email" placeholder="email" />
-              <input type="password" class="password" placeholder="password" />
+            <form class="login-form" action ="/vanilla-stock/login" method="post">
+              <input type="text" name="email" class="email" placeholder="email" />
+              <input type="password" name="password" class="password" placeholder="password" />
               <button class="login">login</button>
               <p class="message">
                 	회원이 아니시라면?
                 <a
-                  href="/Users/IRENE/Downloads/폴더/vanilla-stock-front/jeongyeon/signup.html"
+                  href="/vanila-stock/signup"
                   >회원가입</a
                 >
               </p>
               <p class="close" onclick="popupclose('loginForm')">닫기</p>
             </form>
-            </c:if>
           </div>
         </div>
-
         <!-- Hidden된 로그인창띄우는 JS-->
         <script>
           function modalpopup(i) {
@@ -101,7 +85,6 @@
        
       	$(document).ready(function(e){
       		$('#login').click(function(){
-
       			// 입력 값 체크
       			if($.trim($('#email').val()) == ''){
       				alert("아이디를 입력해 주세요.");
@@ -118,14 +101,10 @@
       		});
       		
       	});
- 
         </script>
-        
-        
-        
         <!--//loginBtn -->
-        <div id="profileBox" class="hidden">
-          <h2 class="screen_out">유저정보</h2>
+        <div id="profileBox" class="${loginMember eq null ? 'hidden' : ''}">
+
           <img
             src="profile/profile.png"
             class="profile_on"
@@ -145,7 +124,7 @@
               </li>
               <!--//.profile -->
               <li class="profile">
-                <a href="/logout.do"
+                <a href="${pageContext.request.contextPath}/logout"
                   ><span class="close_door">문</span> 로그아웃</a
                 >
               </li>
@@ -159,11 +138,9 @@
         <script>
           const $profile = $("#profileBox img");
           const $profileTarget = $("#profilePopup");
-
           $profile.click(function () {
             $profileTarget.toggle();
           }); // profileBox click end
-
           $("html").click(function (e) {
             if (!$(e.target).hasClass("profile_on")) {
               $profileTarget.hide();
@@ -190,7 +167,6 @@
             </div>
             <span class="close" onclick="searchToggle(this, event);"></span>
           </div>
-
           <!--검색창 띄우는 JS-->
           <script>
             function searchToggle(obj, evt) {
@@ -225,9 +201,7 @@
                 </div>
               </div>
             </div>
-
             <!-- hidden된 하한가 DIV-->
-
             <div id="low" style="visibility: hidden;">
               <div class="lowList">
                 <span>삼성전자</span>
@@ -236,14 +210,12 @@
                 <span>-29.76%</span>
               </div>
             </div>
-
             <!-- hidden된 하한가 DIV 보여주는 JS-->
             <script>
               function financeLow() {
                 document.getElementById("low").style.visibility = "visible";
                 document.getElementById("high").style.visibility = "hidden";
               }
-
               function financeHigh() {
                 document.getElementById("low").style.visibility = "hidden";
                 document.getElementById("high").style.visibility = "visible";
@@ -253,15 +225,14 @@
           <div class="recentSearch">
             <span>최근조회종목</span>
           </div>
-
-          <div class="announcement">
-            NEW 공지사항
+           <div class="announcement">
+            <span>NEW 공지사항</span>
+            <span>${announce}</span>
           </div>
         </div>
       </div>
     </div>
     <!--//#content -->
-
     <div id="footer">
       <div id="policy">
         <h4 class="screen_out">정책 및 약관</h4>

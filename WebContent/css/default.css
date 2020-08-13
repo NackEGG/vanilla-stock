@@ -87,6 +87,7 @@ html{
 
 		
 		#header #loginBox{
+		position: block;
 			width: 80px;
 			/*background-color: red;*/
 			position: absolute;
@@ -114,12 +115,21 @@ html{
 
 		#loginBox #profileBox {
 	height:40px;
-	position: absolute;
 	right:0;
 }
 #profileBox {
-	width:140px;
+	width:400px;
 	right:10px;
+	display: inline-block;
+	justify-content: space-between;
+	
+}
+
+.userInfo{
+	width: 200px;
+	height:40px;
+	background-color: red;
+	
 }
 
 #profileBox img {
@@ -133,7 +143,10 @@ html{
 	cursor: pointer;	
 	right:10px;
 	top:0px;
+	color:white;
 }
+
+
 
 #profilePopup{
 	width: 136px;

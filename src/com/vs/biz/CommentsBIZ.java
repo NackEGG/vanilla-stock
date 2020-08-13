@@ -1,5 +1,7 @@
 package com.vs.biz;
 
-public interface CommentsBIZ {
+import com.vs.vo.CommentsVO;
 
+public interface CommentsBIZ {
+	public boolean insert(CommentsVO vo);
 }

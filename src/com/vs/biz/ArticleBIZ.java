@@ -9,4 +9,5 @@ import com.vs.vo.PageVO;
 public interface ArticleBIZ {
 	public boolean insert(ArticleVO articleVO);
 	public Map<String, Object> getPageList(String searchWord, String searchType, String sortType, int page);
+	public ArticleVO select(int no);
 }

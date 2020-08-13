@@ -128,7 +128,7 @@ public class StockRecordsDAOImpl implements StockRecordsDAO {
 			}//rs.next사용불가! 자동으로 호출되기때문
 		};
 		return (List<Pair<StockRecordsVO, String>>) jdbcTemplate.query(
-				sql, mapper,new Object[] {startDate, endDate, indNo});
+				sql, mapper,new Object[] {startDate, endDate, indNo});		
 	}
 
 	@Override

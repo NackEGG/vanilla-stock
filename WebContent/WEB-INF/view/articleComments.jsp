@@ -5,17 +5,17 @@
   <head>
     <meta charset="utf-8" />
     <title></title>
-    <link rel="stylesheet" href="../css/reset.css" />
-    <link rel="stylesheet" href="../css/kakao.font.css" />
-    <link rel="stylesheet" href="../css/default.css" />
-    <link rel="stylesheet" href="../css/articleComments.css" />
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/reset.css" />
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/kakao.font.css" />
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/default.css" />
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/articleComments.css" />
     <link
       rel="stylesheet"
       href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
       integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf"
       crossorigin="anonymous"
     />
-    <script src="../js/jquery.js"></script>
+    <script src="${pageContext.request.contextPath}/js/jquery.js"></script>
     <style type="text/css" media="screen">
       #divTEST {
         height: 1000px;
@@ -28,7 +28,7 @@
       <div id="logoBox">
         <h1>
           <a href="" title="vanilla stock">
-            <img src="../img/vs-logo2.PNG" alt="vanilla stock" />
+            <img src="${pageContext.request.contextPath}/img/vs-logo2.PNG" alt="vanilla stock" />
           </a>
         </h1>
       </div>
@@ -64,7 +64,7 @@
         <div id="profileBox" class="hidden">
           <h2 class="screen_out">유저정보</h2>
           <img
-            src="../profile/profile.png"
+            src="${pageContext.request.contextPath}/profile/profile.png"
             class="profile_on"
             width="60"
             height="60"
@@ -112,18 +112,20 @@
     <!--//#header -->
     <div id="content">
       <div class="aux">
+
         <div class="subject">
-          <span class="articleHeader">썬더치킨 투기장</span>
-          <span class="articleDate">2020년 07월 29일</span>
-        </div>
+          <span class="articleHeader">${articleVO.title}</span>
+          <span class="articleDate">${articleVO.regdate}</span>
+          <input id="articleNo" type="hidden" value="${articleVO.no}" form="pickForm"/>
+        </div> 
         <div class="viewComment">
           <div>
             <span class="articleInfo">조회수</span>
-            <span class="articleInfo">200</span>
+            <span class="articleInfo">${articleVO.countHit}</span>
           </div>
           <div>
             <span class="articleInfo">댓글수</span>
-            <span class="articleInfo">300</span>
+            <span class="articleInfo">${articleVO.countComments}</span>
           </div>
         </div>
 
@@ -136,16 +138,64 @@
             ></div>
           </div>
           <div class="articleBuy">
-            <span>풀매수</span>
-            <span>풀매도</span>
+            <span id = "articleBuy_Good"></span>
+            <span id = "articleBuy_Bad"></span>
           </div>
 
-          <div class="articleFullbuy">
-            <span>풀매수</span>
-          </div>
-          <div class="articleFullsell">
-            <span>풀매도</span>
-          </div>
+          <input class="pickRadio" type="radio" name="pick" value="Y" form="pickForm"> 풀매수
+          <input class="pickRadio" type="radio" name="pick" value="N" form="pickForm"> 풀매도
+          
+          <form id="pickForm" action=""/>
+          
+          <script type="text/javascript">
+         	const $selectTitle = $(".select_title");
+          	const $searchBox = $("#searchBox");
+          	$selectTitle.on("click", function () {
+              $searchBox.toggleClass("click");
+            });
+          </script>
+          <script type="text/javascript">
+			const $goodOpinion = $("#articleBuy_Good");
+			const $badOpinion = $("#articleBuy_Bad");
+			const articleNo = $("#articleNo").val();
+			getOpinion();
+			function getOpinion() {
+				$.ajax({ 
+					url:"/vanilla-stock/ajax/articlePage/pick",
+					type:"GET",
+					data:{ articleNo : "${articleVO.no}" },
+					dataType:'json',
+					error:function(){
+						alert("error");
+					},
+					success: function(json) {
+						console.log(json.good);
+						console.log(json.bad);
+						$goodOpinion.text(json.good); 	
+						$badOpinion.text(json.bad); 	
+					}
+				});//ajax end 
+			}// search() end		
+		</script>
+		<script type="text/javascript">
+			const $pickRadio = $(".pickRadio");
+			const $pickForm = $("#pickForm");
+			$pickRadio.on("click", function(){
+				let formData = $pickForm.serialize();
+				console.log(formData);
+	 			$.ajax({
+	 				url:"/vanilla-stock/ajax/articlePage/pick",
+	 				type:"POST",
+	 				data:formData+'&articleNo='+articleNo,
+	 				error:function(){
+						alert("error");
+					},
+					success: function() {
+						getOpinion();
+					}
+	 			})
+	 		});
+		</script>
         </div>
 
         <div class="articleComment">
@@ -241,6 +291,6 @@
       <address>&copy; 2020 <a href="">NackEGG.com</a></address>
     </div>
     <!--//#footer -->
-    <script src="../js/fix-footer.js"></script>
+    <script src="${pageContext.request.contextPath}/js/fix-footer.js"></script>
   </body>
 </html>

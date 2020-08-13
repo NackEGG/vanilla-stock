@@ -1,5 +1,7 @@
 package com.vs.biz;
 
-public interface PickBIZ {
+import com.vs.vo.PickVO;
 
+public interface PickBIZ {
+	public boolean insert(PickVO vo);
 }
