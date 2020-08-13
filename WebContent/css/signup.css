@@ -11,7 +11,7 @@
   display: flex;
   flex-direction: row;
   margin-left: 650px;
-  margin-top: 10px;
+ 
 }
 
 #signup {
@@ -19,7 +19,7 @@
 
 .signupForm {
   width: auto;
-  height: 600px;
+  /* height: 600px; */
 }
 
 .profileDefault {
@@ -62,8 +62,8 @@
 }
 
 .joinformContents {
-  /* display: flex; */
-  display: grid;
+  display: flex;
+  /* display: grid; */
   justify-content: center;
   align-items: center;
 }
@@ -79,8 +79,9 @@
   margin-left: 20px;
 }
 
-#join_gender {
+.join_gender {
   margin-left: 20px;
+  margin-top: 8px;
 }
 
 #dateofbirth {
@@ -91,17 +92,21 @@
 }
 
 .signupConfirmed {
-  width: 120px;
-  height: 50px;
-  font-size: 25px;
+ /*  width: 120px;
+  height: 50px; */
+  font-size: 15px;
   color: black;
   font-weight: bold;
-  margin-top: 400px;
+  margin-top: 8px;
 }
 
 .birthofdate {
-  width: 120px;
+  width: 80px;
+  height: 30px;
   display: inline;
+  margin-top: 8px;
+  margin-bottom: 20px;
+  margin-left: 20px;
 }
 
 /* .input_group{

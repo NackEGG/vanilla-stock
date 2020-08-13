@@ -30,7 +30,7 @@ public class MemeberValidator implements Validator{
 
 	@Override
 	public void validate(Object object, Errors errors) {
-		RegisterRequest member=(RegisterRequest) object;
+		MemberVO member=(MemberVO) object;
 		
 		if(member.getEmail() == null || member.getEmail().trim().isEmpty()) {
 			errors.rejectValue("email", "required", "필수정보 입니다.");
@@ -41,17 +41,15 @@ public class MemeberValidator implements Validator{
 			}
 		}
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "nickname", "required", "필수 정보 입니다.");
-        ValidationUtils.rejectIfEmpty(errors, "pw", "required", "필수 정보 입니다.");
+		System.out.println(errors);
+        ValidationUtils.rejectIfEmpty(errors, "password", "required", "필수 정보 입니다.");
         ValidationUtils.rejectIfEmpty(errors, "checkPw", "required", "필수 정보 입니다.");
-        if(!member.getPw().isEmpty()) {
+        if(!member.getPassword().isEmpty()) {
             if(!member.isPwEqualToCheckPw()) {
                 errors.rejectValue("checkPw", "nomatch", "비밀번호가 일치하지 않습니다.");
             }
         }
-
-		
-		
-		
+        ValidationUtils.rejectIfEmpty(errors, "gender", "required", "필수 정보 입니다.");
 		
 	}
 

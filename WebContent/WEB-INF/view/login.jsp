@@ -80,7 +80,7 @@
                 >
               </p>
               </c:if>
-              <p class="close" onclick="popupclose('loginForm')">닫기</p>
+              <a class="close" onclick="popupclose('loginForm')">닫기1</a>
             </form>
           </div>
         </div>

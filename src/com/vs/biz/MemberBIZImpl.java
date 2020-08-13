@@ -13,7 +13,6 @@ import org.springframework.stereotype.Service;
 import com.vs.dao.MemberDAO;
 import com.vs.util.AlreadyException;
 import com.vs.util.PaginateUtil;
-import com.vs.util.RegisterRequest;
 import com.vs.vo.MemberVO;
 import com.vs.vo.PageVO;
 
@@ -62,17 +61,20 @@ public class MemberBIZImpl implements MemberBIZ {
 	}
 
 	@Override
-	public boolean insertUser(MemberVO regReq) {
+	public void insertUser(MemberVO regReq) {
 		MemberVO dupMember = memberDAO.selectByEmail(regReq.getEmail());
-		if (dupMember != null) {
-			throw new AlreadyException(regReq.getEmail() + " is duplicate email.");
-		}
-		if (memberDAO.insertUser(regReq) > 0) {
-			return true;
-		} else {
-			return false;
-		}
+    
+        if(dupMember!=null) {
+            throw new AlreadyException(regReq.getEmail()+" is duplicate email.");
+        }
+        memberDAO.insertUser(regReq);
+        /*
+        if(memberDAO.insertUser(regReq)>0) {
+        	return true;
+        }else {
+        	return false;
+        }
+        */
 	}
-
 
 }
