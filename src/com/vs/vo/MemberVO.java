@@ -17,7 +17,17 @@ public class MemberVO {
 	private int countArticles;
 	private Timestamp regdate;
 	
-	public MemberVO() {
+	//회원가입을 위한 VO
+	private String agree;
+    private String checkPw;
+    private String BDYear, BDMon, BDDay;
+	
+    //비밀번호 확인
+    public boolean isPwEqualToCheckPw() {
+        return password.equals(checkPw);
+    }
+ 
+    public MemberVO() {
 		// TODO Auto-generated constructor stub
 	}
 	
@@ -30,6 +40,47 @@ public class MemberVO {
 		this.nickname = nickname;
 	}
 	
+	
+	public String getAgree() {
+		return agree;
+	}
+
+	public void setAgree(String agree) {
+		this.agree = agree;
+	}
+
+	public String getCheckPw() {
+		return checkPw;
+	}
+
+	public void setCheckPw(String checkPw) {
+		this.checkPw = checkPw;
+	}
+
+	public String getBDYear() {
+		return BDYear;
+	}
+
+	public void setBDYear(String bDYear) {
+		BDYear = bDYear;
+	}
+
+	public String getBDMon() {
+		return BDMon;
+	}
+
+	public void setBDMon(String bDMon) {
+		BDMon = bDMon;
+	}
+
+	public String getBDDay() {
+		return BDDay;
+	}
+
+	public void setBDDay(String bDDay) {
+		BDDay = bDDay;
+	}
+
 	public int getCountArticles() {
 		return countArticles;
 	}

@@ -6,7 +6,6 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
-import com.vs.util.RegisterRequest;
 import com.vs.vo.MemberVO;
 
 public interface MemberBIZ {
@@ -14,6 +13,6 @@ public interface MemberBIZ {
 	public MemberVO loginCheck(MemberVO vo);
 	
 	//public MemberVO viewMember(MemberVO vo);
-	public boolean insertUser(MemberVO newMember);
+	public void insertUser(MemberVO newMember);
 
 }
