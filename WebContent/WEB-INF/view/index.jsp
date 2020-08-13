@@ -47,19 +47,16 @@
           </ul>
         </div>
         <!--//#gnb -->
-
        </div>
       <div id="loginBox">
         <div id="loginBtn" class="btn ${loginMember eq null? '':'hidden'}" onclick="modalpopup('loginForm')">
           로그인
         </div>
-      
          <!--//.aux -->
         <!-- Hidden된 로그인창-->
         <div id="loginForm" style="visibility: hidden;" >
           <div class="form">
             <div class="formContents"></div>
-            
             <form class="login-form" action ="/vanilla-stock/login" method="post">
               <input type="text" name="email" class="email" placeholder="email" />
               <input type="password" name="password" class="password" placeholder="password" />
@@ -75,7 +72,6 @@
             </form>
           </div>
         </div>
-
         <!-- Hidden된 로그인창띄우는 JS-->
         <script>
           function modalpopup(i) {
@@ -89,7 +85,6 @@
        
       	$(document).ready(function(e){
       		$('#login').click(function(){
-
       			// 입력 값 체크
       			if($.trim($('#email').val()) == ''){
       				alert("아이디를 입력해 주세요.");
@@ -106,9 +101,7 @@
       		});
       		
       	});
- 
         </script>
-        
         <!--//loginBtn -->
         <div id="profileBox" class="${loginMember eq null ? 'hidden' : ''}">
 
@@ -120,7 +113,6 @@
             alt="테스터"
             title="테스터"
           />
-        
           <div id="profilePopup" class="profile_on">
             <ul id="profileList">
               <li class="profile">
@@ -146,11 +138,9 @@
         <script>
           const $profile = $("#profileBox img");
           const $profileTarget = $("#profilePopup");
-
           $profile.click(function () {
             $profileTarget.toggle();
           }); // profileBox click end
-
           $("html").click(function (e) {
             if (!$(e.target).hasClass("profile_on")) {
               $profileTarget.hide();
@@ -177,7 +167,6 @@
             </div>
             <span class="close" onclick="searchToggle(this, event);"></span>
           </div>
-
           <!--검색창 띄우는 JS-->
           <script>
             function searchToggle(obj, evt) {
@@ -212,9 +201,7 @@
                 </div>
               </div>
             </div>
-
             <!-- hidden된 하한가 DIV-->
-
             <div id="low" style="visibility: hidden;">
               <div class="lowList">
                 <span>삼성전자</span>
@@ -223,14 +210,12 @@
                 <span>-29.76%</span>
               </div>
             </div>
-
             <!-- hidden된 하한가 DIV 보여주는 JS-->
             <script>
               function financeLow() {
                 document.getElementById("low").style.visibility = "visible";
                 document.getElementById("high").style.visibility = "hidden";
               }
-
               function financeHigh() {
                 document.getElementById("low").style.visibility = "hidden";
                 document.getElementById("high").style.visibility = "visible";
@@ -240,7 +225,6 @@
           <div class="recentSearch">
             <span>최근조회종목</span>
           </div>
-
            <div class="announcement">
             <span>NEW 공지사항</span>
             <span>${announce}</span>
@@ -249,7 +233,6 @@
       </div>
     </div>
     <!--//#content -->
-
     <div id="footer">
       <div id="policy">
         <h4 class="screen_out">정책 및 약관</h4>
