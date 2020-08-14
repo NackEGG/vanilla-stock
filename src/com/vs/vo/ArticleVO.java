@@ -15,6 +15,11 @@ public class ArticleVO {
 	private int buyingCount;
 	private int sellCount;
 	private int commentsCount;
+	private String companyName;
+	private int countHit;
+	private int countGood;
+	private int countBad;
+	private int countComments;
 	
 	public ArticleVO() {
 		// TODO Auto-generated constructor stub
@@ -150,6 +155,46 @@ public class ArticleVO {
 
 	public void setRegdate(Timestamp regdate) {
 		this.regdate = regdate;
+	}
+
+	public String getCompanyName() {
+		return companyName;
+	}
+
+	public void setCompanyName(String companyName) {
+		this.companyName = companyName;
+	}
+
+	public int getCountHit() {
+		return countHit;
+	}
+
+	public void setCountHit(int countHit) {
+		this.countHit = countHit;
+	}
+
+	public int getCountGood() {
+		return countGood;
+	}
+
+	public void setCountGood(int countGood) {
+		this.countGood = countGood;
+	}
+
+	public int getCountBad() {
+		return countBad;
+	}
+
+	public void setCountBad(int countBad) {
+		this.countBad = countBad;
+	}
+
+	public int getCountComments() {
+		return countComments;
+	}
+
+	public void setCountComments(int countComments) {
+		this.countComments = countComments;
 	}
 	
 }

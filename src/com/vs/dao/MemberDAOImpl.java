@@ -6,7 +6,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
+import javax.annotation.Resource;
+import javax.servlet.http.HttpSession;
 
+import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -22,12 +25,15 @@ import com.vs.vo.MemberVO;
 public class MemberDAOImpl implements MemberDAO {
 
 	@Autowired
+	private JdbcTemplate jdbcTemplate;
+
+	@Autowired
 	private SqlSessionFactory sqlSessionFactory;
 	private static final String MAPPER = "com.vs.mapper.MemberMapper.";
-	
+
 	@Autowired
-	private JdbcTemplate jdbcTemplate;
-	
+	private SqlSession sqlSession;
+
 	@Override
 	public int selectTotal(String searchWord) {
 		SimpleJdbcCall funcTotalMemberCount = new SimpleJdbcCall(jdbcTemplate);
@@ -37,12 +43,12 @@ public class MemberDAOImpl implements MemberDAO {
 		Integer c = (int) count;
 		return c;
 	}
-	
+
 	@Override
 	public List<MemberVO> selectList(String searchWord, String sortType, int startPage, int endPage) {
-		SimpleJdbcCall procedureSelectMember = new SimpleJdbcCall(jdbcTemplate)
-				.withProcedureName("select_member").returningResultSet("memberVO", new RowMapper<MemberVO>() {
-					
+		SimpleJdbcCall procedureSelectMember = new SimpleJdbcCall(jdbcTemplate).withProcedureName("select_member")
+				.returningResultSet("memberVO", new RowMapper<MemberVO>() {
+
 					@Override
 					public MemberVO mapRow(ResultSet rs, int rowNum) throws SQLException {
 						MemberVO memberVO = new MemberVO();
@@ -61,15 +67,60 @@ public class MemberDAOImpl implements MemberDAO {
 						return memberVO;
 					}
 				});
-		
+
 		SqlParameterSource in = new MapSqlParameterSource().addValue("search_word", searchWord)
-				.addValue("sort_type", sortType)
-				.addValue("start_page", startPage)
-				.addValue("end_page", endPage);
+				.addValue("sort_type", sortType).addValue("start_page", startPage).addValue("end_page", endPage);
 		Map<String, Object> out = procedureSelectMember.execute(in);
 		System.out.println(out);
-		List<MemberVO> memberVOList = (List<MemberVO>)out.get("OUT_CURSOR");
-		
+		List<MemberVO> memberVOList = (List<MemberVO>) out.get("OUT_CURSOR");
+
 		return memberVOList;
 	}
+
+	@Override
+	public MemberVO loginCheck(MemberVO vo) {
+
+		MemberVO mem = null;
+
+		try (SqlSession session = sqlSessionFactory.openSession()) {
+			mem = session.selectOne(MAPPER + "loginCheck", vo);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		System.out.println("===>Mybatis로 로그인 check " + vo.getEmail());
+		return mem;
+
+	}
+
+	@Override
+	public void logout(HttpSession session) {
+		System.out.println("로그아웃!!!!!!");
+		session.invalidate();
+
+	}
+
+	public MemberVO selectByEmail(String email) {
+		MemberVO mem = null;
+		try (SqlSession session = sqlSessionFactory.openSession()) {
+			mem = session.selectOne(MAPPER + "selectByEmail", email);
+		} catch (Exception e) {
+			e.printStackTrace();
+			mem = null;
+		}
+		return mem;
+	}
+
+	public int insertUser(MemberVO regReq) {
+		int result = 0;
+		try (SqlSession session = sqlSessionFactory.openSession()) {
+			System.out.println("insertUser : " + regReq.getGender().length() + " : " + regReq.getGender());
+			regReq.setGender(regReq.getGender().trim());
+			result = session.insert(MAPPER + "join", regReq);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+
 }

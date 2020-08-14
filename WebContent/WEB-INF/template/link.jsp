@@ -11,7 +11,6 @@
 <script src="/vanilla-stock/js/dark-unica.js"></script>
 <script src="/vanilla-stock/js/histogram-bellcurve.js"></script>
 <script>
-
 _.templateSettings = {interpolate: /\<\@\=(.+?)\@\>/gim,evaluate: /\<\@([\s\S]+?)\@\>/gim,escape: /\<\@\-(.+?)\@\>/gim};
 //한국시간으로 변경 
 moment.locale("ko"); 

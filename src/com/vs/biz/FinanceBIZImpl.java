@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,6 +16,7 @@ import com.vs.util.PaginateUtil;
 import com.vs.vo.FinanceManagerJoinVO;
 import com.vs.vo.FinanceVO;
 import com.vs.vo.PageVO;
+
 
 @Service
 public class FinanceBIZImpl implements FinanceBIZ {
@@ -54,4 +58,26 @@ public class FinanceBIZImpl implements FinanceBIZ {
 		return map;
 	}
 
+	// dao의 결과 List<Map<String,Object>>를 -> Map<String account_code,Long value>로
+	@Override
+	public Map<String, Long> findRecentAccountValueMap(String stockCode) {
+		Map<String, Long> result = new HashMap<>();
+		List<FinanceVO> list = financeDAO.selectRecentFinance(stockCode);
+
+		for (FinanceVO vo : list) {
+			result.put(vo.getLabelKor(), vo.getAccountValue());
+		}
+		return result;
+	}
+
+	@Override
+	public Map<String, Long> findIndustryAverageValueMap(int industryNo) {
+		Map<String, Long> result = new HashMap<>();
+		List<FinanceVO> list = financeDAO.getIndustryAverageFinance(industryNo);
+		
+		for (FinanceVO vo : list) {
+			result.put(vo.getLabelKor(), vo.getAccountValue());
+		}
+		return result;
+	}
 }

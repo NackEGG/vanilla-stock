@@ -46,7 +46,7 @@ public class FinanceApiUtil {
 			try {
 				// 본인의 finance_cate_api 폴더가 있는 경로를 작성 
 				List<FinanceCateVO> cateList 
-				= om.readValue(new File("/Users/kimdabin/playdata/workspace/Spring-work/vanilla-stock/db/finance_cate_api/"+fileName+".txt"),
+				= om.readValue(new File("c:/springwork/vanilla-stock/db/finance_cate_api/"+fileName+".txt"),
 						new TypeReference<List<FinanceCateVO>>(){});
 				allList.addAll(cateList);
 			} catch (IOException e) {
