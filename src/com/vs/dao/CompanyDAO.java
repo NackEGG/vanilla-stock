@@ -8,6 +8,7 @@ import com.vs.vo.IndustryVO;
 public interface CompanyDAO {
 	public CompanyVO select(String keyword);
 	public int insertIntoAPI(CompanyVO data);
+	public List<CompanyVO> selectSearchNmList(String company);
 	public List<String> selectAllCompanyName();
 	public List<CompanyVO> selectList();
 	public List<CompanyVO> selectCompany(int indNo);
