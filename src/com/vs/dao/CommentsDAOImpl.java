@@ -88,6 +88,21 @@ public class CommentsDAOImpl implements CommentsDAO {
 		
 		CommentsRowMapper rowMapper = new CommentsRowMapper();
 		
+		class CommentsRowMapper implements RowMapper<CommentsVO>{
+
+			@Override
+			public CommentsVO mapRow(ResultSet rs, int rowNum) throws SQLException {
+				CommentsVO vo = new CommentsVO();
+				vo.setNo(rs.getInt("no"));
+				vo.setMemberNo(rs.getInt("member_no"));
+				vo.setArticleNo(rs.getInt("article_no"));
+				vo.setContent(rs.getString("content"));
+				vo.setOpinion(rs.getString("opinion"));
+				vo.setNickname(rs.getString("nickname"));
+				return vo;
+			}	
+		}
+		
 		simpleJdbcCall
 		.withProcedureName("USP_GET_PICK_AND_COMMENTS")
 		.returningResultSet("PO_GOOD_CURSOR", rowMapper)
@@ -131,8 +146,39 @@ public class CommentsDAOImpl implements CommentsDAO {
 		
 		return result;	
 	}
-	
-	
+
+	@Override
+	public List<CommentsVO> getRecentComments(String stockCode, int num) {
+		
+		SimpleJdbcCall simpleJdbcCall = getSimpleJdbcCall();
+		
+		CommentsRowMapper rowMapper = new CommentsRowMapper();
+		
+		simpleJdbcCall
+		.withProcedureName("USP_GET_RECENT_COMMENTS")
+		.returningResultSet("PO_CURSOR", new RowMapper<CommentsVO>() {
+
+			@Override
+			public CommentsVO mapRow(ResultSet rs, int rowNum) throws SQLException {
+				CommentsVO vo = new CommentsVO();
+				vo.setNo(rs.getInt("no"));
+				vo.setMemberNo(rs.getInt("member_no"));
+				vo.setArticleNo(rs.getInt("article_no"));
+				vo.setContent(rs.getString("content"));
+				vo.setRegdate(rs.getTimestamp("regdate"));
+				vo.setOpinion(rs.getString("opinion"));
+				return vo;
+			}
+		});
+		
+		SqlParameterSource in = new MapSqlParameterSource()
+				.addValue("PI_STOCK_CODE", stockCode)
+				.addValue("PI_NUM", num);
+
+		Map out = simpleJdbcCall.execute(in);
+		
+		return (List<CommentsVO>) out.get("PO_CURSOR");
+	}
 	
 	public class CommentsRowMapper implements RowMapper<CommentsVO>{
 
@@ -148,5 +194,5 @@ public class CommentsDAOImpl implements CommentsDAO {
 			return vo;
 		}	
 	}
-
+	
 }

@@ -100,12 +100,11 @@ public class AjaxController {
 				commentsBIZ.insertPickComments(commentsVO);
 		
 		if(check) {
-			result = "";
+			result = "success";
 		} else {
-			result = "댓글 등록에 실패하셨습니다.";
+			result = "fail";
 		}
-		
-		return "{\"result\":"+result+"}";
+		return result;
 	}
 	
 	@RequestMapping(path = "/articlePage/comments", method = RequestMethod.POST)

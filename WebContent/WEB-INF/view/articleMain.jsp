@@ -247,24 +247,19 @@
 				</span>
               </div>
               <!--//#articleCompany -->
-				<@ 
+				<@ 	
+					var good = 0;
+					var bad = 0;
 					if((artc.countGood + artc.countBad) != 0){
-						var good = artc.countGood/((artc.countGood) + (artc.countBad)) * 100;
-						var bad = artc.countBad/((artc.countGood) + (artc.countBad)) * 100;
+						good = artc.countGood/((artc.countGood) + (artc.countBad)) * 100;
+						bad = artc.countBad/((artc.countGood) + (artc.countBad)) * 100;
 					}
 				@>
               <div class="articleRatio">
                 <div
                   class="articleRatio_fill"
-                  title="<@if((artc.countGood + artc.countBad) != 0){@>
-						<@=artc.countGood/((artc.countGood) + (artc.countBad)) * 100@> :
-						<@=artc.countBad/((artc.countGood) + (artc.countBad)) * 100@>
-						<@}else{@>
-						0:0<@}@>"
-                  style="width: <@if((artc.countGood + artc.countBad) != 0){@>
-						<@=artc.countGood/((artc.countGood) + (artc.countBad)) * 100@>
-						<@}else{@>
-						0<@}@>%;"
+                  title="<@=good.toFixed(0)@>:<@=bad.toFixed(0)@>"
+                  style="width: <@=good@>%;"
                 ></div>
               </div>
 

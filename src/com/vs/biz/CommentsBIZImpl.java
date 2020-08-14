@@ -61,4 +61,14 @@ public class CommentsBIZImpl implements CommentsBIZ {
 			
 		return map;
 	}
+
+	@Override
+	public List<CommentsVO> getRecentComments(String stockCode, int num) {
+		return commentsDAO.getRecentComments(stockCode, num);
+	}
+
+	@Override
+	public int[] getTotalCountCommentsByOpinion(int articleNo) {
+		return commentsDAO.getTotalCountCommentsByOpinion(articleNo);
+	}
 }

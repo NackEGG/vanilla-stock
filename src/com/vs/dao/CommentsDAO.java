@@ -10,4 +10,5 @@ public interface CommentsDAO {
 	public boolean insertPickComments(CommentsVO commentsVO);
 	public Map<String, List<CommentsVO>> getCommentsByOpinion(int articleNo, int start, int end);
 	public int[] getTotalCountCommentsByOpinion(int articleNo);
+	public List<CommentsVO> getRecentComments(String stockCode, int num);
 }

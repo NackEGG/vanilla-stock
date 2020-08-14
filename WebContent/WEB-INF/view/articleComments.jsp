@@ -134,8 +134,6 @@
           <div class="articleRatio">
             <div
               class="articleRatio_fill"
-              title="80승"
-              style="width: 70%;"
             ></div>
           </div>
           <div class="articleBuy">
@@ -257,16 +255,31 @@
 	</div>
 	</script>
 	<script type="text/javascript">
+		
+		
+		// 게이지 바 채우기
+		var good = 0;
+		var bad = 0;
+		if((${articleVO.countGood} + ${articleVO.countBad}) != 0){
+			good = ${articleVO.countGood}/(${articleVO.countGood} + ${articleVO.countBad}) * 100;
+			bad = ${articleVO.countBad}/(${articleVO.countGood} + ${articleVO.countBad}) * 100;
+		}
+		$(".articleRatio_fill").attr({"style": "width:"+good+"%;"
+						,"title" : good.toFixed(0)+":"+bad.toFixed(0)})
+		
+		// init
 		const goodCommentsTmp = _.template($("#goodCommentsTmp").html());
 		const badCommentsTmp = _.template($("#badCommentsTmp").html());
 		const $wrapList1 = $(".goodCommentBox");
 		const $wrapList2 = $(".badCommentBox");
 		const articleNo = $("#articleNo").val();
-		console.log(articleNo);
+		//console.log(articleNo);
 		let page = 1;
-		console.log(page);
+		//console.log(page);
 		getBadComments();
 		getGoodComments();
+		
+		// 풀매수 쪽
 		function getGoodComments(){
 			$.ajax({
 				url : "/vanilla-stock/ajax/articlePage/pickComments",
@@ -276,21 +289,19 @@
 					alert("error");
 				},
 				success : function(json){
-					
 					if (page == 1 || json.goodCommentsList.length > 0) {
-
 						let tmp = goodCommentsTmp({
 							"goodCommentsList" : json.goodCommentsList,
 							"paginateGood" : json.paginateGood
-						});
-						
+						});			
 						$wrapList1.empty().append(tmp);
 					}
-				}
-			})
+				} // ajax
+			}) // function getGoodComments()
 			
 		}
 		
+		// 풀매도쪽
 		function getBadComments(){
 			$.ajax({
 				url : "/vanilla-stock/ajax/articlePage/pickComments",
@@ -300,41 +311,57 @@
 					alert("error");
 				},
 				success : function(json){
-					
 					if (page == 1 || json.badCommentsList.length > 0) {
-
 						let tmp = badCommentsTmp({
 							"badCommentsList" : json.badCommentsList,
 							"paginateBad" : json.paginateBad
 						});
-						
 						$wrapList2.empty().append(tmp);
 					}
 				}
-			})
-			
-		}
+			})// ajax
+		}// function getBadComments()
 		
+		// 댓글 삽입
 		const $insertForm = $("#pickCommentsForm");
 		function insertPickComments() {
 			let formData =  $insertForm.serialize();
-			console.log("form data");
-			console.log(formData);
+			// console.log("form data");
+			// console.log(formData);
 			$.ajax({ 
 				url:"/vanilla-stock/ajax/articlePage/pickComments",
 				type:"POST",
 				data:formData+'&articleNo='+articleNo,
 				error:function(){
-					alert("댓글 등록 실패");
+					alert("error")
 				},
 				success: function(text) {
-					alert("댓글 등록 성공");
+					alert(text);
 					let page = 1;
 					getBadComments();
 					getGoodComments();
 				}
-			});//ajax end 
-		}// search() end
+			});//ajax 
+		}// function insertPickComments()
+		
+		/* // 게이지 바 밑 퍼센트
+		function insertPickComments() {
+			$.ajax({ 
+				url:"/vanilla-stock/ajax/articlePage/pick",
+				type:"GET",
+				data:formData+'&articleNo='+articleNo,
+				error:function(json){
+					alert(error);
+				},
+				success: function(json) {
+					alert(json.result);
+					let page = 1;
+					getBadComments();
+					getGoodComments();
+				}
+			});//ajax 
+		}// function insertPickComments() */
+		
 		$( ".commentEnter" ).click(function() {	 
 			if("${loginMember eq null ? '0' : '1'}" == 1){
       			insertPickComments();
