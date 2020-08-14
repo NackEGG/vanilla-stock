@@ -46,6 +46,7 @@ public class MemberBIZImpl implements MemberBIZ {
 				"/vanilla-stock/ajax/manager/member"));
 		viewMap.put("total",total);
 		 return viewMap;
+	}
 
 	@Override
 	public MemberVO loginCheck(MemberVO vo) {
