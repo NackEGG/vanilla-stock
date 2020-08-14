@@ -30,6 +30,11 @@ public class CompanyVO {
 		return company;
 	}
 
+	@Override
+	public String toString() {
+		return "CompanyVO [ company=" + company + "]";
+	}
+
 	public void setCompany(String company) {
 		this.company = company;
 	}

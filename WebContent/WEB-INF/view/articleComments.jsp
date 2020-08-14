@@ -140,10 +140,12 @@
             <span id = "articleBuy_Good"></span>
             <span id = "articleBuy_Bad"></span>
           </div>
-
-          <input class="pickRadio" type="radio" name="opinion" value="Y" form="pickCommentsForm"> 풀매수
-          <input class="pickRadio" type="radio" name="opinion" value="N" form="pickCommentsForm"> 풀매도
           
+          <div class="articleButton">
+
+          <label><input class="pickRadio" type="radio" name="opinion" value="Y" form="pickCommentsForm"> 풀매수</label>
+          <label><input class="pickRadio" type="radio" name="opinion" value="N" form="pickCommentsForm"> 풀매도</label>
+           </div>
           <script type="text/javascript">
          	const $selectTitle = $(".select_title");
           	const $searchBox = $("#searchBox");
