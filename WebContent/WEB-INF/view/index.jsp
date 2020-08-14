@@ -299,11 +299,12 @@
             </script>
           </div>
           <div class="recentSearch">
+
 		      <span class="subject">최근인기종목</span>
 		      <c:forEach var="pop" items="${popular}">
 		      	<span>${pop.company}</span>
 		      </c:forEach>
-	      </div>
+      </div>
            <div class="announcement">
             <span>NEW 공지사항</span>
             <span>${announce}</span>

@@ -137,8 +137,17 @@
   margin-right: 5px;
 }
 
+.articleButton{
+	
+	display: flex;
+	justify-content: space-around;
+}
+
+
 .commentBox{
 	display:flex;
+	width: 100%;
+	height: auto;
 }
 
 .goodCommentBox {

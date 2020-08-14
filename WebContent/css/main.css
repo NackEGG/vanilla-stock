@@ -167,11 +167,13 @@
 /*  margin-top: 5px; */
 }
 .recentSearch {
- width: 350px;
- height: 345px;
- background-color: lemonchiffon;
- margin-left: 550px;
- margin-top: -345px;
+  width: 350px;
+  height: 345px;
+  background-color: lemonchiffon;
+  margin-left: 550px;
+  margin-top: -345px;
+  display: flex;
+  flex-direction: column;
 }
 .announcement {
  width: 400px;
