@@ -88,8 +88,6 @@
 								<label for="latestMember">최신순</label>
 								<input id="hardMember" type="radio" form="searchForm" name="sortType" value="hardMember" />
 								<label for="hardMember">열혈순</label>
-								
-								
 							</p><!--//sort -->
 						</div><!--//.head_list -->
 						<div class="list_member">

@@ -10,9 +10,9 @@ const $aux = $(".aux");
 const $sortBtn = $(".sort input[type=radio]");
 const $divPaginate = $('.div_paginate');
 let page = 1;// page는 1페이지 부터 시작  
-let cateType = '${category }';
+let cateType = $('#categoryINP').val(); 
 const $selectTitle = $(".select_title");
-const $articleSection = $("#articleSection");
+const $articleSection = $("#articleSection"); 
 const $btnClose = $(".btn_close");
 const $innerSearch = $(".inner_search");
 const $innerBar = $('.inner_bar');
@@ -20,6 +20,99 @@ const $icoSearchBar = $('.ico_search_bar');
 const $icoBtnDetail = $('.ico_btn_detail');
 const $innerDetailSearch = $('.inner_detail_search');
 const $deleteBtn = $('.btn_delete');
+const $tabInp = $('.tab input[type=radio]');
+const $contentsDIV = $('.div_contents');
+const $detailSearchBox = $('.box_inp_detail_search');
+let oldValue = null;
+let oldStockCode = null;
+const $companySearchBox = $("#companySearchBox");
+//reset 조건 
+const $resetTabType = $("input:radio[name=tab]:input[value='finance']");
+const $resetSortingType = $("input:radio[name=sortType]:input[value='latest']");
+function reset() {
+	page = 1;
+	$resetTabType.prop('checked',true);
+	$resetSortingType.prop('checked',true);
+	$txtInp.val("");
+	
+}
+reset();
+
+$txtInp.keyup(findCompany)
+.blur(findCompany)
+.focus();
+
+
+function findCompany() {
+	$companySearchBox.show();
+	let inpValue = $(".company_inp").val();
+	console.log(inpValue);
+	if(inpValue!="" && oldValue!=inpValue ){
+		oldValue = inpValue;
+	console.log(inpValue);
+	$.ajax({
+		url : "/vanilla-stock/ajax/manager/contents/finance/search/company/"+inpValue,
+		 dataType:"json",
+		type : "post",
+		error : function() {
+			alert("error");
+		},
+		success : function(data) {
+			console.log(data);
+			let tmp = searchCompanyTmp({
+				"companyList" : data
+			});
+			
+			$companySearchBox.empty().append(tmp);
+		}//success end 
+
+	});//ajax end 
+	}//if end 
+}//findCompany end 
+
+$companySearchBox.on('click','li', function() {
+	//alert("test");//test by kimdabin
+	let stockCode = $(this).attr('data-stockCode');
+	let companyResult = $(this).text();
+	$txtInp.val(companyResult);
+	console.log(stockCode);
+	
+	if(stockCode!="" && oldStockCode!=stockCode ){
+		oldStockCode = stockCode;
+	
+	$.ajax({
+		url : "/vanilla-stock/ajax/manager/contents/finance/search/term/"+stockCode,
+		 dataType:"json",
+		type : "post",
+		error : function() {
+			alert("error");
+		},
+		success : function(data) {
+			console.log(data);
+			let years = new Set();
+			let quarters = new Array();
+			data.forEach(function(el, index) {
+				years[index] = el.year;
+				quarters[index] = el.quarter;
+				console.log("year");
+				console.log(el.year);
+			});
+			let termTmp = searchTermTmp({
+				"years" : years,
+				"quarters": quarters
+			});
+//			
+			$detailSearchBox.empty().append(termTmp);
+		}//success end 
+
+	});//ajax end 
+	}//if end 
+});
+$("html").click(function(e){
+	if(!$(e.target).hasClass("company_search_on")){
+		$companySearchBox.hide();
+	}//if end
+});//
 $deleteBtn.on('click', function() {
 	//console.log($(this).parent().prevAll('input[type=checkbox]'));
 	let no = $(this).prevAll('input[type=checkbox]').val();
@@ -60,7 +153,7 @@ $selectTitle.on("click", function() {
 	$articleSection.toggleClass("click");
 });//on end
 
-console.log(cateType);
+//console.log(cateType);
 
 window[cateType]();
 //getMembers();
@@ -75,11 +168,25 @@ $searchForm.submit(function(e) {
 	window[cateType]();
 
 });//submit end 
+$tabInp.change(contentsTab);
+
+
 
 function contents() {
-	alert("contents!");
+	//alert("contents!");
+	let formData = $searchForm.serialize();
+	console.log("form data");
+	console.log(formData);
 }
-
+function contentsTab() {
+	//reset();
+	var nowTab = $('.inp_tab:checked').val();
+	alert(nowTab);
+	if($contentsDIV.hasClass('show')){
+		$contentsDIV.removeClass('show');
+	}
+	$('div .'+nowTab).addClass('show');
+}//contentsTab
 function members() {
 
 	let formData = $searchForm.serialize();

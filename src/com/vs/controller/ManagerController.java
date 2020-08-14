@@ -20,4 +20,6 @@ public class ManagerController {
 		model.addAttribute("category", "contents");
 		return "manager";
 	}
+	
+	
 }

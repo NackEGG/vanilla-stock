@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.vs.biz.CompanyBIZ;
+import com.vs.biz.FinanceBIZ;
 import com.vs.biz.FinanceCateBIZ;
 import com.vs.biz.IndustryBIZ;
 import com.vs.biz.MemberBIZ;
@@ -23,6 +24,7 @@ import com.vs.biz.MemberLogBIZ;
 import com.vs.util.FinanceApiUtil;
 import com.vs.vo.CompanyVO;
 import com.vs.vo.FinanceCateVO;
+import com.vs.vo.FinanceVO;
 import com.vs.vo.IndustryVO;
 
 
@@ -36,9 +38,43 @@ public class AjaxController {
 	@Autowired
 	private FinanceCateBIZ financeCateBIZ;
 	@Autowired
+	private FinanceBIZ financeBIZ;
+	@Autowired
 	private MemberBIZ memberBIZ;
 	
 	
+	@RequestMapping(value="/manager/contents/finance/search/company/{company}", method = RequestMethod.POST)
+	public List<CompanyVO> getSearchCompanyList(@PathVariable String company){
+		System.out.println("company");	
+		System.out.println(company);
+		return companyBIZ.getSearchNmList(company);
+	}
+	
+	@RequestMapping(value="/manager/contents/finance/search/term/{stockCode}", method = RequestMethod.POST)
+	public List<FinanceVO> getSearchTermList(@PathVariable String stockCode){
+		return financeBIZ.getSearchTermList(stockCode);
+	}
+	
+	
+	@RequestMapping(value = "/manager/contents")
+	public Map<String, Object> getManagerPgContentsList(HttpServletRequest request){
+		Map<String, Object> map = new ConcurrentHashMap<String, Object>();
+		String tab = request.getParameter("tab");
+		String searchWord = request.getParameter("searchWord");
+		int startYear = Integer.parseInt(request.getParameter("startYear"));
+		int endYear = Integer.parseInt(request.getParameter("endYear"));
+		int startQuarter = Integer.parseInt(request.getParameter("startQuarter"));
+		int endQuarter = Integer.parseInt(request.getParameter("endQuarter"));
+		int page = Integer.parseInt(request.getParameter("page"));
+		String sortType = request.getParameter("sortType");
+		
+		if(tab.equals("finance")) {
+			map = financeBIZ.getJoinList(page, tab, searchWord, startYear, startQuarter, endYear, endQuarter, sortType);
+		}
+				
+		
+		return map;
+	}
 	
 	@RequestMapping(value = "/manager/members", method = RequestMethod.POST)
 	public Map<String, Object> getManagerPgUserList(HttpServletRequest request) {

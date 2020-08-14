@@ -16,8 +16,8 @@
 		<param-name>contextConfigLocation</param-name>
 		<param-value>/WEB-INF/applicationContext.xml</param-value>
 	</context-param>
-	
-		  <!-- post 방식의 한글처리 필터  -->
+		
+  <!-- post 방식의 한글처리 필터  -->
   <filter>
     <filter-name>encoding</filter-name>
     <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>

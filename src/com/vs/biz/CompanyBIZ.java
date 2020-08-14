@@ -6,4 +6,6 @@ import com.vs.vo.CompanyVO;
 
 public interface CompanyBIZ {
 	public boolean insertIntoAPI(List<CompanyVO> companyList);
+	public List<CompanyVO> getSearchNmList(String company);
+	
 }

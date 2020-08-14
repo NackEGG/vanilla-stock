@@ -25,6 +25,7 @@
 </head>
 <body>
 	<c:import url="/WEB-INF/template/header.jsp"/>
+	<input type="hidden" id="categoryINP" value="${category }" name="category"/>
 	<div id="content">
 		<div class="aux">
 

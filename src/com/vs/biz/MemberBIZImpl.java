@@ -7,6 +7,7 @@ import java.util.concurrent.ConcurrentHashMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.vs.dao.MemberDAO;
 import com.vs.util.PaginateUtil;
@@ -18,6 +19,7 @@ public class MemberBIZImpl implements MemberBIZ {
 	@Autowired
 	private MemberDAO memberDAO;
 	
+	@Transactional
 	@Override
 	public Map<String, Object> selectList(String searchWord, String sortType, int page) {
 		// TODO Auto-generated method stub
