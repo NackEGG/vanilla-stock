@@ -94,10 +94,11 @@
 	<div id="content">
 		<div class="aux">
 			<div class="alert alert-success"  align="center">
+				<img src="${pageContext.request.contextPath}/img/logotemp2.png"	width="600px">
 		        <h1><i class="far fa-thumbs-up"></i>Welcome!</h1><br>
 		         <h3>회원가입을 축하드립니다!</h3> 
 		         <h3>우측 상단 로그인버튼을 통해 로그인해주세요</h3>
-		 			
+		         <br><br>
 		    </div>
 		    
 		    <div align="center">

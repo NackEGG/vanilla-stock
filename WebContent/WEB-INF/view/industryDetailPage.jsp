@@ -485,7 +485,7 @@
 				        		    type: 'column'
 				        		  },
 				        		  title: {
-				        		    text: null
+				        		    text: '¼ºÀå·ü'
 				        		  },
 				        		  xAxis: {
 				        		    categories: dateList
