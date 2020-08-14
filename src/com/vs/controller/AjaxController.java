@@ -25,6 +25,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.vs.biz.ArticleBIZ;
 import com.vs.biz.CommentsBIZ;
 import com.vs.biz.CompanyBIZ;
+import com.vs.biz.FinanceBIZ;
 import com.vs.biz.FinanceCateBIZ;
 import com.vs.biz.IndustryBIZ;
 import com.vs.biz.MemberBIZ;
@@ -38,6 +39,7 @@ import com.vs.vo.CardPageVO;
 import com.vs.vo.CommentsVO;
 import com.vs.vo.CompanyVO;
 import com.vs.vo.FinanceCateVO;
+import com.vs.vo.FinanceVO;
 import com.vs.vo.IndustryVO;
 import com.vs.vo.MemberVO;
 import com.vs.vo.PickVO;
@@ -56,6 +58,8 @@ public class AjaxController {
 	private CompanyBIZ companyBIZ;
 	@Autowired
 	private FinanceCateBIZ financeCateBIZ;
+	@Autowired
+	private FinanceBIZ financeBIZ;
 	@Autowired
 	private MemberBIZ memberBIZ;
 	@Autowired
@@ -107,6 +111,40 @@ public class AjaxController {
 		return result;
 	}
 	
+
+	@RequestMapping(value="/manager/contents/finance/search/company/{company}", method = RequestMethod.POST)
+	public List<CompanyVO> getSearchCompanyList(@PathVariable String company){
+		System.out.println("company");	
+		System.out.println(company);
+		return companyBIZ.getSearchNmList(company);
+	}
+	
+	@RequestMapping(value="/manager/contents/finance/search/term/{stockCode}", method = RequestMethod.POST)
+	public List<FinanceVO> getSearchTermList(@PathVariable String stockCode){
+		return financeBIZ.getSearchTermList(stockCode);
+	}
+	
+	
+	@RequestMapping(value = "/manager/contents")
+	public Map<String, Object> getManagerPgContentsList(HttpServletRequest request){
+		Map<String, Object> map = new ConcurrentHashMap<String, Object>();
+		String tab = request.getParameter("tab");
+		String searchWord = request.getParameter("searchWord");
+		int startYear = Integer.parseInt(request.getParameter("startYear"));
+		int endYear = Integer.parseInt(request.getParameter("endYear"));
+		int startQuarter = Integer.parseInt(request.getParameter("startQuarter"));
+		int endQuarter = Integer.parseInt(request.getParameter("endQuarter"));
+		int page = Integer.parseInt(request.getParameter("page"));
+		String sortType = request.getParameter("sortType");
+		
+		if(tab.equals("finance")) {
+			map = financeBIZ.getJoinList(page, tab, searchWord, startYear, startQuarter, endYear, endQuarter, sortType);
+		}
+				
+		
+		return map;
+	}
+
 	@RequestMapping(path = "/articlePage/comments", method = RequestMethod.POST)
 	public void hell06(HttpServletRequest request, HttpSession session) {
 		CommentsVO commentsVO = new CommentsVO();
@@ -205,8 +243,9 @@ public class AjaxController {
 		//System.out.println("{\"result\":"+result+"}");
 		return "{\"result\":"+result+"}";
 	}
+
 	
-	@RequestMapping(value = "/manager/member", method = RequestMethod.POST)
+	@RequestMapping(value = "/manager/members", method = RequestMethod.POST)
 	public Map<String, Object> getManagerPgUserList(HttpServletRequest request) {
 		String searchWord = request.getParameter("searchWord");
 		String sortType = request.getParameter("sortType");
@@ -215,9 +254,9 @@ public class AjaxController {
 		Map<String, Object> map = new ConcurrentHashMap<String, Object>();
 		map = memberBIZ.selectList(searchWord, sortType, page);
 		
-		for( String key : map.keySet()) {
-			System.out.println("[ "+map.get(key)+" ]");
-		}
+//		for( String key : map.keySet()) {
+//			System.out.println("[ "+map.get(key)+" ]");
+//		}
 		return map;
 	}
 	

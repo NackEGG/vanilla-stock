@@ -1,13 +1,16 @@
 package com.vs.vo;
 
 //카드페이지를 위한 산업군별 데이터
-public class CardPageVO {
+public class CardPageVO implements Comparable<CardPageVO> {
 	private int industryNo;
 	private String industryName;
 	
 	private int totalCnt;
 	private int incCnt;
 	private int decCnt;
+	
+	private int Juka;
+	private int Debi;
 	
 	private double CRateSum;
 	private double ChangeRate;
@@ -76,12 +79,39 @@ public class CardPageVO {
 		this.decCnt++;
 	}
 	
+	public int getJuka() {
+		return Juka;
+	}
+
+	public void setJuka(int juka) {
+		Juka = juka;
+	}
+
+	public int getDebi() {
+		return Debi;
+	}
+
+	public void setDebi(int debi) {
+		Debi = debi;
+	}
+
 	public double getChangeRate() {
 		return ChangeRate;
 	}
 
 	public void setChangeRate(double changeRate) {
 		ChangeRate = changeRate;
+	}
+
+	@Override
+	public int compareTo(CardPageVO CVO) {
+		if(this.ChangeRate > CVO.getChangeRate()) {
+			return 1;
+		}else if(this.ChangeRate < CVO.getChangeRate()) {
+			return -1;
+		}else {
+			return 0;
+		}
 	}
 	
 	

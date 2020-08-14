@@ -57,7 +57,6 @@ public class IndustryDAOImpl implements IndustryDAO {
 	@Override
 	public List<IndustryVO> selectList() {
 		RowMapper<IndustryVO> rowMapper = new RowMapper<IndustryVO>() {
-			
 			@Override
 			public IndustryVO mapRow(ResultSet rs, int rowNum) throws SQLException {
 				IndustryVO industry = new IndustryVO();
