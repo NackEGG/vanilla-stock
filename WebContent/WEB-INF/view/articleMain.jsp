@@ -98,12 +98,12 @@
           <ul>
             <li class="article">투기장</li>
             <li class="article_recent">
-            	<input type="radio" class="sortRadio" name="sortType" checked="checked" value ="latest" form="searchForm">
-            		최신순
+            	<label><input type="radio" class="sortRadio" name="sortType" checked="checked" value ="latest" form="searchForm">
+            		최신순</label>
             	</li>
             <li class="article_popular">
-            	<input type="radio" class="sortRadio" name="sortType" value ="popularity" form="searchForm">
-            		인기순
+            	<label><input type="radio" class="sortRadio" name="sortType" value ="popularity" form="searchForm">
+            		인기순</label>
             	</li>
           </ul>
           <div class="article_open">

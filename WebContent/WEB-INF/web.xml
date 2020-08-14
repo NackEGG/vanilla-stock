@@ -30,6 +30,17 @@
     <filter-name>encoding</filter-name>
     <url-pattern>/*</url-pattern>
   </filter-mapping>
+  
+  	<!-- METHOD DELETE 사용하기 위한 필터 -->
+  <filter>
+    <filter-name>httpMethodFilter</filter-name>
+    <filter-class>org.springframework.web.filter.HiddenHttpMethodFilter</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>httpMethodFilter</filter-name>
+    <url-pattern>/*</url-pattern>
+  </filter-mapping>
+  
 	
 	<!-- 서블릿 설정 파일의 위치를 지정할 때 contextConfigLocation을 지정함 -->
 	<servlet>
