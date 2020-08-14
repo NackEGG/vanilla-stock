@@ -100,7 +100,13 @@ public class MainPageController {
         Collections.reverse(MainDataList);
         model.addAttribute("Top10List", MainDataList);
 		*/
+		List<CompanyVO> popularcompany = pickBIZ.popularComanylist();
+		System.out.println("최근인기종목!!!!! " + popularcompany.get(0).getCompany());
+		model.addAttribute("popular",popularcompany);
+		System.out.println(model.toString());
+		
 		return "index";
+		
 	}
 	
 	@RequestMapping(path="/main1" , method=RequestMethod.GET)
