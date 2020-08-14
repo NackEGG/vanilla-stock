@@ -153,6 +153,14 @@
     <div id="content">
       <div class="aux">
         <div id="divTEST">
+		<div>
+			<div style="position: absolute;">
+				<div style="margin-left:240px; margin-top:30px; top: 120px;  ">
+					<img src="${pageContext.request.contextPath}/img/logosh.png" width="600px" ></img>
+				</div>
+			</div>
+			<img src="${pageContext.request.contextPath}/img/mainback.png" width="1080px"></img>
+		</div>
           <!--Main 검색창 -->
           <div class="search-wrapper">
             <div class="input-holder">
@@ -187,10 +195,8 @@
           <div class="financeInfo">
             <div class="financeContents">
               <div class="financeHighLow">
-                <span class="high_btn" onclick="financeHigh('high')"
-                  >상한가</span
-                >
-                <span class="low_btn" onclick="financeLow('low')">하한가</span>
+                <span class="high_btn" onclick="financeHigh('high')">매수추천</span>
+                <span class="low_btn" onclick="financeLow('low')">매도추천</span>
               </div>
               <div id="high">
                 <div class="highList">
@@ -204,10 +210,15 @@
             <!-- hidden된 하한가 DIV-->
             <div id="low" style="visibility: hidden;">
               <div class="lowList">
-                <span>삼성전자</span>
-                <span>18750</span>
-                <span>4300</span>
-                <span>-29.76%</span>
+              	<table>
+              		<tr>
+              			<td>삼성전자</td>
+              			<td>18750</td>
+		                <td>4300</td>
+		                <td>-29.76%</td>
+              		</tr>
+              	</table>
+                
               </div>
             </div>
             <!-- hidden된 하한가 DIV 보여주는 JS-->
