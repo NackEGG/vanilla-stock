@@ -1,9 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
 	pageEncoding="EUC-KR"%>
 <%@ page import="java.util.Date"%>
-<%@ page import="com.vs.util.StockApiUtil"%>
 <%@ page import="java.text.DecimalFormat"%>
 <%@ page import="java.util.Map"%>
+<%@ page import="java.util.List"%>
+<%@ page import="com.vs.util.StockApiUtil"%>
+<%@ page import="com.vs.vo.CommentsVO" %>
 <%
 	String[] arrStockInfo = (String[]) request.getAttribute("arrStockInfo");
 String[][] arrDailyStock = (String[][]) request.getAttribute("arrDailyStock");
@@ -12,11 +14,16 @@ int prevMonthClose = (int) request.getAttribute("prevMonthClose");
 Map<String, Long> financeMap = (Map<String, Long>) request.getAttribute("financeMap");
 Map<String, Long> industryFinanceMap = (Map<String, Long>) request.getAttribute("industryFinanceMap");
 
+
 String today = arrStockInfo[18].substring(0, 11);
 
 DecimalFormat formatter = new DecimalFormat("###,###");
 int monthDevi = Integer.parseInt(arrStockInfo[1].replaceAll(",", "")) - prevMonthClose;
 Float monthDeviPercent = monthDevi / Float.parseFloat(arrStockInfo[1].replaceAll(",", "")) * 100;
+
+List<CommentsVO> commentsList = (List<CommentsVO>)request.getAttribute("commentsList");
+int[] opinion = (int[])request.getAttribute("opinion");
+
 %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
@@ -462,12 +469,13 @@ Float monthDeviPercent = monthDevi / Float.parseFloat(arrStockInfo[1].replaceAll
 							</div>
 						<!--//.upperTitle -->
 							<div class="articleRatio">
-							<div class="articleRatio_fill" title="" style="width: 60%;">
+							<div class="articleRatio_fill">
 							</div>
 							<!-- //.articleRatio_fill -->
 							<div class="ratioInfo">
-							<span>60</span>
-							<span>40</span>
+							<% if(opinion[0] + opinion[1] != 0) {%>
+							<span><%=opinion[0]/(opinion[0]+opinion[1])*100%></span>
+							<span><%=opinion[1]/(opinion[0]+opinion[1])*100%></span>
 							</div>
 							<!-- //.ratioInfo -->
 						</div>
@@ -479,10 +487,24 @@ Float monthDeviPercent = monthDevi / Float.parseFloat(arrStockInfo[1].replaceAll
 							<!--//#commentTitle -->
 							
 							<div id="commentList">
-							<span class="commentBuy">매수</span>
-							<span class="commentContents">매수쪽 댓글!!!!!!</span>
+							<%for(int i=0; i<commentsList.size(); i++){ %>
+							<span class="commentBuy"><%=commentsList.get(i).getOpinion() %></span>
+							<span class="commentContents"><%=commentsList.get(i).getContent() %></span>
 							<span class="like_Btn"><i class="far fa-thumbs-up"></i>25</span>
 							</div>
+							<%} 
+							}else{%>
+							<span>데이터 없음</span>
+							</div>
+							<!-- //.ratioInfo -->
+						</div>
+							<!--//.articleRatio -->
+							
+							<div class="commentTitle">
+							<span class="title">댓글 없음</span>
+							</div>
+							<!--//#commentTitle -->
+							<%} %>
 					</div>
 					<!--//#ArticleBox -->
 				</div>
@@ -529,6 +551,5 @@ Float monthDeviPercent = monthDevi / Float.parseFloat(arrStockInfo[1].replaceAll
 	</div>
 	<!--//#footer -->
 	<script src="${pageContext.request.contextPath}/js/fix-footer.js"></script>
-
 </body>
 </html>

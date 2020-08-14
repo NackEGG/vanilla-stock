@@ -1,6 +1,7 @@
 package com.vs.controller;
 
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
@@ -14,11 +15,13 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.vs.biz.CommentsBIZ;
 import com.vs.biz.CompanyBIZ;
 import com.vs.biz.FinanceBIZ;
 import com.vs.biz.IndustryBIZ;
 import com.vs.biz.StockRecordsBIZ;
 import com.vs.util.StockApiUtil;
+import com.vs.vo.CommentsVO;
 import com.vs.vo.CompanyVO;
 import com.vs.vo.FinanceVO;
 import com.vs.vo.IndustryVO;
@@ -38,6 +41,9 @@ public class ReportPageController {
 	
 	@Autowired
 	FinanceBIZ financeBIZ;
+	
+	@Autowired
+	CommentsBIZ commentsBIZ;
 	
 	@RequestMapping(path = "/reportPage/{no}", method = RequestMethod.GET)
 	public String hello01(@PathVariable String no, Model model) throws Exception {
@@ -79,7 +85,19 @@ public class ReportPageController {
 		// 업종 평균 재무 정보
 		Map<String,Long> industryFinanceMap = financeBIZ.findIndustryAverageValueMap(companyVO.getIndustryNo());
 		
-		System.out.println(financeMap.get("자본과부채총계") +" : " +industryFinanceMap.get("자본과부채총계"));
+		// 투기장 (가장 최근 댓글 5개) + 풀매도, 풀매수
+		List<CommentsVO> commentsList = commentsBIZ.getRecentComments(no, 5);
+		
+		int[] opinion;
+		
+		try {	
+			int articleNo = commentsList.get(0).getArticleNo();
+			opinion = commentsBIZ.getTotalCountCommentsByOpinion(articleNo);
+		} catch (IndexOutOfBoundsException ie) {
+			System.out.println(ie);
+			ie.printStackTrace();
+			opinion = new int[] {0,0};
+		}
 		
 		// model.addAttribute
 		model.addAttribute("companyVO", companyVO);
@@ -90,6 +108,8 @@ public class ReportPageController {
 		model.addAttribute("prevMonthClose", prevMonthClose);
 		model.addAttribute("financeMap", financeMap);
 		model.addAttribute("industryFinanceMap", industryFinanceMap);
+		model.addAttribute("commentsList", commentsList);
+		model.addAttribute("opinion", opinion);
 		
 		return "reportPage";
 	}

@@ -67,8 +67,8 @@
    <form id="insertForm" action="" method="post" />
    <script type="text/javascript">
 	//_.templateSettings = {interpolate: /\<\@\=(.+?)\@\>/gim,evaluate: /\<\@([\s\S]+?)\@\>/gim,escape: /\<\@\-(.+?)\@\>/gim}; 
-		const $articleCompanyOption = $(".articleCompanyOption")
-		const $openTitle = $(".openTitle")
+		//const $articleCompanyOption = $(".articleCompanyOption")
+		//const $openTitle = $(".openTitle")
 		const $insertForm = $("#insertForm");
 		function insertArticle() {
 			let formData =  $insertForm.serialize();

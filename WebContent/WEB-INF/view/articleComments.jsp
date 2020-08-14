@@ -1,21 +1,23 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
   <head>
     <meta charset="utf-8" />
     <title></title>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/reset.css" />
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/kakao.font.css" />
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/default.css" />
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/articleComments.css" />
+    <c:import url="/WEB-INF/template/link.jsp" />
+    <link rel="stylesheet" href="/vanilla-stock/css/reset.css" />
+    <link rel="stylesheet" href="/vanilla-stock/css/kakao.font.css" />
+    <link rel="stylesheet" href="/vanilla-stock/css/default.css" />
+    <link rel="stylesheet" href="/vanilla-stock/css/articleComments.css" />
     <link
       rel="stylesheet"
       href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
       integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf"
       crossorigin="anonymous"
     />
-    <script src="${pageContext.request.contextPath}/js/jquery.js"></script>
+    <script src="/vanilla-stock/js/jquery.js"></script>
     <style type="text/css" media="screen">
       #divTEST {
         height: 1000px;
@@ -28,7 +30,7 @@
       <div id="logoBox">
         <h1>
           <a href="" title="vanilla stock">
-            <img src="${pageContext.request.contextPath}/img/vs-logo2.PNG" alt="vanilla stock" />
+            <img src="/vanilla-stock/img/vs-logo2.PNG" alt="vanilla stock" />
           </a>
         </h1>
       </div>
@@ -64,7 +66,7 @@
         <div id="profileBox" class="hidden">
           <h2 class="screen_out">유저정보</h2>
           <img
-            src="${pageContext.request.contextPath}/profile/profile.png"
+            src="/vanilla-stock/profile/profile.png"
             class="profile_on"
             width="60"
             height="60"
@@ -115,7 +117,7 @@
         <div class="subject">
           <span class="articleHeader">${articleVO.title}</span>
           <span class="articleDate">${articleVO.regdate}</span>
-          <input id="articleNo" type="hidden" value="${articleVO.no}" form="pickForm"/>
+          <input id="articleNo" type="hidden" value="${articleVO.no}" form="pickCommentsForm"/>
         </div> 
         <div class="viewComment">
           <div>
@@ -127,13 +129,11 @@
             <span class="articleInfo">${articleVO.countComments}</span>
           </div>
         </div>
-	<form id="pickForm" action="">
+        <form id="pickCommentsForm" action="">
         <div class="articleChart">
           <div class="articleRatio">
             <div
               class="articleRatio_fill"
-              title="80승"
-              style="width: 70%;"
             ></div>
           </div>
           <div class="articleBuy">
@@ -141,9 +141,8 @@
             <span id = "articleBuy_Bad"></span>
           </div>
 
-          <input class="pickRadio" type="radio" name="pick" value="Y" form="pickForm"> 풀매수
-          <input class="pickRadio" type="radio" name="pick" value="N" form="pickForm"> 풀매도
-          
+          <input class="pickRadio" type="radio" name="opinion" value="Y" form="pickCommentsForm"> 풀매수
+          <input class="pickRadio" type="radio" name="opinion" value="N" form="pickCommentsForm"> 풀매도
           
           <script type="text/javascript">
          	const $selectTitle = $(".select_title");
@@ -152,134 +151,33 @@
               $searchBox.toggleClass("click");
             });
           </script>
-          <script type="text/javascript">
-			const $goodOpinion = $("#articleBuy_Good");
-			const $badOpinion = $("#articleBuy_Bad");
-			const articleNo = $("#articleNo").val();
-			getOpinion();
-			function getOpinion() {
-				$.ajax({ 
-					url:"/vanilla-stock/ajax/articlePage/pick",
-					type:"GET",
-					data:{ articleNo : "${articleVO.no}" },
-					dataType:'json',
-					error:function(){
-						alert("error");
-					},
-					success: function(json) {
-						console.log(json.good);
-						console.log(json.bad);
-						$goodOpinion.text(json.good); 	
-						$badOpinion.text(json.bad); 	
-					}
-				});//ajax end 
-			}// search() end		
-		</script>
-		<script type="text/javascript">
-			const $pickRadio = $(".pickRadio");
-			const $pickForm = $("#pickForm");
-			$pickRadio.on("click", function(){
-				let formData = $pickForm.serialize();
-				console.log(formData);
-	 			$.ajax({
-	 				url:"/vanilla-stock/ajax/articlePage/pick",
-	 				type:"POST",
-	 				data:formData+'&articleNo='+articleNo,
-	 				error:function(){
-						alert("error");
-					},
-					success: function() {
-						getOpinion();
-					}
-	 			})
-	 		});
-		</script>
         </div>
-       </form>
         <div class="articleComment">
           <span class="articleTitle">댓글 입력</span>
           <input
             type="text"
             placeholder="댓글을 입력하세요."
-            name="comment"
+            name="content"
             class="commentWrite"
-            form="commentsForm"
+            form="pickCommentsForm"
           />
           <input type="button" value="등록" class="commentEnter" />
         </div>
-        <script type="text/javascript">
-        	const $comments = $(".commentWrite");
-        	$commentEnter.on("click", function(){
-				let content = $comments.val();
-				console.log(content);
-	 			$.ajax({
-	 				url:"/vanilla-stock/ajax/articlePage/comments",
-	 				type:"POST",
-	 				data:'content'=content+'&articleNo='+articleNo,
-	 				error:function(){
-						alert("error");
-					},
-					success: function() {
-						getOpinion();
-					}
-	 			})
-	 		});
-        	
-        </script>
+        </form>
         <div class="commentBox">
-          <div class="articleCommentListYes">
-            <div class="commentList">
-              <span class="commentWriter">흑우짱짱맨</span>
-              <span class="commentDate">2020-07-29</span>
-              <div class="articleLikes">
-                <span class="commentLike"
-                  ><i class="far fa-thumbs-up"></i> 좋아요</span
-                >
-              </div>
-
-              <div class="commentContents">
-                <span>이거 안사면 걍 흑우....음머</span>
-              </div>
-            </div>
-          </div>
-          <div class="articleCommentListNO">
-            <div class="commentList">
-              <span class="commentWriter">예나</span>
-              <span class="commentDate">2020-07-29</span>
-              <div class="articleLikes">
-                <span class="commentLike"
-                  ><i class="far fa-thumbs-up"></i> 좋아요</span
-                >
-              </div>
-
-              <div class="commentContents">
-                <span>그냥 안사고 집에갈래.....</span>
-              </div>
-            </div>
-            <div class="commentList">
-              <span class="commentWriter">석채</span>
-              <span class="commentDate">2020-07-29</span>
-              <div class="articleLikes">
-                <span class="commentLike"
-                  ><i class="far fa-thumbs-up"></i> 좋아요</span
-                >
-              </div>
-
-              <div class="commentContents">
-                <span>그냥 강가네빈대떡이나 먹자.....</span>
-              </div>
-            </div>
-          </div>
+        	<div class="goodCommentBox">         
+        	</div>
+        	<div class="badCommentBox">
+        	</div>
         </div>
       </div>
     </div>
     <!--//#content -->
-
-    <div id="footer">
-      <div id="policy">
-        <h4 class="screen_out">정책 및 약관</h4>
-        <ul>
-          <li><a href="">회사소개</a></li>
+  	  <div id="footer">
+  	    <div id="policy">
+   	     <h4 class="screen_out">정책 및 약관</h4>
+    	    <ul>
+   	       <li><a href="">회사소개</a></li>
           <!--
 	 -->
           <li><a href="">광고</a></li>
@@ -309,6 +207,184 @@
       <address>&copy; 2020 <a href="">NackEGG.com</a></address>
     </div>
     <!--//#footer -->
-    <script src="${pageContext.request.contextPath}/js/fix-footer.js"></script>
+    <script src="/vanilla-stock/js/fix-footer.js"></script>
+    <script type="text/template" id="goodCommentsTmp">
+	<div class="articleCommentListYes">
+	<@ if(goodCommentsList != null && goodCommentsList.length > 0) { @>
+	<@ _.each(goodCommentsList, function(good){ @>
+            <div class="commentList">
+              <span class="commentWriter"><@=good.nickname@></span>
+              <span class="commentDate"><@=moment(good.regdate).fromNow()@></span>
+              <div class="articleLikes">
+                <span class="commentLike"
+                  ><i class="far fa-thumbs-up"></i> 좋아요</span
+                >
+              </div>
+
+              <div class="commentContents">
+                <span><@=good.content@></span>
+              </div>
+            </div>   
+		<@ }) } @>
+		</div>
+		<div class=paginateGood>
+		<@=paginateGood@>
+		</div>
+	</script>
+	<script type="text/template" id="badCommentsTmp">
+ 	<div class="articleCommentListNO">
+	<@ if(badCommentsList != null && badCommentsList.length > 0) { @>
+	<@ _.each(badCommentsList, function(bad){ @>
+            <div class="commentList">
+              <span class="commentWriter"><@=bad.nickname@></span>
+              <span class="commentDate"><@=moment(bad.regdate).fromNow()@></span>
+              <div class="articleLikes">
+                <span class="commentLike"
+                  ><i class="far fa-thumbs-up"></i> 좋아요</span
+                >
+              </div>
+
+              <div class="commentContents">
+                <span><@=bad.content@></span>
+              </div>
+            </div>
+		<@ }) } @>
+	</div>
+	<div class=paginateBad>
+		<@=paginateBad@>
+	</div>
+	</script>
+	<script type="text/javascript">
+		
+		
+		// 게이지 바 채우기
+		var good = 0;
+		var bad = 0;
+		if((${articleVO.countGood} + ${articleVO.countBad}) != 0){
+			good = ${articleVO.countGood}/(${articleVO.countGood} + ${articleVO.countBad}) * 100;
+			bad = ${articleVO.countBad}/(${articleVO.countGood} + ${articleVO.countBad}) * 100;
+		}
+		$(".articleRatio_fill").attr({"style": "width:"+good+"%;"
+						,"title" : good.toFixed(0)+":"+bad.toFixed(0)})
+		
+		// init
+		const goodCommentsTmp = _.template($("#goodCommentsTmp").html());
+		const badCommentsTmp = _.template($("#badCommentsTmp").html());
+		const $wrapList1 = $(".goodCommentBox");
+		const $wrapList2 = $(".badCommentBox");
+		const articleNo = $("#articleNo").val();
+		//console.log(articleNo);
+		let page = 1;
+		//console.log(page);
+		getBadComments();
+		getGoodComments();
+		
+		// 풀매수 쪽
+		function getGoodComments(){
+			$.ajax({
+				url : "/vanilla-stock/ajax/articlePage/pickComments",
+				type : "GET",
+				data : { articleNo : articleNo , page : page },
+				error : function(){
+					alert("error");
+				},
+				success : function(json){
+					if (page == 1 || json.goodCommentsList.length > 0) {
+						let tmp = goodCommentsTmp({
+							"goodCommentsList" : json.goodCommentsList,
+							"paginateGood" : json.paginateGood
+						});			
+						$wrapList1.empty().append(tmp);
+					}
+				} // ajax
+			}) // function getGoodComments()
+			
+		}
+		
+		// 풀매도쪽
+		function getBadComments(){
+			$.ajax({
+				url : "/vanilla-stock/ajax/articlePage/pickComments",
+				type : "GET",
+				data : { articleNo : articleNo , page : page },
+				error : function(){
+					alert("error");
+				},
+				success : function(json){
+					if (page == 1 || json.badCommentsList.length > 0) {
+						let tmp = badCommentsTmp({
+							"badCommentsList" : json.badCommentsList,
+							"paginateBad" : json.paginateBad
+						});
+						$wrapList2.empty().append(tmp);
+					}
+				}
+			})// ajax
+		}// function getBadComments()
+		
+		// 댓글 삽입
+		const $insertForm = $("#pickCommentsForm");
+		function insertPickComments() {
+			let formData =  $insertForm.serialize();
+			// console.log("form data");
+			// console.log(formData);
+			$.ajax({ 
+				url:"/vanilla-stock/ajax/articlePage/pickComments",
+				type:"POST",
+				data:formData+'&articleNo='+articleNo,
+				error:function(){
+					alert("error")
+				},
+				success: function(text) {
+					alert(text);
+					let page = 1;
+					getBadComments();
+					getGoodComments();
+				}
+			});//ajax 
+		}// function insertPickComments()
+		
+		/* // 게이지 바 밑 퍼센트
+		function insertPickComments() {
+			$.ajax({ 
+				url:"/vanilla-stock/ajax/articlePage/pick",
+				type:"GET",
+				data:formData+'&articleNo='+articleNo,
+				error:function(json){
+					alert(error);
+				},
+				success: function(json) {
+					alert(json.result);
+					let page = 1;
+					getBadComments();
+					getGoodComments();
+				}
+			});//ajax 
+		}// function insertPickComments() */
+		
+		$( ".commentEnter" ).click(function() {	 
+			if("${loginMember eq null ? '0' : '1'}" == 1){
+      			insertPickComments();
+      		} else{
+      			alert("로그인이 필요한 서비스입니다");
+      		}
+		});
+		
+		$('.aux').on("click", ".paginateGood a", function(e) {
+			e.preventDefault();
+			// 각 페이지의 시작되는 게시물 번호  
+			page = this.dataset.no;
+			//ajax로 데이터 리스트 받아오는 함수 
+			getGoodComments();
+	 	});//click() end
+	 	
+	 	$('.aux').on("click", ".paginateBad a", function(e) {
+			e.preventDefault();
+			// 각 페이지의 시작되는 게시물 번호  
+			page = this.dataset.no;
+			//ajax로 데이터 리스트 받아오는 함수 
+			getBadComments();
+	 	});//click() end
+	</script>
   </body>
 </html>
