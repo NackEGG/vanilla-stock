@@ -158,12 +158,13 @@
  justify-content: space-around;
  margin-top: 5px;
  cursor: pointer;
+ vertical-align: middle;
 }
 #high {
- background-color: lightpink;
+ background-color: #FFE0B2;
  width: 350px;
  height: 300px;
- margin-top: 5px;
+/*  margin-top: 5px; */
 }
 .recentSearch {
  width: 350px;
@@ -180,7 +181,7 @@
  margin-left: 500px;
 }
 #low {
- background-color: lightblue;
+ background-color: #FF907C;
  width: 350px;
  height: 300px;
  margin-top: -300px;
@@ -200,4 +201,23 @@
 }
 .low_btn {
  display: inline-block;
+}
+.highList tr td{
+	text-align: center;
+	vertical-align: middle;
+	height: 40px;
+}
+.highList table{
+	font-size: large;
+	width: 100%;
+	
+}
+.lowList tr td{
+	text-align: center;
+	vertical-align: middle;
+	height: 40px;
+}
+.lowList table{
+	font-size: large;
+	width: 100%;
 }

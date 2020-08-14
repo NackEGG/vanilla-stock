@@ -195,15 +195,55 @@
           <div class="financeInfo">
             <div class="financeContents">
               <div class="financeHighLow">
-                <span class="high_btn" onclick="financeHigh('high')">매수추천</span>
-                <span class="low_btn" onclick="financeLow('low')">매도추천</span>
+                <span class="high_btn" style="width:100%; background-color:#FFE0B2 " onclick="financeHigh('high')">매수추천</span>
+                <span class="low_btn" style="width:100%; background-color:#FF907C" onclick="financeLow('low')">매도추천</span>
               </div>
               <div id="high">
                 <div class="highList">
-                  <span>카카오</span>
-                  <span>18750</span>
-                  <span>4300</span>
-                  <span>+29.76%</span>
+                	<table>
+	              		<tr>
+	              			<td>카카오</td>
+	              			<td>18,750</td>
+			                <td style="color: red">▲4300</td>
+			                <td>+29.76%</td>
+	              		</tr>
+	              		<tr>
+	              			<td>삼성전자</td>
+	              			<td>355,750</td>
+			                <td style="color: red">▲400</td>
+			                <td>+29.76%</td>
+	              		</tr>
+	              		<tr>
+	              			<td>엑세스바이오</td>
+	              			<td>29,500</td>
+			                <td style="color: red">▲6,800</td>
+			                <td>+29.96%</td>
+	              		</tr>
+	              		<tr>
+	              			<td>신풍제약</td>
+	              			<td>75,400</td>
+			                <td style="color: red">▲300</td>
+			                <td>+0.40%</td>
+	              		</tr>
+	              		<tr>
+	              			<td>KNN</td>
+	              			<td>2,180</td>
+			                <td style="color: red">▲415</td>
+			                <td>+23.51%</td>
+	              		</tr>
+	              		<tr>
+	              			<td>두산중공업</td>
+	              			<td>9,650</td>
+			                <td style="color: red">▲640</td>
+			                <td>+7.10%</td>
+	              		</tr>
+	              		<tr>
+	              			<td>한국전력</td>
+	              			<td>21,950</td>
+			                <td style="color: red">▲400</td>
+			                <td>+1.86%</td>
+	              		</tr>
+              		</table>
                 </div>
               </div>
             </div>
@@ -212,11 +252,36 @@
               <div class="lowList">
               	<table>
               		<tr>
-              			<td>삼성전자</td>
-              			<td>18750</td>
-		                <td>4300</td>
-		                <td>-29.76%</td>
+              			<td>씨젠</td>
+              			<td>221,500</td>
+		                <td style="color: blue">▼52,200</td>
+		                <td>-19.07%</td>
               		</tr>
+              		<tr>
+              			<td>현대차</td>
+              			<td>168,000</td>
+		                <td style="color: blue">▼2,000</td>
+		                <td>-1.18%</td>
+              		</tr>
+              		<tr>
+              			<td>LG화학</td>
+              			<td>703,000</td>
+		                <td style="color: blue">▼34,000</td>
+		                <td>-4.61%</td>
+              		</tr>
+              		<tr>
+              			<td>알루코</td>
+              			<td>4,600</td>
+		                <td style="color: blue">▼16,200</td>
+		                <td>-21.64%</td>
+              		</tr>
+              		<tr>
+              			<td>셀트리온</td>
+              			<td>305,000</td>
+		                <td style="color: blue">▼3,500</td>
+		                <td>-1.13%</td>
+              		</tr>
+              		
               	</table>
                 
               </div>
@@ -234,8 +299,11 @@
             </script>
           </div>
           <div class="recentSearch">
-            <span>최근조회종목</span>
-          </div>
+		      <span class="subject">최근인기종목</span>
+		      <c:forEach var="pop" items="${popular}">
+		      	<span>${pop.company}</span>
+		      </c:forEach>
+	      </div>
            <div class="announcement">
             <span>NEW 공지사항</span>
             <span>${announce}</span>
