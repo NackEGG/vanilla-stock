@@ -108,7 +108,7 @@
               <p class="message">
                 	회원이 아니시라면?
                 <a
-                  href="/vanila-stock/signup"
+                  href="${pageContext.request.contextPath}/join"
                   >회원가입</a
                 >
               </p>
@@ -215,8 +215,8 @@
           <div class="financeInfo">
             <div class="financeContents">
               <div class="financeHighLow">
-                <span class="high_btn" style="width:100%; background-color:#FFE0B2 " onclick="financeHigh('high')">매수추천</span>
-                <span class="low_btn" style="width:100%; background-color:#FF907C" onclick="financeLow('low')">매도추천</span>
+                <span class="high_btn" style="width:100%; text-align:center; padding-top:5px; background-color:#FFE0B2 " onclick="financeHigh('high')">매수추천</span>
+                <span class="low_btn" style="width:100%; text-align:center; padding-top:5px; background-color:#FF907C" onclick="financeLow('low')">매도추천</span>
               </div>
               <div id="high">
                 <div class="highList">
@@ -320,9 +320,9 @@
           </div>
           <div class="recentSearch">
 
-		      <span class="subject">최근인기종목</span>
+		      <span class="subject" style="margin-left:5px;margin-bottom:10px; font-size:20px; padding-top:5px;">최근인기종목</span>
 		      <c:forEach var="pop" items="${popular}">
-		      	<span>${pop.company}</span>
+		      	<span style="margin-left:5px; margin-bottom:5px; font-size:15px; ">${pop.company}</span>
 		      </c:forEach>
       </div>
            <div class="announcement">
