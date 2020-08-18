@@ -10,6 +10,7 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/kakao.font.css" />
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/default.css" />
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/signup.css" />
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/login.css" />
 
 <link rel="stylesheet"
 	href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
@@ -28,7 +29,7 @@
 		<div id="logoBox">
 			<h1>
 				<a href="${pageContext.request.contextPath}" title="vanilla stock"> 
-					<img src="../img/vs-logo2.PNG" alt="vanilla stock" />
+					<img src="${pageContext.request.contextPath}/img/vs-logo2.PNG" alt="vanilla stock" />
 				</a>
 			</h1>
 		</div>
@@ -52,43 +53,107 @@
 			<!--//#searchBox -->
 		</div>
 		<!--//.aux -->
-		<div id="loginBox">
-			<div id="loginBtn" class="btn">로그인</div>
-			<!--//loginBtn -->
-			<div id="profileBox" class="hidden">
-				<h2 class="screen_out">유저정보</h2>
-				<img src="${pageContext.request.contextPath}/profile/profile.png"
-					class="profile_on" width="60" height="60" alt="테스터" title="테스터" />
-				<div id="profilePopup" class="profile_on">
-					<ul id="profileList">
-						<li class="profile"><a href="/user.jsp?no=3"><span
-								class="open_door">문</span> <!--관리자는 관리자 페이지로 바꾸기 --> 마이페이지</a></li>
-						<!--//.profile -->
-						<li class="profile"><a href="/logout.do"><span
-								class="close_door">문</span> 로그아웃</a></li>
-						<!--//.profile -->
-					</ul>
-					<!--//profileList -->
-				</div>
-				<!--//#profilePopup -->
-			</div>
-			<!--#profileBox -->
-			<script>
+      <div id="loginBox">
+        <div id="loginBtn" class="btn ${loginMember eq null? '':'hidden'}" onclick="modalpopup('loginForm')">
+          로그인
+        </div>
+         <!--//.aux -->
+        <!-- Hidden된 로그인창-->
+        <div id="loginForm" style="visibility: hidden;" >
+          <div class="form">
+            <div class="formContents"></div>
+            <form class="login-form" action ="/vanilla-stock/login" method="post">
+              <input type="text" name="email" class="email" placeholder="email" />
+              <input type="password" name="password" class="password" placeholder="password" />
+              <button class="login">login</button>
+              <p class="message">
+                	회원이 아니시라면?
+                <a
+                  href="${pageContext.request.contextPath}/join"
+                  >회원가입</a
+                >
+              </p>
+              <p class="close" onclick="popupclose('loginForm')">닫기</p>
+            </form>
+          </div>
+        </div>
+        <!-- Hidden된 로그인창띄우는 JS-->
+        <script>
+          function modalpopup(i) {
+            document.getElementById(i).style.visibility = "visible";
+          }
+
+          function popupclose(i) {
+            document.getElementById(i).style.visibility = "hidden";
+          }
+          
+       
+      	$(document).ready(function(e){
+      		$('#login').click(function(){
+      			// 입력 값 체크
+      			if($.trim($('#email').val()) == ''){
+      				alert("아이디를 입력해 주세요.");
+      				$('#email').focus();
+      				return;
+      			}else if($.trim($('#passwd').val()) == ''){
+      				alert("패스워드를 입력해 주세요.");
+      				$('#password').focus();
+      				return;
+      			}
+      			
+      			//전송
+      			$('#login-form').submit();
+      		});
+      		
+      	});
+        </script>
+        <!--//loginBtn -->
+        <div id="profileBox" class="${loginMember eq null ? 'hidden' : ''}">
+
+          <img
+            src="profile/profile.png"
+            class="profile_on"
+            width="60"
+            height="60"
+            alt="테스터"
+            title="테스터"
+          />
+          <div id="profilePopup" class="profile_on">
+            <ul id="profileList">
+              <li class="profile">
+                <a href="/user.jsp?no=3"
+                  ><span class="open_door">문</span>
+                  <!--관리자는 관리자 페이지로 바꾸기 -->
+                  마이페이지</a
+                >
+              </li>
+              <!--//.profile -->
+              <li class="profile">
+                <a href="${pageContext.request.contextPath}/logout"
+                  ><span class="close_door">문</span> 로그아웃</a
+                >
+              </li>
+              <!--//.profile -->
+            </ul>
+            <!--//profileList -->
+          </div>
+          <!--//#profilePopup -->
+        </div>
+        <!--#profileBox -->
+        <script>
           const $profile = $("#profileBox img");
           const $profileTarget = $("#profilePopup");
-
           $profile.click(function () {
             $profileTarget.toggle();
           }); // profileBox click end
-
           $("html").click(function (e) {
             if (!$(e.target).hasClass("profile_on")) {
               $profileTarget.hide();
             }
           }); //
         </script>
-		</div>
-	</div>
+      </div>
+    </div>
 	<!--//#header -->
 	<div id="content">
 		<div class="aux">

@@ -108,7 +108,7 @@
               <p class="message">
                 	회원이 아니시라면?
                 <a
-                  href="/vanila-stock/signup"
+                  href="${pageContext.request.contextPath}/join"
                   >회원가입</a
                 >
               </p>
