@@ -29,7 +29,7 @@
     <div id="header">
       <div id="logoBox">
         <h1>
-          <a href="" title="vanilla stock">
+          <a href="${pageContext.request.contextPath}" title="vanilla stock">
             <img src="/vanilla-stock/img/vs-logo2.PNG" alt="vanilla stock" />
           </a>
         </h1>
@@ -39,8 +39,8 @@
         <div id="gnb">
           <h2 class="screen_out">주요 서비스</h2>
           <ul>
-            <li class="nav"><a href=""> 종목</a></li>
-            <li class="nav on"><a href=""> 투기장 </a></li>
+            <li class="nav"><a href="${pageContext.request.contextPath}/cardpage/init"> 종목</a></li>
+            <li class="nav on"><a href="${pageContext.request.contextPath}/articlePage"> 투기장 </a></li>
             <li class="nav"><a href="">랭킹</a></li>
           </ul>
         </div>

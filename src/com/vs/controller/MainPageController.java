@@ -46,7 +46,7 @@ public class MainPageController {
 	PickBIZ pickBIZ;
 	
 
-	@RequestMapping(path="/main" , method=RequestMethod.GET)
+	@RequestMapping(path="/" , method=RequestMethod.GET)
 	public String recentAnnouncement(Model model) {
 		
 		String list = announcementBIZ.recentAnnouncement();
