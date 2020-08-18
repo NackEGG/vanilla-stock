@@ -46,7 +46,7 @@ public class LoginPageController {
 		return "redirect:"+referer;
 	}
 		
-	@RequestMapping(value="/logout", method = RequestMethod.DELETE)
+	@RequestMapping(value="/logout", method = RequestMethod.GET)
 		public ModelAndView logout(HttpSession session) {
 		memberBIZ.logout(session);	
 		
