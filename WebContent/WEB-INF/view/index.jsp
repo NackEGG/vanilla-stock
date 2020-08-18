@@ -147,17 +147,17 @@
       	});
         </script>
         <!--//loginBtn -->
-        <div id="profileBox" class="${loginMember eq null ? 'hidden' : ''}">
+        <div id="profileBox" class="${loginMember eq null?'hidden':' '}">
 
           <img
-            src="profile/profile.png"
+            src="${pageContext.request.contextPath}/profile/default.png"
             class="profile_on"
             width="60"
             height="60"
             alt="테스터"
             title="테스터"
           />
-          <div id="profilePopup" class="profile_on">
+          <div id="profilePopup" class="profile_on ${loginMember eq null ? 'hidden' : ''}">
             <ul id="profileList">
               <li class="profile">
                 <a href="/user.jsp?no=3"

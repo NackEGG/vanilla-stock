@@ -113,7 +113,7 @@
         <div id="profileBox" class="${loginMember eq null ? 'hidden' : ''}">
 
           <img
-            src="profile/profile.png"
+            src="${pageContext.request.contextPath}/profile/default.png"
             class="profile_on"
             width="60"
             height="60"

@@ -111,7 +111,7 @@
         <div id="profileBox" class="${loginMember eq null ? 'hidden' : ''}">
 
           <img
-            src="profile/profile.png"
+            src="${pageContext.request.contextPath}/profile/default.png"
             class="profile_on"
             width="60"
             height="60"
@@ -196,9 +196,9 @@ vanilla-stock은 이 사이트를 통하여 이용자에게 제공된 정보를 
 				<!-- // #signup -->
 
 				<div class="signupForm">
-					<div class="profileDefault">
-						<img src="${pageContext.request.contextPath}/img/jicon.png"
-							class="profiledefault" />
+					<div class="profileDefault" style="margin-bottom: 30px">
+						<img src="${pageContext.request.contextPath}/profile/default.png"
+							class="profiledefault"/><i style="margin-top: 100px" class="fas fa-camera"></i>
 					</div>
 
 					<div class="joinformContents">

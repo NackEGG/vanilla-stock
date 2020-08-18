@@ -429,3 +429,7 @@ a.btn {
 	cursor:not-allowed;
 
 }
+
+#profileBox.hidden{
+	display: none;
+}
