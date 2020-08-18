@@ -167,11 +167,9 @@
         </div>
         </form>
         <div class="commentBox">
-        	<div class="goodCommentBox">         
-        	</div>
-        	<div class="badCommentBox">
-        	</div>
+        	
         </div>
+        <a id="more_btn" href="" data-no=2>더보기</a>
       </div>
     </div>
     <!--//#content -->
@@ -210,55 +208,32 @@
     </div>
     <!--//#footer -->
     <script src="/vanilla-stock/js/fix-footer.js"></script>
-    <script type="text/template" id="goodCommentsTmp">
-	<div class="articleCommentListYes">
-	<@ if(goodCommentsList != null && goodCommentsList.length > 0) { @>
-	<@ _.each(goodCommentsList, function(good){ @>
+    <script type="text/template" id="commentsTmp">
+	<div class="articleCommentList">
+	<@ if(commentsList != null && commentsList.length > 0) { @>
+	<@ _.each(commentsList, function(comt){ @>
             <div class="commentList">
-              <span class="commentWriter"><@=good.nickname@></span>
-              <span class="commentDate"><@=moment(good.regdate).fromNow()@></span>
+		<@ if(comt.opinion == 'Y'){ @>
+			  <span class="commentGoodOpinion">매수</span>
+		<@ } else { @>
+			  <span class="commentBadOpinion">매도</span>
+		<@ } @>
+              <span class="commentWriter"><@=comt.nickname@></span>
+              <span class="commentDate"><@=moment(comt.regdate).fromNow()@></span>
               <div class="articleLikes">
                 <span class="commentLike"
                   ><i class="far fa-thumbs-up"></i> 좋아요</span
                 >
               </div>
-
               <div class="commentContents">
-                <span><@=good.content@></span>
+                <span><@=comt.content@></span>
               </div>
             </div>   
 		<@ }) } @>
 		</div>
-		<div class=paginateGood>
-		<@=paginateGood@>
-		</div>
-	</script>
-	<script type="text/template" id="badCommentsTmp">
- 	<div class="articleCommentListNO">
-	<@ if(badCommentsList != null && badCommentsList.length > 0) { @>
-	<@ _.each(badCommentsList, function(bad){ @>
-            <div class="commentList">
-              <span class="commentWriter"><@=bad.nickname@></span>
-              <span class="commentDate"><@=moment(bad.regdate).fromNow()@></span>
-              <div class="articleLikes">
-                <span class="commentLike"
-                  ><i class="far fa-thumbs-up"></i> 좋아요</span
-                >
-              </div>
-
-              <div class="commentContents">
-                <span><@=bad.content@></span>
-              </div>
-            </div>
-		<@ }) } @>
-	</div>
-	<div class=paginateBad>
-		<@=paginateBad@>
-	</div>
 	</script>
 	<script type="text/javascript">
-		
-		
+			
 		// 게이지 바 채우기
 		var good = 0;
 		var bad = 0;
@@ -270,19 +245,16 @@
 						,"title" : good.toFixed(0)+":"+bad.toFixed(0)})
 		
 		// init
-		const goodCommentsTmp = _.template($("#goodCommentsTmp").html());
-		const badCommentsTmp = _.template($("#badCommentsTmp").html());
-		const $wrapList1 = $(".goodCommentBox");
-		const $wrapList2 = $(".badCommentBox");
+		const commentsTmp = _.template($("#commentsTmp").html());
+		const $wrapList = $(".commentBox");
 		const articleNo = $("#articleNo").val();
 		//console.log(articleNo);
 		let page = 1;
 		//console.log(page);
-		getBadComments();
-		getGoodComments();
+		getComments();
 		
 		// 풀매수 쪽
-		function getGoodComments(){
+		function getComments(){
 			$.ajax({
 				url : "/vanilla-stock/ajax/articlePage/pickComments",
 				type : "GET",
@@ -291,45 +263,20 @@
 					alert("error");
 				},
 				success : function(json){
-					if (page == 1 || json.goodCommentsList.length > 0) {
-						let tmp = goodCommentsTmp({
-							"goodCommentsList" : json.goodCommentsList,
-							"paginateGood" : json.paginateGood
+					if (page == 1 || json.commentsList.length > 0) {
+						let tmp = commentsTmp({
+							"commentsList" : json.commentsList
 						});			
-						$wrapList1.empty().append(tmp);
+						$wrapList.append(tmp);
 					}
 				} // ajax
-			}) // function getGoodComments()
-			
+			}) // function getComments()			
 		}
-		
-		// 풀매도쪽
-		function getBadComments(){
-			$.ajax({
-				url : "/vanilla-stock/ajax/articlePage/pickComments",
-				type : "GET",
-				data : { articleNo : articleNo , page : page },
-				error : function(){
-					alert("error");
-				},
-				success : function(json){
-					if (page == 1 || json.badCommentsList.length > 0) {
-						let tmp = badCommentsTmp({
-							"badCommentsList" : json.badCommentsList,
-							"paginateBad" : json.paginateBad
-						});
-						$wrapList2.empty().append(tmp);
-					}
-				}
-			})// ajax
-		}// function getBadComments()
 		
 		// 댓글 삽입
 		const $insertForm = $("#pickCommentsForm");
 		function insertPickComments() {
 			let formData =  $insertForm.serialize();
-			// console.log("form data");
-			// console.log(formData);
 			$.ajax({ 
 				url:"/vanilla-stock/ajax/articlePage/pickComments",
 				type:"POST",
@@ -339,30 +286,10 @@
 				},
 				success: function(text) {
 					alert(text);
-					let page = 1;
-					getBadComments();
-					getGoodComments();
+					history.go(0);
 				}
 			});//ajax 
 		}// function insertPickComments()
-		
-		/* // 게이지 바 밑 퍼센트
-		function insertPickComments() {
-			$.ajax({ 
-				url:"/vanilla-stock/ajax/articlePage/pick",
-				type:"GET",
-				data:formData+'&articleNo='+articleNo,
-				error:function(json){
-					alert(error);
-				},
-				success: function(json) {
-					alert(json.result);
-					let page = 1;
-					getBadComments();
-					getGoodComments();
-				}
-			});//ajax 
-		}// function insertPickComments() */
 		
 		$( ".commentEnter" ).click(function() {	 
 			if("${loginMember eq null ? '0' : '1'}" == 1){
@@ -372,21 +299,15 @@
       		}
 		});
 		
-		$('.aux').on("click", ".paginateGood a", function(e) {
+		$('.aux').on("click", "#more_btn", function(e) {
 			e.preventDefault();
 			// 각 페이지의 시작되는 게시물 번호  
 			page = this.dataset.no;
+			
+			this.dataset.no = parseInt(page) + 1;
 			//ajax로 데이터 리스트 받아오는 함수 
-			getGoodComments();
-	 	});//click() end
-	 	
-	 	$('.aux').on("click", ".paginateBad a", function(e) {
-			e.preventDefault();
-			// 각 페이지의 시작되는 게시물 번호  
-			page = this.dataset.no;
-			//ajax로 데이터 리스트 받아오는 함수 
-			getBadComments();
-	 	});//click() end
+			getComments();
+	 	});
 	</script>
   </body>
 </html>

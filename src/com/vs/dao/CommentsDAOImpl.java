@@ -194,5 +194,40 @@ public class CommentsDAOImpl implements CommentsDAO {
 			return vo;
 		}	
 	}
+
+	@Override
+	public List<CommentsVO> getCommentsPage(int articleNo, int start, int end) {
+		
+		System.out.println("입력 +" +articleNo + " : " + start + " : " + end);
+		
+		SimpleJdbcCall simpleJdbcCall = getSimpleJdbcCall();
+		
+		simpleJdbcCall
+		.withProcedureName("USP_GET_PICK_AND_COMMENTS")
+		.returningResultSet("PO_CURSOR", new RowMapper<CommentsVO>() {
+
+			@Override
+			public CommentsVO mapRow(ResultSet rs, int rowNum) throws SQLException {
+				CommentsVO vo = new CommentsVO();
+				vo.setNo(rs.getInt("NO"));
+				vo.setMemberNo(rs.getInt("MEMBER_NO"));
+				vo.setArticleNo(rs.getInt("ARTICLE_NO"));
+				vo.setContent(rs.getString("CONTENT"));
+				vo.setRegdate(rs.getTimestamp("REGDATE"));
+				vo.setOpinion(rs.getString("OPINION"));
+				vo.setNickname(rs.getString("NICKNAME"));
+				return vo;
+			}	
+		});
+		
+		SqlParameterSource in = new MapSqlParameterSource()
+				.addValue("PI_ARTICLE_NO", articleNo)
+				.addValue("PI_START", start)
+				.addValue("PI_END", end);
+		
+		Map out = simpleJdbcCall.execute(in);
+		
+		return (List<CommentsVO>) out.get("PO_CURSOR");
+	}
 	
 }

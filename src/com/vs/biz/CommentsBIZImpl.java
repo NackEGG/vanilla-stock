@@ -42,11 +42,6 @@ public class CommentsBIZImpl implements CommentsBIZ {
 		PageVO pageVO = new PageVO(page, numPage);
 		int start = pageVO.getStart();
 		int end = pageVO.getEnd();
-		//System.out.println(searchWord);
-		//System.out.println(searchType);
-		//System.out.println(sortType);
-		//System.out.println(startPage);
-		//System.out.println(endPage);
 		Map<String, List<CommentsVO>> pickComments = commentsDAO.getCommentsByOpinion(articleNo, start, end); 
 		List<CommentsVO> goodCommentsList = pickComments.get("goodComments");
 		List<CommentsVO> badCommentsList = pickComments.get("badComments");
@@ -70,5 +65,19 @@ public class CommentsBIZImpl implements CommentsBIZ {
 	@Override
 	public int[] getTotalCountCommentsByOpinion(int articleNo) {
 		return commentsDAO.getTotalCountCommentsByOpinion(articleNo);
+	}
+
+	@Override
+	public List<CommentsVO> getCommentsPage(int articleNo, int page) {
+		
+		int numPage = 10; // 더보기시 10개씩 추가
+		
+		PageVO pageVO = new PageVO(page, numPage);
+		int start = pageVO.getStart();
+		int end = pageVO.getEnd();
+		
+		List<CommentsVO> commentsList = commentsDAO.getCommentsPage(articleNo, start, end);
+		
+		return commentsList;
 	}
 }

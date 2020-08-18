@@ -49,9 +49,11 @@ public class MainPageController {
 	@RequestMapping(path="/main" , method=RequestMethod.GET)
 	public String recentAnnouncement(Model model) {
 		
+		List<String> companyList = companyBIZ.selectAllCompanyName();
 		String list = announcementBIZ.recentAnnouncement();
 		System.out.println("공지사항!!!!!!!");
 		model.addAttribute("announce",list);
+		model.addAttribute("companyList", companyList);
 		
 		//예나 수정
 		/*String[] Date = CardPageUtil.getLastDate(2);		// 0:Start, 1:End(오늘)

@@ -11,4 +11,6 @@ public interface CommentsBIZ {
 	public Map<String, Object> getCommentsByOpinion(int articleNo, int page);
 	public int[] getTotalCountCommentsByOpinion(int articleNo);
 	public List<CommentsVO> getRecentComments(String stockCode, int num);
+	public List<CommentsVO> getCommentsPage(int articleNo, int page);
+	
 }

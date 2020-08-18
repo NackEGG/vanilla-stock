@@ -143,27 +143,10 @@
 	justify-content: space-around;
 }
 
-
 .commentBox{
-	display:flex;
 	width: 100%;
 	height: auto;
 }
-
-.goodCommentBox {
-  width: 50%;
-  height: 140px;
-  display: flex;
-  flex-direction: row;
-}
-
-.badCommentBox {
-  width: 50%;
-  height: 140px;
-  display: flex;
-  flex-direction: row;
-}
-
 
 .commentWriter {
   width: 300px;

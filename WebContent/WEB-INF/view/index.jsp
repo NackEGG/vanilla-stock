@@ -1,8 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import = "java.util.List" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@taglib uri="http://www.springframework.org/tags" prefix="spring" %>
+<% List<String> companyList = (List<String>)request.getAttribute("companyList"); %>
 <!DOCTYPE html>
 <html>
   <head>
@@ -20,6 +22,7 @@
       crossorigin="anonymous"
     />
     <script src="js/jquery.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <style type="text/css" media="screen">
       #divTEST {
         height: 1000px;
@@ -70,6 +73,17 @@
     background: #ffffff;
  }
     </style>
+    <script>
+  	$( function() {
+  		var availableTags = [];
+  		<%for(int i=0; i < companyList.size();i++){%>
+  		availableTags[<%=i%>]='<%=companyList.get(i)%>';
+  		<%}%>
+    	$( "#search" ).autocomplete({
+      	source: availableTags
+    	});
+  	} );
+  </script>
   </head>
   <body>
     <div id="header">
@@ -207,11 +221,20 @@
 		</div>
           <!--Main 검색창 -->
           <div class="box">
+          	<form id="searchForm" action="/vanilla-stock/reportPage"> 
 			  <div class="container-1">
 			      <span class="icon"><i class="fa fa-search"></i></span>
-			      <input type="search" id="search" placeholder="Search..." />
+			      <input type="search" name="keyword" id="search" placeholder="Search..." onkeypress="JavaScript:press(this.form)">
 			  </div>
+			</form>
 		  </div>
+		  <script> 
+		  	function press(f){ 
+		  		if(f.keyCode == 13){ //javascript에서는 13이 enter키를 의미함 
+		  			searchForm.submit();
+		  		} 
+		  	} 
+		  </script>
           <div class="financeInfo">
             <div class="financeContents">
               <div class="financeHighLow">

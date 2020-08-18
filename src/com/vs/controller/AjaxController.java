@@ -75,6 +75,19 @@ public class AjaxController {
 	private List<String> indNoList;
 	
 	@RequestMapping(path = "/articlePage/pickComments", method = RequestMethod.GET)
+	public Map<String, Object> hell09(HttpServletRequest request, HttpSession session){
+		int articleNo = Integer.parseInt(request.getParameter("articleNo"));
+		int page = Integer.parseInt(request.getParameter("page"));
+		
+		Map<String, Object> map = new ConcurrentHashMap<String, Object>();
+		
+		List<CommentsVO> commentsList = commentsBIZ.getCommentsPage(articleNo, page);
+		
+		map.put("commentsList", commentsList);
+		return map;
+	}
+	
+	@RequestMapping(path = "/articlePage/pickComments2", method = RequestMethod.GET)
 	public Map<String, Object> hell08(HttpServletRequest request, HttpSession session){
 		Map<String, Object> map = new ConcurrentHashMap<String, Object>();
 		int articleNo = Integer.parseInt(request.getParameter("articleNo"));
@@ -219,10 +232,6 @@ public class AjaxController {
 		String searchType = request.getParameter("searchType");
 		String sortType = request.getParameter("sortType");
 		int page = Integer.parseInt(request.getParameter("page"));
-		System.out.println("검색조건"+searchType);
-		System.out.println("검색어"+searchWord);
-		System.out.println("분류조건"+sortType);
-		System.out.println("페이지"+page);		
 		
 		Map<String, Object> map = new ConcurrentHashMap<String, Object>();
 		map = articleBIZ.getPageList(searchWord, searchType, sortType, page);
