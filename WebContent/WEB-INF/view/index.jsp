@@ -24,54 +24,61 @@
     <script src="js/jquery.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <style type="text/css" media="screen">
-      #divTEST {
+     #divTEST {
         height: 1000px;
         background-color: lightgrey;
-      }
- .box{
- position: absolute;
- transform: translate(-50%, -50%);
- top: 10%;
- left: 50%;
- margin-top: 17%;
+     }
+ 	.box{
+ 		position: absolute;
+ 		transform: translate(-50%, -50%);
+ 		top: 10%;
+ 		left: 50%;
+ 		margin-top: 17%;
 	}
-.container-1 input#search{
-  width: 300px;
-  height: 50px;
-  background: #2b303b;
-  border: none;
-  font-size: 10pt;
-  float: left;
-  color: #63717f;
-  padding-left: 45px;
-  -webkit-border-radius: 5px;
-  -moz-border-radius: 5px;
-  border-radius: 5px;
-}
-.container-1 input#search::-webkit-input-placeholder {
-   color: #65737e;
-}
-.container-1 input#search:-moz-placeholder { /* Firefox 18- */
-   color: #65737e;  
-}
-.container-1 input#search::-moz-placeholder {  /* Firefox 19+ */
-   color: #65737e;  
-}
-.container-1 input#search:-ms-input-placeholder {  
-   color: #65737e;  
-}
-.container-1 .icon{
-  position: absolute;
-  top: 35%;
-  margin-left: 17px;
- /*  margin-top: 17px; */
-  z-index: 1;
-  color: #4f5b66;
-}
-.container-1 input#search:hover, .container-1 input#search:focus, .container-1 input#search:active{
-    outline:none;
-    background: #ffffff;
- }
+	.container-1 input#search{
+  		width: 300px;
+  		height: 50px;
+  		background: #2b303b;
+  		border: none;
+  		font-size: 10pt;
+  		float: left;
+  		color: #63717f;
+  		padding-left: 45px;
+  		-webkit-border-radius: 5px;
+  		-moz-border-radius: 5px;
+  		border-radius: 5px;
+	}
+	.container-1 input#search::-webkit-input-placeholder {
+   		color: #65737e;
+	}
+	.container-1 input#search:-moz-placeholder { /* Firefox 18- */
+   		color: #65737e;  
+	}
+	.container-1 input#search::-moz-placeholder {  /* Firefox 19+ */
+   		color: #65737e;  
+	}
+	.container-1 input#search:-ms-input-placeholder {  
+   		color: #65737e;  
+	}
+	.container-1 .icon{
+  		position: absolute;
+  		top: 35%;
+  		margin-left: 17px;
+ 		/*  margin-top: 17px; */
+ 		z-index: 1;
+  		color: #4f5b66;
+	}
+	.container-1 input#search:hover, .container-1 input#search:focus, .container-1 input#search:active{
+    	outline:none;
+    	background: #ffffff;
+	}
+ 	.ui-menu .ui-menu-item {
+    	background:white;
+    	height:20px;
+    	font-size:15px;
+    	width:300px;
+    	font-style: italic;
+	}
     </style>
     <script>
   	$( function() {
