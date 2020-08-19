@@ -1,7 +1,9 @@
 package com.vs.dao;
 
+import java.math.BigDecimal;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -47,17 +49,17 @@ public class FinanceDAOImpl implements FinanceDAO {
 	@Override
 	public List<FinanceManagerJoinVO> selectJoinList(String tab, String searchWord, int startYear, int startQuarter,
 			int endYear, int endQuarter, int startPage, int endPage, String sortType) {
-		procedureSelectContents.returningResultSet("financeManagerJoinVO", new RowMapper<FinanceManagerJoinVO>() {
+		procedureSelectContents.returningResultSet("CON_CURSOR",new RowMapper<FinanceManagerJoinVO>() {
 			@Override
 			public FinanceManagerJoinVO mapRow(ResultSet rs, int rowNum) throws SQLException {
 				FinanceManagerJoinVO vo = new FinanceManagerJoinVO();
 				vo.setName(rs.getString("name"));
 				vo.setCompany(rs.getString("company"));
-				vo.setStockListed(rs.getInt("stockListed"));
+				vo.setStockListed(rs.getLong("stockListed"));
 				vo.setAccountCode(rs.getString("accountCode"));
 				vo.setAccountNm(rs.getString("accountNm"));
-				vo.setAccountValue(rs.getInt("accountValue"));
-				vo.setCapital(rs.getInt("capital"));
+				vo.setAccountValue(rs.getLong("accountValue"));
+				vo.setCapital(rs.getLong("capital"));	
 				vo.setCurrency(rs.getString("currency"));
 				vo.setFacevalue(rs.getInt("facevalue"));
 				vo.setNo(rs.getInt("no"));
@@ -66,11 +68,13 @@ public class FinanceDAOImpl implements FinanceDAO {
 				vo.setYear(rs.getInt("year"));
 				vo.setStockCode(rs.getString("stockCode"));
 				vo.setLabelKor(rs.getString("labelKor"));
-				vo.setTotal(rs.getInt("total"));
+				vo.setTotal(rs.getLong("total"));
 				return vo;
 			}
 			
 		});//
+		
+		System.out.println(tab+" "+searchWord+" "+startYear+" "+startQuarter+" "+endYear+" "+endQuarter+" "+startPage+" "+endPage+" "+sortType);
 		
 		SqlParameterSource in = new MapSqlParameterSource().addValue("tab", tab)
 				.addValue("search_word", searchWord).addValue("start_year", startYear)
@@ -79,7 +83,15 @@ public class FinanceDAOImpl implements FinanceDAO {
 				.addValue("end_page", endPage).addValue("sort_type",sortType);
 		
 		Map<String, Object> out = procedureSelectContents.execute(in);
-		List<FinanceManagerJoinVO> voList = (List<FinanceManagerJoinVO>) out.get("OUT_CURSOR");
+		
+		for(String key : out.keySet()) {
+			System.out.println(key+" : "+out.get(key));
+		}
+		
+		@SuppressWarnings("unchecked")
+		List<FinanceManagerJoinVO>  voList = (List<FinanceManagerJoinVO>) out.get("CON_CURSOR");
+		
+		//System.out.println(voList.get(0).getCompany());
 		
 		return voList;
 	}

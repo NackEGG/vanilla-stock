@@ -23,20 +23,42 @@ const $deleteBtn = $('.btn_delete');
 const $tabInp = $('.tab input[type=radio]');
 const $contentsDIV = $('.div_contents');
 const $detailSearchBox = $('.box_inp_detail_search');
+const $stockCodeInp = $("#stockCodeInp");
 let oldValue = null;
 let oldStockCode = null;
+let startYearsVal = null;
+let endYearsVal = null;
+let startQuarterVal = null;
+let endQuarterVal = null;
+
 const $companySearchBox = $("#companySearchBox");
 //reset 조건 
 const $resetTabType = $("input:radio[name=tab]:input[value='finance']");
 const $resetSortingType = $("input:radio[name=sortType]:input[value='latest']");
+
+$(window).bind('beforeunload',function(){
+
+	$resetTabType.prop('checked',true);
+	reset();
+  
+
+});
+
+
+
+
 function reset() {
 	page = 1;
-	$resetTabType.prop('checked',true);
+	$stockCodeInp.val('');
+	$innerSearch.removeClass('hidden');
+	$innerDetailSearch.addClass('hidden');
 	$resetSortingType.prop('checked',true);
-	$txtInp.val("");
+	$txtInp.val('');
 	
 }
-reset();
+
+
+
 
 $txtInp.keyup(findCompany)
 .blur(findCompany)
@@ -74,11 +96,19 @@ $companySearchBox.on('click','li', function() {
 	//alert("test");//test by kimdabin
 	let stockCode = $(this).attr('data-stockCode');
 	let companyResult = $(this).text();
+	$stockCodeInp.val(stockCode);
 	$txtInp.val(companyResult);
 	console.log(stockCode);
 	
 	if(stockCode!="" && oldStockCode!=stockCode ){
 		oldStockCode = stockCode;
+		searchCompany(stockCode);
+	
+	}//if end 
+});
+let termObject = null;
+
+function searchCompany(stockCode) {
 	
 	$.ajax({
 		url : "/vanilla-stock/ajax/manager/contents/finance/search/term/"+stockCode,
@@ -91,23 +121,58 @@ $companySearchBox.on('click','li', function() {
 			console.log(data);
 			let years = new Set();
 			let quarters = new Array();
+			
 			data.forEach(function(el, index) {
-				years[index] = el.year;
+				years.add(el.year);
 				quarters[index] = el.quarter;
-				console.log("year");
-				console.log(el.year);
+				//console.log(years);
+				//console.log(el.year);
 			});
-			let termTmp = searchTermTmp({
-				"years" : years,
-				"quarters": quarters
-			});
-//			
-			$detailSearchBox.empty().append(termTmp);
+			
+			termObject = {
+					'years' : years,
+					'quarters': quarters,
+					"terms" : data,
+					"startYearsVal": years.values().next().value,
+					"endYearsVal": years.values().next().value,
+					"startQuarterVal": 5
+			};
+			
+			changeSearchTermTmp(termObject);
 		}//success end 
 
 	});//ajax end 
-	}//if end 
+}
+
+$detailSearchBox.on('change','#startYear',function(){
+
+	termObject.startYearsVal = $(this).val();
+	termObject.endYearsVal = termObject.startYearsVal;
+	changeSearchTermTmp(termObject);
+	
 });
+
+$detailSearchBox.on('change','#startQuarter',function(){
+
+	termObject.startQuarterVal = $(this).val();
+	console.log($(this).val());
+	changeSearchTermTmp(termObject);
+	
+});
+
+$detailSearchBox.on('change','#endYear',function(){
+
+	termObject.endYearsVal = $(this).val();
+	changeSearchTermTmp(termObject);
+	//alert(termObject.endYearsVal);//test 2020.08.18 by kimdabin 
+	
+});
+
+function changeSearchTermTmp(termObject){
+	let termTmp = searchTermTmp(termObject);
+	$detailSearchBox.empty().append(termTmp);
+}
+
 $("html").click(function(e){
 	if(!$(e.target).hasClass("company_search_on")){
 		$companySearchBox.hide();
@@ -177,15 +242,34 @@ function contents() {
 	let formData = $searchForm.serialize();
 	console.log("form data");
 	console.log(formData);
+	//alert(page);
+	$.ajax({
+		url : "/vanilla-stock/ajax/manager/contents",
+		type : "post",
+		data : formData + '&page=' + page,
+		error : function() {
+			alert("error");
+		},
+		success : function(json) {
+			let tmp = financeListTmp({"finances":json.financeDataList});
+			$('.list_rating tbody').empty().append(tmp);
+			$totalCount.text(json.financeDataList[0].total);
+			$divPaginate.empty().append(json.paginate);
+			console.log(json);
+		}
+
+	});//ajax end 
 }
 function contentsTab() {
 	//reset();
 	var nowTab = $('.inp_tab:checked').val();
-	alert(nowTab);
+	//alert(nowTab);
+	
 	if($contentsDIV.hasClass('show')){
 		$contentsDIV.removeClass('show');
 	}
 	$('div .'+nowTab).addClass('show');
+	reset();
 }//contentsTab
 function members() {
 
@@ -220,13 +304,15 @@ function members() {
 	});//ajax end 
 }// search() end
 
+
+
 //pageblock 클릭
 $aux.on("click", ".paginate a", function(e) {
 	e.preventDefault();
 	// 각 페이지의 시작되는 게시물 번호  
 	page = this.dataset.no;
 	//ajax로 데이터 리스트 받아오는 함수 
-	console.log(page)
+	console.log(page);
 	window[cateType]();
 	//getMembers();
 

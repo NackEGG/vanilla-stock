@@ -1,12 +1,12 @@
 package com.vs.vo;
 
 public class FinanceManagerJoinVO {
-	private int total;
+	private long total;
 	private String name;// industry
 	/*company*/
 	private String company;
-	private int stockListed;
-	private int capital;
+	private long stockListed;
+	private long capital;
 	private int facevalue;
 	private String currency;
 	private String stockCode;
@@ -16,7 +16,7 @@ public class FinanceManagerJoinVO {
 	private int year;
 	private int quarter;
 	private String accountCode;
-	private int accountValue;
+	private long accountValue;
 	
 	/*financeCate*/
 	private String accountNm;
@@ -26,11 +26,12 @@ public class FinanceManagerJoinVO {
 	public FinanceManagerJoinVO() {
 		// TODO Auto-generated constructor stub
 	}
-	
-	public int getTotal() {
+
+	public long getTotal() {
 		return total;
 	}
-	public void setTotal(int total) {
+
+	public void setTotal(long total) {
 		this.total = total;
 	}
 
@@ -50,19 +51,19 @@ public class FinanceManagerJoinVO {
 		this.company = company;
 	}
 
-	public int getStockListed() {
+	public long getStockListed() {
 		return stockListed;
 	}
 
-	public void setStockListed(int stockListed) {
+	public void setStockListed(long stockListed) {
 		this.stockListed = stockListed;
 	}
 
-	public int getCapital() {
+	public long getCapital() {
 		return capital;
 	}
 
-	public void setCapital(int capital) {
+	public void setCapital(long capital) {
 		this.capital = capital;
 	}
 
@@ -122,11 +123,11 @@ public class FinanceManagerJoinVO {
 		this.accountCode = accountCode;
 	}
 
-	public int getAccountValue() {
+	public long getAccountValue() {
 		return accountValue;
 	}
 
-	public void setAccountValue(int accountValue) {
+	public void setAccountValue(long accountValue) {
 		this.accountValue = accountValue;
 	}
 

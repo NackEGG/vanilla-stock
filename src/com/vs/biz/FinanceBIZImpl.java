@@ -34,8 +34,9 @@ public class FinanceBIZImpl implements FinanceBIZ {
 		Map<String, Object> map = new ConcurrentHashMap<String, Object>();
 		int numPage = 10; //각 인덱스당 출력되는 유저 수 
 		int numBlock = 5; //출력될 페이지 인덱스 개수 
-		
-		if(searchWord.isEmpty()||searchWord.length()<1)	searchWord = null;
+		System.out.println(searchWord);
+		if(searchWord==null||searchWord.isEmpty()||searchWord.length()<1)	searchWord = null;
+		if(sortType==null||sortType.isEmpty()||sortType.length()<1)	sortType = null;
 		List<FinanceManagerJoinVO> list = new ArrayList<FinanceManagerJoinVO>();
 		PaginateUtil paginateUtil = new PaginateUtil();
 		PageVO pageVO = new PageVO(page, numPage);
@@ -46,8 +47,12 @@ public class FinanceBIZImpl implements FinanceBIZ {
 				endYear, endQuarter, startPage, endPage, sortType);
 		map.put("financeDataList", list);
 		
+		for(FinanceManagerJoinVO f : list) {
+			System.out.println(f.getName());
+		}
+		
 		//총 게시물 수 
-		int total = list.get(0).getTotal();
+		int total = (int) list.get(0).getTotal();
 		
 		map.put("paginate", paginateUtil.getPaginate(page, total, numPage, numBlock, 
 				"/vanilla-stock/ajax/manager/contents"));
