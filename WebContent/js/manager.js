@@ -235,9 +235,9 @@ $searchForm.submit(function(e) {
 });//submit end 
 $tabInp.change(contentsTab);
 
-
-
-function contents() {
+const $financeTbody = $('.list_rating tbody');
+const $arenaUl = $('.list_arena ul');
+function contents(nowTab) {
 	//alert("contents!");
 	let formData = $searchForm.serialize();
 	console.log("form data");
@@ -251,18 +251,30 @@ function contents() {
 			alert("error");
 		},
 		success : function(json) {
-			let tmp = financeListTmp({"finances":json.financeDataList});
-			$('.list_rating tbody').empty().append(tmp);
-			$totalCount.text(json.financeDataList[0].total);
-			$divPaginate.empty().append(json.paginate);
+			let tot = json.dataList[0].total;;
 			console.log(json);
+			if(nowTab=='finance'){
+				let tmp = financeListTmp({"finances":json.dataList});
+				$financeTbody.empty().append(tmp);
+				
+				//console.log(tmp);
+				
+			}else if(nowTab=='arena'){
+				let tmp = arenaListTmp({"arenas":json.dataList});
+				$arenaUl.empty().append(tmp);
+				console.log(tmp);
+			}
+				
+			$divPaginate.empty().append(json.paginate);
+			$totalCount.text(tot);
 		}
 
 	});//ajax end 
 }
+
 function contentsTab() {
 	//reset();
-	var nowTab = $('.inp_tab:checked').val();
+	let nowTab = $('.inp_tab:checked').val();
 	//alert(nowTab);
 	
 	if($contentsDIV.hasClass('show')){
@@ -270,6 +282,7 @@ function contentsTab() {
 	}
 	$('div .'+nowTab).addClass('show');
 	reset();
+	contents(nowTab);
 }//contentsTab
 function members() {
 

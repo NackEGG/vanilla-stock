@@ -17,6 +17,7 @@ import org.springframework.jdbc.core.simple.SimpleJdbcCall;
 import org.springframework.stereotype.Repository;
 
 import com.vs.vo.ArticleVO;
+import com.vs.vo.FinanceManagerJoinVO;
 import com.vs.vo.PageVO;
 
 @Repository
@@ -25,10 +26,58 @@ public class ArticleDAOImpl implements ArticleDAO {
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
 
+
 	public SimpleJdbcCall getSimpleJdbcCall(JdbcTemplate jdbcTemplate) {
 		return new SimpleJdbcCall(jdbcTemplate);
 	}
 	
+	@Override
+	public List<ArticleVO> selectJoinList(String tab, String searchWord, int startYear, int startQuarter, int endYear,
+			int endQuarter, int startPage, int endPage, String sortType) {
+		SimpleJdbcCall procedureSelectContents = new SimpleJdbcCall(jdbcTemplate);
+		System.out.println(procedureSelectContents.toString());
+		procedureSelectContents.withProcedureName("select_contents").returningResultSet("CON_CURSOR",new RowMapper<ArticleVO>() {
+			@Override
+			public ArticleVO mapRow(ResultSet rs, int rowNum) throws SQLException {
+				ArticleVO vo = new ArticleVO();
+				vo.setNo(rs.getInt("no"));
+				vo.setCompany(rs.getString("company"));
+				vo.setIndustry(rs.getString("industry"));
+				vo.setNickname(rs.getString("nickname"));
+				vo.setMemberNo(rs.getInt("memberNo"));
+				vo.setTitle(rs.getString("title"));
+				vo.setStockCode(rs.getString("stockCode"));
+				vo.setRegdate(rs.getTimestamp("regdate"));
+				vo.setBuyingCount(rs.getInt("buyingCount"));
+				vo.setSellCount(rs.getInt("sellCount"));
+				vo.setCommentsCount(rs.getInt("commentsCount"));
+				vo.setTotal(rs.getInt("total"));
+				return vo;
+			}
+			
+		});//
+		
+		System.out.println(tab+" "+searchWord+" "+startYear+" "+startQuarter+" "+endYear+" "+endQuarter+" "+startPage+" "+endPage+" "+sortType);
+		
+		SqlParameterSource in = new MapSqlParameterSource().addValue("tab", tab)
+				.addValue("search_word", searchWord).addValue("start_year", startYear)
+				.addValue("start_quarter", startQuarter).addValue("end_year", endYear)
+				.addValue("end_quarter", endQuarter).addValue("start_page", startPage)
+				.addValue("end_page", endPage).addValue("sort_type",sortType);
+		
+		Map<String, Object> out = procedureSelectContents.execute(in);
+		
+		for(String key : out.keySet()) {
+			System.out.println(key+" : "+out.get(key));
+		}
+		
+		@SuppressWarnings("unchecked")
+		List<ArticleVO>  voList = (List<ArticleVO>) out.get("CON_CURSOR");
+		
+		//System.out.println(voList.get(0).getCompany());
+		
+		return voList;
+	}
 	// 페이지 게시물 선택 조회
 	@Override
 	public ArticleVO select(int no) {

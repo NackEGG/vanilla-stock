@@ -162,7 +162,7 @@
 
 			<div class="wrap_list">
 				<div class="head_list">
-					<span class="total"> 총 게시글 <strong class="total_count">100</strong>
+					<span class="total"> 총 게시글 <strong class="total_count"></strong>
 						개
 					</span>
 					<p class="sort">
@@ -178,330 +178,7 @@
 				<div class="list_arena">
 					<h3 class="screen_out">투기장 게시글 목록</h3>
 					<ul>
-						<li class="arena"><input type="checkbox" name="no" value="" />
-							<a href="">
-								<div title="회사명" class="company">조흥</div>
-								<div class="box_winratio">
-									<span class="screen_out">투 표</span>
-									<div class="winratio_graph">
-
-										<div class="winratio_graph_fill winratio_graph_fill_left"
-											title="풀매수: 70" style="width: 70%"></div>
-										<div class="winratio_graph_txt winratio_graph_txt_left">70</div>
-										<div class="winratio_graph_fill winratio_graph_fill_right"
-											title="풀매도: 30"></div>
-										<div class="winratio_graph_txt winratio_graph_txt_right">30</div>
-
-									</div>
-									<!--//.winratio_graph -->
-								</div> <!--//.box_winratio -->
-								<div class="industry">
-									<span>[ </span> <span>화학</span> <span> ]</span>
-								</div>
-								<div class="comments">
-									<i class="far fa-comment"></i><span> 99999</span>
-								</div>
-								<div class="regdate">
-									<time>2012.02.01</time>
-								</div>
-
-						</a>
-
-							<button type="button" class="btn btn_delete">삭제</button> <!--//btn_delete --></li>
-						<!--//.arena -->
-
-						<li class="arena"><input type="checkbox" name="no" value="" />
-							<a href="">
-								<div title="회사명" class="company">라이프사이언스테크놀로지</div>
-								<div class="box_winratio">
-									<span class="screen_out">투 표</span>
-									<div class="winratio_graph">
-
-										<div class="winratio_graph_fill winratio_graph_fill_left"
-											title="풀매수: 70" style="width: 70%"></div>
-										<div class="winratio_graph_txt winratio_graph_txt_left">70</div>
-										<div class="winratio_graph_fill winratio_graph_fill_right"
-											title="풀매도: 30"></div>
-										<div class="winratio_graph_txt winratio_graph_txt_right">30</div>
-
-									</div>
-									<!--//.winratio_graph -->
-								</div> <!--//.box_winratio -->
-								<div class="industry">
-									<span>[ </span> <span>독립전력생산및에너지거래</span> <span> ]</span>
-								</div>
-								<div class="comments">
-									<i class="far fa-comment"></i><span> 0</span>
-								</div>
-								<div class="regdate">
-									<time>2012.02.01</time>
-								</div>
-
-						</a>
-							<div class="box_btn_delete">
-								<button type="button" class="btn btn_delete">삭제</button>
-								<!--//btn_delete -->
-							</div> <!--//.box_btn_delete --></li>
-						<!--//.arena -->
-						<li class="arena"><input type="checkbox" name="no" value="" />
-							<a href="">
-								<div title="회사명" class="company">조흥</div>
-								<div class="box_winratio">
-									<span class="screen_out">투 표</span>
-									<div class="winratio_graph">
-
-										<div class="winratio_graph_fill winratio_graph_fill_left"
-											title="풀매수: 70" style="width: 70%"></div>
-										<div class="winratio_graph_txt winratio_graph_txt_left">70</div>
-										<div class="winratio_graph_fill winratio_graph_fill_right"
-											title="풀매도: 30"></div>
-										<div class="winratio_graph_txt winratio_graph_txt_right">30</div>
-
-									</div>
-									<!--//.winratio_graph -->
-								</div> <!--//.box_winratio -->
-								<div class="industry">
-									<span>[ </span> <span>화학</span> <span> ]</span>
-								</div>
-								<div class="comments">
-									<i class="far fa-comment"></i><span> 99999</span>
-								</div>
-								<div class="regdate">
-									<time>2012.02.01</time>
-								</div>
-
-						</a>
-
-							<button type="button" class="btn btn_delete">삭제</button> <!--//btn_delete --></li>
-						<!--//.arena -->
-
-						<li class="arena"><input type="checkbox" name="no" value="" />
-							<a href="">
-								<div title="회사명" class="company">라이프사이언스테크놀로지</div>
-								<div class="box_winratio">
-									<span class="screen_out">투 표</span>
-									<div class="winratio_graph">
-
-										<div class="winratio_graph_fill winratio_graph_fill_left"
-											title="풀매수: 70" style="width: 70%"></div>
-										<div class="winratio_graph_txt winratio_graph_txt_left">70</div>
-										<div class="winratio_graph_fill winratio_graph_fill_right"
-											title="풀매도: 30"></div>
-										<div class="winratio_graph_txt winratio_graph_txt_right">30</div>
-
-									</div>
-									<!--//.winratio_graph -->
-								</div> <!--//.box_winratio -->
-								<div class="industry">
-									<span>[ </span> <span>독립전력생산및에너지거래</span> <span> ]</span>
-								</div>
-								<div class="comments">
-									<i class="far fa-comment"></i><span> 0</span>
-								</div>
-								<div class="regdate">
-									<time>2012.02.01</time>
-								</div>
-
-						</a>
-							<div class="box_btn_delete">
-								<button type="button" class="btn btn_delete">삭제</button>
-								<!--//btn_delete -->
-							</div> <!--//.box_btn_delete --></li>
-						<!--//.arena -->
-						<li class="arena"><input type="checkbox" name="no" value="" />
-							<a href="">
-								<div title="회사명" class="company">조흥</div>
-								<div class="box_winratio">
-									<span class="screen_out">투 표</span>
-									<div class="winratio_graph">
-
-										<div class="winratio_graph_fill winratio_graph_fill_left"
-											title="풀매수: 70" style="width: 70%"></div>
-										<div class="winratio_graph_txt winratio_graph_txt_left">70</div>
-										<div class="winratio_graph_fill winratio_graph_fill_right"
-											title="풀매도: 30"></div>
-										<div class="winratio_graph_txt winratio_graph_txt_right">30</div>
-
-									</div>
-									<!--//.winratio_graph -->
-								</div> <!--//.box_winratio -->
-								<div class="industry">
-									<span>[ </span> <span>화학</span> <span> ]</span>
-								</div>
-								<div class="comments">
-									<i class="far fa-comment"></i><span> 99999</span>
-								</div>
-								<div class="regdate">
-									<time>2012.02.01</time>
-								</div>
-
-						</a>
-
-							<button type="button" class="btn btn_delete">삭제</button> <!--//btn_delete --></li>
-						<!--//.arena -->
-
-						<li class="arena"><input type="checkbox" name="no" value="" />
-							<a href="">
-								<div title="회사명" class="company">라이프사이언스테크놀로지</div>
-								<div class="box_winratio">
-									<span class="screen_out">투 표</span>
-									<div class="winratio_graph">
-
-										<div class="winratio_graph_fill winratio_graph_fill_left"
-											title="풀매수: 70" style="width: 70%"></div>
-										<div class="winratio_graph_txt winratio_graph_txt_left">70</div>
-										<div class="winratio_graph_fill winratio_graph_fill_right"
-											title="풀매도: 30"></div>
-										<div class="winratio_graph_txt winratio_graph_txt_right">30</div>
-
-									</div>
-									<!--//.winratio_graph -->
-								</div> <!--//.box_winratio -->
-								<div class="industry">
-									<span>[ </span> <span>독립전력생산및에너지거래</span> <span> ]</span>
-								</div>
-								<div class="comments">
-									<i class="far fa-comment"></i><span> 0</span>
-								</div>
-								<div class="regdate">
-									<time>2012.02.01</time>
-								</div>
-
-						</a>
-							<div class="box_btn_delete">
-								<button type="button" class="btn btn_delete">삭제</button>
-								<!--//btn_delete -->
-							</div> <!--//.box_btn_delete --></li>
-						<!--//.arena -->
-						<li class="arena"><input type="checkbox" name="no" value="" />
-							<a href="">
-								<div title="회사명" class="company">조흥</div>
-								<div class="box_winratio">
-									<span class="screen_out">투 표</span>
-									<div class="winratio_graph">
-
-										<div class="winratio_graph_fill winratio_graph_fill_left"
-											title="풀매수: 70" style="width: 70%"></div>
-										<div class="winratio_graph_txt winratio_graph_txt_left">70</div>
-										<div class="winratio_graph_fill winratio_graph_fill_right"
-											title="풀매도: 30"></div>
-										<div class="winratio_graph_txt winratio_graph_txt_right">30</div>
-
-									</div>
-									<!--//.winratio_graph -->
-								</div> <!--//.box_winratio -->
-								<div class="industry">
-									<span>[ </span> <span>화학</span> <span> ]</span>
-								</div>
-								<div class="comments">
-									<i class="far fa-comment"></i><span> 99999</span>
-								</div>
-								<div class="regdate">
-									<time>2012.02.01</time>
-								</div>
-
-						</a>
-
-							<button type="button" class="btn btn_delete">삭제</button> <!--//btn_delete --></li>
-						<!--//.arena -->
-
-						<li class="arena"><input type="checkbox" name="no" value="" />
-							<a href="">
-								<div title="회사명" class="company">라이프사이언스테크놀로지</div>
-								<div class="box_winratio">
-									<span class="screen_out">투 표</span>
-									<div class="winratio_graph">
-
-										<div class="winratio_graph_fill winratio_graph_fill_left"
-											title="풀매수: 70" style="width: 70%"></div>
-										<div class="winratio_graph_txt winratio_graph_txt_left">70</div>
-										<div class="winratio_graph_fill winratio_graph_fill_right"
-											title="풀매도: 30"></div>
-										<div class="winratio_graph_txt winratio_graph_txt_right">30</div>
-
-									</div>
-									<!--//.winratio_graph -->
-								</div> <!--//.box_winratio -->
-								<div class="industry">
-									<span>[ </span> <span>독립전력생산및에너지거래</span> <span> ]</span>
-								</div>
-								<div class="comments">
-									<i class="far fa-comment"></i><span> 0</span>
-								</div>
-								<div class="regdate">
-									<time>2012.02.01</time>
-								</div>
-
-						</a>
-							<div class="box_btn_delete">
-								<button type="button" class="btn btn_delete">삭제</button>
-								<!--//btn_delete -->
-							</div> <!--//.box_btn_delete --></li>
-						<!--//.arena -->
-						<li class="arena"><input type="checkbox" name="no" value="" />
-							<a href="">
-								<div title="회사명" class="company">조흥</div>
-								<div class="box_winratio">
-									<span class="screen_out">투 표</span>
-									<div class="winratio_graph">
-
-										<div class="winratio_graph_fill winratio_graph_fill_left"
-											title="풀매수: 70" style="width: 70%"></div>
-										<div class="winratio_graph_txt winratio_graph_txt_left">70</div>
-										<div class="winratio_graph_fill winratio_graph_fill_right"
-											title="풀매도: 30"></div>
-										<div class="winratio_graph_txt winratio_graph_txt_right">30</div>
-
-									</div>
-									<!--//.winratio_graph -->
-								</div> <!--//.box_winratio -->
-								<div class="industry">
-									<span>[ </span> <span>화학</span> <span> ]</span>
-								</div>
-								<div class="comments">
-									<i class="far fa-comment"></i><span> 99999</span>
-								</div>
-								<div class="regdate">
-									<time>2012.02.01</time>
-								</div>
-
-						</a>
-
-							<button type="button" class="btn btn_delete">삭제</button> <!--//btn_delete --></li>
-						<!--//.arena -->
-
-						<li class="arena"><input type="checkbox" name="no" value="" />
-							<a href="">
-								<div title="회사명" class="company">라이프사이언스테크놀로지</div>
-								<div class="box_winratio">
-									<span class="screen_out">투 표</span>
-									<div class="winratio_graph">
-
-										<div class="winratio_graph_fill winratio_graph_fill_left"
-											title="풀매수: 70" style="width: 70%"></div>
-										<div class="winratio_graph_txt winratio_graph_txt_left">70</div>
-										<div class="winratio_graph_fill winratio_graph_fill_right"
-											title="풀매도: 30"></div>
-										<div class="winratio_graph_txt winratio_graph_txt_right">30</div>
-
-									</div>
-									<!--//.winratio_graph -->
-								</div> <!--//.box_winratio -->
-								<div class="industry">
-									<span>[ </span> <span>독립전력생산및에너지거래</span> <span> ]</span>
-								</div>
-								<div class="comments">
-									<i class="far fa-comment"></i><span> 0</span>
-								</div>
-								<div class="regdate">
-									<time>2012.02.01</time>
-								</div>
-
-						</a>
-							<div class="box_btn_delete">
-								<button type="button" class="btn btn_delete">삭제</button>
-								<!--//btn_delete -->
-							</div> <!--//.box_btn_delete --></li>
+						
 						<!--//.arena -->
 
 					</ul>
@@ -516,6 +193,41 @@
 	<!--//.contents -->
 </div>
 <!--//#articleSection -->
+<script type="text/template" id="arenaListTmp">
+<@ _.each(arenas, function(arena){   @>	 
+<li class="arena">
+	<input type="checkbox" name="no" value="<@=arena.no @>" />
+	<a href="">
+		<div title="회사명" class="company"><@=arena.company @></div>
+		<div class="box_winratio">
+		<span class="screen_out">투 표</span>
+		<div class="winratio_graph">
+
+		<div class="winratio_graph_fill winratio_graph_fill_left" title="풀매수: <@=arena.buyingCount @>" style="width: <@=arena.buyingCount/(arena.buyingCount+arena.sellCount)*100 @> "></div>
+		<div class="winratio_graph_txt winratio_graph_txt_left">70</div>
+		<div class="winratio_graph_fill winratio_graph_fill_right" title="풀매도: <@=arena.sellCount @>"></div>
+		<div class="winratio_graph_txt winratio_graph_txt_right">30</div>
+
+		</div>
+		<!--//.winratio_graph -->
+		</div> <!--//.box_winratio -->
+		<div class="industry">
+		<span>[ </span> <span>화학</span> <span> ]</span>
+		</div>
+		<div class="comments">
+		<i class="far fa-comment"></i><span> 99999</span>
+		</div>
+		<div class="regdate">
+		<time>2012.02.01</time>
+		</div>
+
+	</a>
+	<button type="button" class="btn btn_delete">삭제</button> <!--//btn_delete -->
+</li>
+<@ })@>
+</script>
+
+
 <script type="text/template" id="financeListTmp">
 <@ _.each(finances, function(fin){   @>	
 <tr>
@@ -598,4 +310,5 @@
 const searchCompanyTmp = _.template($("#searchCompanyTmp").html());
 const searchTermTmp = _.template($("#searchTermTmp").html());
 const financeListTmp = _.template($("#financeListTmp").html());
+const arenaListTmp = _.template($("#arenaListTmp").html());
 </script>

@@ -45,7 +45,7 @@ public class FinanceBIZImpl implements FinanceBIZ {
 		
 		list = financeDAO.selectJoinList(tab, searchWord, startYear, startQuarter, 
 				endYear, endQuarter, startPage, endPage, sortType);
-		map.put("financeDataList", list);
+		map.put("dataList", list);
 		
 		for(FinanceManagerJoinVO f : list) {
 			System.out.println(f.getName());

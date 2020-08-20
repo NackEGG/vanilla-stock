@@ -157,6 +157,8 @@ public class AjaxController {
 			}	
 			if(tab.equals("finance")) {
 				map = financeBIZ.getJoinList(page, tab, searchWord, startYear, startQuarter, endYear, endQuarter, sortType);
+			}else if(tab.equals("arena")) {
+				map = articleBIZ.getJoinList(page, tab, searchWord, startYear, startQuarter, endYear, endQuarter, sortType);
 			}
 		return map;
 	}

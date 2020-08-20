@@ -22,8 +22,7 @@ public class FinanceDAOImpl implements FinanceDAO {
 	
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
-	@Autowired 
-	private SimpleJdbcCall procedureSelectContents;
+
 	
 	
 	@Override
@@ -49,7 +48,10 @@ public class FinanceDAOImpl implements FinanceDAO {
 	@Override
 	public List<FinanceManagerJoinVO> selectJoinList(String tab, String searchWord, int startYear, int startQuarter,
 			int endYear, int endQuarter, int startPage, int endPage, String sortType) {
-		procedureSelectContents.returningResultSet("CON_CURSOR",new RowMapper<FinanceManagerJoinVO>() {
+		SimpleJdbcCall procedureSelectContents = new SimpleJdbcCall(jdbcTemplate);
+		System.out.println(procedureSelectContents.toString());
+		
+		procedureSelectContents.withProcedureName("select_contents").returningResultSet("CON_CURSOR",new RowMapper<FinanceManagerJoinVO>() {
 			@Override
 			public FinanceManagerJoinVO mapRow(ResultSet rs, int rowNum) throws SQLException {
 				FinanceManagerJoinVO vo = new FinanceManagerJoinVO();
