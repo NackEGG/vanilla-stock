@@ -1,8 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import = "java.util.List" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@taglib uri="http://www.springframework.org/tags" prefix="spring" %>
+<% List<String> companyList = (List<String>)request.getAttribute("companyList"); %>
 <!DOCTYPE html>
 <html>
   <head>
@@ -20,56 +22,75 @@
       crossorigin="anonymous"
     />
     <script src="js/jquery.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <style type="text/css" media="screen">
-      #divTEST {
+     #divTEST {
         height: 1000px;
         background-color: lightgrey;
-      }
- .box{
- position: absolute;
- transform: translate(-50%, -50%);
- top: 10%;
- left: 50%;
- margin-top: 17%;
+     }
+ 	.box{
+ 		position: absolute;
+ 		transform: translate(-50%, -50%);
+ 		top: 10%;
+ 		left: 50%;
+ 		margin-top: 17%;
 	}
-.container-1 input#search{
-  width: 300px;
-  height: 50px;
-  background: #2b303b;
-  border: none;
-  font-size: 10pt;
-  float: left;
-  color: #63717f;
-  padding-left: 45px;
-  -webkit-border-radius: 5px;
-  -moz-border-radius: 5px;
-  border-radius: 5px;
-}
-.container-1 input#search::-webkit-input-placeholder {
-   color: #65737e;
-}
-.container-1 input#search:-moz-placeholder { /* Firefox 18- */
-   color: #65737e;  
-}
-.container-1 input#search::-moz-placeholder {  /* Firefox 19+ */
-   color: #65737e;  
-}
-.container-1 input#search:-ms-input-placeholder {  
-   color: #65737e;  
-}
-.container-1 .icon{
-  position: absolute;
-  top: 35%;
-  margin-left: 17px;
- /*  margin-top: 17px; */
-  z-index: 1;
-  color: #4f5b66;
-}
-.container-1 input#search:hover, .container-1 input#search:focus, .container-1 input#search:active{
-    outline:none;
-    background: #ffffff;
- }
+	.container-1 input#search{
+  		width: 300px;
+  		height: 50px;
+  		background: #2b303b;
+  		border: none;
+  		font-size: 10pt;
+  		float: left;
+  		color: #63717f;
+  		padding-left: 45px;
+  		-webkit-border-radius: 5px;
+  		-moz-border-radius: 5px;
+  		border-radius: 5px;
+	}
+	.container-1 input#search::-webkit-input-placeholder {
+   		color: #65737e;
+	}
+	.container-1 input#search:-moz-placeholder { /* Firefox 18- */
+   		color: #65737e;  
+	}
+	.container-1 input#search::-moz-placeholder {  /* Firefox 19+ */
+   		color: #65737e;  
+	}
+	.container-1 input#search:-ms-input-placeholder {  
+   		color: #65737e;  
+	}
+	.container-1 .icon{
+  		position: absolute;
+  		top: 35%;
+  		margin-left: 17px;
+ 		/*  margin-top: 17px; */
+ 		z-index: 1;
+  		color: #4f5b66;
+	}
+	.container-1 input#search:hover, .container-1 input#search:focus, .container-1 input#search:active{
+    	outline:none;
+    	background: #ffffff;
+	}
+ 	.ui-menu .ui-menu-item {
+    	background:white;
+    	height:20px;
+    	font-size:15px;
+    	width:300px;
+    	font-style: italic;
+	}
     </style>
+    <script>
+  	$( function() {
+  		var availableTags = [];
+  		<%for(int i=0; i < companyList.size();i++){%>
+  		availableTags[<%=i%>]='<%=companyList.get(i)%>';
+  		<%}%>
+    	$( "#search" ).autocomplete({
+      	source: availableTags
+    	});
+  	} );
+  </script>
   </head>
   <body>
     <div id="header">
@@ -207,11 +228,20 @@
 		</div>
           <!--Main 검색창 -->
           <div class="box">
+          	<form id="searchForm" action="/vanilla-stock/reportPage"> 
 			  <div class="container-1">
 			      <span class="icon"><i class="fa fa-search"></i></span>
-			      <input type="search" id="search" placeholder="Search..." />
+			      <input type="search" name="keyword" id="search" placeholder="Search..." onkeypress="JavaScript:press(this.form)">
 			  </div>
+			</form>
 		  </div>
+		  <script> 
+		  	function press(f){ 
+		  		if(f.keyCode == 13){ //javascript에서는 13이 enter키를 의미함 
+		  			searchForm.submit();
+		  		} 
+		  	} 
+		  </script>
           <div class="financeInfo">
             <div class="financeContents">
               <div class="financeHighLow">

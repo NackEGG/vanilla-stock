@@ -45,14 +45,14 @@ public class ReportPageController {
 	@Autowired
 	CommentsBIZ commentsBIZ;
 	
-	@RequestMapping(path = "/reportPage/{no}", method = RequestMethod.GET)
-	public String hello01(@PathVariable String no, Model model) throws Exception {
+	@RequestMapping(path = "/reportPage", method = RequestMethod.GET)
+	public String hello01(HttpServletRequest request,Model model) throws Exception {
 		
-		//String keyword = (String) request.getAttribute("keyword");
-		//CompanyVO companyVO = companyBIZ.select(keyword);
+		String keyword = request.getParameter("keyword");
 		
 		// 회사, 산업 정보
-		CompanyVO companyVO = companyBIZ.select(no);
+		CompanyVO companyVO = companyBIZ.select(keyword);
+		String no = companyVO.getStockCode();
 		IndustryVO industryVO = industryBIZ.get(no);
 			
 		// 주식 실시간 API 

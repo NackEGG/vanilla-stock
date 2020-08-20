@@ -11,4 +11,5 @@ public interface CommentsDAO {
 	public Map<String, List<CommentsVO>> getCommentsByOpinion(int articleNo, int start, int end);
 	public int[] getTotalCountCommentsByOpinion(int articleNo);
 	public List<CommentsVO> getRecentComments(String stockCode, int num);
+	public List<CommentsVO> getCommentsPage(int articleNo, int start, int end);
 }
