@@ -24,17 +24,11 @@
 <mvc:resources location="/js/" mapping="/js/**"/>
 <mvc:resources location="/img/" mapping="/img/**"/>
 <mvc:resources location="/profile/" mapping="/profile/**"/>
-<mvc:resources location="/upload/" mapping="/upload/**"/>
+<mvc:resources location="/icon/" mapping="/icon/**"/>
 
 <bean class="org.springframework.web.servlet.view.UrlBasedViewResolver" 
 	p:viewClass="org.springframework.web.servlet.view.JstlView"
 	p:prefix="/WEB-INF/view/"
 	p:suffix=".jsp"/> <!-- /WEB-INF/view/customer/result.jsp -->
-
-<mvc:resources location="/css/" mapping="/css/**"/>
-<mvc:resources location="/fonts/" mapping="/fonts/**"/>
-<mvc:resources location="/img/" mapping="/img/**"/>
-<mvc:resources location="/js/" mapping="/js/**"/>
-<mvc:resources location="/icon/" mapping="/icon/**"/>
 
 </beans>
