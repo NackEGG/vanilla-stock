@@ -141,20 +141,38 @@ public class AjaxController {
 	@RequestMapping(value = "/manager/contents")
 	public Map<String, Object> getManagerPgContentsList(HttpServletRequest request){
 		Map<String, Object> map = new ConcurrentHashMap<String, Object>();
+		
 		String tab = request.getParameter("tab");
 		String searchWord = request.getParameter("searchWord");
-		int startYear = Integer.parseInt(request.getParameter("startYear"));
-		int endYear = Integer.parseInt(request.getParameter("endYear"));
-		int startQuarter = Integer.parseInt(request.getParameter("startQuarter"));
-		int endQuarter = Integer.parseInt(request.getParameter("endQuarter"));
 		int page = Integer.parseInt(request.getParameter("page"));
+		int startYear = 0;
+		int endYear = 0;
+		int startQuarter = 0;
+		int endQuarter = 0;
+		
 		String sortType = request.getParameter("sortType");
 		
-		if(tab.equals("finance")) {
-			map = financeBIZ.getJoinList(page, tab, searchWord, startYear, startQuarter, endYear, endQuarter, sortType);
-		}
+			try {
 				
-		
+				startYear = Integer.parseInt(request.getParameter("startYear"));
+				endYear = Integer.parseInt(request.getParameter("endYear"));
+				startQuarter = Integer.parseInt(request.getParameter("startQuarter"));
+				endQuarter = Integer.parseInt(request.getParameter("endQuarter"));
+				
+				
+				
+			} catch (Exception e) {
+				startYear = 0;
+				endYear = 0;
+				startQuarter = 0;
+				endQuarter = 0;
+				
+			}	
+			if(tab.equals("finance")) {
+				map = financeBIZ.getJoinList(page, tab, searchWord, startYear, startQuarter, endYear, endQuarter, sortType);
+			}else if(tab.equals("arena")) {
+				map = articleBIZ.getJoinList(page, tab, searchWord, startYear, startQuarter, endYear, endQuarter, sortType);
+			}
 		return map;
 	}
 
