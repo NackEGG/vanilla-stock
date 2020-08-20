@@ -202,23 +202,26 @@
 		<div class="box_winratio">
 		<span class="screen_out">투 표</span>
 		<div class="winratio_graph">
-
-		<div class="winratio_graph_fill winratio_graph_fill_left" title="풀매수: <@=arena.buyingCount @>" style="width: <@=arena.buyingCount/(arena.buyingCount+arena.sellCount)*100 @> "></div>
-		<div class="winratio_graph_txt winratio_graph_txt_left">70</div>
+		<@ let buyRatio = Math.round(arena.buyingCount/(arena.buyingCount+arena.sellCount)*100); 
+		
+		@>
+		
+		<div class="winratio_graph_fill winratio_graph_fill_left" title="풀매수: <@=arena.buyingCount @>" style="width: <@=buyRatio @>% "></div>
+		<div class="winratio_graph_txt winratio_graph_txt_left"><@=buyRatio @>%</div>
 		<div class="winratio_graph_fill winratio_graph_fill_right" title="풀매도: <@=arena.sellCount @>"></div>
-		<div class="winratio_graph_txt winratio_graph_txt_right">30</div>
+		<div class="winratio_graph_txt winratio_graph_txt_right"><@=100-buyRatio @>%</div>
 
 		</div>
 		<!--//.winratio_graph -->
 		</div> <!--//.box_winratio -->
 		<div class="industry">
-		<span>[ </span> <span>화학</span> <span> ]</span>
+		<span>[ </span> <span><@=arena.industry @></span> <span> ]</span>
 		</div>
 		<div class="comments">
-		<i class="far fa-comment"></i><span> 99999</span>
+		<i class="far fa-comment"></i><span> <@=arena.commentsCount @></span>
 		</div>
 		<div class="regdate">
-		<time>2012.02.01</time>
+		<time><@=moment(arena.regdate).fromNow() @></time>
 		</div>
 
 	</a>

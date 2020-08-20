@@ -30,7 +30,7 @@ let startYearsVal = null;
 let endYearsVal = null;
 let startQuarterVal = null;
 let endQuarterVal = null;
-
+let nowTab = 'finance';
 const $companySearchBox = $("#companySearchBox");
 //reset 조건 
 const $resetTabType = $("input:radio[name=tab]:input[value='finance']");
@@ -54,6 +54,7 @@ function reset() {
 	$innerDetailSearch.addClass('hidden');
 	$resetSortingType.prop('checked',true);
 	$txtInp.val('');
+	$totalCount.text('');
 	
 }
 
@@ -237,7 +238,7 @@ $tabInp.change(contentsTab);
 
 const $financeTbody = $('.list_rating tbody');
 const $arenaUl = $('.list_arena ul');
-function contents(nowTab) {
+function contents() {
 	//alert("contents!");
 	let formData = $searchForm.serialize();
 	console.log("form data");
@@ -274,7 +275,7 @@ function contents(nowTab) {
 
 function contentsTab() {
 	//reset();
-	let nowTab = $('.inp_tab:checked').val();
+	nowTab = $('.inp_tab:checked').val();
 	//alert(nowTab);
 	
 	if($contentsDIV.hasClass('show')){
@@ -282,7 +283,7 @@ function contentsTab() {
 	}
 	$('div .'+nowTab).addClass('show');
 	reset();
-	contents(nowTab);
+	contents();
 }//contentsTab
 function members() {
 
