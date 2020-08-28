@@ -1,5 +1,8 @@
 package com.vs.dao;
 
-public interface LikesDAO {
+import com.vs.vo.LikesVO;
 
+public interface LikesDAO {
+	public boolean insertLikes(LikesVO vo);
+	public boolean deleteLikes(LikesVO vo);
 }
