@@ -20,6 +20,8 @@ public class AnnouncementDAOImpl implements AnnouncementDAO {
 	@Override
 	public AnnouncementVO recentAnnouncement() {
 		String sql = "select * from (select*from announcement order by regdate desc) where rownum=1";
+		AnnouncementVO vo = null;
+		try {
 		RowMapper<AnnouncementVO> rowmapper = new RowMapper<AnnouncementVO>() {
 
 			@Override
@@ -32,7 +34,14 @@ public class AnnouncementDAOImpl implements AnnouncementDAO {
 				return vo;
 			}
 		};
-		return jdbcTemplate.queryForObject(sql, rowmapper,new Object[] {});
+		vo = jdbcTemplate.queryForObject(sql, rowmapper,new Object[] {});
+		} catch (Exception e) {
+			e.printStackTrace();
+			vo = null;
+		}
+		
+		System.out.println(vo);
+		return vo;
 	
 		
 	}

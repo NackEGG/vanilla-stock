@@ -48,9 +48,9 @@ public class MainPageController {
 
 	@RequestMapping(path="/" , method=RequestMethod.GET)
 	public String recentAnnouncement(Model model) {
-		
+		System.out.println("main");
 		List<String> companyList = companyBIZ.selectAllCompanyName();
-		String list = announcementBIZ.recentAnnouncement();
+		String list = announcementBIZ.recentAnnouncement()==null?"공지사항이 없습니다":announcementBIZ.recentAnnouncement().getTitle();
 		System.out.println("공지사항!!!!!!!");
 		model.addAttribute("announce",list);
 		model.addAttribute("companyList", companyList);

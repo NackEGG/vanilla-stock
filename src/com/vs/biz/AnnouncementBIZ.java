@@ -7,5 +7,5 @@ import com.vs.vo.AnnouncementVO;
 
 public interface AnnouncementBIZ {
 	
-	public String recentAnnouncement();
+	public AnnouncementVO recentAnnouncement();
 }
