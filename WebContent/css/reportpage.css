@@ -181,26 +181,27 @@
 		font-size: 18px;
 		font-weight: bold;
 		margin-left:40px;
-		width:100px;
+		width:126px;
 		height: auto;
 		}
 		
 		#commentList{
 		display: inline-block;
-		margin: 12px auto 10px 40px;
-		width: 530px;
+    	margin: 10px 0 0 10px;
+    	width: 530px;
 		
 		}
 		
 		#commentList .commentBuy{
-			font-size: 25px;
-			color: indianred;
+			font-size: 31px;
+    		color: indianred;
+    		margin-left: 40px;
 		}
 		
 		#commentList .commentContents{
-			font-size: 18px;
-			padding-left: 240px;
-			width: 350px;
+			font-size: 25px;
+    		padding-left: 26px;
+    		width: 350px;
 		}
 		#commentList .like_Btn{
 			font-size: 15px;

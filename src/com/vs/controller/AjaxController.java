@@ -245,11 +245,10 @@ public class AjaxController {
 	 
 	
 	@RequestMapping(path = "/articlePage/list", method = RequestMethod.POST)
-	public Map<String, Object> hello2(HttpServletRequest request) {		
-		String searchWord = request.getParameter("searchWord");
-		String searchType = request.getParameter("searchType");
-		String sortType = request.getParameter("sortType");
-		int page = Integer.parseInt(request.getParameter("page"));
+	public Map<String, Object> getArticlePage(@RequestParam("searchWord") String searchWord,
+			@RequestParam("searchType") String searchType,
+			@RequestParam("sortType") String sortType,
+			@RequestParam("page") int page) {		
 		
 		Map<String, Object> map = new ConcurrentHashMap<String, Object>();
 		map = articleBIZ.getPageList(searchWord, searchType, sortType, page);
@@ -259,15 +258,12 @@ public class AjaxController {
 	
 	@RequestMapping(value = "/reportPage/rtprice", method = RequestMethod.POST)
 	public String getRealTimePrice(@RequestParam("no") String no) {
-		//String stockCode = request.getParameter("stockCode");
 		StockApiUtil api = new StockApiUtil(no);
 		String[][] TimeConclude = api.getTimeConcludeAPI();
 		
 		String result = TimeConclude[0][1].replaceAll(",", ""); 
 		if(result.isEmpty() || result.equals("")) 
 			result = api.getStockInfoAPI()[1].replaceAll(",", "");
-		//System.out.println(result);
-		//System.out.println("{\"result\":"+result+"}");
 		return "{\"result\":"+result+"}";
 	}
 
