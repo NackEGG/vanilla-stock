@@ -5,25 +5,28 @@
 <%@ page import="java.util.Map"%>
 <%@ page import="java.util.List"%>
 <%@ page import="com.vs.util.StockApiUtil"%>
-<%@ page import="com.vs.vo.CommentsVO" %>
-<%
-	String[] arrStockInfo = (String[]) request.getAttribute("arrStockInfo");
-String[][] arrDailyStock = (String[][]) request.getAttribute("arrDailyStock");
-String[][] arrTimeConclude = (String[][]) request.getAttribute("arrTimeConclude");
-int prevMonthClose = (int) request.getAttribute("prevMonthClose");
-Map<String, Long> financeMap = (Map<String, Long>) request.getAttribute("financeMap");
-Map<String, Long> industryFinanceMap = (Map<String, Long>) request.getAttribute("industryFinanceMap");
+<%@ page import="com.vs.vo.CommentsVO"%>
+<%@ page import="com.vs.vo.CompanyVO"%>
+<%@ page import="com.vs.vo.IndustryVO"%>
 
+<%
+	Map<String,Object> summary = (Map<String, Object>)request.getAttribute("summary");
+CompanyVO companyVO = (CompanyVO)summary.get("companyVO");
+IndustryVO industryVO = (IndustryVO)summary.get("industryVO");
+String[] arrStockInfo = (String[])summary.get("arrStockInfo");
+String[][] arrDailyStock = (String[][]) summary.get("arrDailyStock");
+String[][] arrTimeConclude = (String[][]) summary.get("arrTimeConclude");
+int prevMonthClose = (int) summary.get("prevMonthClose");
+Map<String, Long> financeMap = (Map<String, Long>) summary.get("financeMap");
+Map<String, Long> industryFinanceMap = (Map<String, Long>) summary.get("industryFinanceMap");
+List<CommentsVO> commentsList = (List<CommentsVO>) summary.get("commentsList");
+int[] opinion = (int[]) summary.get("opinion");
 
 String today = arrStockInfo[18].substring(0, 11);
 
 DecimalFormat formatter = new DecimalFormat("###,###");
 int monthDevi = Integer.parseInt(arrStockInfo[1].replaceAll(",", "")) - prevMonthClose;
 Float monthDeviPercent = monthDevi / Float.parseFloat(arrStockInfo[1].replaceAll(",", "")) * 100;
-
-List<CommentsVO> commentsList = (List<CommentsVO>)request.getAttribute("commentsList");
-int[] opinion = (int[])request.getAttribute("opinion");
-
 %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
@@ -35,7 +38,7 @@ int[] opinion = (int[])request.getAttribute("opinion");
 <link rel="stylesheet" href="/vanilla-stock/css/reset.css" />
 <link rel="stylesheet" href="/vanilla-stock/css/kakao.font.css" />
 <link rel="stylesheet" href="/vanilla-stock/css/default.css" />
-<link rel="stylesheet" href="${pageContext.request.contextPath}/css/login.css" />
+<link rel="stylesheet" href="/vanilla-stock/css/login.css" />
 <link rel="stylesheet"
 	href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
 	integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf"
@@ -49,13 +52,10 @@ int[] opinion = (int[])request.getAttribute("opinion");
 
 <script>
 	$(function() {
-		$('#container')
-				.highcharts(
-						{
-							chart : {
-								
-								width: 420,
-								height: 300,
+		 $('#container').highcharts({
+							chart : { 
+								width : 420,
+								height : 300,
 								type : 'spline',
 								animation : Highcharts.svg, // don't animate in old IE
 								marginRight : 10,
@@ -66,35 +66,20 @@ int[] opinion = (int[])request.getAttribute("opinion");
 										var sc = $("#companyCode").text();
 										setInterval(
 												function() {
-													const sc = $("#companyCode")
-															.text();
+													const sc = $("#companyCode").text();
 													var ret = 0;
-													$
-															.ajax({
-																url : "/vanilla-stock/ajax/reportPage/rtprice/",
-																data : {
-																	no : sc
-																},
-																dataType : "json",
-																type : "POST",
-																error : function() {
-																	console
-																			.log(sc)
-																},
-																success : function(
-																		json) {
-																	var x = (new Date())
-																			.getTime();
-																	var y = json.result;
-																	series
-																			.addPoint(
-																					[
-																							x,
-																							y ],
-																					true,
-																					true);
-																}
-															});
+													$.ajax({
+														url : "/vanilla-stock/ajax/reportPage/rtprice/",
+														data : { no : sc },
+														dataType : "json",
+														type : "POST",
+														error : function() { console.log(sc) },
+														success : function(json) {
+															var x = (new Date()).getTime();
+															var y = json.result;
+															series.addPoint([x, y], true, true);
+															}
+														});
 												}, 10000);
 									}
 								}
@@ -217,8 +202,7 @@ int[] opinion = (int[])request.getAttribute("opinion");
 		<div id="logoBox">
 			<h1>
 				<a href="${pageContext.request.contextPath}" title="vanilla stock">
-					<img
-					src="${pageContext.request.contextPath}/img/vs-logo2.PNG"
+					<img src="${pageContext.request.contextPath}/img/vs-logo2.PNG"
 					alt="vanilla stock" />
 				</a>
 			</h1>
@@ -227,13 +211,15 @@ int[] opinion = (int[])request.getAttribute("opinion");
 		<!--//#logoBox -->
 		<div class="aux">
 			<div id="gnb">
-	          <h2 class="screen_out">주요 서비스</h2>
-	          <ul>
-	            <li class="nav"><a href="${pageContext.request.contextPath}/cardpage/init"> 종목</a></li>
-	            <li class="nav"><a href="${pageContext.request.contextPath}/articlePage"> 투기장 </a></li>
-	            <li class="nav"><a href="">랭킹</a></li>
-	          </ul>
-	        </div>
+				<h2 class="screen_out">주요 서비스</h2>
+				<ul>
+					<li class="nav"><a
+						href="${pageContext.request.contextPath}/cardpage/init"> 종목</a></li>
+					<li class="nav"><a
+						href="${pageContext.request.contextPath}/articlePage"> 투기장 </a></li>
+					<li class="nav"><a href="">랭킹</a></li>
+				</ul>
+			</div>
 			<!--//#gnb -->
 
 			<div id="searchBox">
@@ -246,107 +232,90 @@ int[] opinion = (int[])request.getAttribute("opinion");
 
 		</div>
 		<!--//.aux -->
-      <div id="loginBox">
-        <div id="loginBtn" class="btn ${loginMember eq null? '':'hidden'}" onclick="modalpopup('loginForm')">
-          로그인
-        </div>
-         <!--//.aux -->
-        <!-- Hidden된 로그인창-->
-        <div id="loginForm" style="visibility: hidden;" >
-          <div class="form">
-            <div class="formContents"></div>
-            <form class="login-form" action ="/vanilla-stock/login" method="post">
-              <input type="text" name="email" class="email" placeholder="email" />
-              <input type="password" name="password" class="password" placeholder="password" />
-              <button class="login">login</button>
-              <p class="message">
-                	회원이 아니시라면?
-                <a
-                  href="${pageContext.request.contextPath}/join"
-                  >회원가입</a
-                >
-              </p>
-              <p class="close" onclick="popupclose('loginForm')">닫기</p>
-            </form>
-          </div>
-        </div>
-        <!-- Hidden된 로그인창띄우는 JS-->
-        <script>
-          function modalpopup(i) {
-            document.getElementById(i).style.visibility = "visible";
-          }
+		<div id="loginBox">
+			<div id="loginBtn" class="btn ${loginMember eq null? '':'hidden'}"
+				onclick="modalpopup('loginForm')">로그인</div>
+			<!--//.aux -->
+			<!-- Hidden된 로그인창-->
+			<div id="loginForm" style="visibility: hidden;">
+				<div class="form">
+					<div class="formContents"></div>
+					<form class="login-form" action="/vanilla-stock/login"
+						method="post">
+						<input type="text" name="email" class="email" placeholder="email" />
+						<input type="password" name="password" class="password"
+							placeholder="password" />
+						<button class="login">login</button>
+						<p class="message">
+							회원이 아니시라면? <a href="${pageContext.request.contextPath}/join">회원가입</a>
+						</p>
+						<p class="close" onclick="popupclose('loginForm')">닫기</p>
+					</form>
+				</div>
+			</div>
+			<!-- Hidden된 로그인창띄우는 JS-->
+			<script>
+				function modalpopup(i) {
+					document.getElementById(i).style.visibility = "visible";
+				}
 
-          function popupclose(i) {
-            document.getElementById(i).style.visibility = "hidden";
-          }
-          
-       
-      	$(document).ready(function(e){
-      		$('#login').click(function(){
-      			// 입력 값 체크
-      			if($.trim($('#email').val()) == ''){
-      				alert("아이디를 입력해 주세요.");
-      				$('#email').focus();
-      				return;
-      			}else if($.trim($('#passwd').val()) == ''){
-      				alert("패스워드를 입력해 주세요.");
-      				$('#password').focus();
-      				return;
-      			}
-      			
-      			//전송
-      			$('#login-form').submit();
-      		});
-      		
-      	});
-        </script>
-        <!--//loginBtn -->
-        <div id="profileBox" class="${loginMember eq null ? 'hidden' : ''}">
+				function popupclose(i) {
+					document.getElementById(i).style.visibility = "hidden";
+				}
 
-          <img
-            src="${pageContext.request.contextPath}/profile/default.png"
-            class="profile_on"
-            width="60"
-            height="60"
-            alt="테스터"
-            title="테스터"
-          />
-          <div id="profilePopup" class="profile_on">
-            <ul id="profileList">
-              <li class="profile">
-                <a href="/user.jsp?no=3"
-                  ><span class="open_door">문</span>
-                  <!--관리자는 관리자 페이지로 바꾸기 -->
-                  마이페이지</a
-                >
-              </li>
-              <!--//.profile -->
-              <li class="profile">
-                <a href="${pageContext.request.contextPath}/logout"
-                  ><span class="close_door">문</span> 로그아웃</a
-                >
-              </li>
-              <!--//.profile -->
-            </ul>
-            <!--//profileList -->
-          </div>
-          <!--//#profilePopup -->
-        </div>
-        <!--#profileBox -->
-        <script>
-          const $profile = $("#profileBox img");
-          const $profileTarget = $("#profilePopup");
-          $profile.click(function () {
-            $profileTarget.toggle();
-          }); // profileBox click end
-          $("html").click(function (e) {
-            if (!$(e.target).hasClass("profile_on")) {
-              $profileTarget.hide();
-            }
-          }); //
-        </script>
-      </div>
-    </div>
+				$(document).ready(function(e) {
+					$('#login').click(function() {
+						// 입력 값 체크
+						if ($.trim($('#email').val()) == '') {
+							alert("아이디를 입력해 주세요.");
+							$('#email').focus();
+							return;
+						} else if ($.trim($('#passwd').val()) == '') {
+							alert("패스워드를 입력해 주세요.");
+							$('#password').focus();
+							return;
+						}
+
+						//전송
+						$('#login-form').submit();
+					});
+
+				});
+			</script>
+			<!--//loginBtn -->
+			<div id="profileBox" class="${loginMember eq null ? 'hidden' : ''}">
+
+				<img src="${pageContext.request.contextPath}/profile/default.png"
+					class="profile_on" width="60" height="60" alt="테스터" title="테스터" />
+				<div id="profilePopup" class="profile_on">
+					<ul id="profileList">
+						<li class="profile"><a href="/user.jsp?no=3"><span
+								class="open_door">문</span> <!--관리자는 관리자 페이지로 바꾸기 --> 마이페이지</a></li>
+						<!--//.profile -->
+						<li class="profile"><a
+							href="${pageContext.request.contextPath}/logout"><span
+								class="close_door">문</span> 로그아웃</a></li>
+						<!--//.profile -->
+					</ul>
+					<!--//profileList -->
+				</div>
+				<!--//#profilePopup -->
+			</div>
+			<!--#profileBox -->
+			<script>
+				const $profile = $("#profileBox img");
+				const $profileTarget = $("#profilePopup");
+				$profile.click(function() {
+					$profileTarget.toggle();
+				}); // profileBox click end
+				$("html").click(function(e) {
+					if (!$(e.target).hasClass("profile_on")) {
+						$profileTarget.hide();
+					}
+				}); //
+			</script>
+		</div>
+	</div>
 	<!--//#header -->
 	<div id="content">
 		<div class="aux">
@@ -354,18 +323,18 @@ int[] opinion = (int[])request.getAttribute("opinion");
 				<div id="summaryBox">
 					<div id="descBox">
 						<div id="upperDescBox">
-							<div id="companyName">${companyVO.company}</div>
-							<div id="companyCode">${companyVO.stockCode}</div>
+							<div id="companyName"><%=companyVO.getCompany() %></div>
+							<div id="companyCode"><%=companyVO.getStockCode() %></div>
 						</div>
 						<!--//#upperDescBox-->
 						<hr>
 						<div id="lowerDescBox">
 							<div id="industyBox">
 								<div id="industryLogo">
-									<img src="/vanilla-stock/icon/${industryVO.no}.png">
+									<img src="/vanilla-stock/icon/<%=industryVO.getNo()%>.png">
 								</div>
 								<!--//#industryLogo -->
-								<div id="industyName">${industryVO.name}</div>
+								<div id="industyName"><%=industryVO.getName()%></div>
 								<!--//#industryName -->
 								<div id="industryAverageBox">
 									<div id="industryAverage">0.45%+</div>
@@ -381,45 +350,45 @@ int[] opinion = (int[])request.getAttribute("opinion");
 								</div>
 								<hr>
 								<div class="percentInfo">
-								<div class="percentBox">
-									<div class="LdaydeviName">전일대비</div>
-									<div class="LdeviPercent"><%=arrStockInfo[17]%>%
-										<%
-											if (arrStockInfo[2].equals("1") || arrStockInfo[2].equals("2")) {
-										%>
-										▲
-										<%
-											} else if (arrStockInfo[2].equals("4") || arrStockInfo[2].equals("5")) {
-										%>
-										▼
-										<%
-											} else {
-										%>
-										─
-										<%
-											}
-										%>
+									<div class="percentBox">
+										<div class="LdaydeviName">전일대비</div>
+										<div class="LdeviPercent"><%=arrStockInfo[17]%>%
+											<%
+												if (arrStockInfo[2].equals("1") || arrStockInfo[2].equals("2")) {
+											%>
+											▲
+											<%
+												} else if (arrStockInfo[2].equals("4") || arrStockInfo[2].equals("5")) {
+											%>
+											▼
+											<%
+												} else {
+											%>
+											─
+											<%
+												}
+											%>
+										</div>
+										<div class="daydeviName">전월대비</div>
+										<div class="deviPercent"><%=String.format("%.2f", monthDeviPercent)%>%
+											<%
+												if (monthDevi > 0) {
+											%>
+											▲
+											<%
+												} else if (monthDevi < 0) {
+											%>
+											▼
+											<%
+												} else {
+											%>
+											─
+											<%
+												}
+											%>
+										</div>
 									</div>
-									<div class="daydeviName">전월대비</div>
-									<div class="deviPercent"><%=String.format("%.2f", monthDeviPercent)%>%
-										<%
-											if (monthDevi > 0) {
-										%>
-										▲
-										<%
-											} else if (monthDevi < 0) {
-										%>
-										▼
-										<%
-											} else {
-										%>
-										─
-										<%
-											}
-										%>
-									</div>
-								</div>
-								
+
 									<div class="percentBox">
 										<div class="LdaydeviName">거래량</div>
 										<div class="LdeviPercent"><%=arrStockInfo[5]%></div>
@@ -468,10 +437,10 @@ int[] opinion = (int[])request.getAttribute("opinion");
 								$('#container2')
 										.highcharts(
 												{
-													
+
 													chart : {
-														width: 530,
-														height: 300,
+														width : 530,
+														height : 300,
 														type : 'column'
 													},
 													title : {
@@ -488,7 +457,7 @@ int[] opinion = (int[])request.getAttribute("opinion");
 													},
 													series : [
 															{
-																name : '${companyVO.company}',
+																name : '<%=companyVO.getCompany()%>',
 																data : [
 						<%=financeMap.get("자본과부채총계")%>
 							,
@@ -526,55 +495,63 @@ int[] opinion = (int[])request.getAttribute("opinion");
 					<!--//#financeInfoBox -->
 					<div id="articleBox">
 						<div class="upperTitle">
-							<span class="title">오늘의 투기장</span>
-							<span class="moreTitle">+더보기</span>
-							</div>
+							<span class="title">오늘의 투기장</span> <span class="moreTitle">+더보기</span>
+						</div>
 						<!--//.upperTitle -->
-							<div class="articleRatio">
-							<div class="articleRatio_fill">
+						<div class="articleRatio">
+							<div class="articleRatio_fill"
+								style="width: <%=opinion[0] / (double) (opinion[0] + opinion[1]) * 100%>%">
 							</div>
 							<!-- //.articleRatio_fill -->
 							<div class="ratioInfo">
-							<% if(opinion[0] + opinion[1] != 0) {%>
-							<span><%=opinion[0]/(opinion[0]+opinion[1])*100%></span>
-							<span><%=opinion[1]/(opinion[0]+opinion[1])*100%></span>
+								<%
+									if (opinion[0] + opinion[1] != 0) {
+								%>
+								<span><%=opinion[0]%></span> <span><%=opinion[1]%></span>
 							</div>
 							<!-- //.ratioInfo -->
 						</div>
-							<!--//.articleRatio -->
-							
-							<div class="commentTitle">
-							<span class="title">댓글</span>
-							</div>
-							<!--//#commentTitle -->
-							
-							<div id="commentList">
-							<%for(int i=0; i<commentsList.size(); i++){ %>
-							<span class="commentBuy"><%=commentsList.get(i).getOpinion() %></span>
-							<span class="commentContents"><%=commentsList.get(i).getContent() %></span>
-							<span class="like_Btn"><i class="far fa-thumbs-up"></i>25</span>
-							</div>
-							<%} 
-							}else{%>
+						<!--//.articleRatio -->
+
+						<div class="commentTitle">
+							<span class="title">매수의견과 댓글</span>
+						</div>
+						<!--//#commentTitle -->
+
+
+						<%
+							for (int i = 0; i < commentsList.size(); i++) {
+						%>
+						<div id="commentList">
+							<span class="commentBuy"><%=commentsList.get(i).getOpinion()%></span>
+							<span class="commentContents"><%=commentsList.get(i).getContent()%></span>
+						</div>
+						<%
+							}
+						} else {
+						%>
+						<div id="commentList">
 							<span>데이터 없음</span>
-							</div>
-							<!-- //.ratioInfo -->
 						</div>
-							<!--//.articleRatio -->
-							
-							<div class="commentTitle">
-							<span class="title">댓글 없음</span>
-							</div>
-							<!--//#commentTitle -->
-							<%} %>
+						<!-- //.ratioInfo -->
 					</div>
-					<!--//#ArticleBox -->
+					<!--//.articleRatio -->
+
+					<div class="commentTitle">
+						<span class="title">댓글 없음</span>
+					</div>
+					<!--//#commentTitle -->
+					<%
+						}
+					%>
 				</div>
-				<!--//#supprotingBox -->
+				<!--//#ArticleBox -->
 			</div>
-			<!--//#lowerContent -->
+			<!--//#supprotingBox -->
 		</div>
-		<!--//.aux -->
+		<!--//#lowerContent -->
+	</div>
+	<!--//.aux -->
 	</div>
 	<!--//#content -->
 	<div id="footer">

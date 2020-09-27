@@ -342,10 +342,6 @@
               </div>
               <!-- //.articleOpinion -->
               <div class="viewTimestamp">
-                <div class="articleView">
-                  <span>조회수</span>
-                  <span><@=artc.countHit@></span>
-                </div>
                 <div class="articleTimestamp">
                   <span><@=moment(artc.regdate).fromNow()@></span>
                 </div>
@@ -364,16 +360,13 @@
 		let page = 1; // page는 1페이지 부터 시작  
 		getArticle();
 		function getArticle() {
-
 			let formData = $searchForm.serialize();
-			console.log("form data");
-			console.log(formData);
 			$.ajax({
 				url : "/vanilla-stock/ajax/articlePage/list/",
 				type : "POST",
 				data : formData + '&page='+page,
 				error : function() {
-					alert("error");
+					alert("게시판을 조회할 수 없습니다.");
 				},
 				success : function(json) {
 
