@@ -89,7 +89,7 @@ Float monthDeviPercent = monthDevi / Float.parseFloat(arrStockInfo[1].replaceAll
 							},
 
 							title : {
-								text : '½Ç½Ã°£ ÁÖ°¡ »óÈ²ÆÇ'
+								text : 'ì‹¤ì‹œê°„ ì£¼ê°€ ìƒí™©íŒ'
 							},
 							accessibility : {
 								announceNewData : {
@@ -112,7 +112,7 @@ Float monthDeviPercent = monthDevi / Float.parseFloat(arrStockInfo[1].replaceAll
 
 							yAxis : {
 								title : {
-									text : 'ÁÖ°¡'
+									text : 'ì£¼ê°€'
 								},
 								plotLines : [ {
 									value : 0,
@@ -195,7 +195,7 @@ Float monthDeviPercent = monthDevi / Float.parseFloat(arrStockInfo[1].replaceAll
 						});
 	});
 </script>
-<!--// chart½ºÅ©¸³Æ®-->
+<!--// chartìŠ¤í¬ë¦½íŠ¸-->
 </head>
 <body>
 	<div id="header">
@@ -211,20 +211,20 @@ Float monthDeviPercent = monthDevi / Float.parseFloat(arrStockInfo[1].replaceAll
 		<!--//#logoBox -->
 		<div class="aux">
 			<div id="gnb">
-				<h2 class="screen_out">ÁÖ¿ä ¼­ºñ½º</h2>
+				<h2 class="screen_out">ì£¼ìš” ì„œë¹„ìŠ¤</h2>
 				<ul>
 					<li class="nav"><a
-						href="${pageContext.request.contextPath}/cardpage/init"> Á¾¸ñ</a></li>
+						href="${pageContext.request.contextPath}/cardpage/init"> ì¢…ëª©</a></li>
 					<li class="nav"><a
-						href="${pageContext.request.contextPath}/articlePage"> Åõ±âÀå </a></li>
-					<li class="nav"><a href="">·©Å·</a></li>
+						href="${pageContext.request.contextPath}/articlePage"> íˆ¬ê¸°ì¥ </a></li>
+					<li class="nav"><a href="">ë­í‚¹</a></li>
 				</ul>
 			</div>
 			<!--//#gnb -->
 
 			<div id="searchBox">
-				<label class="screen_out">Ã£À» È¸»ç ÀÔ·Â</label> <input class="inp_txt"
-					type="text" placeholder="È¸»ç¸íÀ» ÀÔ·ÂÇØÁÖ¼¼¿ä" /> <span class="btn_search">
+				<label class="screen_out">ì°¾ì„ íšŒì‚¬ ì…ë ¥</label> <input class="inp_txt"
+					type="text" placeholder="íšŒì‚¬ëª…ì„ ì…ë ¥í•´ì£¼ì„¸ìš”" /> <span class="btn_search">
 					<i class="fa fa-search"></i>
 				</span>
 			</div>
@@ -234,9 +234,9 @@ Float monthDeviPercent = monthDevi / Float.parseFloat(arrStockInfo[1].replaceAll
 		<!--//.aux -->
 		<div id="loginBox">
 			<div id="loginBtn" class="btn ${loginMember eq null? '':'hidden'}"
-				onclick="modalpopup('loginForm')">·Î±×ÀÎ</div>
+				onclick="modalpopup('loginForm')">ë¡œê·¸ì¸</div>
 			<!--//.aux -->
-			<!-- HiddenµÈ ·Î±×ÀÎÃ¢-->
+			<!-- Hiddenëœ ë¡œê·¸ì¸ì°½-->
 			<div id="loginForm" style="visibility: hidden;">
 				<div class="form">
 					<div class="formContents"></div>
@@ -247,13 +247,13 @@ Float monthDeviPercent = monthDevi / Float.parseFloat(arrStockInfo[1].replaceAll
 							placeholder="password" />
 						<button class="login">login</button>
 						<p class="message">
-							È¸¿øÀÌ ¾Æ´Ï½Ã¶ó¸é? <a href="${pageContext.request.contextPath}/join">È¸¿ø°¡ÀÔ</a>
+							íšŒì›ì´ ì•„ë‹ˆì‹œë¼ë©´? <a href="${pageContext.request.contextPath}/join">íšŒì›ê°€ì…</a>
 						</p>
-						<p class="close" onclick="popupclose('loginForm')">´İ±â</p>
+						<p class="close" onclick="popupclose('loginForm')">ë‹«ê¸°</p>
 					</form>
 				</div>
 			</div>
-			<!-- HiddenµÈ ·Î±×ÀÎÃ¢¶ç¿ì´Â JS-->
+			<!-- Hiddenëœ ë¡œê·¸ì¸ì°½ë„ìš°ëŠ” JS-->
 			<script>
 				function modalpopup(i) {
 					document.getElementById(i).style.visibility = "visible";
@@ -265,18 +265,18 @@ Float monthDeviPercent = monthDevi / Float.parseFloat(arrStockInfo[1].replaceAll
 
 				$(document).ready(function(e) {
 					$('#login').click(function() {
-						// ÀÔ·Â °ª Ã¼Å©
+						// ì…ë ¥ ê°’ ì²´í¬
 						if ($.trim($('#email').val()) == '') {
-							alert("¾ÆÀÌµğ¸¦ ÀÔ·ÂÇØ ÁÖ¼¼¿ä.");
+							alert("ì•„ì´ë””ë¥¼ ì…ë ¥í•´ ì£¼ì„¸ìš”.");
 							$('#email').focus();
 							return;
 						} else if ($.trim($('#passwd').val()) == '') {
-							alert("ÆĞ½º¿öµå¸¦ ÀÔ·ÂÇØ ÁÖ¼¼¿ä.");
+							alert("íŒ¨ìŠ¤ì›Œë“œë¥¼ ì…ë ¥í•´ ì£¼ì„¸ìš”.");
 							$('#password').focus();
 							return;
 						}
 
-						//Àü¼Û
+						//ì „ì†¡
 						$('#login-form').submit();
 					});
 
@@ -286,15 +286,15 @@ Float monthDeviPercent = monthDevi / Float.parseFloat(arrStockInfo[1].replaceAll
 			<div id="profileBox" class="${loginMember eq null ? 'hidden' : ''}">
 
 				<img src="${pageContext.request.contextPath}/profile/default.png"
-					class="profile_on" width="60" height="60" alt="Å×½ºÅÍ" title="Å×½ºÅÍ" />
+					class="profile_on" width="60" height="60" alt="í…ŒìŠ¤í„°" title="í…ŒìŠ¤í„°" />
 				<div id="profilePopup" class="profile_on">
 					<ul id="profileList">
 						<li class="profile"><a href="/user.jsp?no=3"><span
-								class="open_door">¹®</span> <!--°ü¸®ÀÚ´Â °ü¸®ÀÚ ÆäÀÌÁö·Î ¹Ù²Ù±â --> ¸¶ÀÌÆäÀÌÁö</a></li>
+								class="open_door">ë¬¸</span> <!--ê´€ë¦¬ìëŠ” ê´€ë¦¬ì í˜ì´ì§€ë¡œ ë°”ê¾¸ê¸° --> ë§ˆì´í˜ì´ì§€</a></li>
 						<!--//.profile -->
 						<li class="profile"><a
 							href="${pageContext.request.contextPath}/logout"><span
-								class="close_door">¹®</span> ·Î±×¾Æ¿ô</a></li>
+								class="close_door">ë¬¸</span> ë¡œê·¸ì•„ì›ƒ</a></li>
 						<!--//.profile -->
 					</ul>
 					<!--//profileList -->
@@ -344,45 +344,45 @@ Float monthDeviPercent = monthDevi / Float.parseFloat(arrStockInfo[1].replaceAll
 							<!--//#industryBox -->
 							<div id="deviBox">
 								<div class="stockPriceBox">
-									<div class="stockPriceName">ÇöÀç°¡</div>
+									<div class="stockPriceName">í˜„ì¬ê°€</div>
 									<div class="stockPrice">
 										&#8361;<%=arrStockInfo[1].trim()%></div>
 								</div>
 								<hr>
 								<div class="percentInfo">
 									<div class="percentBox">
-										<div class="LdaydeviName">ÀüÀÏ´ëºñ</div>
+										<div class="LdaydeviName">ì „ì¼ëŒ€ë¹„</div>
 										<div class="LdeviPercent"><%=arrStockInfo[17]%>%
 											<%
 												if (arrStockInfo[2].equals("1") || arrStockInfo[2].equals("2")) {
 											%>
-											¡ã
+											â–²
 											<%
 												} else if (arrStockInfo[2].equals("4") || arrStockInfo[2].equals("5")) {
 											%>
-											¡å
+											â–¼
 											<%
 												} else {
 											%>
-											¦¡
+											â”€
 											<%
 												}
 											%>
 										</div>
-										<div class="daydeviName">Àü¿ù´ëºñ</div>
+										<div class="daydeviName">ì „ì›”ëŒ€ë¹„</div>
 										<div class="deviPercent"><%=String.format("%.2f", monthDeviPercent)%>%
 											<%
 												if (monthDevi > 0) {
 											%>
-											¡ã
+											â–²
 											<%
 												} else if (monthDevi < 0) {
 											%>
-											¡å
+											â–¼
 											<%
 												} else {
 											%>
-											¦¡
+											â”€
 											<%
 												}
 											%>
@@ -390,21 +390,21 @@ Float monthDeviPercent = monthDevi / Float.parseFloat(arrStockInfo[1].replaceAll
 									</div>
 
 									<div class="percentBox">
-										<div class="LdaydeviName">°Å·¡·®</div>
+										<div class="LdaydeviName">ê±°ë˜ëŸ‰</div>
 										<div class="LdeviPercent"><%=arrStockInfo[5]%></div>
-										<div class="daydeviNameAmount">°Å·¡±İ¾×</div>
+										<div class="daydeviNameAmount">ê±°ë˜ê¸ˆì•¡</div>
 										<div class="deviPercent"><%=arrStockInfo[6]%></div>
 									</div>
 									<div class="percentBox">
-										<div class="LdaydeviName">°í°¡</div>
+										<div class="LdaydeviName">ê³ ê°€</div>
 										<div class="LdeviPercent"><%=arrStockInfo[8]%></div>
-										<div class="daydeviName">Àú°¡</div>
+										<div class="daydeviName">ì €ê°€</div>
 										<div class="deviPercent"><%=arrStockInfo[9]%></div>
 									</div>
 									<div class="percentBox">
-										<div class="LdaydeviName">52ÁÖÃÖ°í°¡</div>
+										<div class="LdaydeviName">52ì£¼ìµœê³ ê°€</div>
 										<div class="LdeviPercent"><%=arrStockInfo[10]%></div>
-										<div class="daydeviName">52ÁÖÃÖÀú°¡</div>
+										<div class="daydeviName">52ì£¼ìµœì €ê°€</div>
 										<div class="deviPercent"><%=arrStockInfo[11]%></div>
 									</div>
 
@@ -444,13 +444,13 @@ Float monthDeviPercent = monthDevi / Float.parseFloat(arrStockInfo[1].replaceAll
 														type : 'column'
 													},
 													title : {
-														text : 'ÇÑ´«¿¡ º¸´Â Àç¹«Á¤º¸'
+														text : 'í•œëˆˆì— ë³´ëŠ” ì¬ë¬´ì •ë³´'
 													},
 													xAxis : {
-														categories : [ 'ÀÚ»ê±Ô¸ğ',
-																'´ç±â¼øÀÌÀÍ',
-																'À¯µ¿ÀÚ»ê', '¸ÅÃâ¾×',
-																'¿µ¾÷ÀÌÀÍ', 'Çö±İÀÚ»ê' ]
+														categories : [ 'ìì‚°ê·œëª¨',
+																'ë‹¹ê¸°ìˆœì´ìµ',
+																'ìœ ë™ìì‚°', 'ë§¤ì¶œì•¡',
+																'ì˜ì—…ì´ìµ', 'í˜„ê¸ˆìì‚°' ]
 													},
 													credits : {
 														enabled : false
@@ -459,33 +459,33 @@ Float monthDeviPercent = monthDevi / Float.parseFloat(arrStockInfo[1].replaceAll
 															{
 																name : '<%=companyVO.getCompany()%>',
 																data : [
-						<%=financeMap.get("ÀÚº»°úºÎÃ¤ÃÑ°è")%>
+						<%=financeMap.get("ìë³¸ê³¼ë¶€ì±„ì´ê³„")%>
 							,
-						<%=financeMap.get("´ç±â¼øÀÌÀÍ(¼Õ½Ç)")%>
+						<%=financeMap.get("ë‹¹ê¸°ìˆœì´ìµ(ì†ì‹¤)")%>
 							,
-						<%=financeMap.get("À¯µ¿ÀÚ»ê")%>
+						<%=financeMap.get("ìœ ë™ìì‚°")%>
 							,
-						<%=financeMap.get("¼öÀÍ(¸ÅÃâ¾×)")%>
+						<%=financeMap.get("ìˆ˜ìµ(ë§¤ì¶œì•¡)")%>
 							,
-						<%=financeMap.get("¿µ¾÷ÀÌÀÍ(¼Õ½Ç)")%>
+						<%=financeMap.get("ì˜ì—…ì´ìµ(ì†ì‹¤)")%>
 							,
-						<%=financeMap.get("Çö±İ¹×Çö±İ¼ºÀÚ»ê")%>
+						<%=financeMap.get("í˜„ê¸ˆë°í˜„ê¸ˆì„±ìì‚°")%>
 							]
 															},
 															{
-																name : 'µ¿Á¾¾÷°è Æò±Õ',
+																name : 'ë™ì¢…ì—…ê³„ í‰ê· ',
 																data : [
-						<%=industryFinanceMap.get("ÀÚº»°úºÎÃ¤ÃÑ°è")%>
+						<%=industryFinanceMap.get("ìë³¸ê³¼ë¶€ì±„ì´ê³„")%>
 							,
-						<%=industryFinanceMap.get("´ç±â¼øÀÌÀÍ(¼Õ½Ç)")%>
+						<%=industryFinanceMap.get("ë‹¹ê¸°ìˆœì´ìµ(ì†ì‹¤)")%>
 							,
-						<%=industryFinanceMap.get("À¯µ¿ÀÚ»ê")%>
+						<%=industryFinanceMap.get("ìœ ë™ìì‚°")%>
 							,
-						<%=industryFinanceMap.get("¼öÀÍ(¸ÅÃâ¾×)")%>
+						<%=industryFinanceMap.get("ìˆ˜ìµ(ë§¤ì¶œì•¡)")%>
 							,
-						<%=industryFinanceMap.get("¿µ¾÷ÀÌÀÍ(¼Õ½Ç)")%>
+						<%=industryFinanceMap.get("ì˜ì—…ì´ìµ(ì†ì‹¤)")%>
 							,
-						<%=industryFinanceMap.get("Çö±İ¹×Çö±İ¼ºÀÚ»ê")%>
+						<%=industryFinanceMap.get("í˜„ê¸ˆë°í˜„ê¸ˆì„±ìì‚°")%>
 							]
 															} ]
 												})
@@ -495,7 +495,7 @@ Float monthDeviPercent = monthDevi / Float.parseFloat(arrStockInfo[1].replaceAll
 					<!--//#financeInfoBox -->
 					<div id="articleBox">
 						<div class="upperTitle">
-							<span class="title">¿À´ÃÀÇ Åõ±âÀå</span> <span class="moreTitle">+´õº¸±â</span>
+							<span class="title">ì˜¤ëŠ˜ì˜ íˆ¬ê¸°ì¥</span> <span class="moreTitle">+ë”ë³´ê¸°</span>
 						</div>
 						<!--//.upperTitle -->
 						<div class="articleRatio">
@@ -514,7 +514,7 @@ Float monthDeviPercent = monthDevi / Float.parseFloat(arrStockInfo[1].replaceAll
 						<!--//.articleRatio -->
 
 						<div class="commentTitle">
-							<span class="title">¸Å¼öÀÇ°ß°ú ´ñ±Û</span>
+							<span class="title">ë§¤ìˆ˜ì˜ê²¬ê³¼ ëŒ“ê¸€</span>
 						</div>
 						<!--//#commentTitle -->
 
@@ -531,14 +531,14 @@ Float monthDeviPercent = monthDevi / Float.parseFloat(arrStockInfo[1].replaceAll
 						} else {
 						%>
 						<div id="commentList">
-							<span>µ¥ÀÌÅÍ ¾øÀ½</span>
+							<span>ë°ì´í„° ì—†ìŒ</span>
 						</div>
 						<!-- //.ratioInfo -->
 					</div>
 					<!--//.articleRatio -->
 
 					<div class="commentTitle">
-						<span class="title">´ñ±Û ¾øÀ½</span>
+						<span class="title">ëŒ“ê¸€ ì—†ìŒ</span>
 					</div>
 					<!--//#commentTitle -->
 					<%
@@ -556,30 +556,30 @@ Float monthDeviPercent = monthDevi / Float.parseFloat(arrStockInfo[1].replaceAll
 	<!--//#content -->
 	<div id="footer">
 		<div id="policy">
-			<h4 class="screen_out">Á¤Ã¥ ¹× ¾à°ü</h4>
+			<h4 class="screen_out">ì •ì±… ë° ì•½ê´€</h4>
 			<ul>
-				<li><a href="">È¸»ç¼Ò°³</a></li>
+				<li><a href="">íšŒì‚¬ì†Œê°œ</a></li>
 				<!--
 	 -->
-				<li><a href="">±¤°í</a></li>
+				<li><a href="">ê´‘ê³ </a></li>
 				<!--
 	 -->
-				<li><a href="">°Ë»öµî·Ï</a></li>
+				<li><a href="">ê²€ìƒ‰ë“±ë¡</a></li>
 				<!--
 	 -->
-				<li><a href="">Á¦ÈŞÁ¦¾È</a></li>
+				<li><a href="">ì œíœ´ì œì•ˆ</a></li>
 				<!--
 	 -->
-				<li><a href="">ÀÌ¿ë¾à°ü</a></li>
+				<li><a href="">ì´ìš©ì•½ê´€</a></li>
 				<!--
 	 -->
-				<li><a href=""><strong>°³ÀÎÁ¤º¸ÀÌ¿ë¾à°ü</strong></a></li>
+				<li><a href=""><strong>ê°œì¸ì •ë³´ì´ìš©ì•½ê´€</strong></a></li>
 				<!--
 	 -->
-				<li><a href="">Ã»¼Ò³âº¸È£Á¤Ã¥</a></li>
+				<li><a href="">ì²­ì†Œë…„ë³´í˜¸ì •ì±…</a></li>
 				<!--
 	-->
-				<li><a href="">°í°´¼¾ÅÍ</a></li>
+				<li><a href="">ê³ ê°ì„¼í„°</a></li>
 			</ul>
 		</div>
 		<!--//policy -->

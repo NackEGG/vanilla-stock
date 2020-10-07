@@ -15,7 +15,7 @@ public class FinanceCateDAOImpl implements FinanceCateDAO {
 	@Override
 	public int insertViaJSON(FinanceCateVO financeCate) {
 		// TODO Auto-generated method stub
-		return jdbcTemplate.update("insert into finance_cate(sj_div, account_id, account_nm , bsns_de, label_kor, label_eng) values(?, ?, ?, ?, ?, ?)",
+		return jdbcTemplate.update("insert into account(sj_div, code, name, bsns_de, label_kor, label_eng) values(?, ?, ?, ?, ?, ?)",
 				new Object[] {financeCate.getSjDiv(), financeCate.getAccountId(), financeCate.getAccountNm() ,financeCate.getBsnsDe(),financeCate.getLabelKor(), financeCate.getLabelEng()});
 	}
 }

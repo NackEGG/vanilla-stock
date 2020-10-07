@@ -77,7 +77,7 @@ public class CompanyDAOImpl implements CompanyDAO {
 	@Override
 	public int insertIntoAPI(CompanyVO data) {
 		// TODO Auto-generated method stub
-		return jdbcTemplate.update("update company set industry_no = ? where stock_code = ? ",
+		return jdbcTemplate.update("update company set industry_no = ? where code = ? ",
 				new Object[] {data.getIndustryNo(),data.getStockCode()});
 	}
 	

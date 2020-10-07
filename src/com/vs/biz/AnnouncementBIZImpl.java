@@ -15,8 +15,8 @@ public class AnnouncementBIZImpl implements AnnouncementBIZ {
 	private AnnouncementDAO announcementDAO;
 
 	@Override
-	public String recentAnnouncement() {
-		System.out.println(announcementDAO.recentAnnouncement().getTitle());
-		return announcementDAO.recentAnnouncement().getTitle();
+	public AnnouncementVO recentAnnouncement() {
+		//System.out.println(announcementDAO.recentAnnouncement().getTitle());
+		return announcementDAO.recentAnnouncement();
 	}
 }
