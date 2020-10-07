@@ -28,7 +28,7 @@ import com.fasterxml.jackson.core.JsonParser.Feature;
 import com.fasterxml.jackson.databind.MapperFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.vs.vo.CompanyVO;
-import com.vs.vo.FinanceCateVO;
+import com.vs.vo.AccountVO;
 import com.vs.vo.IndustryVO;
 import com.fasterxml.jackson.core.type.TypeReference;
 
@@ -36,18 +36,18 @@ import com.fasterxml.jackson.core.type.TypeReference;
 public class FinanceApiUtil {
 	
 	
-   public List<FinanceCateVO> getFinanceCateAPI(){
+   public List<AccountVO> getFinanceCateAPI(){
 	   ObjectMapper om = new ObjectMapper();
 		om.configure(Feature.ALLOW_UNQUOTED_CONTROL_CHARS, true);
-		List<FinanceCateVO> allList = new ArrayList<>();
+		List<AccountVO> allList = new ArrayList<>();
 		String[] fileNameArr = {"BS1","CF3","CIS1","IS1"};
 		for(String fileName : fileNameArr){
 			
 			try {
 				// 본인의 finance_cate_api 폴더가 있는 경로를 작성 
-				List<FinanceCateVO> cateList 
+				List<AccountVO> cateList 
 				= om.readValue(new File("/Users/kimdabin/playdata/workspace/Spring-work/vanilla-stock/db/finance_cate_api/"+fileName+".txt"),
-						new TypeReference<List<FinanceCateVO>>(){});
+						new TypeReference<List<AccountVO>>(){});
 				allList.addAll(cateList);
 			} catch (IOException e) {
 				// TODO Auto-generated catch block

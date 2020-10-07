@@ -26,7 +26,7 @@ import com.vs.biz.ArticleBIZ;
 import com.vs.biz.CommentsBIZ;
 import com.vs.biz.CompanyBIZ;
 import com.vs.biz.FinanceBIZ;
-import com.vs.biz.FinanceCateBIZ;
+import com.vs.biz.AccountBIZ;
 import com.vs.biz.IndustryBIZ;
 import com.vs.biz.MemberBIZ;
 import com.vs.biz.MemberLogBIZ;
@@ -38,7 +38,7 @@ import com.vs.vo.ArticleVO;
 import com.vs.vo.CardPageVO;
 import com.vs.vo.CommentsVO;
 import com.vs.vo.CompanyVO;
-import com.vs.vo.FinanceCateVO;
+import com.vs.vo.AccountVO;
 import com.vs.vo.FinanceVO;
 import com.vs.vo.IndustryVO;
 import com.vs.vo.MemberVO;
@@ -57,7 +57,7 @@ public class AjaxController {
 	@Autowired
 	private CompanyBIZ companyBIZ;
 	@Autowired
-	private FinanceCateBIZ financeCateBIZ;
+	private AccountBIZ financeCateBIZ;
 	@Autowired
 	private FinanceBIZ financeBIZ;
 	@Autowired
@@ -286,7 +286,7 @@ public class AjaxController {
 	@RequestMapping("/financeCateData")
 	public void getFinanceCateData() {
 		FinanceApiUtil fau = new FinanceApiUtil();
-		List<FinanceCateVO> cateList  = fau.getFinanceCateAPI();
+		List<AccountVO> cateList  = fau.getFinanceCateAPI();
 		if(financeCateBIZ.insertViaJSON(cateList))	System.out.println("[insert 모두 완료]");
 		else System.out.println("[insert 실패]");
 		

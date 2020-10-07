@@ -9,7 +9,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class FinanceCateVO {
+public class AccountVO {
 	@JsonProperty("sj_div")
 	private String sjDiv;
 	@JsonProperty("account_id")
@@ -23,7 +23,7 @@ public class FinanceCateVO {
 	@JsonProperty("label_eng")
 	private String labelEng;
 	
-	public FinanceCateVO() {
+	public AccountVO() {
 		// TODO Auto-generated constructor stub
 	}
 
