@@ -23,7 +23,7 @@ Float monthDeviPercent = monthDevi / Float.parseFloat(arrStockInfo[1].replaceAll
 
 List<CommentsVO> commentsList = (List<CommentsVO>)request.getAttribute("commentsList");
 int[] opinion = (int[])request.getAttribute("opinion");
-
+ 
 %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>

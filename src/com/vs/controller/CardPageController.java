@@ -47,6 +47,17 @@ public class CardPageController {
 	
 	public Map<String, List<Double>> comCRateMapForCN;
 	public List<CompanyVO> comlist;
+	
+	
+	
+	@RequestMapping("/industry")
+	public String getCardPage() {
+		
+		
+		
+		return "industryCardPage";
+	}
+	
 
 	@RequestMapping("/init")
 	public String initCardPage(HttpServletRequest request, HttpServletResponse response, Model model) {	
